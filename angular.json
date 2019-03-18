@@ -27,7 +27,10 @@
               "apps/website/src/favicon.ico",
               "apps/website/src/assets"
             ],
-            "styles": ["apps/website/src/styles.scss"],
+            "styles": [
+              "./node_modules/normalize.css/normalize.css",
+              "apps/website/src/styles.scss"
+            ],
             "scripts": [],
             "es5BrowserSupport": true
           },

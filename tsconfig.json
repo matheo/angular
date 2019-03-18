@@ -14,7 +14,9 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@matheo/datasource": ["libs/datasource/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }

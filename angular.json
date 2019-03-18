@@ -121,6 +121,44 @@
           }
         }
       }
+    },
+    "datasource": {
+      "root": "libs/datasource",
+      "sourceRoot": "libs/datasource/src",
+      "projectType": "library",
+      "prefix": "mat",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "libs/datasource/tsconfig.lib.json",
+            "project": "libs/datasource/ng-package.json"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/datasource/tsconfig.lib.json",
+              "libs/datasource/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/builders:jest",
+          "options": {
+            "jestConfig": "libs/datasource/jest.config.js",
+            "tsConfig": "libs/datasource/tsconfig.spec.json",
+            "setupFile": "libs/datasource/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/schematics:component": {
+          "styleext": "scss"
+        }
+      }
     }
   },
   "cli": {

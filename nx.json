@@ -1,5 +1,5 @@
 {
-  "npmScope": "@matheo",
+  "npmScope": "matheo",
   "implicitDependencies": {
     "angular.json": "*",
     "package.json": "*",
@@ -13,6 +13,9 @@
     },
     "website-e2e": {
       "tags": []
+    },
+    "datasource": {
+      "tags": ["shared"]
     }
   }
 }

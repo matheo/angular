@@ -70,6 +70,7 @@
     "ng-packagr": "^4.2.0",
     "ngrx-store-freeze": "^0.2.4",
     "prettier": "1.15.2",
+    "ts-jest": "24.0.0",
     "ts-node": "~7.0.0",
     "tsickle": ">=0.34.0",
     "tslib": "^1.9.0",

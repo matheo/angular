@@ -200,6 +200,43 @@
           "styleext": "scss"
         }
       }
+    },
+    "schematics": {
+      "root": "libs/schematics",
+      "sourceRoot": "libs/schematics/src",
+      "projectType": "library",
+      "prefix": "mat",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "libs/schematics/tsconfig.lib.json",
+            "project": "libs/schematics/ng-package.json"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/schematics/tsconfig.lib.json",
+              "libs/schematics/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/builders:jest",
+          "options": {
+            "jestConfig": "libs/schematics/jest.config.js",
+            "tsConfig": "libs/schematics/tsconfig.spec.json"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/schematics:component": {
+          "styleext": "scss"
+        }
+      }
     }
   },
   "cli": {

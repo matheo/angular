@@ -19,6 +19,9 @@
     },
     "datepicker": {
       "tags": ["shared"]
+    },
+    "schematics": {
+      "tags": []
     }
   }
 }

@@ -50,6 +50,7 @@
     "@angular/cli": "7.3.6",
     "@angular/compiler-cli": "~7.2.0",
     "@angular/language-service": "^7.0.0",
+    "@ngrx/schematics": "^7.3.0",
     "@nrwl/builders": "7.7.2",
     "@nrwl/schematics": "7.7.2",
     "@types/jest": "24.0.9",

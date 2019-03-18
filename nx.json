@@ -16,6 +16,9 @@
     },
     "datasource": {
       "tags": ["shared"]
+    },
+    "datepicker": {
+      "tags": ["shared"]
     }
   }
 }

@@ -159,6 +159,44 @@
           "styleext": "scss"
         }
       }
+    },
+    "datepicker": {
+      "root": "libs/datepicker",
+      "sourceRoot": "libs/datepicker/src",
+      "projectType": "library",
+      "prefix": "mat",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "libs/datepicker/tsconfig.lib.json",
+            "project": "libs/datepicker/ng-package.json"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/datepicker/tsconfig.lib.json",
+              "libs/datepicker/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/builders:jest",
+          "options": {
+            "jestConfig": "libs/datepicker/jest.config.js",
+            "tsConfig": "libs/datepicker/tsconfig.spec.json",
+            "setupFile": "libs/datepicker/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/schematics:component": {
+          "styleext": "scss"
+        }
+      }
     }
   },
   "cli": {

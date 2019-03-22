@@ -232,13 +232,17 @@ export abstract class MatDataSource<REQ, RAW, RES> extends DataSource<RES> {
   /**
    * Data processing that can be completely customized.
    */
+  reqArguments(args: REQ): REQ {
+    return args;
+  }
+
   abstract rawDefault(): RAW;
 
   abstract rawFetch(args: REQ): Observable<RAW>;
 
-  abstract rawResult(result: RAW): Array<RES>;
-
   abstract rawTotal(result: RAW): Observable<number>;
+
+  abstract rawResult(result: RAW): Array<RES>;
 
   /**
    * Data Fetching Methods
@@ -367,11 +371,12 @@ export abstract class MatDataSource<REQ, RAW, RES> extends DataSource<RES> {
       tap(() => this._triggered++),
       skipWhile(val => this._blockStart(val)),
       switchMap(() => this._getArgs()),
+      map(req => this.reqArguments(req)),
       distinctUntilChanged(),
       tap(() => this._preQuery()),
-      switchMap(args => this._execQuery(args)),
-      tap(res => this._updateTotal(res)),
-      map(res => this._postQuery(res)),
+      switchMap(req => this._execQuery(req)),
+      tap(raw => this._updateTotal(raw)),
+      map(raw => this._postQuery(raw)),
       catchError(err => this._processException(err)),
       filter<RES[]>(res => typeof res !== 'boolean')
     ) as Observable<RES[]>;

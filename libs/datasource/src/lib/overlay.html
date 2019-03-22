@@ -1,0 +1,39 @@
+<ng-container *ngIf="dataSource.isLoading then loading; else loaded"></ng-container>
+
+<ng-template #loading>
+  <mat-progress-spinner
+    [mode]="dataSource.progressMode"
+    [value]="dataSource.progress"
+    [diameter]="diameter"
+    [strokeWidth]="strokeWidth"
+  ></mat-progress-spinner>
+
+  <div #out>
+    <ng-content select="mat-datasource-loading"></ng-content>
+  </div>
+  <ng-container *ngIf="!out.childNodes.length">
+    <mat-datasource-loading *ngIf="dataSource.outputMsg">{{ dataSource.outputMsg }}</mat-datasource-loading>
+  </ng-container>
+</ng-template>
+
+<ng-template #loaded>
+  <ng-container *ngIf="dataSource.hasErrors then errors; else empty"></ng-container>
+
+  <ng-template #errors>
+    <div class="mat-datasource-overlay" #err>
+      <ng-content select="mat-datasource-error"></ng-content>
+    </div>
+    <ng-container *ngIf="!err.childNodes.length">
+      <mat-datasource-error *ngFor="let error of dataSource.getErrors | keyvalue">{{ error.value }}</mat-datasource-error>
+    </ng-container>
+  </ng-template>
+
+  <ng-template #empty>
+    <div class="mat-datasource-overlay" #emp>
+      <ng-content select="mat-datasource-empty"></ng-content>
+    </div>
+    <ng-container *ngIf="!emp.childNodes.length">
+      <mat-datasource-empty>{{ dataSource.outputMsg }}</mat-datasource-empty>
+    </ng-container>
+  </ng-template>
+</ng-template>

@@ -1,1 +1,1 @@
-export * from './lib/datasource.module';
+export * from './lib/public_api';

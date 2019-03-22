@@ -1,0 +1,15 @@
+<div class="mat-datasource-container">
+  <div [attr.hidden]="dataSource.isLoading || dataSource.isEmpty ? '' : null">
+    <ng-content select="mat-table,table"></ng-content>
+  </div>
+
+  <mat-datasource-overlay [dataSource]="dataSource" [diameter]="diameter" [strokeWidth]="strokeWidth">
+    <ng-content select="mat-datasource-empty" ngProjectAs="mat-datasource-empty"></ng-content>
+    <ng-content select="mat-datasource-error" ngProjectAs="mat-datasource-error"></ng-content>
+    <ng-content select="mat-datasource-loading" ngProjectAs="mat-datasource-loading"></ng-content>
+  </mat-datasource-overlay>
+</div>
+
+<div [attr.hidden]="dataSource.isLoading || dataSource.isEmpty ? '' : null">
+  <ng-content></ng-content>
+</div>

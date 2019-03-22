@@ -1,0 +1,22 @@
+.mat-datasource-overlay {
+  display: flex;
+  flex-direction: column;
+  min-height: 120px;
+  width: 100%;
+
+  align-items: center;
+  place-content: center;
+
+  > * {
+    margin-bottom: 15px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  &:empty {
+    margin-bottom: 0;
+    min-height: 0;
+  }
+}

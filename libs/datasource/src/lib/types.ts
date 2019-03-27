@@ -37,5 +37,6 @@ export interface DataSourceItem {
   title: any;
   subtitle?: any;
   note?: any;
+  route?: any;
   disabled?: boolean;
 }

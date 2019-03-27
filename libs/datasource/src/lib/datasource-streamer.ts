@@ -58,7 +58,7 @@ export class DataSourceStreamer<T> {
     // all the defaults and getters must complete a T object
     return (args.length > 1
       ? args.reduce((a: any, b: any) => deepMerge({}, a, b))
-      : args[0]) as T;
+      : args[0] || {}) as T;
   }
 
   connect() {

@@ -248,10 +248,8 @@ export abstract class MatDataSource<REQ, RAW, RES> extends DataSource<RES> {
    * Data Fetching Methods
    */
   private _blockStart(streamed: Array<any>): boolean {
-    // check if it's not configured to start after the initial stream
-    const block =
-      !this._config.autoStart &&
-      (this._streams.length.optional > 1 && streamed[1] === TRIGGER_INIT);
+    // check if it's not configured to start after the initial optional stream
+    const block = !this._config.autoStart && streamed[1] === TRIGGER_INIT;
 
     if (this._triggered === 1) {
       this._logger.debug(

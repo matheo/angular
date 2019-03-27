@@ -87,8 +87,8 @@ export abstract class MatDataSource<REQ, RAW, RES> extends DataSource<RES> {
   /**
    * Accessors
    */
-  get args() {
-    return this.arguments || {};
+  get args(): REQ {
+    return this.arguments || ({} as REQ);
   }
 
   get progressMode() {

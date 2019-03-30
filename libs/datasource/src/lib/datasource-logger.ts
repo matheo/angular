@@ -64,7 +64,7 @@ export class DataSourceLogger {
    */
 
   // display a message according a condition
-  debug(truthy: string, falsy?: string, condition: any = true) {
+  debug(truthy: any, falsy?: any, condition: any = true) {
     if (this._config.debug) {
       if (condition) {
         console.log(`${this.sourceName}:`, truthy);

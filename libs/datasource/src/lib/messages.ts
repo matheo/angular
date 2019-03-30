@@ -75,12 +75,13 @@ export function responseTotal(): string {
   return 'Total returned:';
 }
 
-export function responseSuccess(length): string {
-  return `Response succeed with ${length} item${length === 1 ? '' : 's'}`;
+export function responseSuccess(result: any): Array<any> {
+  const len = result.length;
+  return [`Response succeed with ${len} item${len === 1 ? '' : 's'}`, result];
 }
 
-export function responseError(): string {
-  return 'Response failed';
+export function responseError(errors: any): Array<any> {
+  return ['Response failed', errors];
 }
 
 /**

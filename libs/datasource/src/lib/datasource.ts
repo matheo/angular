@@ -336,8 +336,8 @@ export abstract class MatDataSource<REQ, RAW, RES> extends DataSource<RES> {
     const result = !hasErrors ? this.rawResult(res) : [];
 
     this._logger.debug(
-      responseSuccess(result.length),
-      responseError(),
+      responseSuccess(result),
+      responseError(this.getErrors),
       !hasErrors
     );
 
@@ -381,8 +381,8 @@ export abstract class MatDataSource<REQ, RAW, RES> extends DataSource<RES> {
   }
 
   disconnect() {
-    this._change$.complete();
     this._trigger$.complete();
+    this._change$.complete();
     this._disconnect$.next();
     this._disconnect$.complete();
   }

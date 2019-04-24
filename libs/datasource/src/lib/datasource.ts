@@ -67,6 +67,11 @@ export abstract class MatDataSource<REQ, RAW, RES> extends DataSource<RES> {
   }
   protected _total = 0;
 
+  get data() {
+    return this._data;
+  }
+  protected _data: Array<RES> = [];
+
   /**
    * Number used to calculate the loading progress.
    * Updated while loading the query and triggering change$.
@@ -333,15 +338,15 @@ export abstract class MatDataSource<REQ, RAW, RES> extends DataSource<RES> {
 
   private _postQuery(res: RAW): Array<RES> {
     const hasErrors = this.hasErrors;
-    const result = !hasErrors ? this.rawResult(res) : [];
+    this._data = !hasErrors ? this.rawResult(res) : [];
 
     this._logger.debug(
-      responseSuccess(result),
+      responseSuccess(this._data),
       responseError(this.getErrors),
       !hasErrors
     );
 
-    this._empty = !result || !result.length;
+    this._empty = !this._data || !this._data.length;
 
     if (!hasErrors && this._empty) {
       this._outputMsg = this._config.emptyMsg();
@@ -351,7 +356,7 @@ export abstract class MatDataSource<REQ, RAW, RES> extends DataSource<RES> {
     this._loading = false;
     this._change$.next({});
 
-    return result;
+    return this._data;
   }
 
   private _processException(err) {

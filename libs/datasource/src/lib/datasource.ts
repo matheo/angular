@@ -264,6 +264,10 @@ export abstract class MatDataSource<REQ, RAW, RES> extends DataSource<RES> {
       );
     }
 
+    if (block) {
+      this._loading = false;
+    }
+
     return block;
   }
 

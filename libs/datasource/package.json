@@ -1,6 +1,6 @@
 {
   "name": "@matheo/datasource",
-  "version": "0.5.4",
+  "version": "0.5.5",
   "dependencies": {
     "lodash": "^4.17.4"
   },

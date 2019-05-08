@@ -37,6 +37,7 @@ import {
   TRIGGER_REFRESH,
   TRIGGER_RELOAD
 } from './types';
+import { isEqual } from 'lodash';
 
 export abstract class MatDataSource<REQ, RAW, RES> extends DataSource<RES> {
   /**
@@ -379,7 +380,7 @@ export abstract class MatDataSource<REQ, RAW, RES> extends DataSource<RES> {
       skipWhile(val => this._blockStart(val)),
       switchMap(() => this._getArgs()),
       map(req => this.reqArguments(req)),
-      distinctUntilChanged(),
+      distinctUntilChanged(isEqual),
       tap(() => this._preQuery()),
       switchMap(req => this._execQuery(req)),
       tap(raw => this._updateTotal(raw)),

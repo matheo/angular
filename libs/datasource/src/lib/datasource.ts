@@ -48,6 +48,7 @@ export abstract class MatDataSource<REQ, RAW, RES> extends DataSource<RES> {
     return this._loading;
   }
   protected _loading = true;
+  private _reloading = true;
 
   get isLoaded() {
     return this._loaded;
@@ -232,6 +233,7 @@ export abstract class MatDataSource<REQ, RAW, RES> extends DataSource<RES> {
     if (this._loaded) {
       this.overrides = { forceReload: true };
     }
+    this._reloading = true;
     this._trigger$.next(TRIGGER_RELOAD);
   }
 
@@ -284,9 +286,14 @@ export abstract class MatDataSource<REQ, RAW, RES> extends DataSource<RES> {
     return of(this.arguments);
   }
 
+  private _isEqual(): (prev: REQ, curr: REQ) => boolean {
+    return (prev, curr) => !this._reloading && isEqual(prev, curr);
+  }
+
   private _preQuery(): void {
     // state update
     this._loading = true;
+    this._reloading = false;
     this._outputMsg = '';
     this._logger.clearErrors();
     this._change$.next({});
@@ -380,7 +387,7 @@ export abstract class MatDataSource<REQ, RAW, RES> extends DataSource<RES> {
       skipWhile(val => this._blockStart(val)),
       switchMap(() => this._getArgs()),
       map(req => this.reqArguments(req)),
-      distinctUntilChanged(isEqual),
+      distinctUntilChanged(this._isEqual()),
       tap(() => this._preQuery()),
       switchMap(req => this._execQuery(req)),
       tap(raw => this._updateTotal(raw)),

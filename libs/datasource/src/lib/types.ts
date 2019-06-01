@@ -39,4 +39,5 @@ export interface DataSourceItem {
   note?: any;
   route?: any;
   disabled?: boolean;
+  [field: string]: any;
 }

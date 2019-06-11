@@ -231,7 +231,7 @@ export abstract class MatDataSource<REQ, RAW, RES> extends DataSource<RES> {
 
   reload() {
     if (this._loaded) {
-      this.overrides = { forceReload: true };
+      this.overrides = { forceReload: new Date().getTime() };
     }
     this._reloading = true;
     this._trigger$.next(TRIGGER_RELOAD);

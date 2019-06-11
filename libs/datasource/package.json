@@ -1,12 +1,12 @@
 {
   "name": "@matheo/datasource",
-  "version": "0.5.7",
+  "version": "0.6.0",
   "dependencies": {
     "lodash": "^4.17.4"
   },
   "peerDependencies": {
-    "@angular/common": "^7.0.0",
-    "@angular/core": "^7.0.0",
-    "@angular/material": "^7.0.0"
+    "@angular/common": ">=7.0.0",
+    "@angular/core": ">=7.0.0",
+    "@angular/material": ">=7.0.0"
   }
 }

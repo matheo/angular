@@ -1,7 +1,7 @@
 {
   "rulesDirectory": [
-    "node_modules/@nrwl/schematics/src/tslint",
-    "node_modules/codelyzer"
+    "node_modules/codelyzer",
+    "node_modules/@nrwl/workspace/src/tslint"
   ],
   "rules": {
     "arrow-return-shorthand": true,

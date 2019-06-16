@@ -89,7 +89,7 @@
           }
         },
         "test": {
-          "builder": "@nrwl/builders:jest",
+          "builder": "@nrwl/jest:jest",
           "options": {
             "jestConfig": "apps/website/jest.config.js",
             "tsConfig": "apps/website/tsconfig.spec.json",
@@ -104,7 +104,7 @@
       "prefix": "",
       "architect": {
         "e2e": {
-          "builder": "@nrwl/builders:cypress",
+          "builder": "@nrwl/cypress:cypress",
           "options": {
             "cypressConfig": "apps/website-e2e/cypress.json",
             "tsConfig": "apps/website-e2e/tsconfig.e2e.json",
@@ -149,7 +149,7 @@
           }
         },
         "test": {
-          "builder": "@nrwl/builders:jest",
+          "builder": "@nrwl/jest:jest",
           "options": {
             "jestConfig": "libs/datasource/jest.config.js",
             "tsConfig": "libs/datasource/tsconfig.spec.json",
@@ -187,7 +187,7 @@
           }
         },
         "test": {
-          "builder": "@nrwl/builders:jest",
+          "builder": "@nrwl/jest:jest",
           "options": {
             "jestConfig": "libs/datepicker/jest.config.js",
             "tsConfig": "libs/datepicker/tsconfig.spec.json",
@@ -225,7 +225,7 @@
           }
         },
         "test": {
-          "builder": "@nrwl/builders:jest",
+          "builder": "@nrwl/jest:jest",
           "options": {
             "jestConfig": "libs/schematics/jest.config.js",
             "tsConfig": "libs/schematics/tsconfig.spec.json"
@@ -244,7 +244,7 @@
       "typescriptMismatch": false,
       "versionMismatch": false
     },
-    "defaultCollection": "@nrwl/schematics"
+    "defaultCollection": "@nrwl/angular"
   },
   "schematics": {
     "@nrwl/schematics:application": {

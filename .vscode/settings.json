@@ -1,7 +1,15 @@
 {
-  "beautify.ignore": [".html", ".js"],
+  "editor.codeActionsOnSave": {
+    "source.fixAll.tslint": true
+  },
   "editor.formatOnSave": true,
+  "editor.formatOnPaste": false,
+  "files.associations": {
+    "tslint.json": "jsonc"
+  },
   "html.format.enable": false,
   "javascript.format.enable": false,
-  "prettier.disableLanguages": ["html", "js"]
+  "json.format.enable": false,
+  "prettier.disableLanguages": ["html", "js", "json", "jsonc"],
+  "prettier.tslintIntegration": true
 }

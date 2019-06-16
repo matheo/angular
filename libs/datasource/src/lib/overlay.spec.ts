@@ -1,5 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { MatProgressSpinnerModule } from '@angular/material';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { BehaviorSubject, of, throwError } from 'rxjs';
 import { MatDataSource } from './datasource';
 import { DataSourceOverlay } from './overlay';

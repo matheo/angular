@@ -103,7 +103,7 @@ export abstract class MatDataSource<REQ, RAW, RES> extends DataSource<RES> {
   }
 
   get change$() {
-    return this._change$;
+    return this._change$.asObservable();
   }
 
   get hasErrors() {

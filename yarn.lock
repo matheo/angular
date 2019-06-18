@@ -686,39 +686,39 @@
   resolved "https://registry.yarnpkg.com/@nodelib/fs.stat/-/fs.stat-1.1.3.tgz#2b5a3ab3f918cca48a8c754c08168e3f03eba61b"
   integrity sha512-shAmDyaQC4H92APFoIaVDHCx5bStIocgvbwQyxPRrbUY20V1EYTbSDchWbuwlMG3V17cprZhA6+78JfB+3DTPw==
 
-"@nrwl/angular@8.1.0":
-  version "8.1.0"
-  resolved "https://registry.yarnpkg.com/@nrwl/angular/-/angular-8.1.0.tgz#a10b1aefa3d1e61b81e00e2ce501ad977aed9c25"
-  integrity sha512-4bHc2bLt1bFiyb3206bvMQbX+qgeUSPDvaPmQGDu+iPstaArDoGReZM/XAcwmZvs86Q1BSn36Q/A7WJRanvT5A==
+"@nrwl/angular@8.1.2":
+  version "8.1.2"
+  resolved "https://registry.yarnpkg.com/@nrwl/angular/-/angular-8.1.2.tgz#18b058fccdb6deb3f5f18af4a2268a478fd53d68"
+  integrity sha512-0afrs4IFeKsH5wtlOV7r+R99wgTCT7wNDn+gPGY9tWxS7kqIqOa4F4si70da5IfKO/G25md7a7Oj7umoe1oC+w==
   dependencies:
     "@angular-devkit/schematics" "8.0.1"
-    "@nrwl/cypress" "8.1.0"
-    "@nrwl/jest" "8.1.0"
+    "@nrwl/cypress" "8.1.2"
+    "@nrwl/jest" "8.1.2"
     "@schematics/angular" "8.0.1"
     jasmine-marbles "~0.5.0"
 
-"@nrwl/cypress@8.1.0":
-  version "8.1.0"
-  resolved "https://registry.yarnpkg.com/@nrwl/cypress/-/cypress-8.1.0.tgz#43aa75f94b7f84b6163e6894b9ea8785be364a0a"
-  integrity sha512-82BTg9V67QhPGBgNO2PYWvV/zf2QFw4vGKsHPkJOM/8Wc6hVEpPniTjPx2hpcICLYrPRnhF7u4dYAVTe/PrT6Q==
+"@nrwl/cypress@8.1.2":
+  version "8.1.2"
+  resolved "https://registry.yarnpkg.com/@nrwl/cypress/-/cypress-8.1.2.tgz#48d4da2a36c2e2e42cd00dbc7ec125ec7cb96022"
+  integrity sha512-CVoxmXYoy9gvmYVOmB2VgqBVr65RI3MlRPIe4ZZrpYR4YN0XCgPxX0x0M33EQMlFAugejkCycNANsQEE65dMhw==
   dependencies:
     "@angular-devkit/architect" "0.800.1"
     "@angular-devkit/core" "8.0.1"
     tree-kill "1.2.1"
 
-"@nrwl/jest@8.1.0":
-  version "8.1.0"
-  resolved "https://registry.yarnpkg.com/@nrwl/jest/-/jest-8.1.0.tgz#53042001217be40907141e7c10ffcf6725ffa5bb"
-  integrity sha512-599tx4sgKtFAI3exhgBDVfCtZc0045Q2K1kQEW3f1M621XThSCZpb6SpatXqgiYp4/1o4IU+OHy9fftfcOic5g==
+"@nrwl/jest@8.1.2":
+  version "8.1.2"
+  resolved "https://registry.yarnpkg.com/@nrwl/jest/-/jest-8.1.2.tgz#8c563bf61c4683a522884a193983df4fe4ecbda3"
+  integrity sha512-P0KQG1UXOVrh8YmZwZHAJPjBc6kzYp0VKGNwspesah4oGLHfPqNWwWrbWCTZ0aFWTHX5Qb+HFu0anJuQ5UzjbQ==
   dependencies:
     "@angular-devkit/architect" "0.800.1"
     "@angular-devkit/core" "8.0.1"
     "@angular-devkit/schematics" "8.0.1"
 
-"@nrwl/workspace@8.1.0":
-  version "8.1.0"
-  resolved "https://registry.yarnpkg.com/@nrwl/workspace/-/workspace-8.1.0.tgz#85ccf2141156061d2e1ae24711af8a8866f85ce8"
-  integrity sha512-WpWkNAqLLvFt5lbGa2i8sS4fQGsovUw/nJF6vch35QHFm1DxLeNTNnIkkMdx4TRz7SiIEOR5Du+RqUDvgQGTzA==
+"@nrwl/workspace@8.1.2":
+  version "8.1.2"
+  resolved "https://registry.yarnpkg.com/@nrwl/workspace/-/workspace-8.1.2.tgz#5a24940f8631e127270c0f89d22ffef091e5b04e"
+  integrity sha512-pifxtThCEO2kft/8BOBNa+Y+PBMFc6O1y2oxNS4BxLzgbfUsYiBH5TjdvURyc8a7Y2VpxwkHvgvw+gh7lQTEAg==
   dependencies:
     "@angular-devkit/core" "8.0.1"
     "@angular-devkit/schematics" "8.0.1"
@@ -1676,7 +1676,7 @@ base64-js@0.0.8:
   resolved "https://registry.yarnpkg.com/base64-js/-/base64-js-0.0.8.tgz#1101e9544f4a76b1bc3b26d452ca96d7a35e7978"
   integrity sha1-EQHpVE9KdrG8OybUUsqW16NeeXg=
 
-base64-js@^1.0.2, base64-js@^1.1.2:
+base64-js@^1.0.2, base64-js@^1.1.2, base64-js@^1.3.0:
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/base64-js/-/base64-js-1.3.0.tgz#cab1e6118f051095e58b5281aea8c1cd22bfc0e3"
   integrity sha512-ccav/yGvoa80BQDljCxsmmQ3Xvx60/UpBIij5QN21W3wBi/hhIC9OoO+KLpu9IJTS9j4DRVJ3aDDF9cMSoa2lw==
@@ -1738,7 +1738,7 @@ bluebird@3.5.0:
   resolved "https://registry.yarnpkg.com/bluebird/-/bluebird-3.5.0.tgz#791420d7f551eea2897453a8a77653f96606d67c"
   integrity sha1-eRQg1/VR7qKJdFOop3ZT+WYG1nw=
 
-bluebird@^3.5.1, bluebird@^3.5.3:
+bluebird@^3.5.1, bluebird@^3.5.3, bluebird@^3.5.5:
   version "3.5.5"
   resolved "https://registry.yarnpkg.com/bluebird/-/bluebird-3.5.5.tgz#a8d0afd73251effbbd5fe384a77d73003c17a71f"
   integrity sha512-5am6HnnfN+urzt4yfg7IgTbotDjIT/u8AJpEt0sIU9FtXfVeezXAPKswrG+xKUCOYAINpSdgZVDU6QFh+cuH3w==
@@ -2025,21 +2025,21 @@ bytes@3.1.0:
   integrity sha512-zauLjrfCG+xvoyaqLoV8bLVXXNGC4JqlxFCutSDWA6fJrTo2ZuvLYTqZ7aHBLZSMOopbzwv8f+wZcVzfVTI2Dg==
 
 cacache@^11.0.1, cacache@^11.0.2, cacache@^11.3.1, cacache@^11.3.2:
-  version "11.3.2"
-  resolved "https://registry.yarnpkg.com/cacache/-/cacache-11.3.2.tgz#2d81e308e3d258ca38125b676b98b2ac9ce69bfa"
-  integrity sha512-E0zP4EPGDOaT2chM08Als91eYnf8Z+eH1awwwVsngUmgppfM5jjJ8l3z5vO5p5w/I3LsiXawb1sW0VY65pQABg==
+  version "11.3.3"
+  resolved "https://registry.yarnpkg.com/cacache/-/cacache-11.3.3.tgz#8bd29df8c6a718a6ebd2d010da4d7972ae3bbadc"
+  integrity sha512-p8WcneCytvzPxhDvYp31PD039vi77I12W+/KfR9S8AZbaiARFBCpsPJS+9uhWfeBfeAtW7o/4vt3MUqLkbY6nA==
   dependencies:
-    bluebird "^3.5.3"
+    bluebird "^3.5.5"
     chownr "^1.1.1"
     figgy-pudding "^3.5.1"
-    glob "^7.1.3"
+    glob "^7.1.4"
     graceful-fs "^4.1.15"
     lru-cache "^5.1.1"
     mississippi "^3.0.0"
     mkdirp "^0.5.1"
     move-concurrently "^1.0.1"
     promise-inflight "^1.0.1"
-    rimraf "^2.6.2"
+    rimraf "^2.6.3"
     ssri "^6.0.1"
     unique-filename "^1.1.1"
     y18n "^4.0.0"
@@ -3017,11 +3017,9 @@ dezalgo@^1.0.0:
     wrappy "1"
 
 dfa@^1.0.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/dfa/-/dfa-1.1.0.tgz#d30218bd10d030fa421df3ebbc82285463a31781"
-  integrity sha1-0wIYvRDQMPpCHfPrvIIoVGOjF4E=
-  dependencies:
-    babel-runtime "^6.11.6"
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/dfa/-/dfa-1.2.0.tgz#96ac3204e2d29c49ea5b57af8d92c2ae12790657"
+  integrity sha512-ED3jP8saaweFTjeGX8HQPjeC1YYyZs98jGNZx6IiBvxW7JG5v492kamAQB3m2wop07CvU/RQmzcKr6bgcC5D/Q==
 
 diff-sequences@^24.3.0:
   version "24.3.0"
@@ -3183,9 +3181,9 @@ ee-first@1.1.1:
   integrity sha1-WQxhFWsK4vTwJVcyoViyZrxWsh0=
 
 electron-to-chromium@^1.3.124, electron-to-chromium@^1.3.150:
-  version "1.3.162"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.162.tgz#e006e3a2aeebaf942064a16b24c6dfc864510de1"
-  integrity sha512-/cCwFlLV0lImvAfNsJpEVIZFhJBoutb7L0AHd56K4h8McUqpdkbBvAbMnY/mfNKnCqkX6GZVvQc+BVod4t2EMw==
+  version "1.3.164"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.164.tgz#8680b875577882c1572c42218d53fa9ba5f71d5d"
+  integrity sha512-VLlalqUeduN4+fayVtRZvGP2Hl1WrRxlwzh2XVVMJym3IFrQUS29BFQ1GP/BxOJXJI1OFCrJ5BnFEsAe8NHtOg==
 
 elegant-spinner@^1.0.1:
   version "1.0.1"
@@ -4123,7 +4121,7 @@ glob@7.1.3:
     once "^1.3.0"
     path-is-absolute "^1.0.0"
 
-glob@^7.0.0, glob@^7.0.3, glob@^7.1.1, glob@^7.1.2, glob@^7.1.3:
+glob@^7.0.0, glob@^7.0.3, glob@^7.1.1, glob@^7.1.2, glob@^7.1.3, glob@^7.1.4:
   version "7.1.4"
   resolved "https://registry.yarnpkg.com/glob/-/glob-7.1.4.tgz#aa608a2f6c577ad357e1ae5a5c26d9a8d1969255"
   integrity sha512-hkLPepehmnKk41pUGm3sYxoFs/umurYfYJCerbXEyFIWcAzvpipAgVkBqqT9RBKMGjnq6kMuyYwha6csxbiM1A==
@@ -9390,17 +9388,25 @@ unc-path-regex@^0.1.2:
   integrity sha1-5z3T17DXxe2G+6xrCufYxqadUPo=
 
 unicode-properties@^1.0.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/unicode-properties/-/unicode-properties-1.1.0.tgz#7a96eef49f75682ea69d2315eec9ac43ffdf00c1"
-  integrity sha1-epbu9J91aC6mnSMV7smsQ//fAME=
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/unicode-properties/-/unicode-properties-1.2.2.tgz#8ea79db656166f9c2eca157b0fd06c415dcf5b01"
+  integrity sha512-+WhsOj19c93rPymvnPnFisbgFzrI4LjTV8ejMcCCfwS0XhdllZB4NsMFiYb4xUmpn3+aj3PM40h+wlzoG7PCnQ==
   dependencies:
-    brfs "^1.4.0"
-    unicode-trie "^0.3.0"
+    base64-js "^1.3.0"
+    unicode-trie "^1.0.0"
 
 unicode-trie@^0.3.0:
   version "0.3.1"
   resolved "https://registry.yarnpkg.com/unicode-trie/-/unicode-trie-0.3.1.tgz#d671dddd89101a08bac37b6a5161010602052085"
   integrity sha1-1nHd3YkQGgi6w3tqUWEBBgIFIIU=
+  dependencies:
+    pako "^0.2.5"
+    tiny-inflate "^1.0.0"
+
+unicode-trie@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/unicode-trie/-/unicode-trie-1.0.0.tgz#f649afdca127135edb55ca0ad7c8c60656d92ad1"
+  integrity sha512-v5raLKsobbFbWLMoX9+bChts/VhPPj3XpkNr/HbqkirXR1DPk8eo9IYKyvk0MQZFkaoRsFj2Rmaqgi2rfAZYtA==
   dependencies:
     pako "^0.2.5"
     tiny-inflate "^1.0.0"

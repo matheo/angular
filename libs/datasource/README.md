@@ -1,12 +1,11 @@
 # Reactive Datasource
 
-This library provides an abstract `MatDataSource` class to build custom datasources for Angular Material tables.
+This library provides an abstract `ReactiveDataSource` and `MatDataSource` classes to build custom datasources for Angular Material tables.
 
 ## Further help
 
-I will be publishing its documentation soon.
+https://medium.com/@matheo/reactive-datasource-for-angular-1d869b0155f6
 
 ## TODO
 
 - Online Documentation
-- matConnect standalone directive

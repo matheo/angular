@@ -9,6 +9,7 @@ import {
   DataSourceLoading
 } from './directives';
 import { DataSourceOverlay } from './overlay';
+import { DataSourcePipe } from './datasource-pipe';
 
 @NgModule({
   imports: [CommonModule, MatProgressSpinnerModule],
@@ -17,14 +18,16 @@ import { DataSourceOverlay } from './overlay';
     DataSourceEmpty,
     DataSourceError,
     DataSourceLoading,
-    DataSourceOverlay
+    DataSourceOverlay,
+    DataSourcePipe
   ],
   exports: [
     MatProgressSpinnerModule,
     DataSourceContainer,
     DataSourceEmpty,
     DataSourceError,
-    DataSourceLoading
+    DataSourceLoading,
+    DataSourcePipe
   ]
 })
 export class MatDataSourceModule {}

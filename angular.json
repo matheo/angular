@@ -85,7 +85,7 @@
               "apps/website/tsconfig.app.json",
               "apps/website/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**"]
+            "exclude": ["**/node_modules/**", "!apps/website/**"]
           }
         },
         "test": {
@@ -120,7 +120,7 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": "apps/website-e2e/tsconfig.e2e.json",
-            "exclude": ["**/node_modules/**"]
+            "exclude": ["**/node_modules/**", "!apps/website-e2e/**"]
           }
         }
       }
@@ -145,7 +145,7 @@
               "libs/datasource/tsconfig.lib.json",
               "libs/datasource/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**"]
+            "exclude": ["**/node_modules/**", "!libs/datasource/**"]
           }
         },
         "test": {
@@ -183,7 +183,7 @@
               "libs/datepicker/tsconfig.lib.json",
               "libs/datepicker/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**"]
+            "exclude": ["**/node_modules/**", "!libs/datepicker/**"]
           }
         },
         "test": {
@@ -221,7 +221,7 @@
               "libs/schematics/tsconfig.lib.json",
               "libs/schematics/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**"]
+            "exclude": ["**/node_modules/**", "!libs/schematics/**"]
           }
         },
         "test": {

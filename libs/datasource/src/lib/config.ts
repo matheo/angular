@@ -8,12 +8,14 @@ import { delayMsg, emptyMsg, timeoutMsg, waitMsg } from './messages';
 export interface DataSourceConfig {
   debug?: boolean;
   autoStart: boolean;
-  errorHandler?: ((err: any) => string);
+  errorHandler?: (err: any) => string;
   showErrors: boolean;
-  emptyMsg: (() => string);
+  emptyMsg: () => string;
   waitMsg: string;
   delayMsg: string;
   timeoutMsg: string;
+  waitMs: number; // ms to wait before show the waitMsg
+  intervalMs: number; // timer interval to timeout the request
   progressMode: ProgressSpinnerMode;
 }
 
@@ -25,5 +27,7 @@ export const defaultConfig: DataSourceConfig = {
   waitMsg: waitMsg(),
   delayMsg: delayMsg(),
   timeoutMsg: timeoutMsg(),
+  waitMs: 5000,
+  intervalMs: 10000,
   progressMode: 'indeterminate'
 };

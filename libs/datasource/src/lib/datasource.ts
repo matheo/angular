@@ -297,9 +297,9 @@ export abstract class MatDataSource<REQ, RAW, RES> extends DataSource<RES> {
     return merge(
       query,
       // timers check
-      timer(5000, 8000).pipe(
+      timer(this.config.waitMs, this.config.intervalMs).pipe(
         takeUntil(query),
-        take(3) // 5s, 13s, 21s
+        take(3) // by default: 5s, 15s, 25s
       )
     ).pipe(
       take(3),

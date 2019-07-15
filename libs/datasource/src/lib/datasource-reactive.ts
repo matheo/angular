@@ -4,7 +4,8 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { MatDataSource } from './datasource';
 import { nonNumeric, setValue } from './messages';
-import { DataSourceGetter, DataSourceItem } from './types';
+import { DataSourceItem } from './types';
+import { mapPaginator, mapSort } from './mappers';
 
 export abstract class ReactiveDataSource<REQ, RAW, RES> extends MatDataSource<
   REQ,
@@ -37,23 +38,18 @@ export abstract class ReactiveDataSource<REQ, RAW, RES> extends MatDataSource<
   private _pageSize = 10;
 
   // be sure the paginator's view has been initialized
-  setPaginator(
-    paginator: MatPaginator,
-    getter: (pageSize: number) => DataSourceGetter<REQ>
-  ) {
-    this.addOptional({
+  setPaginator(paginator: MatPaginator) {
+    this.addStream({
       name: 'MatPaginator',
-      stream: paginator.page,
-      getter: getter(this.pageSize)
+      stream: paginator.page.pipe<any>(mapPaginator(this.pageSize))
     });
   }
 
   // sort changes emitted will trigger an update
-  setSort(sort: MatSort, getter: DataSourceGetter<REQ>) {
-    this.addOptional({
+  setSort(sort: MatSort) {
+    this.addStream({
       name: 'MatSort',
-      stream: sort.sortChange,
-      getter
+      stream: sort.sortChange.pipe<any>(mapSort())
     });
   }
 

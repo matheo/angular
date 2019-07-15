@@ -29,10 +29,7 @@ describe('DataSourceOverlay', () => {
 
   // TODO test errors and different kind of dataSource events
   const dataSource = new DataSource();
-  dataSource.addOptional({
-    stream,
-    getter: () => stream.getValue()
-  });
+  dataSource.addStream(stream);
   dataSource.connect();
 
   let component: DataSourceOverlay<any, any, any>;

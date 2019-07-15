@@ -30,10 +30,8 @@ export function setValue(name: string): string {
   return `${name} setted:`;
 }
 
-export function srcAdding(name: string, required: boolean): string {
-  return required
-    ? `Adding required '${name}' stream`
-    : `Adding optional '${name}' stream`;
+export function srcAdding(src: any): string {
+  return `Adding '${src}' stream`;
 }
 
 export function srcEmpty(name: string): string {
@@ -44,8 +42,16 @@ export function srcInvalid(): string {
   return `Empty stream provided!`;
 }
 
-export function srcEmitted(): string {
-  return `Stream emitted:`;
+export function srcConnect(): string {
+  return `Connected`;
+}
+
+export function srcEmitted(src: any): string {
+  return `Stream ${src} emitted:`;
+}
+
+export function srcOutput(): string {
+  return `Stream outputs:`;
 }
 
 export function isAutoStarting(): string {

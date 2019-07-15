@@ -1,31 +1,18 @@
 import { Observable } from 'rxjs';
 
 /**
- * Constants
- */
-
-export const REQUIRED_INIT = 'required.init';
-
-export const TRIGGER_INIT = 'trigger.init';
-export const TRIGGER_REFRESH = 'trigger.refresh';
-export const TRIGGER_RELOAD = 'trigger.reload';
-
-/**
  * Types
  */
 
-export type DataSourceGetter<T> = () => Partial<T>;
-
+// internal options
 export interface DataSourceOpts {
-  forceReload?: boolean;
+  forceReload?: number;
 }
 
 export interface DataSourceStream<T> {
-  name?: string;
-  required?: boolean;
+  name: string;
+  stream: Observable<Partial<T>>;
   weight?: number;
-  stream: Observable<any>;
-  getter: DataSourceGetter<T>;
 }
 
 /**

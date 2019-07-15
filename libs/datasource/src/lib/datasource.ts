@@ -1,5 +1,14 @@
 import { DataSource } from '@angular/cdk/table';
-import { BehaviorSubject, merge, Observable, of, Subject, timer } from 'rxjs';
+import { isEqual } from 'lodash';
+import {
+  BehaviorSubject,
+  merge,
+  Observable,
+  of,
+  Subject,
+  timer,
+  isObservable
+} from 'rxjs';
 import {
   catchError,
   distinctUntilChanged,
@@ -30,14 +39,7 @@ import {
   srcAdding,
   srcEmpty
 } from './messages';
-import {
-  DataSourceOpts,
-  DataSourceStream,
-  TRIGGER_INIT,
-  TRIGGER_REFRESH,
-  TRIGGER_RELOAD
-} from './types';
-import { isEqual } from 'lodash';
+import { DataSourceOpts, DataSourceStream } from './types';
 
 export abstract class MatDataSource<REQ, RAW, RES> extends DataSource<RES> {
   /**
@@ -135,7 +137,7 @@ export abstract class MatDataSource<REQ, RAW, RES> extends DataSource<RES> {
    * Control members for the datasource processing.
    */
   protected defaults: Partial<REQ> = {};
-  protected overrides: any = {};
+  protected overrides: Partial<REQ> = {};
   protected arguments: REQ & DataSourceOpts;
 
   /**
@@ -148,7 +150,9 @@ export abstract class MatDataSource<REQ, RAW, RES> extends DataSource<RES> {
    * Can receive some Criteria overrides for a temporary update.
    * It has to be used outside the datasource to prevent infinite loops.
    */
-  protected readonly _trigger$ = new BehaviorSubject<string>(TRIGGER_INIT);
+  protected readonly _trigger$ = new BehaviorSubject<
+    Partial<REQ> | DataSourceOpts
+  >({});
 
   /** Executions counter */
   private _triggered = 0;
@@ -157,7 +161,9 @@ export abstract class MatDataSource<REQ, RAW, RES> extends DataSource<RES> {
   private readonly _change$ = new BehaviorSubject<any>({});
 
   /** Registered streams */
-  private readonly _streams = new DataSourceStreamer<REQ>(this._logger);
+  private readonly _streams = new DataSourceStreamer<REQ | DataSourceOpts>(
+    this._logger
+  );
 
   /** Disconnect internal observable. */
   private readonly _disconnect$ = new Subject<void>();
@@ -172,10 +178,7 @@ export abstract class MatDataSource<REQ, RAW, RES> extends DataSource<RES> {
     this._logger.config = this._config;
 
     // listen the internal trigger
-    this.addOptional({
-      stream: this._trigger$,
-      getter: () => ({})
-    });
+    this.addStream(this._trigger$);
   }
 
   /**
@@ -186,32 +189,20 @@ export abstract class MatDataSource<REQ, RAW, RES> extends DataSource<RES> {
     this.defaults = { ...this.defaults, ...args };
   }
 
-  addRequired(src: DataSourceStream<REQ>) {
+  addStream(
+    stream: Observable<Partial<REQ | DataSourceOpts>> | DataSourceStream<REQ>
+  ): string {
+    const src: DataSourceStream<REQ | DataSourceOpts> = isObservable(stream)
+      ? {
+          name: this._streams.length.toString(),
+          stream
+        }
+      : stream;
+
     this._logger.check(this._triggered, addWhenRunning(src.name || src.stream));
-    this._logger.debug(
-      srcAdding(src.name, true),
-      srcEmpty(src.name),
-      src.stream
-    );
+    this._logger.debug(srcAdding(name), srcEmpty(name), stream);
 
-    this._streams.add({
-      ...src,
-      required: true
-    });
-  }
-
-  addOptional(src: DataSourceStream<REQ>) {
-    this._logger.check(this._triggered, addWhenRunning(src.name || src.stream));
-    this._logger.debug(
-      srcAdding(src.name, false),
-      srcEmpty(src.name),
-      src.stream
-    );
-
-    this._streams.add({
-      ...src,
-      required: false
-    });
+    return this._streams.add(src);
   }
 
   remStream(name: string) {
@@ -226,15 +217,12 @@ export abstract class MatDataSource<REQ, RAW, RES> extends DataSource<RES> {
 
   refresh(overrides: Partial<REQ> = {}) {
     this.overrides = overrides;
-    this._trigger$.next(TRIGGER_REFRESH);
+    this._trigger$.next(overrides);
   }
 
   reload() {
-    if (this._loaded) {
-      this.overrides = { forceReload: new Date().getTime() };
-    }
     this._reloading = true;
-    this._trigger$.next(TRIGGER_RELOAD);
+    this._trigger$.next({ forceReload: new Date().getTime() });
   }
 
   /**
@@ -255,9 +243,9 @@ export abstract class MatDataSource<REQ, RAW, RES> extends DataSource<RES> {
   /**
    * Data Fetching Methods
    */
-  private _blockStart(streamed: Array<any>): boolean {
-    // check if it's not configured to start after the initial optional stream
-    const block = !this._config.autoStart && streamed[1] === TRIGGER_INIT;
+  private _blockStart(): boolean {
+    // check if it's not configured to start after the first trigger
+    const block = this._triggered === 1 && !this._config.autoStart;
 
     if (this._triggered === 1) {
       this._logger.debug(
@@ -274,9 +262,13 @@ export abstract class MatDataSource<REQ, RAW, RES> extends DataSource<RES> {
     return block;
   }
 
-  private _getArgs(): Observable<REQ> {
-    // merge all the getters outputs
-    this.arguments = this._streams.args(this.defaults, this.overrides);
+  private _getArgs(outputs: Array<Partial<REQ>>): Observable<REQ> {
+    // merge all the stream outputs
+    this.arguments = {
+      ...this.defaults,
+      ...outputs,
+      ...this.overrides
+    } as any;
     this.overrides = {};
 
     this._logger.print(resolvedArgs(), this.arguments);
@@ -371,7 +363,7 @@ export abstract class MatDataSource<REQ, RAW, RES> extends DataSource<RES> {
     return this._data;
   }
 
-  private _processException(err) {
+  private _processException(err: any) {
     this._logger.print(resException(), err);
     return of(false);
   }
@@ -384,8 +376,8 @@ export abstract class MatDataSource<REQ, RAW, RES> extends DataSource<RES> {
     return this._streams.connect().pipe(
       takeUntil(this._disconnect$),
       tap(() => this._triggered++),
-      skipWhile(val => this._blockStart(val)),
-      switchMap(() => this._getArgs()),
+      skipWhile(() => this._blockStart()),
+      switchMap(args => this._getArgs(args)),
       map(req => this.reqArguments(req)),
       distinctUntilChanged(this._isEqual()),
       tap(() => this._preQuery()),

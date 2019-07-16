@@ -269,9 +269,9 @@ export abstract class MatDataSource<REQ, RAW, RES> extends DataSource<RES> {
       ...outputs,
       ...this.overrides
     } as any;
-    this.overrides = {};
 
     this._logger.print(resolvedArgs(), this.arguments);
+
     // TODO consider any edge case with forceReload
     delete this.arguments.forceReload;
 
@@ -289,6 +289,7 @@ export abstract class MatDataSource<REQ, RAW, RES> extends DataSource<RES> {
     this._outputMsg = '';
     this._logger.clearErrors();
     this._change$.next({});
+    this.overrides = {};
   }
 
   private _execQuery(args: REQ): Observable<RAW> {

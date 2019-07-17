@@ -23,71 +23,68 @@ export function timeoutMsg(): string {
  */
 
 export function removingStream(): string {
-  return `Removing stream`;
+  return `SETUP Removing stream`;
 }
 
 export function setValue(name: string): string {
-  return `${name} setted:`;
+  return `SETUP ${name} =`;
 }
 
-export function srcAdding(src: any): string {
-  return `Adding '${src}' stream`;
+export function srcAdding(src: any): any[] {
+  return [`SETUP Adding stream`, src];
 }
 
 export function srcEmpty(name: string): string {
-  return `Adding empty stream '${name}'`;
+  return `SETUP Adding empty stream '${name}'`;
 }
 
 export function srcInvalid(): string {
-  return `Empty stream provided!`;
+  return `SETUP Empty stream provided!`;
 }
 
 export function srcConnect(): string {
-  return `Connected`;
+  return `REQ Connected`;
 }
 
 export function srcEmitted(src: any): string {
-  return `Stream ${src} emitted:`;
+  return `REQ Stream ${src} emitted`;
 }
 
 export function srcOutput(): string {
-  return `Stream outputs:`;
+  return `REQ Streams output`;
 }
 
 export function isAutoStarting(): string {
-  return `DataSource starting automatically`;
+  return `REQ DataSource starting automatically`;
 }
 
-export function notAutoStarting(length: any): string {
-  return (
-    `DataSource not auto starting with ${length.optional}` +
-    ` optional and ${length.required} required streams`
-  );
+export function notAutoStarting(length: number): string {
+  return `REQ DataSource not auto starting with ${length} streams`;
 }
 
-export function resolvedArgs(): string {
-  return 'Resolved request';
+export function resolvedArgs(distinct: boolean): string {
+  return `REQ Resolved ${distinct ? 'the SAME' : ''} request`;
 }
 
 export function queryResponse(): string {
-  return 'Query response:';
+  return 'RAW Query response:';
 }
 
 export function queryTimeout(): string {
-  return 'Query timeout count:';
+  return 'RAW Query timeout count:';
 }
 
 export function responseTotal(): string {
-  return 'Total returned:';
+  return 'RAW Calculated total:';
 }
 
 export function responseSuccess(result: any): Array<any> {
   const len = result.length;
-  return [`Response succeed with ${len} item${len === 1 ? '' : 's'}`, result];
+  return [`RES succeed with ${len} item${len === 1 ? '' : 's'}`, result];
 }
 
 export function responseError(errors: any): Array<any> {
-  return ['Response failed', errors];
+  return ['RES failed', errors];
 }
 
 /**

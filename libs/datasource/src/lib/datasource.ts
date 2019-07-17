@@ -200,7 +200,7 @@ export abstract class MatDataSource<REQ, RAW, RES> extends DataSource<RES> {
       : stream;
 
     this._logger.check(this._triggered, addWhenRunning(src.name || src.stream));
-    this._logger.debug(srcAdding(name), srcEmpty(name), stream);
+    this._logger.debug(srcAdding(src.name), srcEmpty(src.name), stream);
 
     return this._streams.add(src);
   }
@@ -270,16 +270,19 @@ export abstract class MatDataSource<REQ, RAW, RES> extends DataSource<RES> {
       ...this.overrides
     } as any;
 
-    this._logger.print(resolvedArgs(), this.arguments);
-
-    // TODO consider any edge case with forceReload
     delete this.arguments.forceReload;
 
     return of(this.arguments);
   }
 
   private _isEqual(): (prev: REQ, curr: REQ) => boolean {
-    return (prev, curr) => !this._reloading && isEqual(prev, curr);
+    return (prev, curr) => {
+      const isDistinct = !this._reloading && isEqual(prev, curr);
+
+      this._logger.print(resolvedArgs(isDistinct), curr);
+
+      return isDistinct;
+    };
   }
 
   private _preQuery(): void {

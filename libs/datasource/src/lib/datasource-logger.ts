@@ -67,9 +67,11 @@ export class DataSourceLogger {
   debug(truthy: any, falsy?: any, condition: any = true) {
     if (this._config.debug) {
       if (condition) {
-        console.log(`${this.sourceName}:`, truthy);
+        truthy = Array.isArray(truthy) ? truthy : [truthy];
+        console.log(`${this.sourceName}:`, ...truthy);
       } else if (falsy) {
-        console.log(`${this.sourceName}:`, falsy);
+        falsy = Array.isArray(falsy) ? falsy : [falsy];
+        console.log(`${this.sourceName}:`, ...falsy);
       }
     }
   }

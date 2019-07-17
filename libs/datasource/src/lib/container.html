@@ -1,6 +1,6 @@
 <div class="mat-datasource-container">
   <div [attr.hidden]="dataSource.isLoading || dataSource.isEmpty ? '' : null">
-    <ng-content select="mat-table,table"></ng-content>
+    <ng-content select="mat-table,table,[mat-datasource-content]"></ng-content>
   </div>
 
   <mat-datasource-overlay [dataSource]="dataSource" [diameter]="diameter" [strokeWidth]="strokeWidth">

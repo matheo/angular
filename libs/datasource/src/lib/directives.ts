@@ -1,6 +1,14 @@
 import { Directive } from '@angular/core';
 
 @Directive({
+  selector: 'mat-datasource-content',
+  host: {
+    class: 'mat-datasource-content'
+  }
+})
+export class DataSourceContent {}
+
+@Directive({
   selector: 'mat-datasource-empty',
   host: {
     class: 'mat-datasource-empty'

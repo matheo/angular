@@ -4,6 +4,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 import { DataSourceContainer } from './container';
 import {
+  DataSourceContent,
   DataSourceEmpty,
   DataSourceError,
   DataSourceLoading
@@ -15,6 +16,7 @@ import { DataSourcePipe } from './datasource-pipe';
   imports: [CommonModule, MatProgressSpinnerModule],
   declarations: [
     DataSourceContainer,
+    DataSourceContent,
     DataSourceEmpty,
     DataSourceError,
     DataSourceLoading,
@@ -24,6 +26,7 @@ import { DataSourcePipe } from './datasource-pipe';
   exports: [
     MatProgressSpinnerModule,
     DataSourceContainer,
+    DataSourceContent,
     DataSourceEmpty,
     DataSourceError,
     DataSourceLoading,

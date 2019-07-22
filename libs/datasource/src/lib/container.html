@@ -1,5 +1,5 @@
 <div class="mat-datasource-container">
-  <div [attr.hidden]="dataSource.isLoading || dataSource.isEmpty ? '' : null">
+  <div class="mat-datasource-output" [attr.hidden]="dataSource.isLoading || dataSource.isEmpty ? '' : null">
     <ng-content select="mat-table,table,[mat-datasource-content]"></ng-content>
   </div>
 

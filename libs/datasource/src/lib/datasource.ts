@@ -46,21 +46,27 @@ export abstract class MatDataSource<REQ, RAW, RES> extends DataSource<RES> {
    * State to control outside behavior like css classes and components.
    * Updated by pre/postQuery to show/hide the loading overlay and empty message.
    */
+  private _reloading = true;
+
   get isLoading() {
     return this._loading;
   }
-  protected _loading = true;
-  private _reloading = true;
+  private _loading = true;
 
   get isLoaded() {
     return this._loaded;
   }
-  protected _loaded = false;
+  private _loaded = false;
 
   get isEmpty() {
     return this._empty;
   }
-  protected _empty = true;
+  private _empty = true;
+
+  set skipSave(val: any) {
+    this._skip = !!val;
+  }
+  private _skip = false;
 
   /**
    * Number used to calculate the pagination length.
@@ -69,12 +75,12 @@ export abstract class MatDataSource<REQ, RAW, RES> extends DataSource<RES> {
   get total() {
     return this._total;
   }
-  protected _total = 0;
+  private _total = 0;
 
   get data() {
     return this._data;
   }
-  protected _data: Array<RES> = [];
+  private _data: Array<RES> = [];
 
   /**
    * Number used to calculate the loading progress.
@@ -346,25 +352,30 @@ export abstract class MatDataSource<REQ, RAW, RES> extends DataSource<RES> {
 
   private _postQuery(res: RAW): Array<RES> {
     const hasErrors = this.hasErrors;
-    this._data = !hasErrors ? this.rawResult(res) : [];
+    const data = !hasErrors ? this.rawResult(res) : [];
 
     this._logger.debug(
-      responseSuccess(this._data),
+      responseSuccess(data),
       responseError(this.getErrors),
       !hasErrors
     );
 
-    this._empty = !this._data || !this._data.length;
+    this._empty = !data || !data.length;
 
     if (!hasErrors && this._empty) {
       this._outputMsg = this._config.emptyMsg();
     }
 
+    if (!this._skip) {
+      this._data = data;
+    }
+
     this._loaded = !hasErrors;
     this._loading = false;
+    this._skip = false;
     this._change$.next({});
 
-    return this._data;
+    return data;
   }
 
   private _processException(err: any) {

@@ -18,7 +18,8 @@ import {
   switchMap,
   take,
   takeUntil,
-  tap
+  tap,
+  shareReplay
 } from 'rxjs/operators';
 import { DataSourceConfig, defaultConfig } from './config';
 import { DataSourceLogger } from './datasource-logger';
@@ -302,7 +303,7 @@ export abstract class MatDataSource<REQ, RAW, RES> extends DataSource<RES> {
   }
 
   private _execQuery(args: REQ): Observable<RAW> {
-    const query = this.rawFetch(args);
+    const query = this.rawFetch(args).pipe(shareReplay());
 
     return merge(
       query,
@@ -350,6 +351,11 @@ export abstract class MatDataSource<REQ, RAW, RES> extends DataSource<RES> {
     }
   }
 
+  private _processException(err: any) {
+    this._logger.handleError('exception', err);
+    return of(false);
+  }
+
   private _postQuery(res: RAW): Array<RES> {
     const hasErrors = this.hasErrors;
     const data = !hasErrors ? this.rawResult(res) : [];
@@ -378,11 +384,6 @@ export abstract class MatDataSource<REQ, RAW, RES> extends DataSource<RES> {
     return data;
   }
 
-  private _processException(err: any) {
-    this._logger.print(resException(), err);
-    return of(false);
-  }
-
   /**
    * Data API
    */
@@ -398,9 +399,8 @@ export abstract class MatDataSource<REQ, RAW, RES> extends DataSource<RES> {
       tap(() => this._preQuery()),
       switchMap(req => this._execQuery(req)),
       tap(raw => this._updateTotal(raw)),
-      map(raw => this._postQuery(raw)),
       catchError(err => this._processException(err)),
-      filter<RES[]>(res => typeof res !== 'boolean')
+      map(raw => this._postQuery(raw))
     ) as Observable<RES[]>;
   }
 

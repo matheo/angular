@@ -79,7 +79,7 @@ export abstract class MatDataSource<REQ, RAW, RES> extends DataSource<RES> {
   private _total = 0;
 
   get data() {
-    return this._data;
+    return this._data ? this._data : [];
   }
   private _data: Array<RES> = [];
 
@@ -347,7 +347,10 @@ export abstract class MatDataSource<REQ, RAW, RES> extends DataSource<RES> {
           take(1),
           tap(total => this._logger.print(responseTotal(), total))
         )
-        .subscribe(total => (this._total = total));
+        .subscribe(total => {
+          this._total = total;
+          this._change$.next({});
+        });
     }
   }
 

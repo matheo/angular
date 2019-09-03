@@ -164,16 +164,16 @@ export abstract class MatDataSource<REQ, RAW, RES> extends DataSource<RES> {
   /** Executions counter */
   private _triggered = 0;
 
-  /** Output Emitter to refresh the UI. */
-  private readonly _change$ = new BehaviorSubject<any>({});
-
   /** Registered streams */
   private readonly _streams = new DataSourceStreamer<REQ | DataSourceOpts>(
     this._logger
   );
 
+  /** Output Emitter to refresh the UI. */
+  protected readonly _change$ = new BehaviorSubject<any>({});
+
   /** Disconnect internal observable. */
-  private readonly _disconnect$ = new Subject<void>();
+  protected readonly _disconnect$ = new Subject<void>();
 
   /**
    * DataSource.

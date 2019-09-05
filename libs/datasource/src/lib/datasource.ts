@@ -190,7 +190,7 @@ export abstract class MatDataSource<REQ, RAW, RES> extends DataSource<RES>
   }
 
   ngOnDestroy() {
-    this._logger.check(true, disconnecting());
+    this._logger.print(disconnecting(), '');
     this.disconnect();
   }
 

@@ -1,4 +1,5 @@
 import { DataSource } from '@angular/cdk/table';
+import { OnDestroy } from '@angular/core';
 import { isEqual } from 'lodash';
 import {
   BehaviorSubject,
@@ -18,14 +19,14 @@ import {
   switchMap,
   take,
   takeUntil,
-  tap,
-  shareReplay
+  tap
 } from 'rxjs/operators';
 import { DataSourceConfig, defaultConfig } from './config';
 import { DataSourceLogger } from './datasource-logger';
 import { DataSourceStreamer } from './datasource-streamer';
 import {
   addWhenRunning,
+  disconnecting,
   isAutoStarting,
   notAutoStarting,
   queryResponse,
@@ -36,13 +37,13 @@ import {
   responseSuccess,
   rmWhenRunning,
   removingStream,
-  resException,
   srcAdding,
   srcEmpty
 } from './messages';
 import { DataSourceOpts, DataSourceStream } from './types';
 
-export abstract class MatDataSource<REQ, RAW, RES> extends DataSource<RES> {
+export abstract class MatDataSource<REQ, RAW, RES> extends DataSource<RES>
+  implements OnDestroy {
   /**
    * State to control outside behavior like css classes and components.
    * Updated by pre/postQuery to show/hide the loading overlay and empty message.
@@ -188,6 +189,11 @@ export abstract class MatDataSource<REQ, RAW, RES> extends DataSource<RES> {
     this.addStream(this._trigger$);
   }
 
+  ngOnDestroy() {
+    this._logger.check(true, disconnecting());
+    this.disconnect();
+  }
+
   /**
    * Streams
    */
@@ -303,7 +309,7 @@ export abstract class MatDataSource<REQ, RAW, RES> extends DataSource<RES> {
   }
 
   private _execQuery(args: REQ): Observable<RAW> {
-    const query = this.rawFetch(args).pipe(shareReplay());
+    const query = this.rawFetch(args);
 
     return merge(
       query,
@@ -313,7 +319,6 @@ export abstract class MatDataSource<REQ, RAW, RES> extends DataSource<RES> {
         take(3) // by default: 5s, 15s, 25s
       )
     ).pipe(
-      take(3),
       // delay check
       tap(val => {
         if (typeof val !== 'number') {
@@ -355,7 +360,7 @@ export abstract class MatDataSource<REQ, RAW, RES> extends DataSource<RES> {
   }
 
   private _processException(err: any) {
-    this._logger.handleError('exception', err);
+    console.error(`${this.constructor.name} Exception`, err);
     return of(false);
   }
 
@@ -401,6 +406,7 @@ export abstract class MatDataSource<REQ, RAW, RES> extends DataSource<RES> {
       distinctUntilChanged(this._isEqual()),
       tap(() => this._preQuery()),
       switchMap(req => this._execQuery(req)),
+      takeUntil(this._disconnect$),
       tap(raw => this._updateTotal(raw)),
       catchError(err => this._processException(err)),
       map(raw => this._postQuery(raw))

@@ -87,6 +87,10 @@ export function responseError(errors: any): Array<any> {
   return ['RES failed', errors];
 }
 
+export function disconnecting(): string {
+  return 'Disconnecting';
+}
+
 /**
  * Error Messages
  */

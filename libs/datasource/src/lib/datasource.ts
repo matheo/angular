@@ -251,6 +251,10 @@ export abstract class MatDataSource<REQ, RAW, RES> extends DataSource<RES>
 
   abstract rawTotal(result: RAW): Observable<number>;
 
+  rawFilter(result: RAW) {
+    return true;
+  }
+
   abstract rawResult(result: RAW): Array<RES>;
 
   /**
@@ -407,6 +411,7 @@ export abstract class MatDataSource<REQ, RAW, RES> extends DataSource<RES>
       tap(() => this._preQuery()),
       switchMap(req => this._execQuery(req)),
       takeUntil(this._disconnect$),
+      filter(raw => this.rawFilter(raw)),
       tap(raw => this._updateTotal(raw)),
       catchError(err => this._processException(err)),
       map(raw => this._postQuery(raw))

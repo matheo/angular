@@ -1,6 +1,6 @@
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
-import { Observable } from 'rxjs';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { MatSort, Sort } from '@angular/material/sort';
+import { Observable, UnaryFunction } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { MatDataSource } from './datasource';
 import { nonNumeric, setValue } from './messages';
@@ -38,18 +38,28 @@ export abstract class ReactiveDataSource<REQ, RAW, RES> extends MatDataSource<
   private _pageSize = 10;
 
   // be sure the paginator's view has been initialized
-  setPaginator(paginator: MatPaginator) {
+  setPaginator(
+    paginator: MatPaginator,
+    mapper?: (
+      pageSize: number
+    ) => UnaryFunction<Observable<PageEvent>, Observable<any>>
+  ) {
     this.addStream({
       name: 'MatPaginator',
-      stream: paginator.page.pipe<any>(mapPaginator(this.pageSize))
+      stream: paginator.page.pipe<any>(
+        mapper ? mapper(this.pageSize) : mapPaginator(this.pageSize)
+      )
     });
   }
 
   // sort changes emitted will trigger an update
-  setSort(sort: MatSort) {
+  setSort(
+    sort: MatSort,
+    mapper?: () => UnaryFunction<Observable<Sort>, Observable<any>>
+  ) {
     this.addStream({
       name: 'MatSort',
-      stream: sort.sortChange.pipe<any>(mapSort())
+      stream: sort.sortChange.pipe<any>(mapper ? mapper() : mapSort())
     });
   }
 

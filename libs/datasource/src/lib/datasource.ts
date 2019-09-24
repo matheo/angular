@@ -116,6 +116,10 @@ export abstract class MatDataSource<REQ, RAW, RES> extends DataSource<RES>
     return this._change$.asObservable();
   }
 
+  get data$() {
+    return this._data$.asObservable();
+  }
+
   get hasErrors() {
     return this._logger.hasErrors(true);
   }
@@ -172,6 +176,9 @@ export abstract class MatDataSource<REQ, RAW, RES> extends DataSource<RES>
 
   /** Output Emitter to refresh the UI. */
   protected readonly _change$ = new BehaviorSubject<any>({});
+
+  /** Output Emitter of the latest Data. */
+  protected readonly _data$ = new Subject<Array<RES>>();
 
   /** Disconnect internal observable. */
   protected readonly _disconnect$ = new Subject<void>();
@@ -386,6 +393,7 @@ export abstract class MatDataSource<REQ, RAW, RES> extends DataSource<RES>
 
     if (!this._skip) {
       this._data = data;
+      this._data$.next(data);
     }
 
     this._loaded = !hasErrors;

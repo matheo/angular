@@ -50,7 +50,7 @@
     "@ngrx/store": "^9.2.0",
     "@nrwl/angular": "10.0.8",
     "normalize.css": "^8.0.1",
-    "rxjs": "~6.5.5",
+    "rxjs": "~6.6.2",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"
   },

@@ -12,7 +12,8 @@
       "tags": ["app"]
     },
     "website-e2e": {
-      "tags": []
+      "tags": [],
+      "implicitDependencies": ["website"]
     },
     "datasource": {
       "tags": ["shared"]

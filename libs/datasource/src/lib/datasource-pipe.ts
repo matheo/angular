@@ -1,14 +1,11 @@
 import {
   ChangeDetectorRef,
-  Injectable,
   OnDestroy,
   Pipe,
   PipeTransform,
   Type,
-  WrappedValue,
   ɵisObservable,
-  ɵlooseIdentical,
-  ɵstringify as stringify
+  ɵstringify as stringify,
 } from '@angular/core';
 import { Observable, SubscriptionLike } from 'rxjs';
 import { ReactiveDataSource } from './datasource-reactive';
@@ -35,7 +32,7 @@ class ObservableStrategy implements SubscriptionStrategy {
       next: updateLatestValue,
       error: (e: any) => {
         throw e;
-      }
+      },
     });
   }
 
@@ -58,11 +55,9 @@ const _observableStrategy = new ObservableStrategy();
  * changes. When the component gets destroyed, the `dataSource` pipe disconnects automatically to avoid
  * potential memory leaks.
  */
-@Injectable()
 @Pipe({ name: 'dataSource', pure: false })
 export class DataSourcePipe implements OnDestroy, PipeTransform {
   private _latestValue: any = null;
-  private _latestReturnedValue: any = null;
 
   private _subscription: SubscriptionLike | null = null;
   private _obj: ReactiveDataSource<any, any, any> | null = null;
@@ -83,7 +78,6 @@ export class DataSourcePipe implements OnDestroy, PipeTransform {
       if (obj) {
         this._subscribe(obj);
       }
-      this._latestReturnedValue = this._latestValue;
       return this._latestValue;
     }
 
@@ -92,12 +86,7 @@ export class DataSourcePipe implements OnDestroy, PipeTransform {
       return this.transform(obj as any);
     }
 
-    if (ɵlooseIdentical(this._latestValue, this._latestReturnedValue)) {
-      return this._latestReturnedValue;
-    }
-
-    this._latestReturnedValue = this._latestValue;
-    return WrappedValue.wrap(this._latestValue);
+    return this._latestValue;
   }
 
   private _subscribe(obj: ReactiveDataSource<any, any, any>): void {
@@ -106,7 +95,7 @@ export class DataSourcePipe implements OnDestroy, PipeTransform {
     const stream = obj.connect();
     this._subscription = this._strategy.createSubscription(
       stream,
-      (value: Object) => this._updateLatestValue(value)
+      (value: Object) => this._updateLatestValue(obj, value)
     );
   }
 
@@ -122,13 +111,14 @@ export class DataSourcePipe implements OnDestroy, PipeTransform {
     this._strategy.dispose(this._subscription!);
     this._obj.disconnect();
     this._latestValue = null;
-    this._latestReturnedValue = null;
     this._subscription = null;
     this._obj = null;
   }
 
-  private _updateLatestValue(value: Object): void {
-    this._latestValue = value;
-    this._ref.markForCheck();
+  private _updateLatestValue(async: any, value: Object): void {
+    if (async === this._obj) {
+      this._latestValue = value;
+      this._ref.markForCheck();
+    }
   }
 }

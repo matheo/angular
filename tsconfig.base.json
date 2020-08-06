@@ -1,38 +1,29 @@
-/*
-  This is a "Solution Style" tsconfig.json file, and is used by editors and TypeScript’s language server to improve development experience.
-  It is not intended to be used to perform a compilation.
-
-  To learn more about this file see: https://angular.io/config/solution-tsconfig.
-*/
 {
-  "files": [],
-  "references": [
-    {
-      "path": "./apps/website/tsconfig.app.json"
+  "compilerOptions": {
+    "rootDir": ".",
+    "baseUrl": ".",
+    "outDir": "./dist/out-tsc",
+    "sourceMap": true,
+    "allowSyntheticDefaultImports": true,
+    "declaration": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "target": "es5",
+    "module": "esnext",
+    "typeRoots": ["node_modules/@types"],
+    "lib": ["es2018", "dom"],
+    "paths": {
+      "@matheo/datasource": ["libs/datasource/src/index.ts"],
+      "@matheo/datepicker": ["libs/datepicker/src/index.ts"],
+      "@matheo/schematics": ["libs/schematics/src/index.ts"]
     },
-    {
-      "path": "./apps/website/tsconfig.spec.json"
-    },
-    {
-      "path": "./apps/website-e2e/tsconfig.e2e.json"
-    },
-    {
-      "path": "./libs/datasource/tsconfig.lib.json"
-    },
-    {
-      "path": "./libs/datasource/tsconfig.spec.json"
-    },
-    {
-      "path": "./libs/datepicker/tsconfig.lib.json"
-    },
-    {
-      "path": "./libs/datepicker/tsconfig.spec.json"
-    },
-    {
-      "path": "./libs/schematics/tsconfig.lib.json"
-    },
-    {
-      "path": "./libs/schematics/tsconfig.spec.json"
-    }
-  ]
+    "plugins": [
+      {
+        "name": "typescript-tslint-plugin"
+      }
+    ]
+  },
+  "exclude": ["node_modules"]
 }

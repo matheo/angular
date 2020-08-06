@@ -139,6 +139,11 @@
           "options": {
             "tsConfig": "libs/datasource/tsconfig.lib.json",
             "project": "libs/datasource/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/datasource/tsconfig.lib.prod.json"
+            }
           }
         },
         "lint": {

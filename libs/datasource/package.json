@@ -1,6 +1,6 @@
 {
   "name": "@matheo/datasource",
-  "version": "0.9.5",
+  "version": "10.0.0",
   "description": "Reactive Datasource for Angular",
   "author": {
     "name": "Mateo Tibaquira",
@@ -20,8 +20,10 @@
     "tslib": "^2.0.0"
   },
   "peerDependencies": {
-    "@angular/common": ">=7.0.0",
-    "@angular/core": ">=7.0.0",
-    "@angular/material": ">=7.0.0"
+    "@angular/common": ">=10.0.0",
+    "@angular/core": ">=10.0.0",
+    "@angular/cdk": ">=10.0.0",
+    "@angular/material": ">=10.0.0",
+    "rxjs": "*"
   }
 }

@@ -1,5 +1,5 @@
 import { DataSource } from '@angular/cdk/table';
-import { OnDestroy } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 import { isEqual } from 'lodash';
 import {
   BehaviorSubject,
@@ -8,7 +8,7 @@ import {
   of,
   Subject,
   timer,
-  isObservable
+  isObservable,
 } from 'rxjs';
 import {
   catchError,
@@ -19,7 +19,7 @@ import {
   switchMap,
   take,
   takeUntil,
-  tap
+  tap,
 } from 'rxjs/operators';
 import { DataSourceConfig, defaultConfig } from './config';
 import { DataSourceLogger } from './datasource-logger';
@@ -38,10 +38,11 @@ import {
   rmWhenRunning,
   removingStream,
   srcAdding,
-  srcEmpty
+  srcEmpty,
 } from './messages';
 import { DataSourceOpts, DataSourceStream } from './types';
 
+@Injectable()
 export abstract class MatDataSource<REQ, RAW, RES> extends DataSource<RES>
   implements OnDestroy {
   /**
@@ -139,7 +140,7 @@ export abstract class MatDataSource<REQ, RAW, RES> extends DataSource<RES>
   set config(config: Partial<DataSourceConfig>) {
     this._config = {
       ...this._config,
-      ...config
+      ...config,
     };
     this._logger.config = this._config;
   }
@@ -215,7 +216,7 @@ export abstract class MatDataSource<REQ, RAW, RES> extends DataSource<RES>
     const src: DataSourceStream<REQ | DataSourceOpts> = isObservable(stream)
       ? {
           name: this._streams.length.toString(),
-          stream
+          stream,
         }
       : stream;
 
@@ -291,7 +292,7 @@ export abstract class MatDataSource<REQ, RAW, RES> extends DataSource<RES>
     this.arguments = {
       ...this.defaults,
       ...outputs,
-      ...this.overrides
+      ...this.overrides,
     } as any;
 
     delete this.arguments.forceReload;
@@ -331,7 +332,7 @@ export abstract class MatDataSource<REQ, RAW, RES> extends DataSource<RES>
       )
     ).pipe(
       // delay check
-      tap(val => {
+      tap((val) => {
         if (typeof val !== 'number') {
           this._logger.print(queryResponse(), val);
         } else {
@@ -346,8 +347,8 @@ export abstract class MatDataSource<REQ, RAW, RES> extends DataSource<RES>
         }
       }),
       // discard timer result
-      filter<RAW>(result => typeof result !== 'number'),
-      catchError(err => {
+      filter<RAW>((result) => typeof result !== 'number'),
+      catchError((err) => {
         // isolate query error
         this._logger.handleError('query', err);
         return of(this.rawDefault());
@@ -361,9 +362,9 @@ export abstract class MatDataSource<REQ, RAW, RES> extends DataSource<RES>
       this.rawTotal(res)
         .pipe(
           take(1),
-          tap(total => this._logger.print(responseTotal(), total))
+          tap((total) => this._logger.print(responseTotal(), total))
         )
-        .subscribe(total => {
+        .subscribe((total) => {
           this._total = total;
           this._change$.next({});
         });
@@ -413,16 +414,16 @@ export abstract class MatDataSource<REQ, RAW, RES> extends DataSource<RES>
       takeUntil(this._disconnect$),
       tap(() => this._triggered++),
       skipWhile(() => this._blockStart()),
-      switchMap(args => this._getArgs(args)),
-      map(req => this.reqArguments(req)),
+      switchMap((args) => this._getArgs(args)),
+      map((req) => this.reqArguments(req)),
       distinctUntilChanged(this._isEqual()),
       tap(() => this._preQuery()),
-      switchMap(req => this._execQuery(req)),
+      switchMap((req) => this._execQuery(req)),
       takeUntil(this._disconnect$),
-      filter(raw => this.rawFilter(raw)),
-      tap(raw => this._updateTotal(raw)),
-      catchError(err => this._processException(err)),
-      map(raw => this._postQuery(raw))
+      filter((raw) => this.rawFilter(raw)),
+      tap((raw) => this._updateTotal(raw)),
+      catchError((err) => this._processException(err)),
+      map((raw) => this._postQuery(raw))
     ) as Observable<RES[]>;
   }
 

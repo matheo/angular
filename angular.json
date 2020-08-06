@@ -18,6 +18,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "aot": true,
             "outputPath": "dist/apps/website",
             "index": "apps/website/src/index.html",
             "main": "apps/website/src/main.ts",
@@ -31,8 +32,7 @@
               "./node_modules/normalize.css/normalize.css",
               "apps/website/src/styles.scss"
             ],
-            "scripts": [],
-            "es5BrowserSupport": true
+            "scripts": []
           },
           "configurations": {
             "production": {
@@ -56,6 +56,10 @@
                   "type": "initial",
                   "maximumWarning": "2mb",
                   "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
                 }
               ]
             }
@@ -92,8 +96,7 @@
           "builder": "@nrwl/jest:jest",
           "options": {
             "jestConfig": "apps/website/jest.config.js",
-            "tsConfig": "apps/website/tsconfig.spec.json",
-            "setupFile": "apps/website/src/test-setup.ts"
+            "passWithNoTests": true
           }
         }
       }
@@ -120,7 +123,7 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": "apps/website-e2e/tsconfig.e2e.json",
-            "exclude": ["**/node_modules/**", "!apps/website-e2e/**"]
+            "exclude": ["**/node_modules/**", "!apps/website-e2e/**/*"]
           }
         }
       }
@@ -132,7 +135,7 @@
       "prefix": "mat",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
+          "builder": "@nrwl/angular:package",
           "options": {
             "tsConfig": "libs/datasource/tsconfig.lib.json",
             "project": "libs/datasource/ng-package.json"
@@ -145,15 +148,14 @@
               "libs/datasource/tsconfig.lib.json",
               "libs/datasource/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/datasource/**"]
+            "exclude": ["**/node_modules/**", "!libs/datasource/**/*"]
           }
         },
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
             "jestConfig": "libs/datasource/jest.config.js",
-            "tsConfig": "libs/datasource/tsconfig.spec.json",
-            "setupFile": "libs/datasource/src/test-setup.ts"
+            "passWithNoTests": true
           }
         }
       },
@@ -170,7 +172,7 @@
       "prefix": "mat",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
+          "builder": "@nrwl/angular:package",
           "options": {
             "tsConfig": "libs/datepicker/tsconfig.lib.json",
             "project": "libs/datepicker/ng-package.json"
@@ -183,15 +185,14 @@
               "libs/datepicker/tsconfig.lib.json",
               "libs/datepicker/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/datepicker/**"]
+            "exclude": ["**/node_modules/**", "!libs/datepicker/**/*"]
           }
         },
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
             "jestConfig": "libs/datepicker/jest.config.js",
-            "tsConfig": "libs/datepicker/tsconfig.spec.json",
-            "setupFile": "libs/datepicker/src/test-setup.ts"
+            "passWithNoTests": true
           }
         }
       },
@@ -208,7 +209,7 @@
       "prefix": "mat",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
+          "builder": "@nrwl/angular:package",
           "options": {
             "tsConfig": "libs/schematics/tsconfig.lib.json",
             "project": "libs/schematics/ng-package.json"
@@ -221,14 +222,14 @@
               "libs/schematics/tsconfig.lib.json",
               "libs/schematics/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/schematics/**"]
+            "exclude": ["**/node_modules/**", "!libs/schematics/**/*"]
           }
         },
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
             "jestConfig": "libs/schematics/jest.config.js",
-            "tsConfig": "libs/schematics/tsconfig.spec.json"
+            "passWithNoTests": true
           }
         }
       },
@@ -241,7 +242,6 @@
   },
   "cli": {
     "warnings": {
-      "typescriptMismatch": false,
       "versionMismatch": false
     },
     "defaultCollection": "@nrwl/angular"

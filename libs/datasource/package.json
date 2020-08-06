@@ -16,7 +16,8 @@
   "license": "MIT",
   "repository": "git://git@github.com/matheo/angular.git",
   "dependencies": {
-    "lodash": "*"
+    "lodash": "*",
+    "tslib": "^2.0.0"
   },
   "peerDependencies": {
     "@angular/common": ">=7.0.0",

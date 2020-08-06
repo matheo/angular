@@ -1,0 +1,38 @@
+/*
+  This is a "Solution Style" tsconfig.json file, and is used by editors and TypeScript’s language server to improve development experience.
+  It is not intended to be used to perform a compilation.
+
+  To learn more about this file see: https://angular.io/config/solution-tsconfig.
+*/
+{
+  "files": [],
+  "references": [
+    {
+      "path": "./apps/website/tsconfig.app.json"
+    },
+    {
+      "path": "./apps/website/tsconfig.spec.json"
+    },
+    {
+      "path": "./apps/website-e2e/tsconfig.e2e.json"
+    },
+    {
+      "path": "./libs/datasource/tsconfig.lib.json"
+    },
+    {
+      "path": "./libs/datasource/tsconfig.spec.json"
+    },
+    {
+      "path": "./libs/datepicker/tsconfig.lib.json"
+    },
+    {
+      "path": "./libs/datepicker/tsconfig.spec.json"
+    },
+    {
+      "path": "./libs/schematics/tsconfig.lib.json"
+    },
+    {
+      "path": "./libs/schematics/tsconfig.spec.json"
+    }
+  ]
+}

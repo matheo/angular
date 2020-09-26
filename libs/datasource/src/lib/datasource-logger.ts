@@ -1,4 +1,5 @@
 import { DataSourceConfig } from './config';
+import { MatDataSourceIntl } from './datasource-intl';
 
 /**
  * Logging Handler
@@ -14,7 +15,7 @@ export class DataSourceLogger {
   }
   private _config: DataSourceConfig;
 
-  constructor(private sourceName: string) {}
+  constructor(private sourceName: string, private _intl?: MatDataSourceIntl) {}
 
   /**
    * Error Management Methods
@@ -47,11 +48,11 @@ export class DataSourceLogger {
   getTimeoutError(attempt: number) {
     switch (attempt) {
       case 0:
-        return this._config.waitMsg;
+        return this._intl?.waitMsg || this._config.waitMsg;
       case 1:
-        return this._config.delayMsg;
+        return this._intl?.delayMsg || this._config.delayMsg;
       default:
-        throw new Error(this._config.timeoutMsg);
+        throw new Error(this._intl?.timeoutMsg || this._config.timeoutMsg);
     }
   }
 

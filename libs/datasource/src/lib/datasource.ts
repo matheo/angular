@@ -22,11 +22,13 @@ import {
   tap,
 } from 'rxjs/operators';
 import { DataSourceConfig, defaultConfig } from './config';
+import { MatDataSourceIntl } from './datasource-intl';
 import { DataSourceLogger } from './datasource-logger';
 import { DataSourceStreamer } from './datasource-streamer';
 import {
   addWhenRunning,
   disconnecting,
+  emptyMsg,
   isAutoStarting,
   notAutoStarting,
   queryResponse,
@@ -43,7 +45,8 @@ import {
 import { DataSourceOpts, DataSourceStream } from './types';
 
 @Injectable()
-export abstract class MatDataSource<REQ, RAW, RES> extends DataSource<RES>
+export abstract class MatDataSource<REQ = any, RAW = any, RES = any>
+  extends DataSource<RES>
   implements OnDestroy {
   /**
    * State to control outside behavior like css classes and components.
@@ -156,7 +159,10 @@ export abstract class MatDataSource<REQ, RAW, RES> extends DataSource<RES>
   /**
    * Error control vars.
    */
-  protected readonly _logger = new DataSourceLogger(this.constructor.name);
+  protected readonly _logger = new DataSourceLogger(
+    this.constructor.name,
+    this.intl
+  );
 
   /**
    * Stream only used to trigger a refresh on the data.
@@ -187,8 +193,13 @@ export abstract class MatDataSource<REQ, RAW, RES> extends DataSource<RES>
   /**
    * DataSource.
    */
-  constructor() {
+  constructor(protected intl?: MatDataSourceIntl<REQ>) {
     super();
+
+    // update i18n if present
+    if (this.intl) {
+      this.config = this.intl;
+    }
 
     // initial config sync
     this._logger.config = this._config;
@@ -389,7 +400,7 @@ export abstract class MatDataSource<REQ, RAW, RES> extends DataSource<RES>
     this._empty = !data || !data.length;
 
     if (!hasErrors && this._empty) {
-      this._outputMsg = this._config.emptyMsg();
+      this._outputMsg = this._emptyMessage();
     }
 
     if (!this._skip) {
@@ -403,6 +414,24 @@ export abstract class MatDataSource<REQ, RAW, RES> extends DataSource<RES>
     this._change$.next({});
 
     return data;
+  }
+
+  private _emptyMessage() {
+    if (this.intl?.emptyMsg) {
+      if (typeof this.intl.emptyMsg === 'function') {
+        return this.intl.emptyMsg(this.args);
+      } else {
+        return this.intl.emptyMsg;
+      }
+    }
+    if (this._config.emptyMsg) {
+      if (typeof this._config.emptyMsg === 'function') {
+        return this._config.emptyMsg(this.args);
+      } else {
+        return this._config.emptyMsg;
+      }
+    }
+    return emptyMsg();
   }
 
   /**

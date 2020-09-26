@@ -7,10 +7,11 @@ import {
   DataSourceContent,
   DataSourceEmpty,
   DataSourceError,
-  DataSourceLoading
+  DataSourceLoading,
 } from './directives';
 import { DataSourceOverlay } from './overlay';
 import { DataSourcePipe } from './datasource-pipe';
+import { MatDataSourceIntl } from './datasource-intl';
 
 @NgModule({
   imports: [CommonModule, MatProgressSpinnerModule],
@@ -21,7 +22,7 @@ import { DataSourcePipe } from './datasource-pipe';
     DataSourceError,
     DataSourceLoading,
     DataSourceOverlay,
-    DataSourcePipe
+    DataSourcePipe,
   ],
   exports: [
     MatProgressSpinnerModule,
@@ -30,7 +31,8 @@ import { DataSourcePipe } from './datasource-pipe';
     DataSourceEmpty,
     DataSourceError,
     DataSourceLoading,
-    DataSourcePipe
-  ]
+    DataSourcePipe,
+  ],
+  providers: [MatDataSourceIntl],
 })
 export class MatDataSourceModule {}

@@ -10,10 +10,10 @@ export interface DataSourceConfig {
   autoStart: boolean;
   errorHandler?: (err: any) => string;
   showErrors: boolean;
-  emptyMsg: () => string;
-  waitMsg: string;
-  delayMsg: string;
-  timeoutMsg: string;
+  emptyMsg?: ((args?: any) => string) | string;
+  waitMsg?: string;
+  delayMsg?: string;
+  timeoutMsg?: string;
   waitMs: number; // ms to wait before show the waitMsg
   intervalMs: number; // timer interval to timeout the request
   progressMode: ProgressSpinnerMode;
@@ -29,5 +29,5 @@ export const defaultConfig: DataSourceConfig = {
   timeoutMsg: timeoutMsg(),
   waitMs: 5000,
   intervalMs: 10000,
-  progressMode: 'indeterminate'
+  progressMode: 'indeterminate',
 };

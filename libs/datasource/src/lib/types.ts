@@ -12,6 +12,7 @@ export interface DataSourceOpts {
 export interface DataSourceStream<T> {
   name: string;
   stream: Observable<Partial<T>>;
+  optional?: boolean;
   weight?: number;
 }
 

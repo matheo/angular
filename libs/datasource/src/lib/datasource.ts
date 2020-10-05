@@ -298,17 +298,17 @@ export abstract class MatDataSource<REQ = any, RAW = any, RES = any>
     return block;
   }
 
-  private _getArgs(outputs: Array<Partial<REQ>>): Observable<REQ> {
+  private _getArgs(output: Partial<REQ | DataSourceOpts>): REQ {
     // merge all the stream outputs
     this.arguments = {
       ...this.defaults,
-      ...outputs,
+      ...output,
       ...this.overrides,
     } as any;
 
     delete this.arguments.forceReload;
 
-    return of(this.arguments);
+    return this.arguments;
   }
 
   private _isEqual(): (prev: REQ, curr: REQ) => boolean {
@@ -443,7 +443,7 @@ export abstract class MatDataSource<REQ = any, RAW = any, RES = any>
       takeUntil(this._disconnect$),
       tap(() => this._triggered++),
       skipWhile(() => this._blockStart()),
-      switchMap((args) => this._getArgs(args)),
+      map((args) => this._getArgs(args)),
       map((req) => this.reqArguments(req)),
       distinctUntilChanged(this._isEqual()),
       tap(() => this._preQuery()),

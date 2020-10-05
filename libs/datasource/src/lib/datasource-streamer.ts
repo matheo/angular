@@ -1,5 +1,5 @@
-import { combineLatest, of, isObservable, Observable } from 'rxjs';
-import { tap, map } from 'rxjs/operators';
+import { combineLatest, of, isObservable, merge } from 'rxjs';
+import { tap, map, first, scan, switchMap, startWith } from 'rxjs/operators';
 import { DataSourceLogger } from './datasource-logger';
 import { srcEmitted, srcInvalid, srcOutput, srcConnect } from './messages';
 import { DataSourceStream } from './types';
@@ -16,12 +16,14 @@ export class DataSourceStreamer<T> {
 
   add(src: DataSourceStream<T>) {
     this.logger.check(!src.stream, srcInvalid());
-    this.streams.push(src);
+    if (src.stream && isObservable(src.stream)) {
+      this.streams.push(src);
+    }
     return src.name;
   }
 
   remove(name: string) {
-    this.streams = this.streams.filter(s => s.name !== name);
+    this.streams = this.streams.filter((s) => s.name !== name);
   }
 
   connect() {
@@ -30,25 +32,47 @@ export class DataSourceStreamer<T> {
       this.streams.map((src, i) => src.name || i)
     );
 
-    return (this.streams.length
-      ? combineLatest(
-          this.streams
-            .filter(src => src.stream && isObservable(src.stream))
-            .sort((a, b) => {
-              return (a.weight || 0) < (b.weight || 0) ? -1 : 1;
-            })
-            .map((src, i) =>
-              src.stream.pipe(
-                tap(output =>
-                  this.logger.print(srcEmitted(src.name || i), output)
-                )
+    const required = this.streams
+      .filter((src) => !src.optional)
+      .sort((a, b) => ((a.weight || 0) < (b.weight || 0) ? -1 : 1))
+      .map(this.logEmittedValue());
+
+    const optional = this.streams
+      .filter((src) => src.optional)
+      .map(this.logEmittedValue());
+
+    return combineLatest([
+      required.length
+        ? combineLatest(required).pipe(
+            // waits the first emission of the required ones
+            map((args) => args.reduce(this.reducePartials, {} as Partial<T>)),
+            first(),
+            // and from there it accumulates the emissions
+            switchMap((args) =>
+              merge(...required).pipe(
+                startWith(args),
+                scan(this.reducePartials, {} as Partial<T>)
               )
             )
-        )
-      : of([])
-    ).pipe(
-      tap(v => this.logger.print(srcOutput(), v)),
-      map(outputs => outputs.reduce((a, b) => ({ ...a, ...b })))
+          )
+        : of({} as Partial<T>),
+      optional.length
+        ? merge(...optional).pipe(scan(this.reducePartials, {} as Partial<T>))
+        : of({} as Partial<T>),
+    ]).pipe(
+      map((args) => args.reduce(this.reducePartials, {} as Partial<T>)),
+      tap((v) => this.logger.print(srcOutput(), v))
     );
+  }
+
+  private logEmittedValue() {
+    return (src: DataSourceStream<T>, i: number) =>
+      src.stream.pipe(
+        tap((output) => this.logger.print(srcEmitted(src.name || i), output))
+      );
+  }
+
+  private reducePartials(a: Partial<T>, b: Partial<T>) {
+    return { ...a, ...b };
   }
 }

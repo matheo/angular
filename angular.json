@@ -9,11 +9,6 @@
       "sourceRoot": "apps/website/src",
       "projectType": "application",
       "prefix": "web",
-      "schematics": {
-        "@nrwl/schematics:component": {
-          "style": "scss"
-        }
-      },
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
@@ -181,11 +176,6 @@
             "coverage/libs/datasource"
           ]
         }
-      },
-      "schematics": {
-        "@nrwl/schematics:component": {
-          "styleext": "scss"
-        }
       }
     },
     "datepicker": {
@@ -224,11 +214,6 @@
           "outputs": [
             "coverage/libs/datepicker"
           ]
-        }
-      },
-      "schematics": {
-        "@nrwl/schematics:component": {
-          "styleext": "scss"
         }
       }
     },
@@ -269,11 +254,6 @@
             "coverage/libs/schematics"
           ]
         }
-      },
-      "schematics": {
-        "@nrwl/schematics:component": {
-          "styleext": "scss"
-        }
       }
     }
   },
@@ -288,6 +268,9 @@
       "style": "scss"
     },
     "@nrwl/schematics:library": {
+      "style": "scss"
+    },
+    "@nrwl/schematics:component": {
       "style": "scss"
     }
   }

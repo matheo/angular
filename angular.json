@@ -62,7 +62,10 @@
                 }
               ]
             }
-          }
+          },
+          "outputs": [
+            "dist/apps/website"
+          ]
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
@@ -88,7 +91,10 @@
               "apps/website/tsconfig.app.json",
               "apps/website/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!apps/website/**"]
+            "exclude": [
+              "**/node_modules/**",
+              "!apps/website/**"
+            ]
           }
         },
         "test": {
@@ -96,7 +102,10 @@
           "options": {
             "jestConfig": "apps/website/jest.config.js",
             "passWithNoTests": true
-          }
+          },
+          "outputs": [
+            "coverage/apps/website/"
+          ]
         }
       }
     },
@@ -122,7 +131,10 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": "apps/website-e2e/tsconfig.e2e.json",
-            "exclude": ["**/node_modules/**", "!apps/website-e2e/**/*"]
+            "exclude": [
+              "**/node_modules/**",
+              "!apps/website-e2e/**/*"
+            ]
           }
         }
       }
@@ -137,7 +149,8 @@
           "builder": "@nrwl/angular:package",
           "options": {
             "tsConfig": "libs/datasource/tsconfig.lib.json",
-            "project": "libs/datasource/ng-package.json"
+            "project": "libs/datasource/ng-package.json",
+            "buildableProjectDepsInPackageJsonType": "dependencies"
           },
           "configurations": {
             "production": {
@@ -152,7 +165,10 @@
               "libs/datasource/tsconfig.lib.json",
               "libs/datasource/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/datasource/**/*"]
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/datasource/**/*"
+            ]
           }
         },
         "test": {
@@ -160,7 +176,10 @@
           "options": {
             "jestConfig": "libs/datasource/jest.config.js",
             "passWithNoTests": true
-          }
+          },
+          "outputs": [
+            "coverage/libs/datasource"
+          ]
         }
       },
       "schematics": {
@@ -179,7 +198,8 @@
           "builder": "@nrwl/angular:package",
           "options": {
             "tsConfig": "libs/datepicker/tsconfig.lib.json",
-            "project": "libs/datepicker/ng-package.json"
+            "project": "libs/datepicker/ng-package.json",
+            "buildableProjectDepsInPackageJsonType": "dependencies"
           }
         },
         "lint": {
@@ -189,7 +209,10 @@
               "libs/datepicker/tsconfig.lib.json",
               "libs/datepicker/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/datepicker/**/*"]
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/datepicker/**/*"
+            ]
           }
         },
         "test": {
@@ -197,7 +220,10 @@
           "options": {
             "jestConfig": "libs/datepicker/jest.config.js",
             "passWithNoTests": true
-          }
+          },
+          "outputs": [
+            "coverage/libs/datepicker"
+          ]
         }
       },
       "schematics": {
@@ -216,7 +242,8 @@
           "builder": "@nrwl/angular:package",
           "options": {
             "tsConfig": "libs/schematics/tsconfig.lib.json",
-            "project": "libs/schematics/ng-package.json"
+            "project": "libs/schematics/ng-package.json",
+            "buildableProjectDepsInPackageJsonType": "dependencies"
           }
         },
         "lint": {
@@ -226,7 +253,10 @@
               "libs/schematics/tsconfig.lib.json",
               "libs/schematics/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/schematics/**/*"]
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/schematics/**/*"
+            ]
           }
         },
         "test": {
@@ -234,7 +264,10 @@
           "options": {
             "jestConfig": "libs/schematics/jest.config.js",
             "passWithNoTests": true
-          }
+          },
+          "outputs": [
+            "coverage/libs/schematics"
+          ]
         }
       },
       "schematics": {

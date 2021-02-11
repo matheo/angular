@@ -1,6 +1,6 @@
 module.exports = {
-  name: 'website',
-  preset: '../../jest.config.js',
+  displayName: 'website',
+  preset: '../../jest.preset.js',
   coverageDirectory: '../../coverage/apps/website/',
   snapshotSerializers: [
     'jest-preset-angular/build/AngularNoNgAttributesSnapshotSerializer.js',
@@ -12,10 +12,12 @@ module.exports = {
     'ts-jest': {
       tsConfig: '<rootDir>tsconfig.spec.json',
       stringifyContentPathRegex: '\\.(html|svg)$',
-      astTransformers: [
-        'jest-preset-angular/build/InlineFilesTransformer',
-        'jest-preset-angular/build/StripStylesTransformer',
-      ],
+      astTransformers: {
+        before: [
+          'jest-preset-angular/build/InlineFilesTransformer',
+          'jest-preset-angular/build/StripStylesTransformer',
+        ],
+      },
     },
   },
 };

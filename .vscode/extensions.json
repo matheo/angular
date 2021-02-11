@@ -3,7 +3,8 @@
     "nrwl.angular-console",
     "angular.ng-template",
     "esbenp.prettier-vscode",
-    "ms-vscode.vscode-typescript-tslint-plugin"
+    "ms-vscode.vscode-typescript-tslint-plugin",
+    "firsttris.vscode-jest-runner"
   ],
   "unwantedRecommendations": [
     "hookyqr.beautify"

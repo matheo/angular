@@ -1,16 +1,23 @@
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterModule, Routes } from '@angular/router';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppComponent } from './app.component';
-import { RouterModule } from '@angular/router';
+
+const routes: Routes = [];
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
     BrowserAnimationsModule,
-    RouterModule.forRoot([], { initialNavigation: 'enabled', relativeLinkResolution: 'legacy' })
+    RouterModule.forRoot(routes, {
+      initialNavigation: 'enabled',
+      relativeLinkResolution: 'legacy',
+    }),
+    NgbModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule {}

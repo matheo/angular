@@ -1,3 +1,6 @@
+/* Importing Bootstrap SCSS file. */
+@import '~bootstrap/scss/bootstrap';
+
 // Custom Theming for Angular Material
 // For more information: https://material.angular.io/guide/theming
 @import '~@angular/material/theming';
@@ -33,6 +36,320 @@ body {
 }
 
 body {
+  background: #ffffff;
+  color: #898989;
+  font-family: 'Poppins', helvetica;
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 20px;
+  letter-spacing: 0.02em;
+  overflow-x: hidden;
+  margin: 0 auto;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+h2 {
+  color: #292929;
+  font-weight: 600;
+}
+
+h4 {
+  color: #292929;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+a {
+  color: #292929;
+  text-decoration: none !important;
+  transition: all 0.5s ease-in-out 0s;
+}
+
+a:hover {
+  -moz-transition: all 0.5s ease-in-out 0s;
+  -ms-transition: all 0.5s ease-in-out 0s;
+  -o-transition: all 0.5s ease-in-out 0s;
+  -webkit-transition: all 0.5s ease-in-out 0s;
+  transition: all 0.5s ease-in-out 0s;
+}
+
+a:hover,
+a:focus {
+  color: #b8a07e;
+  text-decoration: underline;
+}
+
+nav ul li a {
+  padding: 2px 0 0 0;
+  position: relative;
+  display: block;
+  font-size: 12px;
+  color: #999999;
+  letter-spacing: 0.1em;
+  font-weight: 500;
+  line-height: 14px;
+  text-transform: uppercase;
+  transition: all 0.5s ease-in-out 0s;
+}
+
+p {
+  margin: 25px 0;
+  padding: 0;
+  font-size: 15px;
+  color: #999999;
+  line-height: 28px;
+}
+
+::-moz-selection {
+  background: #b8a07e;
+  color: #fff;
+}
+
+::selection {
+  background: #b8a07e;
+  color: #fff;
+}
+
+.btn {
+  background: #333;
+  border: medium none;
+  border-radius: 0;
+  color: #fff;
+  font-size: 12px;
+  height: 50px;
+  line-height: 50px;
+  padding: 0 30px;
+  text-transform: uppercase;
+}
+
+.btn:hover,
+.btn:focus {
+  color: #fff;
+}
+
+.padDiv {
+  padding: 30px 20px;
+}
+
+.section-title {
+  margin-bottom: 70px;
+}
+
+.section-title h2 {
+  font-size: 25px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.form-control {
+  background-color: transparent;
+  border: 1px solid #999;
+  border-radius: 0;
+  color: #999999;
+  font-size: 12px;
+  font-weight: 500;
+  height: 50px;
+  letter-spacing: 0.1em;
+  padding-left: 10px;
+  margin: 0 0 25px 0;
+  line-height: 14px;
+  text-transform: uppercase;
+}
+
+.form-control:focus {
+  box-shadow: none;
+  outline: 0 none;
+}
+
+.paddsection {
+  padding-top: 90px;
+  padding-bottom: 90px;
+}
+
+.paddsections {
+  padding-top: 90px;
+  padding-bottom: 90px !important;
+}
+
+.hvr-shutter-in-horizontal::before {
+  background: #333;
+}
+
+.hvr-shutter-in-horizontal:hover {
+  background: #b8a07e;
+}
+
+.mb-30 {
+  margin-bottom: 30px;
+}
+
+/*-----------------------------------------------------------------------------------*/
+/*  Navbar Top
+/*-----------------------------------------------------------------------------------*/
+
+nav {
+  position: fixed;
+  background: #fff;
+  z-index: 1000;
+  width: 100%;
+  padding: 20px;
+  display: none;
+  box-shadow: 0px 2px 92px 0px rgba(0, 0, 0, 0.18);
+}
+
+.nav-menu {
+  float: right;
+  line-height: 32px;
+  margin-bottom: 0;
+  padding-top: 16px;
+}
+
+nav ul li {
+  float: left;
+  margin-right: 15px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  margin-left: 40px;
+}
+
+nav ul li a {
+  padding: 2px 0 0 0;
+  position: relative;
+  display: block;
+  font-size: 14px;
+  color: #999999;
+  font-family: 'Poppins', helvetica;
+  font-weight: 500;
+  line-height: 16px;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  text-transform: capitalize;
+}
+
+.logo {
+  float: left;
+}
+
+.logo img {
+  width: 100px;
+  height: 50px;
+}
+
+.responsive {
+  display: none;
+  font-size: 23px;
+}
+
+.active {
+  color: #afafaf;
+}
+
+/*----------------------------------------------------------------------------------*/
+/*  Header
+/*-----------------------------------------------------------------------------------*/
+
+#header {
+  background: url('/assets/header.jpg') repeat scroll center center / cover;
+  height: 100vh;
+  width: 100%;
+}
+
+#header .header-content {
+  height: 100vh;
+  text-align: left;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.header-content h1 {
+  font-size: 42px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.header-content p {
+  font-size: 24px;
+  letter-spacing: 5px;
+  margin-top: 0;
+  margin-bottom: 30px;
+  text-transform: capitalize;
+  color: #fff;
+  font-weight: 500;
+}
+
+.header-content .list-social li {
+  float: left;
+  margin-right: 20px;
+}
+
+.header-content .list-social li i {
+  color: #fff;
+  font-size: 15px;
+}
+
+/*-----------------------------------------------------------------------------------*/
+/*  Footer
+/*-----------------------------------------------------------------------------------*/
+
+#footer {
+  background: #f7f7f7;
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+#footer .socials-media {
+  width: 100%;
+}
+
+#footer .socials-media ul {
+  display: inline-block;
+  float: none;
+  margin: 0 0 20px 0;
+}
+
+#footer .socials-media ul li {
+  float: left;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+#footer .socials-media ul li a {
+  font-size: 24px;
+  color: #999;
+  letter-spacing: 0.1em;
+  font-weight: 500;
+  background: transparent;
+  text-transform: uppercase;
+  transition: all 0.5s ease-in-out 0s;
+}
+
+#footer .socials-media ul li a:hover {
+  color: #b8a07e;
+  transition: all 0.5s ease-in-out 0s;
+}
+
+#footer p {
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  font-weight: 500;
+  margin-top: 0;
+  text-transform: uppercase;
+}
+
+.credits {
+  font-size: 13px;
 }

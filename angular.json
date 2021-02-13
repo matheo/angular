@@ -24,8 +24,8 @@
               "apps/website/src/assets"
             ],
             "styles": [
-              "./node_modules/normalize.css/normalize.css",
-              "apps/website/src/styles.scss"
+              "apps/website/src/styles.scss",
+              "apps/website/src/styles/responsive.scss"
             ],
             "scripts": []
           },

@@ -17,4 +17,9 @@ mat-selection-list {
       text-transform: uppercase;
     }
   }
+
+  a:hover,
+  a:visited {
+    color: inherit;
+  }
 }

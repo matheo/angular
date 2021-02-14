@@ -1,0 +1,24 @@
+:host {
+  margin-bottom: 30px;
+
+  .item-body {
+    padding: 25px 0px;
+    position: relative;
+
+    h4 a {
+      color: #292929;
+      display: block;
+      font-size: 20px;
+      font-weight: 500;
+      line-height: 24px;
+      margin: 0 0 13px 0;
+      text-transform: uppercase;
+    }
+
+    p {
+      font-size: 14px;
+      line-height: 24px;
+      margin: 0;
+    }
+  }
+}

@@ -1,4 +1,5 @@
 .mat-icon-button {
+  color: black;
   position: absolute;
 
   left: 10px;
@@ -8,7 +9,6 @@
   width: 56px;
 
   .mat-icon {
-    color: white;
     font-size: 42px;
     line-height: 42px;
     height: 42px;
@@ -18,10 +18,15 @@
 
 .mat-drawer {
   background: #f4eead;
+}
 
-  .mat-icon-button {
-    .mat-icon {
-      color: black;
+:host {
+  &.home {
+    // home menu icon is white
+    main {
+      .mat-icon-button {
+        color: white;
+      }
     }
   }
 }

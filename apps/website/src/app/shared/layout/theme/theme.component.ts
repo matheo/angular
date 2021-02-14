@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostBinding } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'web-theme',
@@ -6,4 +7,15 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   styleUrls: ['./theme.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ThemeComponent {}
+export class ThemeComponent {
+  url!: string;
+
+  constructor(router: Router) {
+    this.url = router.url;
+  }
+
+  @HostBinding('class.home')
+  get isHome(): boolean {
+    return this.url === '/';
+  }
+}

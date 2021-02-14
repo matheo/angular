@@ -1,0 +1,13 @@
+
+<div class="item">
+
+  <a [routerLink]="item.link">
+    <img [src]="item.image || '//via.placeholder.com/300x222'" class="img-responsive" alt="img">
+  </a>
+
+  <div class="item-body">
+    <h4><a [routerLink]="item.link">{{ item.title }}</a></h4>
+    <p *ngIf="item.description">{{ item.description }}</p>
+  </div>
+
+</div>

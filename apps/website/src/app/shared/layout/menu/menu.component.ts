@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
   selector: 'web-menu',
@@ -11,6 +11,7 @@ export class MenuComponent {
     {
       text: 'Home',
       link: '/',
+      options: { exact: true },
     },
     {
       text: 'Demos',

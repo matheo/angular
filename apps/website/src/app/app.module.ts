@@ -1,15 +1,27 @@
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { PagesModule } from './pages/pages.module';
+
+const routes: Routes = [
+  {
+    path: 'demos',
+    loadChildren: () =>
+      import('./demos/demos.module').then((m) => m.DemosModule),
+  },
+  {
+    path: 'lab',
+    loadChildren: () => import('./lab/lab.module').then((m) => m.LabModule),
+  },
+];
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
     BrowserAnimationsModule,
-    RouterModule.forRoot([], {
+    RouterModule.forRoot(routes, {
       initialNavigation: 'enabled',
       relativeLinkResolution: 'legacy',
     }),

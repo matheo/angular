@@ -2,8 +2,12 @@
   <mat-list-option
     *ngFor="let option of menu"
     [routerLink]="option.link"
-    routerLinkActive="mat-list-single-selected-option"
+    [routerLinkActive]="'mat-list-single-selected-option'"
+    [routerLinkActiveOptions]="option.options || {}"
   >
     {{ option.text }}
+  </mat-list-option>
+  <mat-list-option>
+    <a href="https://www.paypal.me/mateotp" target="_blank">Donate</a>
   </mat-list-option>
 </mat-selection-list>

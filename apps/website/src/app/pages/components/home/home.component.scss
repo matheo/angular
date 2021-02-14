@@ -1,0 +1,44 @@
+:host {
+  background: url('/assets/header.jpg') repeat scroll center center / cover;
+  display: block;
+  height: 100vh;
+  width: 100%;
+}
+
+.header-content {
+  height: 100vh;
+  text-align: left;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  text-shadow: 1px 1px 5px rgb(0 0 0 / 50%);
+
+  h1 {
+    font-size: 42px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    color: #fff;
+  }
+
+  p {
+    font-size: 24px;
+    letter-spacing: 5px;
+    margin-top: 0;
+    margin-bottom: 30px;
+    text-transform: capitalize;
+    color: #fff;
+    font-weight: 500;
+  }
+
+  .list-social li {
+    float: left;
+    margin-right: 20px;
+
+    ion-icon {
+      color: white;
+      font-size: 48px;
+    }
+  }
+}

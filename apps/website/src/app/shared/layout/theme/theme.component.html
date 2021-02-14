@@ -1,0 +1,23 @@
+<mat-drawer-container autosize fxFlexFill>
+
+  <mat-drawer #drawer mode="over">
+    <button mat-icon-button (click)="drawer.close()">
+      <mat-icon>close</mat-icon>
+    </button>
+
+    <web-menu></web-menu>
+  </mat-drawer>
+
+  <main>
+    <button mat-icon-button (click)="drawer.toggle()">
+      <mat-icon>menu</mat-icon>
+    </button>
+
+    <router-outlet></router-outlet>
+
+    <footer>
+      Design based on Folio by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+    </footer>
+  </main>
+
+</mat-drawer-container>

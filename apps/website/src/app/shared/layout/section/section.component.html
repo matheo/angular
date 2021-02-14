@@ -1,17 +1,19 @@
-<div class="container">
-
-  <h2>
-    <ng-container *ngFor="let section of sections; let last = last">
-      <ng-container *ngIf="section.link; else current">
-        <a [routerLink]="section.link">{{ section.title }}</a>
+<header>
+  <div class="container">
+    <h2>
+      <ng-container *ngFor="let section of sections; let last = last">
+        <ng-container *ngIf="section.link; else current">
+          <a [routerLink]="section.link">{{ section.title }}</a>
+        </ng-container>
+        <ng-template #current>
+          {{ section.title }}
+        </ng-template>
+        <span *ngIf="!last">/</span>
       </ng-container>
-      <ng-template #current>
-        {{ section.title }}
-      </ng-template>
-      <span *ngIf="!last">/</span>
-    </ng-container>
-  </h2>
+    </h2>
+  </div>
+</header>
 
+<div class="container">
   <ng-content></ng-content>
-
 </div>

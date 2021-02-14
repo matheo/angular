@@ -1,17 +1,18 @@
-:host {
-  display: block;
+header {
+  background: url('/assets/header.jpg') no-repeat scroll left top;
   padding-top: 84px;
+  padding-bottom: 70px;
+  margin-bottom: 42px;
+}
 
-  h2 {
-    font-size: 25px;
-    letter-spacing: 2px;
-    margin-bottom: 70px;
-    text-align: center;
-    text-transform: uppercase;
+h2 {
+  font-size: 25px;
+  letter-spacing: 2px;
+  text-align: center;
+  text-transform: uppercase;
 
-    span {
-      color: #999999;
-      margin-left: 0.3em;
-    }
+  span {
+    color: #999999;
+    margin-left: 0.3em;
   }
 }

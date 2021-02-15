@@ -1,1 +1,3 @@
-export * from './lib/datepicker.module';
+import './typings';
+
+export * from './lib/public-api';

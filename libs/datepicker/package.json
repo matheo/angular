@@ -1,9 +1,23 @@
 {
   "name": "@matheo/datepicker",
-  "version": "0.0.1",
+  "version": "11.0.0",
+  "description": "Angular material date+time picker",
+  "keywords": [
+    "angular",
+    "material",
+    "datepicker",
+    "timepicker"
+  ],
+  "license": "MIT",
+  "homepage": "http://matheo.co/demos/datepicker/",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:matheo/angular.git",
+    "directory": "libs/datepicker"
+  },
   "peerDependencies": {
-    "@angular/common": "^7.2.0",
-    "@angular/core": "^7.2.0"
+    "@angular/common": ">11.0.0",
+    "@angular/core": ">11.0.0"
   },
   "dependencies": {
     "tslib": "^2.0.0"

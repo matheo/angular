@@ -25,8 +25,7 @@
               "apps/website/src/assets"
             ],
             "styles": [
-              "apps/website/src/styles.scss",
-              "apps/website/src/styles/responsive.scss"
+              "apps/website/src/styles.scss"
             ],
             "scripts": []
           },

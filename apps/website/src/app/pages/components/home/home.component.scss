@@ -20,6 +20,10 @@
     margin-bottom: 10px;
     text-transform: uppercase;
     color: #fff;
+
+    @media (max-width: 480px) {
+      font-size: 28px;
+    }
   }
 
   p {
@@ -30,6 +34,10 @@
     text-transform: capitalize;
     color: #fff;
     font-weight: 500;
+
+    @media (max-width: 480px) {
+      font-size: 18px;
+    }
   }
 
   .list-social li {
@@ -39,6 +47,10 @@
     ion-icon {
       color: white;
       font-size: 48px;
+
+      @media (max-width: 480px) {
+        font-size: 28px;
+      }
     }
   }
 }

@@ -1,6 +1,10 @@
 mat-selection-list {
-  margin-top: 250px;
+  margin-top: 70px;
   min-width: 250px;
+
+  @media (min-width: 1200px) {
+    margin-top: 180px;
+  }
 
   ::ng-deep {
     .mat-list-option {

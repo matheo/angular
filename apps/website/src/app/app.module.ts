@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { MatNativeDateModule } from '@angular/material/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule, Routes } from '@angular/router';
 
@@ -25,6 +26,7 @@ const routes: Routes = [
       initialNavigation: 'enabled',
       relativeLinkResolution: 'legacy',
     }),
+    MatNativeDateModule,
     PagesModule,
   ],
   providers: [],

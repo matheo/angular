@@ -16,3 +16,12 @@ h2 {
     margin-left: 0.3em;
   }
 }
+
+::ng-deep h3 {
+  color: #292929;
+  font-size: 19px;
+  font-weight: 500;
+  line-height: 24px;
+  margin: 0 0 13px 0;
+  text-transform: uppercase;
+}

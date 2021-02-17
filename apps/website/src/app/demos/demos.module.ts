@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { MatDatepickerModule } from '@matheo/datepicker';
 import { RouterModule, Routes } from '@angular/router';
 import { ThemeComponent } from '../shared/layout/theme/theme.component';
 import { SharedModule } from '../shared/shared.module';
@@ -25,7 +26,12 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [CommonModule, RouterModule.forChild(routes), SharedModule],
+  imports: [
+    CommonModule,
+    RouterModule.forChild(routes),
+    MatDatepickerModule,
+    SharedModule,
+  ],
   declarations: [IndexComponent, DatepickerComponent],
 })
 export class DemosModule {}

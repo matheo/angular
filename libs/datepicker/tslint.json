@@ -128,6 +128,7 @@
     "directive-class-suffix": false,
     "directive-selector": false,
     "deprecation": false,
+    "interface-over-type-literal": false,
     "member-ordering": false,
     "no-host-metadata-property": false,
     "no-input-rename": false,

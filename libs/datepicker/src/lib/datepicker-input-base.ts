@@ -28,12 +28,12 @@ import {
   Validator,
   ValidatorFn,
 } from '@angular/forms';
+import {Subscription, Subject} from 'rxjs';
 import {
   DateAdapter,
   MAT_DATE_FORMATS,
   MatDateFormats,
-} from '@angular/material/core';
-import {Subscription, Subject} from 'rxjs';
+} from '../core/datetime';
 import {createMissingDateImplError} from './datepicker-errors';
 import {
   ExtractDateTypeFromSelection,

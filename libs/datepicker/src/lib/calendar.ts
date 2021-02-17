@@ -25,12 +25,12 @@ import {
   ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
+import {Subject, Subscription} from 'rxjs';
 import {
   DateAdapter,
   MAT_DATE_FORMATS,
   MatDateFormats,
-} from '@angular/material/core';
-import {Subject, Subscription} from 'rxjs';
+} from '../core/datetime';
 import {MatCalendarUserEvent, MatCalendarCellClassFunction} from './calendar-body';
 import {createMissingDateImplError} from './datepicker-errors';
 import {MatDatepickerIntl} from './datepicker-intl';

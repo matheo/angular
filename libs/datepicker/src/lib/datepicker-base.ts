@@ -44,13 +44,13 @@ import {
 import {
   CanColor,
   CanColorCtor,
-  DateAdapter,
   mixinColor,
   ThemePalette,
 } from '@angular/material/core';
 import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {merge, Subject, Observable, Subscription} from 'rxjs';
 import {filter, take} from 'rxjs/operators';
+import {DateAdapter} from '../core/datetime';
 import {MatCalendar, MatCalendarView} from './calendar';
 import {matDatepickerAnimations} from './datepicker-animations';
 import {createMissingDateImplError} from './datepicker-errors';

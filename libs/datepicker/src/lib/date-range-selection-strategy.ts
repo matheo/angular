@@ -7,7 +7,7 @@
  */
 
 import {Injectable, InjectionToken, Optional, SkipSelf, FactoryProvider} from '@angular/core';
-import {DateAdapter} from '@angular/material/core';
+import {DateAdapter} from '../core/datetime';
 import {DateRange} from './date-selection-model';
 
 /** Injection token used to customize the date range selection behavior. */

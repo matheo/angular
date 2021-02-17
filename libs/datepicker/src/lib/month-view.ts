@@ -36,8 +36,8 @@ import {
   SimpleChanges,
   OnChanges,
 } from '@angular/core';
-import {DateAdapter, MAT_DATE_FORMATS, MatDateFormats} from '@angular/material/core';
 import {Directionality} from '@angular/cdk/bidi';
+import {DateAdapter, MAT_DATE_FORMATS, MatDateFormats} from '../core/datetime';
 import {
   MatCalendarBody,
   MatCalendarCell,

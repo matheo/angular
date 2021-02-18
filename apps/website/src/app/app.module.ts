@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
-import { MatNativeDateModule } from '@matheo/datepicker';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule, Routes } from '@angular/router';
+import { MatNativeDateModule } from '@matheo/datepicker';
 
 import { AppComponent } from './app.component';
 import { PagesModule } from './pages/pages.module';

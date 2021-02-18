@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { MatDatepickerModule } from '@matheo/datepicker';
 import { RouterModule, Routes } from '@angular/router';
+import { MatDatepickerModule } from '@matheo/datepicker';
 import { ThemeComponent } from '../shared/layout/theme/theme.component';
 import { SharedModule } from '../shared/shared.module';
 import { DatepickerComponent } from './components/datepicker/datepicker.component';

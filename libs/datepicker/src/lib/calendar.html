@@ -1,6 +1,18 @@
 <ng-template [cdkPortalOutlet]="_calendarHeaderPortal"></ng-template>
 
 <div class="mat-calendar-content" [ngSwitch]="currentView" cdkMonitorSubtreeFocus tabindex="-1">
+
+  <mat-clock-view
+      *ngSwitchCase="'clock'"
+      [(activeDate)]="activeDate"
+      [selected]="selected"
+      [dateFilter]="dateFilter"
+      [clockStep]="clockStep"
+      [twelveHour]="twelveHour"
+      (selectedChange)="_timeChanged($event)"
+      (_userSelection)="_timeSelected($event)">
+  </mat-clock-view>
+
   <mat-month-view
       *ngSwitchCase="'month'"
       [(activeDate)]="activeDate"
@@ -11,7 +23,7 @@
       [dateClass]="dateClass"
       [comparisonStart]="comparisonStart"
       [comparisonEnd]="comparisonEnd"
-      (_userSelection)="_dateSelected($event)">
+      (_userSelection)="_showClockView($event)">
   </mat-month-view>
 
   <mat-year-view

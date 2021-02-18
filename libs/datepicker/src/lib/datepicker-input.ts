@@ -82,6 +82,7 @@ export class MatDatepickerInput<D> extends MatDatepickerInputBase<D | null, D>
   set matDatepicker(datepicker: MatDatepickerPanel<MatDatepickerControl<D>, D | null, D>) {
     if (datepicker) {
       this._datepicker = datepicker;
+      this.type = datepicker.type;
       this._closedSubscription = datepicker.closedStream.subscribe(() => this._onTouched());
       this._registerModel(datepicker.registerInput(this));
     }

@@ -5,8 +5,11 @@
   <mat-calendar
     [id]="datepicker.id"
     [ngClass]="datepicker.panelClass"
+    [type]="datepicker.type"
     [startAt]="datepicker.startAt"
     [startView]="datepicker.startView"
+    [clockStep]="datepicker.clockStep"
+    [twelveHour]="datepicker.twelveHour"
     [minDate]="datepicker._getMinDate()"
     [maxDate]="datepicker._getMaxDate()"
     [dateFilter]="datepicker._getDateFilter()"

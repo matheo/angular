@@ -51,7 +51,8 @@ import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {merge, Subject, Observable, Subscription} from 'rxjs';
 import {filter, take} from 'rxjs/operators';
 import {DateAdapter} from '../core/datetime';
-import {MatCalendar, MatCalendarView} from './calendar';
+import {MatCalendar} from './calendar';
+import {MatCalendarType, MatCalendarView} from './calendar.types';
 import {matDatepickerAnimations} from './datepicker-animations';
 import {createMissingDateImplError} from './datepicker-errors';
 import {MatCalendarUserEvent, MatCalendarCellClassFunction} from './calendar-body';
@@ -256,6 +257,8 @@ export interface MatDatepickerPanel<C extends MatDatepickerControl<D>, S,
     D = ExtractDateTypeFromSelection<S>> {
   /** Stream that emits whenever the date picker is closed. */
   closedStream: EventEmitter<void>;
+  /** The type of value handled by the calendar. */
+  type: MatCalendarType;
   /** Color palette to use on the datepicker's calendar. */
   color: ThemePalette;
   /** The input element the datepicker is associated with. */
@@ -299,8 +302,17 @@ export abstract class MatDatepickerBase<C extends MatDatepickerControl<D>, S,
   }
   private _startAt: D | null;
 
+  /** The type of value handled by the calendar. */
+  @Input() type: MatCalendarType = 'date';
+
   /** The view that the calendar should start in. */
-  @Input() startView: 'month' | 'year' | 'multi-year' = 'month';
+  @Input() startView: MatCalendarView = 'month';
+
+  /** Clock interval */
+  @Input() clockStep = 1;
+
+  /** Clock hour format */
+  @Input() twelveHour = true;
 
   /** Color palette to use on the datepicker's calendar. */
   @Input()

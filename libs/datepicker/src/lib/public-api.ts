@@ -32,6 +32,7 @@ export {
 } from './datepicker-input';
 export * from './datepicker-intl';
 export * from './datepicker-toggle';
+export * from './clock-view';
 export * from './month-view';
 export * from './year-view';
 export * from './date-range-input';

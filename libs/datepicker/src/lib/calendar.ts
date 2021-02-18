@@ -32,8 +32,10 @@ import {
   MatDateFormats,
 } from '../core/datetime';
 import {MatCalendarUserEvent, MatCalendarCellClassFunction} from './calendar-body';
+import {MatCalendarType, MatCalendarView} from './calendar.types';
 import {createMissingDateImplError} from './datepicker-errors';
 import {MatDatepickerIntl} from './datepicker-intl';
+import {MatClockView} from './clock-view';
 import {MatMonthView} from './month-view';
 import {
   getActiveOffset,
@@ -43,12 +45,6 @@ import {
 } from './multi-year-view';
 import {MatYearView} from './year-view';
 import {MAT_SINGLE_DATE_SELECTION_MODEL_PROVIDER, DateRange} from './date-selection-model';
-
-/**
- * Possible views for the calendar.
- * @docs-private
- */
-export type MatCalendarView = 'month' | 'year' | 'multi-year';
 
 /** Counter used to generate unique IDs. */
 let uniqueId = 0;
@@ -215,7 +211,10 @@ export class MatCalendar<D> implements AfterContentInit, AfterViewChecked, OnDes
   }
   private _startAt: D | null;
 
-  /** Whether the calendar should be started in month or year view. */
+  /** The type of value handled by the calendar. */
+  @Input() type: MatCalendarType = 'date';
+
+  /** Whether the calendar should be started in. */
   @Input() startView: MatCalendarView = 'month';
 
   /** The currently selected date. */
@@ -252,6 +251,12 @@ export class MatCalendar<D> implements AfterContentInit, AfterViewChecked, OnDes
   /** Function that can be used to add custom CSS classes to dates. */
   @Input() dateClass: MatCalendarCellClassFunction<D>;
 
+  /** Clock interval */
+  @Input() clockStep = 1;
+
+  /** Clock hour format */
+  @Input() twelveHour = false;
+
   /** Start of the comparison range. */
   @Input() comparisonStart: D | null;
 
@@ -283,6 +288,9 @@ export class MatCalendar<D> implements AfterContentInit, AfterViewChecked, OnDes
   @Output() readonly _userSelection: EventEmitter<MatCalendarUserEvent<D | null>> =
       new EventEmitter<MatCalendarUserEvent<D | null>>();
 
+  /** Reference to the current clock view component. */
+  @ViewChild(MatClockView) clockView: MatClockView<D>;
+
   /** Reference to the current month view component. */
   @ViewChild(MatMonthView) monthView: MatMonthView<D>;
 
@@ -299,6 +307,7 @@ export class MatCalendar<D> implements AfterContentInit, AfterViewChecked, OnDes
   get activeDate(): D { return this._clampedActiveDate; }
   set activeDate(value: D) {
     this._clampedActiveDate = this._dateAdapter.clampDate(value, this.minDate, this.maxDate);
+    this._isAm = this._dateAdapter.getHours(this._clampedActiveDate) < 12;
     this.stateChanges.next();
     this._changeDetectorRef.markForCheck();
   }
@@ -321,6 +330,12 @@ export class MatCalendar<D> implements AfterContentInit, AfterViewChecked, OnDes
    * Emits whenever there is a state change that the header may need to respond to.
    */
   stateChanges = new Subject<void>();
+
+  /** Whether the active date is AM or not */
+  _isAm: boolean;
+
+  /** Whether the calendar process the time. */
+  _hasTime: boolean;
 
   constructor(_intl: MatDatepickerIntl,
               @Optional() private _dateAdapter: DateAdapter<D>,
@@ -364,6 +379,8 @@ export class MatCalendar<D> implements AfterContentInit, AfterViewChecked, OnDes
   }
 
   ngOnChanges(changes: SimpleChanges) {
+    this._hasTime = this.type.indexOf('time') >= 0;
+
     const change =
         changes['minDate'] || changes['maxDate'] || changes['dateFilter'];
 
@@ -401,6 +418,17 @@ export class MatCalendar<D> implements AfterContentInit, AfterViewChecked, OnDes
     view._init();
   }
 
+  /** Handles date selection in the clock view. */
+  _timeChanged(date: D): void {
+    this.activeDate = date;
+  }
+
+  _timeSelected(event: MatCalendarUserEvent<D | null>): void {
+    this.activeDate = event.value;
+    this.selectedChange.emit(event.value);
+    this._userSelection.emit(event);
+  }
+
   /** Handles date selection in the month view. */
   _dateSelected(event: MatCalendarUserEvent<D | null>): void {
     const date = event.value;
@@ -411,6 +439,16 @@ export class MatCalendar<D> implements AfterContentInit, AfterViewChecked, OnDes
     }
 
     this._userSelection.emit(event);
+  }
+
+  /** Handles user clicks on the time labels. */
+  _showClockView(event: MatCalendarUserEvent<D | null>): void {
+    if (!this._hasTime || this.selected instanceof DateRange) {
+      this._dateSelected(event);
+    } else {
+      this.selectedChange.emit(event.value);
+      this._goToDateInView(event.value,  'clock');
+    }
   }
 
   /** Handles year selection in the multiyear view. */
@@ -424,13 +462,13 @@ export class MatCalendar<D> implements AfterContentInit, AfterViewChecked, OnDes
   }
 
   /** Handles year/month selection in the multi-year/year views. */
-  _goToDateInView(date: D, view: 'month' | 'year' | 'multi-year'): void {
+  _goToDateInView(date: D, view: MatCalendarView): void {
     this.activeDate = date;
     this.currentView = view;
   }
 
   /** Returns the component instance that corresponds to the current calendar view. */
   private _getCurrentViewComponent() {
-    return this.monthView || this.yearView || this.multiYearView;
+    return this.clockView || this.monthView || this.yearView || this.multiYearView;
   }
 }

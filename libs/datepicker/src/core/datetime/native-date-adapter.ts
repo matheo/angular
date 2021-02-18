@@ -162,20 +162,25 @@ export class NativeDateAdapter extends DateAdapter<Date> {
   }
 
   getHourNames(): string[] {
+    /*
     if (SUPPORTS_INTL_API) {
-      const dtf = new Intl.DateTimeFormat(this.locale, { hour: 'numeric', timeZone: 'utc' });
+      const dtf = new Intl.DateTimeFormat(this.locale,
+        { hour: 'numeric', hour12: false, timeZone: 'utc' });
       return range(24, i => this._stripDirectionalityCharacters(
-          dtf.format(new Date(2017, 0, 0, i))));
+          dtf.format(new Date(Date.UTC(2017, 0, 0, i)))));
     }
+    */
     return DEFAULT_HOUR_NAMES;
   }
 
   getMinuteNames(): string[] {
+    /*
     if (SUPPORTS_INTL_API) {
       const dtf = new Intl.DateTimeFormat(this.locale, { minute: 'numeric', timeZone: 'utc' });
       return range(60, i => this._stripDirectionalityCharacters(
-          dtf.format(new Date(2017, 0, 0, 0, i))));
+          dtf.format(new Date(Date.UTC(2017, 0, 0, 0, i)))));
     }
+    */
     return DEFAULT_MINUTE_NAMES;
   }
 

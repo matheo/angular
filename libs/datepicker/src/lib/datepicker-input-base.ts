@@ -34,6 +34,7 @@ import {
   MAT_DATE_FORMATS,
   MatDateFormats,
 } from '../core/datetime';
+import {MatCalendarType} from './calendar.types';
 import {createMissingDateImplError} from './datepicker-errors';
 import {
   ExtractDateTypeFromSelection,
@@ -115,6 +116,9 @@ export abstract class MatDatepickerInputBase<S, D = ExtractDateTypeFromSelection
 
   /** Emits when the internal state has changed */
   stateChanges = new Subject<void>();
+
+  /** The type of value handled by the calendar. */
+  type: MatCalendarType = 'date';
 
   _onTouched = () => {};
   _validatorOnChange = () => {};
@@ -295,7 +299,7 @@ export abstract class MatDatepickerInputBase<S, D = ExtractDateTypeFromSelection
 
   _onInput(value: string) {
     const lastValueWasValid = this._lastValueValid;
-    let date = this._dateAdapter.parse(value, this._dateFormats.parse.dateInput);
+    let date = this._dateAdapter.parse(value, this._dateFormats.parse[`${this.type}Input`]);
     this._lastValueValid = this._isValidValue(date);
     date = this._dateAdapter.getValidDateOrNull(date);
 
@@ -332,8 +336,9 @@ export abstract class MatDatepickerInputBase<S, D = ExtractDateTypeFromSelection
 
   /** Formats a value and sets it on the input element. */
   protected _formatValue(value: D | null) {
-    this._elementRef.nativeElement.value =
-        value ? this._dateAdapter.format(value, this._dateFormats.display.dateInput) : '';
+    this._elementRef.nativeElement.value = value
+      ? this._dateAdapter.format(value, this._dateFormats.display[`${this.type}Input`])
+      : '';
   }
 
   /** Assigns a value to the model. */

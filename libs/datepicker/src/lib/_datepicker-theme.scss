@@ -176,6 +176,118 @@ $mat-calendar-weekday-table-font-size: 11px !default;
   .mat-date-range-input-inner[disabled] {
     color: mat-color($foreground, disabled-text);
   }
+
+  $clock-min-size: 224px !default;
+  $clock-margin: 8px !default;
+  $clock-font-size: 14px !default;
+  $clock-cell-size: 14.1666% !default;
+
+  mat-clock-view {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    min-height: 236px;
+    min-width: $clock-min-size;
+    margin: $clock-margin;
+    font-size: $clock-font-size;
+    box-sizing: border-box;
+    user-select: none;
+  }
+
+  .mat-clock {
+    background-color: darken(white, 6);
+    border-radius: 50%;
+    position: relative;
+  }
+
+  .mat-clock-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 2%;
+    height: 2%;
+    margin: -1%;
+    border-radius: 50%;
+    background-color: mat-color(map-get($config, primary), text);
+  }
+
+  .mat-clock-hand {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 1px;
+    /*height: $clock-hand-size;*/
+    margin: 0 auto;
+    background-color: mat-color(map-get($config, primary), text);
+    transform-origin: bottom;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: -4px;
+      left: -4px;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background-color: mat-color(map-get($config, primary), text);
+    }
+  }
+
+  .mat-clock-hours,
+  .mat-clock-minutes {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    visibility: hidden;
+    transition: 350ms;
+    transform: scale(1.2);
+
+    &.active {
+      opacity: 1;
+      visibility: visible;
+      transform: scale(1);
+    }
+  }
+
+  .mat-clock-minutes {
+    transform: scale(0.8);
+  }
+
+  .mat-clock-cell {
+    position: absolute;
+    display: flex;
+    width: $clock-cell-size;
+    height: $clock-cell-size;
+    color: rgba(black, 0.87);
+    justify-content: center;
+    box-sizing: border-box;
+    border-radius: 50%;
+    align-items: center;
+    cursor: pointer;
+
+    &:not(.mat-clock-cell-selected) {
+      &:not(.mat-clock-cell-disabled):hover {
+        background-color: rgba(black, 0.1);
+      }
+    }
+
+    &.mat-clock-cell-disabled {
+      color: rgba(black, 0.38);
+      pointer-events: none;
+    }
+
+    &.mat-clock-cell-selected {
+      color: white;
+      background-color: lighten(mat-color(map-get($config, primary), text), 5);
+    }
+  }
 }
 
 @mixin mat-datepicker-typography($config-or-theme) {

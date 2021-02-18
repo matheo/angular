@@ -21,15 +21,15 @@ export const MAT_NATIVE_DATE_FORMATS: MatDateFormats = {
       year: 'numeric',
       month: 'numeric',
       day: 'numeric',
-      hours: 'numeric',
-      minutes: 'numeric'
+      hour: 'numeric',
+      minute: 'numeric'
     },
-    timeInput: { hours: 'numeric', minutes: 'numeric' },
+    timeInput: {hour: 'numeric', minute: 'numeric'},
     dateA11yLabel: {year: 'numeric', month: 'long', day: 'numeric'},
-    monthDayLabel: { month: 'short', day: 'numeric' },
-    monthDayA11yLabel: { month: 'long', day: 'numeric' },
+    monthDayLabel: {month: 'short', day: 'numeric'},
+    monthDayA11yLabel: {month: 'long', day: 'numeric'},
     monthYearLabel: {year: 'numeric', month: 'short'},
     monthYearA11yLabel: {year: 'numeric', month: 'long'},
-    timeLabel: { hours: 'numeric', minutes: 'numeric' },
+    timeLabel: {hours: 'numeric', minutes: 'numeric'},
   }
 };

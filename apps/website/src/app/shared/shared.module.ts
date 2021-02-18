@@ -1,8 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { RouterModule } from '@angular/router';
@@ -27,6 +30,14 @@ import { ThemeComponent } from './layout/theme/theme.component';
     SectionComponent,
     ItemComponent,
   ],
-  exports: [ThemeComponent, SectionComponent, ItemComponent],
+  exports: [
+    ThemeComponent,
+    SectionComponent,
+    ItemComponent,
+    // modules
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+  ],
 })
 export class SharedModule {}

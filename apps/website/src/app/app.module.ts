@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule, Routes } from '@angular/router';
+import { MatNativeDateModule } from '@matheo/datepicker';
 
 import { AppComponent } from './app.component';
 import { PagesModule } from './pages/pages.module';
@@ -25,6 +26,7 @@ const routes: Routes = [
       initialNavigation: 'enabled',
       relativeLinkResolution: 'legacy',
     }),
+    MatNativeDateModule,
     PagesModule,
   ],
   providers: [],

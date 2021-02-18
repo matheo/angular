@@ -1,0 +1,52 @@
+<ng-template [cdkPortalOutlet]="_calendarHeaderPortal"></ng-template>
+
+<div class="mat-calendar-content" [ngSwitch]="currentView" cdkMonitorSubtreeFocus tabindex="-1">
+
+  <mat-clock-view
+      *ngSwitchCase="'clock'"
+      [(activeDate)]="activeDate"
+      [selected]="selected"
+      [dateFilter]="dateFilter"
+      [clockStep]="clockStep"
+      [twelveHour]="twelveHour"
+      (selectedChange)="_timeChanged($event)"
+      (_userSelection)="_timeSelected($event)">
+  </mat-clock-view>
+
+  <mat-month-view
+      *ngSwitchCase="'month'"
+      [(activeDate)]="activeDate"
+      [selected]="selected"
+      [dateFilter]="dateFilter"
+      [maxDate]="maxDate"
+      [minDate]="minDate"
+      [dateClass]="dateClass"
+      [comparisonStart]="comparisonStart"
+      [comparisonEnd]="comparisonEnd"
+      (_userSelection)="_showClockView($event)">
+  </mat-month-view>
+
+  <mat-year-view
+      *ngSwitchCase="'year'"
+      [(activeDate)]="activeDate"
+      [selected]="selected"
+      [dateFilter]="dateFilter"
+      [maxDate]="maxDate"
+      [minDate]="minDate"
+      [dateClass]="dateClass"
+      (monthSelected)="_monthSelectedInYearView($event)"
+      (selectedChange)="_goToDateInView($event, 'month')">
+  </mat-year-view>
+
+  <mat-multi-year-view
+      *ngSwitchCase="'multi-year'"
+      [(activeDate)]="activeDate"
+      [selected]="selected"
+      [dateFilter]="dateFilter"
+      [maxDate]="maxDate"
+      [minDate]="minDate"
+      [dateClass]="dateClass"
+      (yearSelected)="_yearSelectedInMultiYearView($event)"
+      (selectedChange)="_goToDateInView($event, 'year')">
+  </mat-multi-year-view>
+</div>

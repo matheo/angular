@@ -2,12 +2,12 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { BehaviorSubject, of, throwError } from 'rxjs';
 import { MatDataSource } from './datasource';
-import { DataSourceOverlay } from './overlay';
 import {
   DataSourceEmpty,
   DataSourceError,
-  DataSourceLoading
+  DataSourceLoading,
 } from './directives';
+import { DataSourceOverlay } from './overlay';
 
 class DataSource extends MatDataSource<any, any, any> {
   rawDefault() {
@@ -42,8 +42,8 @@ describe('DataSourceOverlay', () => {
         DataSourceEmpty,
         DataSourceError,
         DataSourceLoading,
-        DataSourceOverlay
-      ]
+        DataSourceOverlay,
+      ],
     }).compileComponents();
   }));
 

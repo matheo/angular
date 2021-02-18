@@ -1,3 +1,17 @@
 <web-section>
-  DATEPICKER EXAMPLES
+  <form [formGroup]="form">
+
+    <div class="col-12">
+      <h3>Single DateTime</h3>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Choose a date</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="datetime">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker type="datetime"></mat-datepicker>
+        <mat-hint>{{ form.value.datetime | date:'short' }}</mat-hint>
+      </mat-form-field>
+    </div>
+
+  </form>
 </web-section>

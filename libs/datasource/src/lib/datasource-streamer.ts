@@ -1,7 +1,7 @@
-import { combineLatest, of, isObservable, merge } from 'rxjs';
-import { tap, map, first, scan, switchMap, startWith } from 'rxjs/operators';
+import { combineLatest, isObservable, merge, of } from 'rxjs';
+import { first, map, scan, startWith, switchMap, tap } from 'rxjs/operators';
 import { DataSourceLogger } from './datasource-logger';
-import { srcEmitted, srcInvalid, srcOutput, srcConnect } from './messages';
+import { srcConnect, srcEmitted, srcInvalid, srcOutput } from './messages';
 import { DataSourceStream } from './types';
 
 export class DataSourceStreamer<T> {

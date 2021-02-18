@@ -39,6 +39,11 @@ const DEFAULT_MONTH_NAMES = {
 /** The default date names to use if Intl API is not available. */
 const DEFAULT_DATE_NAMES = range(31, i => String(i + 1));
 
+/** The default hour names to use if Intl API is not available. */
+const DEFAULT_HOUR_NAMES = range(24, String);
+
+/** The default minute names to use if Intl API is not available. */
+const DEFAULT_MINUTE_NAMES = range(60, String);
 
 /** The default day of the week names to use if Intl API is not available. */
 const DEFAULT_DAY_OF_WEEK_NAMES = {
@@ -106,6 +111,34 @@ export class NativeDateAdapter extends DateAdapter<Date> {
     return date.getDate();
   }
 
+  getHours(date: Date): number {
+    return date.getHours();
+  }
+
+  setHours(date: Date, value: number): void {
+    date.setHours(value);
+  }
+
+  getMinutes(date: Date): number {
+    return date.getMinutes();
+  }
+
+  setMinutes(date: Date, value: number): void {
+    date.setMinutes(value);
+  }
+
+  getSeconds(date: Date): number {
+    return date.getSeconds();
+  }
+
+  setSeconds(date: Date, value: number, ms?: number): void {
+    date.setSeconds(value, ms);
+  }
+
+  getMilliseconds(date: Date): number {
+    return date.getMilliseconds();
+  }
+
   getDayOfWeek(date: Date): number {
     return date.getDay();
   }
@@ -126,6 +159,24 @@ export class NativeDateAdapter extends DateAdapter<Date> {
           this._format(dtf, new Date(2017, 0, i + 1))));
     }
     return DEFAULT_DATE_NAMES;
+  }
+
+  getHourNames(): string[] {
+    if (SUPPORTS_INTL_API) {
+      const dtf = new Intl.DateTimeFormat(this.locale, { hour: 'numeric', timeZone: 'utc' });
+      return range(24, i => this._stripDirectionalityCharacters(
+          dtf.format(new Date(2017, 0, 0, i))));
+    }
+    return DEFAULT_HOUR_NAMES;
+  }
+
+  getMinuteNames(): string[] {
+    if (SUPPORTS_INTL_API) {
+      const dtf = new Intl.DateTimeFormat(this.locale, { minute: 'numeric', timeZone: 'utc' });
+      return range(60, i => this._stripDirectionalityCharacters(
+          dtf.format(new Date(2017, 0, 0, 0, i))));
+    }
+    return DEFAULT_MINUTE_NAMES;
   }
 
   getDayOfWeekNames(style: 'long' | 'short' | 'narrow'): string[] {
@@ -159,7 +210,15 @@ export class NativeDateAdapter extends DateAdapter<Date> {
     return new Date(date.getTime());
   }
 
-  createDate(year: number, month: number, date: number): Date {
+  createDate(
+    year: number,
+    month: number,
+    date: number,
+    hours?: number,
+    minutes?: number,
+    seconds?: number,
+    ms?: number,
+  ): Date {
     if (typeof ngDevMode === 'undefined' || ngDevMode) {
       // Check for invalid month and date (except upper bound on date which we have to check after
       // creating the Date).
@@ -172,7 +231,7 @@ export class NativeDateAdapter extends DateAdapter<Date> {
       }
     }
 
-    let result = this._createDateWithOverflow(year, month, date);
+    let result = this._createDateWithOverflow(year, month, date, hours, minutes, seconds, ms);
     // Check that the date wasn't above the upper bound for the month, causing the month to overflow
     if (result.getMonth() != month && (typeof ngDevMode === 'undefined' || ngDevMode)) {
       throw Error(`Invalid date "${date}" for month with index "${month}".`);
@@ -221,7 +280,13 @@ export class NativeDateAdapter extends DateAdapter<Date> {
 
   addCalendarMonths(date: Date, months: number): Date {
     let newDate = this._createDateWithOverflow(
-        this.getYear(date), this.getMonth(date) + months, this.getDate(date));
+      this.getYear(date),
+      this.getMonth(date) + months,
+      this.getDate(date),
+      this.getHours(date),
+      this.getMinutes(date),
+      this.getSeconds(date),
+    );
 
     // It's possible to wind up in the wrong month if the original month has more days than the new
     // month. In this case we want to go to the last day of the desired month.
@@ -236,7 +301,47 @@ export class NativeDateAdapter extends DateAdapter<Date> {
 
   addCalendarDays(date: Date, days: number): Date {
     return this._createDateWithOverflow(
-        this.getYear(date), this.getMonth(date), this.getDate(date) + days);
+      this.getYear(date),
+      this.getMonth(date),
+      this.getDate(date) + days,
+      this.getHours(date),
+      this.getMinutes(date),
+      this.getSeconds(date),
+    );
+  }
+
+  addCalendarHours(date: Date, hours: number): Date {
+    return this._createDateWithOverflow(
+      this.getYear(date),
+      this.getMonth(date),
+      this.getDate(date),
+      this.getHours(date) + hours,
+      this.getMinutes(date),
+      this.getSeconds(date),
+    );
+  }
+
+  addCalendarMinutes(date: Date, minutes: number): Date {
+    return this._createDateWithOverflow(
+      this.getYear(date),
+      this.getMonth(date),
+      this.getDate(date),
+      this.getHours(date),
+      this.getMinutes(date) + minutes,
+      this.getSeconds(date),
+    );
+  }
+
+  addCalendarSeconds(date: Date, seconds: number, ms?: number): Date {
+    return this._createDateWithOverflow(
+      this.getYear(date),
+      this.getMonth(date),
+      this.getDate(date),
+      this.getHours(date),
+      this.getMinutes(date),
+      this.getSeconds(date) + seconds,
+      this.getMilliseconds(date) + ms,
+    );
   }
 
   toIso8601(date: Date): string {
@@ -282,12 +387,20 @@ export class NativeDateAdapter extends DateAdapter<Date> {
   }
 
   /** Creates a date but allows the month and date to overflow. */
-  private _createDateWithOverflow(year: number, month: number, date: number) {
+  private _createDateWithOverflow(
+    year: number,
+    month: number,
+    date: number,
+    hours: number = 0,
+    minutes: number = 0,
+    seconds: number = 0,
+    ms: number = 0,
+  ) {
     // Passing the year to the constructor causes year numbers <100 to be converted to 19xx.
     // To work around this we use `setFullYear` and `setHours` instead.
     const d = new Date();
     d.setFullYear(year, month, date);
-    d.setHours(0, 0, 0, 0);
+    d.setHours(hours, minutes, seconds, ms);
     return d;
   }
 

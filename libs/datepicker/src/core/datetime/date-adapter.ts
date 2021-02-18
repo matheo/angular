@@ -43,6 +43,20 @@ export abstract class DateAdapter<D> {
    */
   abstract getMonth(date: D): number;
 
+  abstract getHours(date: D): number;
+
+  abstract setHours(date: D, value: number): void;
+
+  abstract getMinutes(date: D): number;
+
+  abstract setMinutes(date: D, value: number): void;
+
+  abstract getSeconds(date: D): number;
+
+  abstract setSeconds(date: D, value: number, ms?: number): void;
+
+  abstract getMilliseconds(date: D): number;
+
   /**
    * Gets the date of the month component of the given date.
    * @param date The date to extract the date of the month from.
@@ -69,6 +83,10 @@ export abstract class DateAdapter<D> {
    * @returns An ordered list of all date of the month names, starting with '1'.
    */
   abstract getDateNames(): string[];
+
+  abstract getHourNames(): string[];
+
+  abstract getMinuteNames(): string[];
 
   /**
    * Gets a list of names for the days of the week.
@@ -112,7 +130,15 @@ export abstract class DateAdapter<D> {
    * @param date The date of month of the date. Must be an integer 1 - length of the given month.
    * @returns The new date, or null if invalid.
    */
-  abstract createDate(year: number, month: number, date: number): D;
+  abstract createDate(
+    year: number,
+    month: number,
+    date: number,
+    hours?: number,
+    minutes?: number,
+    seconds?: number,
+    ms?: number,
+  ): D;
 
   /**
    * Gets today's date.
@@ -165,6 +191,12 @@ export abstract class DateAdapter<D> {
    * @returns A new date equal to the given one with the specified number of days added.
    */
   abstract addCalendarDays(date: D, days: number): D;
+
+  abstract addCalendarHours(date: D, hours: number): D;
+
+  abstract addCalendarMinutes(date: D, minutes: number): D;
+
+  abstract addCalendarSeconds(date: D, seconds: number, ms?: number): D;
 
   /**
    * Gets the RFC 3339 compatible string (https://tools.ietf.org/html/rfc3339) for the given date.
@@ -243,7 +275,10 @@ export abstract class DateAdapter<D> {
   compareDate(first: D, second: D): number {
     return this.getYear(first) - this.getYear(second) ||
         this.getMonth(first) - this.getMonth(second) ||
-        this.getDate(first) - this.getDate(second);
+        this.getDate(first) - this.getDate(second) ||
+        this.getHours(first) - this.getHours(second) ||
+        this.getMinutes(first) - this.getMinutes(second) ||
+        this.getSeconds(first) - this.getSeconds(second);
   }
 
   /**

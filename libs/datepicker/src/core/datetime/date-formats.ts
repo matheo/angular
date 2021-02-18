@@ -11,14 +11,21 @@ import {InjectionToken} from '@angular/core';
 
 export type MatDateFormats = {
   parse: {
-    dateInput: any
+    dateInput: any,
+    datetimeInput: any,
+    timeInput: any,
   },
   display: {
     dateInput: any,
-    monthLabel?: any,
-    monthYearLabel: any,
+    datetimeInput: any,
+    timeInput: any,
     dateA11yLabel: any,
+    monthLabel?: any,
+    monthDayLabel: any,
+    monthDayA11yLabel: any,
+    monthYearLabel: any,
     monthYearA11yLabel: any,
+    timeLabel: any,
   }
 };
 

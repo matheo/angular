@@ -101,7 +101,10 @@
     "decorator-not-allowed": true,
     "no-output-on-prefix": true,
     "templates-no-negated-async": true,
-    "use-life-cycle-interface": true
+    "use-life-cycle-interface": true,
+
+    // Overrides
+    "no-host-metadata-property": false
   },
   "linterOptions": {
     "exclude": ["!**/*"]

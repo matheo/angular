@@ -3,12 +3,12 @@ import { Injectable, OnDestroy } from '@angular/core';
 import { isEqual } from 'lodash';
 import {
   BehaviorSubject,
+  isObservable,
   merge,
   Observable,
   of,
   Subject,
   timer,
-  isObservable,
 } from 'rxjs';
 import {
   catchError,
@@ -33,12 +33,12 @@ import {
   notAutoStarting,
   queryResponse,
   queryTimeout,
+  removingStream,
   resolvedArgs,
-  responseTotal,
   responseError,
   responseSuccess,
+  responseTotal,
   rmWhenRunning,
-  removingStream,
   srcAdding,
   srcEmpty,
 } from './messages';

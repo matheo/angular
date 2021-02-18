@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 import { DataSourceContainer } from './container';
+import { MatDataSourceIntl } from './datasource-intl';
+import { DataSourcePipe } from './datasource-pipe';
 import {
   DataSourceContent,
   DataSourceEmpty,
@@ -10,8 +12,6 @@ import {
   DataSourceLoading,
 } from './directives';
 import { DataSourceOverlay } from './overlay';
-import { DataSourcePipe } from './datasource-pipe';
-import { MatDataSourceIntl } from './datasource-intl';
 
 @NgModule({
   imports: [CommonModule, MatProgressSpinnerModule],

@@ -3,9 +3,9 @@ import { MatSort, Sort } from '@angular/material/sort';
 import { Observable, UnaryFunction } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { MatDataSource } from './datasource';
+import { mapPaginator, mapSort } from './mappers';
 import { nonNumeric, setValue } from './messages';
 import { DataSourceItem } from './types';
-import { mapPaginator, mapSort } from './mappers';
 
 export abstract class ReactiveDataSource<REQ, RAW, RES> extends MatDataSource<
   REQ,
@@ -48,7 +48,7 @@ export abstract class ReactiveDataSource<REQ, RAW, RES> extends MatDataSource<
       name: 'MatPaginator',
       stream: paginator.page.pipe<any>(
         mapper ? mapper(this.pageSize) : mapPaginator(this.pageSize)
-      )
+      ),
     });
   }
 
@@ -59,7 +59,7 @@ export abstract class ReactiveDataSource<REQ, RAW, RES> extends MatDataSource<
   ) {
     this.addStream({
       name: 'MatSort',
-      stream: sort.sortChange.pipe<any>(mapper ? mapper() : mapSort())
+      stream: sort.sortChange.pipe<any>(mapper ? mapper() : mapSort()),
     });
   }
 
@@ -70,7 +70,7 @@ export abstract class ReactiveDataSource<REQ, RAW, RES> extends MatDataSource<
    * @returns Observable that emits a new value when the data changes.
    */
   attach(): Observable<Array<DataSourceItem>> {
-    return this.connect().pipe(map(res => this.resFilter(res)));
+    return this.connect().pipe(map((res) => this.resFilter(res)));
   }
 
   // customized filter trigger

@@ -10,6 +10,13 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 export class DatepickerComponent implements OnInit {
   form!: FormGroup;
 
+  startDate = new Date(1990, 0, 1);
+  excludeFilter = (d: Date | null): boolean => {
+    const day = (d || new Date()).getDay();
+    // Prevent Saturday and Sunday from being selected.
+    return day !== 0 && day !== 6;
+  };
+
   constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {

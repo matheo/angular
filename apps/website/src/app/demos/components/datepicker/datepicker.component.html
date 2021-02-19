@@ -1,8 +1,8 @@
 <web-section>
   <form [formGroup]="form">
 
-    <div class="col-12">
-      <h3>Single DateTime</h3>
+    <fieldset class="col-12">
+      <h3>Basic DateTimepicker</h3>
 
       <mat-form-field appearance="fill">
         <mat-label>Choose a date</mat-label>
@@ -11,7 +11,71 @@
         <mat-datepicker #picker type="datetime"></mat-datepicker>
         <mat-hint>{{ form.value.datetime | date:'short' }}</mat-hint>
       </mat-form-field>
-    </div>
+    </fieldset>
+
+    <fieldset class="col-12">
+      <h3>Timepicker TouchUI</h3>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Choose a date</mat-label>
+        <input matInput [matDatepicker]="pui" formControlName="datetime">
+        <mat-datepicker-toggle matSuffix [for]="pui"></mat-datepicker-toggle>
+        <mat-datepicker #pui type="time" touchUi></mat-datepicker>
+      </mat-form-field>
+    </fieldset>
+
+    <fieldset class="col-12">
+      <h3>Datepicker start parameters</h3>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Choose a date</mat-label>
+        <input matInput [matDatepicker]="pp" formControlName="datetime">
+        <mat-datepicker-toggle matSuffix [for]="pp"></mat-datepicker-toggle>
+        <mat-datepicker #pp type="date" startView="year" [startAt]="startDate"></mat-datepicker>
+      </mat-form-field>
+    </fieldset>
+
+    <fieldset class="col-12">
+      <h3>Disabled Datepicker</h3>
+
+      <p>
+        <mat-form-field appearance="fill">
+          <mat-label>Completely disabled</mat-label>
+          <input matInput [matDatepicker]="dp1" disabled>
+          <mat-datepicker-toggle matSuffix [for]="dp1"></mat-datepicker-toggle>
+          <mat-datepicker #dp1></mat-datepicker>
+        </mat-form-field>
+      </p>
+
+      <p>
+        <mat-form-field appearance="fill">
+          <mat-label>Popup disabled</mat-label>
+          <input matInput [matDatepicker]="dp2">
+          <mat-datepicker-toggle matSuffix [for]="dp2" disabled></mat-datepicker-toggle>
+          <mat-datepicker #dp2></mat-datepicker>
+        </mat-form-field>
+      </p>
+
+      <p>
+        <mat-form-field appearance="fill">
+          <mat-label>Input disabled</mat-label>
+          <input matInput [matDatepicker]="dp3" disabled>
+          <mat-datepicker-toggle matSuffix [for]="dp3"></mat-datepicker-toggle>
+          <mat-datepicker #dp3 disabled="false"></mat-datepicker>
+        </mat-form-field>
+      </p>
+    </fieldset>
+
+    <fieldset class="col-12">
+      <h3>Filter validation</h3>
+
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Choose a date</mat-label>
+        <input matInput [matDatepickerFilter]="excludeFilter" [matDatepicker]="pfilter">
+        <mat-datepicker-toggle matSuffix [for]="pfilter"></mat-datepicker-toggle>
+        <mat-datepicker #pfilter></mat-datepicker>
+      </mat-form-field>
+    </fieldset>
 
   </form>
 </web-section>

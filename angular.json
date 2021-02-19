@@ -20,7 +20,6 @@
             "polyfills": "apps/website/src/polyfills.ts",
             "tsConfig": "apps/website/tsconfig.app.json",
             "assets": [
-              "apps/website/src/.htaccess",
               "apps/website/src/favicon.ico",
               "apps/website/src/assets"
             ],

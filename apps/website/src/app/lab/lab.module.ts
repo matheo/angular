@@ -6,8 +6,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { MatDatepickerModule } from '@matheo/datepicker';
 import { ThemeComponent } from '../shared/layout/theme/theme.component';
 import { SharedModule } from '../shared/shared.module';
-import { BirthmoonComponent } from './components/birthmoon/birthmoon.component';
 import { IndexComponent } from './components/index/index.component';
+import { SunmoonComponent } from './components/sunmoon/sunmoon.component';
 
 const routes: Routes = [
   {
@@ -20,8 +20,8 @@ const routes: Routes = [
         component: IndexComponent,
       },
       {
-        path: 'birthmoon',
-        component: BirthmoonComponent,
+        path: 'sunmoon',
+        component: SunmoonComponent,
       },
     ],
   },
@@ -36,6 +36,6 @@ const routes: Routes = [
     MatDatepickerModule,
     SharedModule,
   ],
-  declarations: [IndexComponent, BirthmoonComponent],
+  declarations: [IndexComponent, SunmoonComponent],
 })
 export class LabModule {}

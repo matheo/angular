@@ -11,16 +11,16 @@ import { ActivatedRoute } from '@angular/router';
 import { DateAdapter } from '@matheo/datepicker';
 import { AstroTime, MoonPhase, SearchMoonPhase } from 'astronomy-engine';
 import { differenceInHours } from 'date-fns';
-import { moonPhases, SYNODIC_MONTH } from './birthmoon.constants';
-import { BirthMoonArgs, BirthMoonRow } from './birthmoon.interfaces';
+import { moonPhases, SYNODIC_MONTH } from './sunmoon.constants';
+import { BirthMoonArgs, BirthMoonRow } from './sunmoon.interfaces';
 
 @Component({
-  selector: 'web-birthmoon',
-  templateUrl: './birthmoon.component.html',
-  styleUrls: ['./birthmoon.component.scss'],
+  selector: 'web-sunmoon',
+  templateUrl: './sunmoon.component.html',
+  styleUrls: ['./sunmoon.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class BirthmoonComponent implements OnInit {
+export class SunmoonComponent implements OnInit {
   form!: FormGroup;
   columns: string[] = ['date', 'phase', 'age', 'future', 'events'];
   data: BirthMoonRow[];

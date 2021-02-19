@@ -10,9 +10,9 @@ import { SectionItem } from '../../../shared/layout/item/item.interface';
 export class IndexComponent {
   items: SectionItem[] = [
     {
-      title: 'Birth Moon',
-      link: './birthmoon',
-      description: 'Calculator for the black moon before the birthday.',
+      title: 'Sun-Moon Cycle',
+      link: './sunmoon',
+      description: 'Calculator for the sun-moon lifecycles.',
     },
   ];
 }

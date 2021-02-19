@@ -46,21 +46,6 @@ export class SunmoonComponent implements OnInit {
     });
 
     this.form.valueChanges.subscribe((args) => this.updateTable(args));
-
-    this.getCurrentLocation().then((pos) => this.form.patchValue(pos));
-  }
-
-  getCurrentLocation(): Promise<any> {
-    return new Promise((resolve, reject) => {
-      navigator.geolocation.getCurrentPosition(
-        (resp) =>
-          resolve({
-            lat: resp.coords.latitude,
-            lng: resp.coords.longitude,
-          }),
-        (err) => reject(err)
-      );
-    });
   }
 
   updateTable({ birthdate, maxAge }: BirthMoonArgs): void {

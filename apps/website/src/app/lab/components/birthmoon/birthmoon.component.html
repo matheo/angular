@@ -1,3 +1,62 @@
 <web-section>
-  BIRTH MOON CALCULATOR
+  <form [formGroup]="form">
+
+    <div class="col-12">
+      <h3>Ciclo Sol-Luna</h3>
+
+      <div fxLayout="row" fxLayoutAlign="space-between">
+        <mat-form-field appearance="fill">
+          <mat-label>Nacimiento</mat-label>
+          <input matInput [matDatepicker]="picker" formControlName="birthdate">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker type="datetime"></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Edad Maxima</mat-label>
+          <input matInput type="number" formControlName="maxAge">
+          <span matSuffix>años</span>
+        </mat-form-field>
+      </div>
+
+      <table mat-table [dataSource]="data">
+
+        <ng-container matColumnDef="date">
+          <th mat-header-cell *matHeaderCellDef> Fecha </th>
+          <td mat-cell *matCellDef="let row"> {{ row.date | date:'MMM d, y, h:mma' }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="phase">
+          <th mat-header-cell *matHeaderCellDef> Fase </th>
+          <td mat-cell *matCellDef="let row" [class.black-moon]="!row.moonLon">
+            {{ moonPhases.get(row.moonLon) }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="age">
+          <th mat-header-cell *matHeaderCellDef class="col-age"> Edad </th>
+          <td mat-cell *matCellDef="let row" class="col-age"> {{ row.age ? formatAge(row.age) : '' }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="future">
+          <th mat-header-cell *matHeaderCellDef> Aprox </th>
+          <td mat-cell *matCellDef="let row"> {{ row.future | date:'MMMM y' }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="events">
+          <th mat-header-cell *matHeaderCellDef> Eventos </th>
+          <td mat-cell *matCellDef="let row"> {{ row.events }} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="columns"></tr>
+        <tr
+          mat-row *matRowDef="let row; columns: columns;"
+          [class.birthdate]="!row.age"
+          [class.quarter]="row.moonLon % 90 === 0"
+          [class.sesquad]="row.moonLon % 90 === 45"
+        ></tr>
+      </table>
+    </div>
+
+  </form>
 </web-section>

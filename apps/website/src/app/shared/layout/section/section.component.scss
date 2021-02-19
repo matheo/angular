@@ -1,8 +1,15 @@
+$margin: 42px;
+
+:host {
+  display: block;
+  padding-bottom: $margin;
+}
+
 header {
   background: url('/assets/header.jpg') no-repeat scroll left top;
   padding-top: 84px;
   padding-bottom: 70px;
-  margin-bottom: 42px;
+  margin-bottom: $margin;
 }
 
 h2 {

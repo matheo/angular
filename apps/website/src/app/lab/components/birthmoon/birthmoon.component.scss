@@ -1,0 +1,33 @@
+@import 'variables';
+
+form,
+table {
+  width: 100%;
+}
+
+input[type='number'] {
+  text-align: right;
+}
+
+.sesquad {
+  .mat-column-phase {
+    font-style: italic;
+  }
+}
+
+.quarter {
+  background-color: #f5f5f5;
+}
+
+.birthdate {
+  background-color: rgba(map-get($colors, green), 0.25);
+}
+
+.black-moon {
+  font-weight: bold;
+}
+
+.col-age {
+  padding-right: 2em;
+  text-align: right;
+}

@@ -1,0 +1,19 @@
+$colors: (
+  aqua: #40babd,
+  dark-aqua: #2d8284,
+  green: #75c181,
+  dark-green: #48a156,
+  blue: #58bbee,
+  dark-blue: #179de2,
+  orange: #f88c30,
+  dark-orange: #d46607,
+  red: #f77b6b,
+  dark-red: #f33a22,
+  pink: #ea5395,
+  dark-pink: #d61a6c,
+  purple: #8a40a7,
+  dark-purple: #5c2b70,
+);
+$colorNames: aqua, green, blue, orange, red, pink, purple;
+
+$color-primary: map-get($colors, blue);

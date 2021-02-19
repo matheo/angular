@@ -8,6 +8,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatTableModule } from '@angular/material/table';
 import { RouterModule } from '@angular/router';
 import { ItemComponent } from './layout/item/item.component';
 import { MenuComponent } from './layout/menu/menu.component';
@@ -38,6 +39,7 @@ import { ThemeComponent } from './layout/theme/theme.component';
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
+    MatTableModule,
   ],
 })
 export class SharedModule {}

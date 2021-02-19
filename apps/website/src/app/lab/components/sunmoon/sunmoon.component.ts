@@ -11,6 +11,7 @@ import { ActivatedRoute } from '@angular/router';
 import { DateAdapter } from '@matheo/datepicker';
 import { AstroTime, MoonPhase, SearchMoonPhase } from 'astronomy-engine';
 import { differenceInHours } from 'date-fns';
+import { startWith } from 'rxjs/operators';
 import { moonPhases, SYNODIC_MONTH } from './sunmoon.constants';
 import { BirthMoonArgs, BirthMoonRow } from './sunmoon.interfaces';
 
@@ -45,7 +46,9 @@ export class SunmoonComponent implements OnInit {
       maxAge: age || 90, // max age
     });
 
-    this.form.valueChanges.subscribe((args) => this.updateTable(args));
+    this.form.valueChanges
+      .pipe(startWith(this.form.value))
+      .subscribe((args) => this.updateTable(args));
   }
 
   updateTable({ birthdate, maxAge }: BirthMoonArgs): void {

@@ -194,6 +194,11 @@
             "tsConfig": "libs/datepicker/tsconfig.lib.json",
             "project": "libs/datepicker/ng-package.json",
             "buildableProjectDepsInPackageJsonType": "dependencies"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/datepicker/tsconfig.lib.prod.json"
+            }
           }
         },
         "lint": {

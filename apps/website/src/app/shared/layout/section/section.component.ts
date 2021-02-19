@@ -12,7 +12,8 @@ export class SectionComponent {
   sections!: SectionItem[];
 
   constructor(router: Router) {
-    const paths = router.url.split('/').filter(Boolean);
+    const url = new URL(router.url, location.origin);
+    const paths = url.pathname.split('/').filter(Boolean);
 
     this.sections = paths.reduce<SectionItem[]>((items, next, i) => {
       items.push({

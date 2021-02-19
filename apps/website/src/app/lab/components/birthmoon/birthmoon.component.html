@@ -2,7 +2,26 @@
   <form [formGroup]="form">
 
     <div class="col-12">
-      <h3>Ciclo Sol-Luna</h3>
+      <div class="actions">
+        <a title="Copiar Enlace"
+          #link mat-icon-button
+          [routerLink]="'.'"
+          [queryParams]="{
+            birthdate: form.value.birthdate?.toISOString(),
+            age: form.value.maxAge
+          }"
+          [cdkCopyToClipboard]="getLink()"
+          [class.hidden]="!form.value.birthdate">
+          <mat-icon>share</mat-icon>
+        </a>
+        <!--button mat-icon-button title="Copy Table">
+          <mat-icon>copy_all</mat-icon>
+        </button-->
+      </div>
+
+      <h3>
+        Ciclo Sol-Luna
+      </h3>
 
       <div fxLayout="row" fxLayoutAlign="space-between">
         <mat-form-field appearance="fill">
@@ -13,7 +32,7 @@
         </mat-form-field>
 
         <mat-form-field appearance="fill">
-          <mat-label>Edad Maxima</mat-label>
+          <mat-label>Edad Limite</mat-label>
           <input matInput type="number" formControlName="maxAge">
           <span matSuffix>años</span>
         </mat-form-field>

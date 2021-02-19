@@ -37,7 +37,9 @@ import { ThemeComponent } from './layout/theme/theme.component';
     ItemComponent,
     // modules
     ReactiveFormsModule,
+    MatButtonModule,
     MatFormFieldModule,
+    MatIconModule,
     MatInputModule,
     MatTableModule,
   ],

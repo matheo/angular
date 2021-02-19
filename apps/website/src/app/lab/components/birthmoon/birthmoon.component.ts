@@ -2,9 +2,12 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
+  ElementRef,
   OnInit,
+  ViewChild,
 } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { DateAdapter } from '@matheo/datepicker';
 import { AstroTime, MoonPhase, SearchMoonPhase } from 'astronomy-engine';
 import { differenceInHours } from 'date-fns';
@@ -24,16 +27,22 @@ export class BirthmoonComponent implements OnInit {
 
   readonly moonPhases = moonPhases;
 
+  @ViewChild('link', { static: true, read: ElementRef })
+  link: ElementRef;
+
   constructor(
     private cdr: ChangeDetectorRef,
     private fb: FormBuilder,
+    private route: ActivatedRoute,
     private dateAdapter: DateAdapter<Date>
   ) {}
 
   ngOnInit(): void {
+    const { birthdate, age } = this.route.snapshot.queryParams;
+
     this.form = this.fb.group({
-      birthdate: null,
-      maxAge: 90, // max age
+      birthdate: birthdate ? new Date(birthdate) : null,
+      maxAge: age || 90, // max age
     });
 
     this.form.valueChanges.subscribe((args) => this.updateTable(args));
@@ -105,5 +114,9 @@ export class BirthmoonComponent implements OnInit {
     const abs = Math.abs(age);
     const decimal = abs - Math.floor(abs);
     return `${Math.trunc(age)}a ${(decimal * 12).toFixed(0)}m`;
+  }
+
+  getLink(): string {
+    return this.link.nativeElement.href;
   }
 }

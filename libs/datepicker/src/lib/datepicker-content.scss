@@ -23,7 +23,8 @@ $mat-datepicker-touch-max-height: 788px;
 
 
 .mat-datepicker-content {
-  display: block;
+  display: flex;
+  flex-direction: column;
   border-radius: 4px;
 
   .mat-calendar {
@@ -51,12 +52,14 @@ $mat-datepicker-touch-max-height: 788px;
   display: flex;
   flex-direction: column;
 
+  justify-content: stretch;
   // Ensures that `mat-datepicker-actions` is pushed to the bottom of the popup.
-  justify-content: space-between;
+  .mat-calendar {
+    flex: 1;
+  }
 }
 
 .mat-datepicker-content-touch {
-  display: block;
   // Make sure the dialog scrolls rather than being cropped on ludicrously small screens
   max-height: 80vh;
   overflow: auto;

@@ -20,7 +20,8 @@ $mat-calendar-next-icon-transform: translateX(-2px) rotate(45deg);
 
 
 .mat-calendar {
-  display: block;
+  display: flex;
+  flex-direction: column;
 }
 
 .mat-calendar-header {

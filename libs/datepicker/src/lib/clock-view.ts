@@ -188,7 +188,7 @@ export class MatClockView<D> implements AfterViewInit, AfterContentInit {
 
   ngAfterViewInit() {
     const { offsetWidth, offsetHeight } = this._element.nativeElement;
-    this._size = offsetWidth < offsetHeight ? offsetWidth : offsetHeight;
+    this._size = (offsetWidth < offsetHeight ? offsetWidth : offsetHeight) * 0.96;
     this._changeDetectorRef.detectChanges();
   }
 

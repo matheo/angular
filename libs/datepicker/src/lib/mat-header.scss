@@ -1,0 +1,101 @@
+mat-custom-header {
+  * {
+    box-sizing: border-box;
+  }
+
+  .mat-custom-controls {
+    display: flex;
+    flex-direction: row;
+    padding: 5%;
+
+    .mat-button {
+      font-size: inherit;
+      font-weight: inherit;
+      line-height: inherit;
+      padding: 0;
+      min-width: auto;
+    }
+
+    .mat-custom-date {
+      display: flex;
+      flex-direction: column;
+      flex: 1 1 auto;
+      place-content: flex-start;
+      align-items: flex-start;
+
+      &-year {
+        font-size: 16px;
+        font-weight: 500;
+        line-height: 20px;
+
+        &-dayname {
+          display: none;
+        }
+      }
+      &-monthday {
+        font-size: 42px;
+        line-height: 36px;
+      }
+    }
+
+    .mat-custom-time {
+      display: flex;
+      flex-direction: row;
+      flex: 1 1 auto;
+      place-content: flex-end;
+      align-items: flex-end;
+
+      &-hour {
+        display: flex;
+        flex-direction: row;
+        place-content: center flex-start;
+        align-items: center;
+
+        font-size: 42px;
+        line-height: 36px;
+      }
+      &-ampm {
+        display: flex;
+        flex-direction: column;
+
+        font-size: 16px;
+        line-height: 18px;
+        margin-left: 5px;
+
+        .mat-calendar-control-active {
+          font-weight: 500;
+          opacity: 1;
+        }
+      }
+    }
+  }
+
+  .mat-custom-prev-next {
+    display: flex;
+    flex-direction: row;
+    place-content: stretch space-between;
+    align-items: stretch;
+
+    padding: 1% 0;
+
+    .mat-button .mat-button-focus-overlay {
+      display: none;
+    }
+  }
+
+  // type customizations
+  &.time {
+    .mat-custom-controls {
+      .mat-custom-time {
+        &-hour {
+          font-size: 46px;
+          line-height: 42px;
+        }
+        &-ampm {
+          font-size: 18px;
+          line-height: 20px;
+        }
+      }
+    }
+  }
+}

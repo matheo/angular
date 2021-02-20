@@ -1,0 +1,81 @@
+<div class="mat-custom-header">
+  <div class="mat-custom-controls">
+
+    <div class="mat-custom-date" *ngIf="hasOutput('date')">
+      <button mat-button type="button" class="mat-custom-date-year mat-custom-control"
+      [class.mat-calendar-control-active]="calendar.currentView == 'multi-year'"
+      (click)="calendar.currentView = 'multi-year'"
+      [attr.aria-label]="_intl.switchToMultiYearViewLabel">
+        <span>{{ _yearButtonText }}</span>
+      </button>
+
+      <button mat-button type="button" class="mat-custom-date-monthday mat-custom-control"
+      [class.mat-custom-control-active]="calendar.currentView == 'month' || calendar.currentView == 'year'"
+      (click)="calendar.currentView = 'year'"
+      [attr.aria-label]="_intl.switchToMonthViewLabel">
+        <span class="mat-custom-date-year-dayname">{{ _dayButtonText }}&nbsp;</span>
+        <span class="mat-custom-date-year-monthday">{{ _monthdayButtonText }}</span>
+      </button>
+    </div>
+
+    <div class="mat-custom-time" *ngIf="hasOutput('time')">
+      <div class="mat-custom-time-hour">
+        <button mat-button type="button" class="mat-custom-time-hour mat-custom-control"
+        [class.mat-calendar-control-active]="calendar.currentView == 'clock'"
+        (click)="calendar.currentView = 'clock'"
+        [attr.aria-label]="_intl.switchToHourViewLabel">
+          <span>{{ _hourButtonText }}</span>
+        </button>
+
+        <span>:</span>
+
+        <button mat-button type="button" class="mat-custom-time-minute mat-custom-control"
+        [class.mat-calendar-control-active]="calendar.currentView == 'clock'"
+        (click)="calendar.currentView = 'clock'"
+        [attr.aria-label]="_intl.switchToMinuteViewLabel">
+          <span>{{ _minuteButtonText }}</span>
+        </button>
+
+      </div>
+      <div class="mat-custom-time-ampm" *ngIf="calendar.twelveHour">
+        <button mat-button type="button" class="mat-calendar-control"
+        [class.mat-calendar-control-active]="_isAM"
+        [attr.aria-label]="_intl.setToAMLabel"
+        (click)="toggleAmPm(true)">
+          AM
+        </button>
+        <button mat-button type="button" class="mat-calendar-control"
+        [class.mat-calendar-control-active]="!_isAM"
+        [attr.aria-label]="_intl.setToPMLabel"
+        (click)="toggleAmPm(false)">
+          PM
+        </button>
+      </div>
+    </div>
+
+  </div>
+  <div class="mat-custom-prev-next" *ngIf="calendar.currentView !== 'clock'">
+
+    <button mat-icon-button type="button"
+            class="mat-calendar-previous-button"
+            [disabled]="!previousEnabled()"
+            (click)="previousClicked()"
+            [attr.aria-label]="prevButtonLabel">
+    </button>
+
+    <button mat-button type="button" class="mat-custom-period mat-custom-control"
+    disableRipple="true"
+    (click)="currentPeriodClicked()"
+    [attr.aria-label]="periodButtonLabel">
+      <strong>{{ periodButtonText }}</strong>
+    </button>
+
+    <button mat-icon-button type="button"
+            class="mat-calendar-next-button"
+            [disabled]="!nextEnabled()"
+            (click)="nextClicked()"
+            [attr.aria-label]="nextButtonLabel">
+    </button>
+
+  </div>
+</div>

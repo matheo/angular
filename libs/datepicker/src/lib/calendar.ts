@@ -15,6 +15,7 @@ import {
   Component,
   EventEmitter,
   forwardRef,
+  HostBinding,
   Inject,
   Input,
   OnChanges,
@@ -25,6 +26,7 @@ import {
   ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
+import {ThemePalette} from '@angular/material/core';
 import {Subject, Subscription} from 'rxjs';
 import {
   DateAdapter,
@@ -51,8 +53,9 @@ let uniqueId = 0;
 
 /** Default header for MatCalendar */
 @Component({
-  selector: 'mat-calendar-header',
-  templateUrl: 'calendar-header.html',
+  selector: 'mat-custom-header',
+  templateUrl: 'mat-header.html',
+  styleUrls: ['./mat-header.scss'],
   exportAs: 'matCalendarHeader',
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -60,13 +63,62 @@ let uniqueId = 0;
 export class MatCalendarHeader<D> {
   _buttonDescriptionId = `mat-calendar-button-${uniqueId++}`;
 
-  constructor(private _intl: MatDatepickerIntl,
+  @HostBinding('class')
+  get getCssClasses(): string {
+    const cssClasses: string[] = [this.calendar.type];
+    if (this.calendar.color) {
+      cssClasses.push(`mat-${this.calendar.color}`);
+    }
+    return cssClasses.join(' ');
+  }
+
+  _yearButtonText: string;
+  _monthdayButtonText: string;
+  _dayButtonText: string;
+  _hourButtonText: string;
+  _minuteButtonText: string;
+  _isAM: boolean;
+
+  constructor(public _intl: MatDatepickerIntl,
               @Inject(forwardRef(() => MatCalendar)) public calendar: MatCalendar<D>,
               @Optional() private _dateAdapter: DateAdapter<D>,
               @Optional() @Inject(MAT_DATE_FORMATS) private _dateFormats: MatDateFormats,
-              changeDetectorRef: ChangeDetectorRef) {
+              private changeDetectorRef: ChangeDetectorRef) {
 
-    this.calendar.stateChanges.subscribe(() => changeDetectorRef.markForCheck());
+    this.updateValues();
+    this.calendar.stateChanges.subscribe(() => this.updateValues());
+  }
+
+  hasOutput(type: MatCalendarType): boolean {
+    return this.calendar.type.indexOf(type) !== -1;
+  }
+
+  updateValues() {
+    const activeDate = this.calendar.activeDate;
+    console.log('updateValues', activeDate )
+    const day = this._dateAdapter.getDayOfWeek(activeDate);
+    let hours = this._dateAdapter.getHours(activeDate);
+    this._isAM = hours < 12;
+    if (this.calendar.twelveHour) {
+      hours = hours === 0 ? 12 : hours > 12 ? hours - 12 : hours;
+    }
+    const minutes = this._dateAdapter.getMinutes(activeDate);
+
+    this._yearButtonText = this._dateAdapter.getYear(activeDate).toString();
+    this._monthdayButtonText = this._dateAdapter.format(activeDate,
+      this._dateFormats.display.monthDayLabel);
+    this._dayButtonText = this._dateAdapter.getDayOfWeekNames('short')[day];
+    this._hourButtonText = hours.toString();
+    this._minuteButtonText = ('00' + minutes).slice(-2);
+
+    this.changeDetectorRef.markForCheck();
+  }
+
+  toggleAmPm(am): void {
+    if (this._isAM !== am) {
+      this.calendar.activeDate = this._dateAdapter.addCalendarHours(
+        this.calendar.activeDate, this._isAM ? 12 : -12);
+    }
   }
 
   /** The label for the current calendar view. */
@@ -210,6 +262,8 @@ export class MatCalendar<D> implements AfterContentInit, AfterViewChecked, OnDes
     this._startAt = this._dateAdapter.getValidDateOrNull(this._dateAdapter.deserialize(value));
   }
   private _startAt: D | null;
+
+  @Input() color: ThemePalette;
 
   /** The type of value handled by the calendar. */
   @Input() type: MatCalendarType = 'date';

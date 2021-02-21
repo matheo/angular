@@ -2,7 +2,7 @@
   <div class="mat-clock-center"></div>
   <div class="mat-clock-hand" [ngStyle]="_hand"></div>
 
-  <div class="mat-clock-hours" [class.active]="_hourView">
+  <div class="mat-clock-hours" [class.active]="inHourView">
     <div *ngFor="let item of _hours"
       class="mat-clock-cell"
       [class.mat-clock-cell-selected]="_selectedHour == item.value"
@@ -15,7 +15,7 @@
     </div>
   </div>
 
-  <div class="mat-clock-minutes" [class.active]="!_hourView">
+  <div class="mat-clock-minutes" [class.active]="!inHourView">
     <div *ngFor="let item of _minutes"
       class="mat-clock-cell"
       [class.mat-clock-cell-selected]="_selectedMinute == item.value"

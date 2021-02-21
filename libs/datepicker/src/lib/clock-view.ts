@@ -110,9 +110,13 @@ export class MatClockView<D> implements AfterViewInit, AfterContentInit {
   // A function used to filter which dates are selectable.
   @Input() dateFilter: (date: D, unit?: string) => boolean;
 
-  @Input() clockStep = 1;
+  @Input() clockStep: number = 1;
 
-  @Input() twelveHour = false;
+  @Input() twelveHour: Boolean = false;
+
+  @Input() currentView: ClockView;
+
+  @Output() currentViewChange = new EventEmitter<ClockView>();
 
   /** Emits when a new date is selected. */
   @Output()
@@ -128,11 +132,14 @@ export class MatClockView<D> implements AfterViewInit, AfterContentInit {
   _selectedHour: number | null;
   _selectedMinute: number | null;
   _anteMeridian: boolean;
-  _hourView = true;
   _size: number;
 
   private mouseMoveListener: any;
   private mouseUpListener: any;
+
+  get inHourView(): boolean {
+    return this.currentView === 'hour';
+  }
 
   get _hand(): any {
     this._selectedHour = this._dateAdapter.getHours(this.activeDate);
@@ -145,7 +152,7 @@ export class MatClockView<D> implements AfterViewInit, AfterContentInit {
       this._selectedHour = this._selectedHour === 0 ? 12 : this._selectedHour;
     }
 
-    if (this._hourView) {
+    if (this.inHourView) {
       const outer = this._selectedHour > 0 && this._selectedHour < 13;
       radius = outer ? CLOCK_OUTER_RADIUS : CLOCK_INNER_RADIUS;
       if (this.twelveHour) {
@@ -313,10 +320,10 @@ export class MatClockView<D> implements AfterViewInit, AfterContentInit {
     const y = height / 2 - (pageY - triggerRect.top - window.pageYOffset);
     const unit =
       Math.PI /
-      (this._hourView ? 6 : this.clockStep ? 30 / this.clockStep : 30);
+      (this.inHourView ? 6 : this.clockStep ? 30 / this.clockStep : 30);
     const z = Math.sqrt(x * x + y * y);
     const outer =
-      this._hourView &&
+      this.inHourView &&
       z >
         (width * (CLOCK_OUTER_RADIUS / 100) +
           width * (CLOCK_INNER_RADIUS / 100)) /
@@ -335,7 +342,7 @@ export class MatClockView<D> implements AfterViewInit, AfterContentInit {
 
     const date = this._dateAdapter.clone(this.activeDate);
 
-    if (this._hourView) {
+    if (this.inHourView) {
       if (value === 12) {
         value = 0;
       }
@@ -363,19 +370,16 @@ export class MatClockView<D> implements AfterViewInit, AfterContentInit {
     this._dateAdapter.setSeconds(date, 0, 0);
 
     // validate if the resulting value is disabled and do not take action
-    if (
-      this.dateFilter &&
-      !this.dateFilter(date, this._hourView ? 'hour' : 'minute')
-    ) {
+    if (this.dateFilter && !this.dateFilter(date, this.currentView)) {
       return;
     }
 
     this.activeDate = date;
     this.selectedChange.emit(this.activeDate);
 
-    if (this._hourView) {
+    if (this.inHourView) {
       // continue with minute view
-      this._hourView = !this._hourView;
+      this.currentViewChange.emit('minute');
     } else {
       this._userSelection.emit({ value: date, event });
     }

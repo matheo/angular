@@ -25,7 +25,6 @@ mat-custom-header {
 
       &-year {
         font-size: 16px;
-        font-weight: 500;
         line-height: 20px;
 
         &-dayname {
@@ -84,16 +83,62 @@ mat-custom-header {
   }
 
   // type customizations
-  &.time {
+  &.type-year {
+    .mat-custom-controls {
+      .mat-custom-date {
+        place-content: center;
+        align-items: center;
+
+        &-year {
+          font-size: 56px;
+          line-height: 56px;
+        }
+      }
+    }
+  }
+
+  &.type-month {
+    .mat-custom-controls {
+      .mat-custom-date {
+        flex-direction: row;
+        place-content: center;
+        align-items: center;
+
+        &-month,
+        &-year {
+          font-size: 56px;
+          line-height: 56px;
+
+          &:not(:last-child) {
+            margin-right: 0.2em;
+          }
+        }
+      }
+    }
+  }
+
+  &.type-datetime {
+    .mat-custom-controls {
+      .mat-custom-date {
+        &-year {
+          font-weight: 500;
+        }
+      }
+    }
+  }
+
+  &.type-time {
     .mat-custom-controls {
       .mat-custom-time {
         &-hour {
-          font-size: 46px;
-          line-height: 42px;
+          font-size: 56px;
+          line-height: 56px;
         }
         &-ampm {
-          font-size: 18px;
-          line-height: 20px;
+          font-size: 22px;
+          line-height: 24px;
+          margin-bottom: 3px;
+          margin-left: 7px;
         }
       }
     }

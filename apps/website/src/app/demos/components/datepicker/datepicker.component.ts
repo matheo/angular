@@ -21,7 +21,14 @@ export class DatepickerComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = this.fb.group({
-      datetime: null,
+      date: new Date(),
+      datetime: new Date(),
+      time: new Date(),
+      year: new Date(),
+      month: new Date(),
+      touchUI: new Date(),
+      start: new Date(),
+      filter: new Date(),
     });
   }
 }

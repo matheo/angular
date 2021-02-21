@@ -14,6 +14,8 @@ export const MAT_NATIVE_DATE_FORMATS: MatDateFormats = {
     dateInput: null,
     datetimeInput: null,
     timeInput: null,
+    monthInput: null,
+    yearInput: null,
   },
   display: {
     dateInput: {year: 'numeric', month: 'numeric', day: 'numeric'},
@@ -25,7 +27,10 @@ export const MAT_NATIVE_DATE_FORMATS: MatDateFormats = {
       minute: 'numeric'
     },
     timeInput: {hour: 'numeric', minute: 'numeric'},
+    monthInput: {month: 'short', year: 'numeric'},
+    yearInput: {year: 'numeric'},
     dateA11yLabel: {year: 'numeric', month: 'long', day: 'numeric'},
+    monthLabel: {month: 'short'},
     monthDayLabel: {month: 'short', day: 'numeric'},
     monthDayA11yLabel: {month: 'long', day: 'numeric'},
     monthYearLabel: {year: 'numeric', month: 'short'},

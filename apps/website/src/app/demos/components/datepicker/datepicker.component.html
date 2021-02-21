@@ -2,68 +2,115 @@
   <form [formGroup]="form">
 
     <fieldset class="col-12">
-      <h3>Basic DateTimepicker</h3>
+      <h3>Date picker</h3>
 
       <mat-form-field appearance="fill">
         <mat-label>Choose a date</mat-label>
-        <input matInput [matDatepicker]="picker" formControlName="datetime">
-        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker type="datetime"></mat-datepicker>
+        <input matInput [matDatepicker]="pdd" formControlName="date">
+        <mat-datepicker-toggle matSuffix [for]="pdd"></mat-datepicker-toggle>
+        <mat-datepicker #pdd type="date">
+          <mat-datepicker-actions>
+            <button mat-button matDatepickerCancel>Cancel</button>
+            <button mat-raised-button color="primary" matDatepickerApply>Apply</button>
+          </mat-datepicker-actions>
+        </mat-datepicker>
+        <mat-hint>{{ form.value.date | date:'mediumDate' }}</mat-hint>
+      </mat-form-field>
+    </fieldset>
+
+    <fieldset class="col-12">
+      <h3>DateTime picker</h3>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Choose a datetime</mat-label>
+        <input matInput [matDatepicker]="pdt" formControlName="datetime">
+        <mat-datepicker-toggle matSuffix [for]="pdt"></mat-datepicker-toggle>
+        <mat-datepicker color="accent" #pdt type="datetime">
+          <mat-datepicker-actions>
+            <button mat-button matDatepickerCancel>Cancel</button>
+            <button mat-raised-button color="accent" matDatepickerApply>Apply</button>
+          </mat-datepicker-actions>
+        </mat-datepicker>
         <mat-hint>{{ form.value.datetime | date:'short' }}</mat-hint>
       </mat-form-field>
     </fieldset>
 
     <fieldset class="col-12">
-      <h3>Timepicker TouchUI</h3>
+      <h3>Time picker</h3>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Choose a time</mat-label>
+        <input matInput [matDatepicker]="ptt" formControlName="time">
+        <mat-datepicker-toggle matSuffix [for]="ptt"></mat-datepicker-toggle>
+        <mat-datepicker #ptt type="time" [twelveHour]="false">
+          <mat-datepicker-actions>
+            <button mat-button matDatepickerCancel>Cancel</button>
+            <button mat-raised-button color="primary" matDatepickerApply>Apply</button>
+          </mat-datepicker-actions>
+        </mat-datepicker>
+        <mat-hint>{{ form.value.time | date:'shortTime' }}</mat-hint>
+      </mat-form-field>
+    </fieldset>
+
+    <fieldset class="col-12">
+      <h3>Year picker</h3>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Choose a year</mat-label>
+        <input matInput [matDatepicker]="pyy" formControlName="year">
+        <mat-datepicker-toggle matSuffix [for]="pyy"></mat-datepicker-toggle>
+        <mat-datepicker #pyy type="year">
+          <mat-datepicker-actions>
+            <button mat-button matDatepickerCancel>Cancel</button>
+            <button mat-raised-button color="primary" matDatepickerApply>Apply</button>
+          </mat-datepicker-actions>
+        </mat-datepicker>
+        <mat-hint>{{ form.value.year | date:'y' }}</mat-hint>
+      </mat-form-field>
+    </fieldset>
+
+    <fieldset class="col-12">
+      <h3>Month picker</h3>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Choose a month</mat-label>
+        <input matInput [matDatepicker]="pmm" formControlName="month">
+        <mat-datepicker-toggle matSuffix [for]="pmm"></mat-datepicker-toggle>
+        <mat-datepicker #pmm type="month">
+          <mat-datepicker-actions>
+            <button mat-button matDatepickerCancel>Cancel</button>
+            <button mat-raised-button color="primary" matDatepickerApply>Apply</button>
+          </mat-datepicker-actions>
+        </mat-datepicker>
+        <mat-hint>{{ form.value.month | date:'MMM  y' }}</mat-hint>
+      </mat-form-field>
+    </fieldset>
+
+    <fieldset class="col-12">
+      <h3>TouchUI</h3>
 
       <mat-form-field appearance="fill">
         <mat-label>Choose a date</mat-label>
-        <input matInput [matDatepicker]="pui" formControlName="datetime">
+        <input matInput [matDatepicker]="pui" formControlName="touchUI">
         <mat-datepicker-toggle matSuffix [for]="pui"></mat-datepicker-toggle>
-        <mat-datepicker #pui type="time" touchUi></mat-datepicker>
+        <mat-datepicker #pui type="datetime" touchUi>
+          <mat-datepicker-actions>
+            <button mat-button matDatepickerCancel>Cancel</button>
+            <button mat-raised-button color="primary" matDatepickerApply>Apply</button>
+          </mat-datepicker-actions>
+        </mat-datepicker>
       </mat-form-field>
     </fieldset>
 
     <fieldset class="col-12">
-      <h3>Datepicker start parameters</h3>
+      <h3>Start parameters</h3>
 
       <mat-form-field appearance="fill">
         <mat-label>Choose a date</mat-label>
-        <input matInput [matDatepicker]="pp" formControlName="datetime">
+        <input matInput [matDatepicker]="pp" formControlName="start">
         <mat-datepicker-toggle matSuffix [for]="pp"></mat-datepicker-toggle>
-        <mat-datepicker #pp type="date" startView="year" [startAt]="startDate"></mat-datepicker>
+        <mat-datepicker #pp type="datetime" startView="multi-year" [startAt]="startDate"></mat-datepicker>
       </mat-form-field>
-    </fieldset>
-
-    <fieldset class="col-12">
-      <h3>Disabled Datepicker</h3>
-
-      <p>
-        <mat-form-field appearance="fill">
-          <mat-label>Completely disabled</mat-label>
-          <input matInput [matDatepicker]="dp1" disabled>
-          <mat-datepicker-toggle matSuffix [for]="dp1"></mat-datepicker-toggle>
-          <mat-datepicker #dp1></mat-datepicker>
-        </mat-form-field>
-      </p>
-
-      <p>
-        <mat-form-field appearance="fill">
-          <mat-label>Popup disabled</mat-label>
-          <input matInput [matDatepicker]="dp2">
-          <mat-datepicker-toggle matSuffix [for]="dp2" disabled></mat-datepicker-toggle>
-          <mat-datepicker #dp2></mat-datepicker>
-        </mat-form-field>
-      </p>
-
-      <p>
-        <mat-form-field appearance="fill">
-          <mat-label>Input disabled</mat-label>
-          <input matInput [matDatepicker]="dp3" disabled>
-          <mat-datepicker-toggle matSuffix [for]="dp3"></mat-datepicker-toggle>
-          <mat-datepicker #dp3 disabled="false"></mat-datepicker>
-        </mat-form-field>
-      </p>
     </fieldset>
 
     <fieldset class="col-12">
@@ -71,9 +118,9 @@
 
       <mat-form-field class="example-full-width" appearance="fill">
         <mat-label>Choose a date</mat-label>
-        <input matInput [matDatepickerFilter]="excludeFilter" [matDatepicker]="pfilter">
+        <input matInput [matDatepickerFilter]="excludeFilter" [matDatepicker]="pfilter" formControlName="filter">
         <mat-datepicker-toggle matSuffix [for]="pfilter"></mat-datepicker-toggle>
-        <mat-datepicker #pfilter></mat-datepicker>
+        <mat-datepicker #pfilter type="datetime"></mat-datepicker>
       </mat-form-field>
     </fieldset>
 

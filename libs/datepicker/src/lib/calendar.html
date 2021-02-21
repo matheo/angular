@@ -3,8 +3,9 @@
 <div class="mat-calendar-content" [ngSwitch]="currentView" cdkMonitorSubtreeFocus tabindex="-1">
 
   <mat-clock-view
-      *ngSwitchCase="'clock'"
+      *ngSwitchDefault
       [(activeDate)]="activeDate"
+      [(currentView)]="currentView"
       [selected]="selected"
       [dateFilter]="dateFilter"
       [clockStep]="clockStep"
@@ -35,7 +36,7 @@
       [minDate]="minDate"
       [dateClass]="dateClass"
       (monthSelected)="_monthSelectedInYearView($event)"
-      (selectedChange)="_goToDateInView($event, 'month')">
+      (selectedChange)="hasOutput('month') ? _dateEmit($event) : _goToDateInView($event, 'month')">
   </mat-year-view>
 
   <mat-multi-year-view
@@ -47,6 +48,6 @@
       [minDate]="minDate"
       [dateClass]="dateClass"
       (yearSelected)="_yearSelectedInMultiYearView($event)"
-      (selectedChange)="_goToDateInView($event, 'year')">
+      (selectedChange)="hasOutput('year') ? _dateEmit($event) : _goToDateInView($event, 'year')">
   </mat-multi-year-view>
 </div>

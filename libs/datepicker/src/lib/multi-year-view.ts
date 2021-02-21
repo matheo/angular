@@ -186,12 +186,24 @@ export class MatMultiYearView<D> implements AfterContentInit, OnDestroy {
   /** Handles when a new year is selected. */
   _yearSelected(event: MatCalendarUserEvent<number>) {
     const year = event.value;
-    this.yearSelected.emit(this._dateAdapter.createDate(year, 0, 1));
-    let month = this._dateAdapter.getMonth(this.activeDate);
-    let daysInMonth =
+    const month = this._dateAdapter.getMonth(this.activeDate);
+    const daysInMonth =
         this._dateAdapter.getNumDaysInMonth(this._dateAdapter.createDate(year, month, 1));
-    this.selectedChange.emit(this._dateAdapter.createDate(year, month,
-        Math.min(this._dateAdapter.getDate(this.activeDate), daysInMonth)));
+    const day = Math.min(this._dateAdapter.getDate(this.activeDate), daysInMonth);
+
+    const activeDate = this._dateAdapter.createDate(
+      year,
+      month,
+      day,
+      this._dateAdapter.getHours(this.activeDate),
+      this._dateAdapter.getMinutes(this.activeDate),
+      this._dateAdapter.getSeconds(this.activeDate),
+      this._dateAdapter.getMilliseconds(this.activeDate),
+    );
+
+    this.yearSelected.emit(this._dateAdapter.createDate(year, 0, 1));
+
+    this.selectedChange.emit(activeDate);
   }
 
   /** Handles keydown events on the calendar body when calendar is in multi-year view. */

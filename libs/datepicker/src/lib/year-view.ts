@@ -168,16 +168,24 @@ export class MatYearView<D> implements AfterContentInit, OnDestroy {
   /** Handles when a new month is selected. */
   _monthSelected(event: MatCalendarUserEvent<number>) {
     const month = event.value;
-    const normalizedDate =
-          this._dateAdapter.createDate(this._dateAdapter.getYear(this.activeDate), month, 1);
+    const year = this._dateAdapter.getYear(this.activeDate);
+    const normalizedDate = this._dateAdapter.createDate(year, month, 1);
+    const daysInMonth = this._dateAdapter.getNumDaysInMonth(normalizedDate);
+    const day = Math.min(this._dateAdapter.getDate(this.activeDate), daysInMonth);
+
+    const activeDate = this._dateAdapter.createDate(
+      year,
+      month,
+      day,
+      this._dateAdapter.getHours(this.activeDate),
+      this._dateAdapter.getMinutes(this.activeDate),
+      this._dateAdapter.getSeconds(this.activeDate),
+      this._dateAdapter.getMilliseconds(this.activeDate),
+    );
 
     this.monthSelected.emit(normalizedDate);
 
-    const daysInMonth = this._dateAdapter.getNumDaysInMonth(normalizedDate);
-
-    this.selectedChange.emit(this._dateAdapter.createDate(
-        this._dateAdapter.getYear(this.activeDate), month,
-        Math.min(this._dateAdapter.getDate(this.activeDate), daysInMonth)));
+    this.selectedChange.emit(activeDate);
   }
 
   /** Handles keydown events on the calendar body when calendar is in year view. */

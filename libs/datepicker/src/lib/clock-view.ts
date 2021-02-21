@@ -357,7 +357,6 @@ export class MatClockView<D> implements AfterViewInit, AfterContentInit {
       }
       this._dateAdapter.setMinutes(date, value);
     }
-    this._dateAdapter.setSeconds(date, 0, 0);
 
     // validate if the resulting value is disabled and do not take action
     if (this.dateFilter && !this.dateFilter(date, this.currentView)) {

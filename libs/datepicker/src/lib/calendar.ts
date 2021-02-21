@@ -344,6 +344,11 @@ export class MatCalendar<D> implements AfterContentInit, AfterViewChecked, OnDes
   @Output() readonly monthSelected: EventEmitter<D> = new EventEmitter<D>();
 
   /**
+   * Emits when the date changes.
+   */
+  @Output() readonly dateChanged = new EventEmitter<D>();
+
+  /**
    * Emits when the current view changes.
    */
   @Output() readonly viewChanged: EventEmitter<MatCalendarView> =
@@ -492,6 +497,8 @@ export class MatCalendar<D> implements AfterContentInit, AfterViewChecked, OnDes
       this.selected = date;
     }
     this.activeDate = date;
+
+    this.dateChanged.emit(date);
   }
 
   /** Updates today's date after an update of the active date */

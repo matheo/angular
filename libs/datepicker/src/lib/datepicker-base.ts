@@ -198,6 +198,10 @@ export class MatDatepickerContent<S, D = ExtractDateTypeFromSelection<S>>
     this._animationDone.complete();
   }
 
+  _queueUserSelection(date: D) {
+    this._model.queue(date);
+  }
+
   _handleUserSelection(event: MatCalendarUserEvent<D | null>) {
     const selection = this._model.selection;
     const value = event.value;
@@ -234,6 +238,7 @@ export class MatDatepickerContent<S, D = ExtractDateTypeFromSelection<S>>
 
   /** Applies the current pending selection to the global model. */
   _applyPendingSelection() {
+    this._model.processQueue();
     if (this._model !== this._globalModel) {
       this._globalModel.updateSelection(this._model.selection, this);
     }
@@ -515,6 +520,10 @@ export abstract class MatDatepickerBase<C extends MatDatepickerControl<D>, S,
   /** Emits changed view */
   _viewChanged(view: MatCalendarView): void {
     this.viewChanged.emit(view);
+  }
+
+  _queueDate(date: D): void {
+    this._model.queue(date);
   }
 
   /**

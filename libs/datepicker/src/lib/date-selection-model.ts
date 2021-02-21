@@ -79,6 +79,10 @@ export abstract class MatDateSelectionModel<S, D = ExtractDateTypeFromSelection<
   /** Adds a date to the current selection. */
   abstract add(date: D | null): void;
 
+  /** Adds a date as pending to update if the user selects the date partially. */
+  abstract queue(date: D | null): void;
+  abstract processQueue(): void;
+
   /** Checks whether the current selection is valid. */
   abstract isValid(): boolean;
 
@@ -102,6 +106,9 @@ export abstract class MatDateSelectionModel<S, D = ExtractDateTypeFromSelection<
 /**  A selection model that contains a single date. */
 @Injectable()
 export class MatSingleDateSelectionModel<D> extends MatDateSelectionModel<D | null, D> {
+  /** Queue store */
+  queuedValue: D;
+
   constructor(adapter: DateAdapter<D>) {
     super(null, adapter);
   }
@@ -112,6 +119,17 @@ export class MatSingleDateSelectionModel<D> extends MatDateSelectionModel<D | nu
    */
   add(date: D | null) {
     super.updateSelection(date, this);
+  }
+
+  /** Adds a date as pending to update if the user selects the date partially. */
+  queue(date: D | null) {
+    this.queuedValue = date;
+  }
+
+  processQueue(): void {
+    if (this.queuedValue) {
+      this.updateSelection(this.queuedValue, this);
+    }
   }
 
   /** Checks whether the current selection is valid. */
@@ -131,6 +149,9 @@ export class MatSingleDateSelectionModel<D> extends MatDateSelectionModel<D | nu
   clone() {
     const clone = new MatSingleDateSelectionModel<D>(this._adapter);
     clone.updateSelection(this.selection, this);
+    if (this.queuedValue) {
+      clone.queue(this.queuedValue);
+    }
     return clone;
   }
 }
@@ -161,6 +182,9 @@ export class MatRangeDateSelectionModel<D> extends MatDateSelectionModel<DateRan
 
     super.updateSelection(new DateRange<D>(start, end), this);
   }
+
+  queue(date: D | null) {}
+  processQueue() {}
 
   /** Checks whether the current selection is valid. */
   isValid(): boolean {

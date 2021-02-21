@@ -6,7 +6,7 @@ The datepicker allows users to enter a date either through text input, or by cho
 It is made up of several components and directives that work together.
 
 Further documentation can be found at the official docs:
-https://material.angular.io/components/datepicker/overview
+<https://material.angular.io/components/datepicker/overview>
 
 ```html
 <mat-form-field>
@@ -19,11 +19,11 @@ https://material.angular.io/components/datepicker/overview
 
 The `mat-datepicker` has the following _input_ parameters:
 
-- `startAt`: start Date/Moment, otherwise the current selected value
-- `type`: `date | datetime | time` output type and available views. default: date
-- `startView`: `clock | month | year | years` initial view to load. default: month
+- `type`: `date | datetime | time | month | year` output type and available views. default: date
+- `startView`: `multi-year | year | month | hour | minute` initial view to load. default: month
+- `startAt`: start Date, otherwise the current selected value
 - `clockStep`: interval to use in the clock view. default: 1
-- `twelveHour`: whether to use 12 or 24 hrs format. default: false
+- `twelveHour`: whether to use 12 or 24 hrs format. default: true
 - `touchUi`: calendar UI mode. default: false
 - `disabled`: whether the datepicker pop-up should be disabled
 - `matDatepicker`: whether the datepicker is connected to a date type one

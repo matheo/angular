@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { FlexLayoutModule } from '@angular/flex-layout';
 import { RouterModule, Routes } from '@angular/router';
 import { MatDatepickerModule } from '@matheo/datepicker';
 import { ThemeComponent } from '../shared/layout/theme/theme.component';
@@ -28,6 +29,7 @@ const routes: Routes = [
 @NgModule({
   imports: [
     CommonModule,
+    FlexLayoutModule,
     RouterModule.forChild(routes),
     MatDatepickerModule,
     SharedModule,

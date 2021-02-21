@@ -147,17 +147,9 @@ export class MatClockView<D> implements AfterViewInit, AfterContentInit {
     let radius = CLOCK_OUTER_RADIUS;
     let deg = 0;
 
-    if (this.twelveHour) {
-      this._selectedHour = this._selectedHour < 12 ? this._selectedHour : this._selectedHour - 12;
-      this._selectedHour = this._selectedHour === 0 ? 12 : this._selectedHour;
-    }
-
     if (this.inHourView) {
-      const outer = this._selectedHour > 0 && this._selectedHour < 13;
+      const outer = this.twelveHour || this._selectedHour >= 0 && this._selectedHour < 12;
       radius = outer ? CLOCK_OUTER_RADIUS : CLOCK_INNER_RADIUS;
-      if (this.twelveHour) {
-        radius = CLOCK_OUTER_RADIUS;
-      }
       deg = Math.round(this._selectedHour * (360 / (24 / 2)));
     } else {
       deg = Math.round(this._selectedMinute * (360 / 60));
@@ -252,11 +244,11 @@ export class MatClockView<D> implements AfterViewInit, AfterContentInit {
           this._dateAdapter.getYear(this.activeDate),
           this._dateAdapter.getMonth(this.activeDate),
           this._dateAdapter.getDate(this.activeDate),
-          this._anteMeridian ? i : i + 12
+          this._anteMeridian ? i : i + 12,
         );
         this._hours.push({
-          value: i,
-          displayValue: i === 0 ? '12' : hourNames[i],
+          value: this._anteMeridian ? i : i + 12,
+          displayValue: i === 0 ? hourNames[12] : hourNames[i],
           enabled: !this.dateFilter || this.dateFilter(date, 'hour'),
           top: CLOCK_RADIUS - Math.cos(radian) * radius - CLOCK_TICK_RADIUS,
           left: CLOCK_RADIUS + Math.sin(radian) * radius - CLOCK_TICK_RADIUS,
@@ -267,15 +259,16 @@ export class MatClockView<D> implements AfterViewInit, AfterContentInit {
         const radian = (i / 6) * Math.PI;
         const outer = i > 0 && i < 13;
         const radius = outer ? CLOCK_OUTER_RADIUS : CLOCK_INNER_RADIUS;
+        const hour = i % 12 ? i : (i === 0 ? 12 : 0);
         const date = this._dateAdapter.createDate(
           this._dateAdapter.getYear(this.activeDate),
           this._dateAdapter.getMonth(this.activeDate),
           this._dateAdapter.getDate(this.activeDate),
-          i
+          hour,
         );
         this._hours.push({
-          value: i,
-          displayValue: i === 0 ? '00' : hourNames[i],
+          value: hour,
+          displayValue: hourNames[hour],
           enabled: !this.dateFilter || this.dateFilter(date, 'hour'),
           top: CLOCK_RADIUS - Math.cos(radian) * radius - CLOCK_TICK_RADIUS,
           left: CLOCK_RADIUS + Math.sin(radian) * radius - CLOCK_TICK_RADIUS,
@@ -353,9 +346,7 @@ export class MatClockView<D> implements AfterViewInit, AfterContentInit {
       }
       value = this.twelveHour
         ? (this._anteMeridian ? value : value + 12)
-        : outer
-          ? (value === 0 ? 12 : value)
-          : (value === 0 ? 0 : value + 12);
+        : (outer ? value : value + 12);
       this._dateAdapter.setHours(date, value);
     } else {
       if (this.clockStep) {

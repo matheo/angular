@@ -12,6 +12,7 @@ import { MatTableModule } from '@angular/material/table';
 import { RouterModule } from '@angular/router';
 import { ItemComponent } from './layout/item/item.component';
 import { MenuComponent } from './layout/menu/menu.component';
+import { SectionActionsComponent } from './layout/section-actions/section-actions.component';
 import { SectionComponent } from './layout/section/section.component';
 import { ThemeComponent } from './layout/theme/theme.component';
 
@@ -29,11 +30,13 @@ import { ThemeComponent } from './layout/theme/theme.component';
     ThemeComponent,
     MenuComponent,
     SectionComponent,
+    SectionActionsComponent,
     ItemComponent,
   ],
   exports: [
     ThemeComponent,
     SectionComponent,
+    SectionActionsComponent,
     ItemComponent,
     // modules
     ReactiveFormsModule,

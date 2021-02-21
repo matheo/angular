@@ -95,7 +95,7 @@ export class MatDatepickerInput<D> extends MatDatepickerInputBase<D | null, D>
   set min(value: D | null) {
     const validValue = this._dateAdapter.getValidDateOrNull(this._dateAdapter.deserialize(value));
 
-    if (!this._dateAdapter.sameDate(validValue, this._min)) {
+    if (!this._dateAdapter.sameDate(validValue, this._min, this.getUnit())) {
       this._min = validValue;
       this._validatorOnChange();
     }
@@ -108,7 +108,7 @@ export class MatDatepickerInput<D> extends MatDatepickerInputBase<D | null, D>
   set max(value: D | null) {
     const validValue = this._dateAdapter.getValidDateOrNull(this._dateAdapter.deserialize(value));
 
-    if (!this._dateAdapter.sameDate(validValue, this._max)) {
+    if (!this._dateAdapter.sameDate(validValue, this._max, this.getUnit())) {
       this._max = validValue;
       this._validatorOnChange();
     }

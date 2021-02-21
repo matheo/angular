@@ -31,6 +31,7 @@ import {
 import {Subscription, Subject} from 'rxjs';
 import {
   DateAdapter,
+  DateUnit,
   MAT_DATE_FORMATS,
   MatDateFormats,
 } from '../core/datetime';
@@ -258,6 +259,18 @@ export abstract class MatDatepickerInputBase<S, D = ExtractDateTypeFromSelection
     this.stateChanges.complete();
   }
 
+  getUnit(): DateUnit {
+    switch (this.type) {
+      case 'date':
+        return 'day';
+      case 'datetime':
+      case 'time':
+        return 'minute';
+      default:
+        return this.type;
+    }
+  }
+
   /** @docs-private */
   registerOnValidatorChange(fn: () => void): void {
     this._validatorOnChange = fn;
@@ -303,7 +316,7 @@ export abstract class MatDatepickerInputBase<S, D = ExtractDateTypeFromSelection
     this._lastValueValid = this._isValidValue(date);
     date = this._dateAdapter.getValidDateOrNull(date);
 
-    if (!this._dateAdapter.sameDate(date, this.value)) {
+    if (!this._dateAdapter.sameDate(date, this.value, this.getUnit())) {
       this._assignValue(date);
       this._cvaOnChange(date);
       this.dateInput.emit(new MatDatepickerInputEvent(this, this._elementRef.nativeElement));
@@ -400,7 +413,7 @@ export function dateInputsHaveChanged(
     const {previousValue, currentValue} = changes[key];
 
     if (adapter.isDateInstance(previousValue) && adapter.isDateInstance(currentValue)) {
-      if (!adapter.sameDate(previousValue, currentValue)) {
+      if (!adapter.sameDate(previousValue, currentValue, this.getUnit())) {
         return true;
       }
     } else {

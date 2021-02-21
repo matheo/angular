@@ -38,8 +38,8 @@ import {
   ChangeDetectorRef,
   Directive,
   OnChanges,
-  SimpleChanges,
   OnInit,
+  SimpleChanges,
 } from '@angular/core';
 import {
   CanColor,
@@ -212,8 +212,8 @@ export class MatDatepickerContent<S, D = ExtractDateTypeFromSelection<S>>
       const newSelection = this._rangeSelectionStrategy.selectionFinished(value,
           selection as unknown as DateRange<D>, event.event);
       this._model.updateSelection(newSelection as unknown as S, this);
-    } else if (value && (isRange ||
-              !this._dateAdapter.sameDate(value, selection as unknown as D))) {
+    } else if (value && (isRange || !this._dateAdapter.sameDate(
+        value, selection as unknown as D, this._calendar.getUnit()))) {
       this._model.add(value);
     }
 

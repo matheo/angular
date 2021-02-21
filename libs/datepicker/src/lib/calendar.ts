@@ -30,6 +30,7 @@ import {ThemePalette} from '@angular/material/core';
 import {Subject, Subscription} from 'rxjs';
 import {
   DateAdapter,
+  DateUnit,
   MAT_DATE_FORMATS,
   MatDateFormats,
 } from '../core/datetime';
@@ -474,6 +475,18 @@ export class MatCalendar<D> implements AfterContentInit, AfterViewChecked, OnDes
       : this.selected;
   }
 
+  getUnit(): DateUnit {
+    switch (this.type) {
+      case 'date':
+        return 'day';
+      case 'datetime':
+      case 'time':
+        return 'minute';
+      default:
+        return this.type;
+    }
+  }
+
   setDate(date: D): void {
     if (!(this.selected instanceof DateRange)) {
       this.selected = date;
@@ -504,7 +517,7 @@ export class MatCalendar<D> implements AfterContentInit, AfterViewChecked, OnDes
     const date = event.value;
 
     if (this.selected instanceof DateRange ||
-        (date && !this._dateAdapter.sameDate(date, this.selected))) {
+        (date && !this._dateAdapter.sameDate(date, this.selected, this.getUnit()))) {
       this.selectedChange.emit(date);
     }
 

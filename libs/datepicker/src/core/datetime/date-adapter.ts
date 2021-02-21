@@ -20,6 +20,13 @@ export function MAT_DATE_LOCALE_FACTORY(): string {
   return inject(LOCALE_ID);
 }
 
+export type DateUnit =
+  | 'y' | 'year' | 'years'
+  | 'M' | 'month' | 'months'
+  | 'd' | 'day' | 'days'
+  | 'h' | 'hour' | 'hours'
+  | 'm' | 'minute' | 'minutes';
+
 /** Adapts type `D` to be usable as a date by cdk-based components that work with dates. */
 export abstract class DateAdapter<D> {
   /** The locale to use for all dates. */
@@ -269,16 +276,43 @@ export abstract class DateAdapter<D> {
    * Compares two dates.
    * @param first The first date to compare.
    * @param second The second date to compare.
+   * @param unit Unit deep of the comparision.
    * @returns 0 if the dates are equal, a number less than 0 if the first date is earlier,
    *     a number greater than 0 if the first date is later.
    */
-  compareDate(first: D, second: D): number {
-    return this.getYear(first) - this.getYear(second) ||
-        this.getMonth(first) - this.getMonth(second) ||
-        this.getDate(first) - this.getDate(second) ||
-        this.getHours(first) - this.getHours(second) ||
-        this.getMinutes(first) - this.getMinutes(second) ||
-        this.getSeconds(first) - this.getSeconds(second);
+  compareDate(first: D, second: D, unit: DateUnit = 'minute'): number {
+    let d1 = this.getYear(first).toString();
+    let d2 = this.getYear(second).toString();
+
+    if (['y', 'year', 'years'].includes(unit)) {
+      return Number(d1) - Number(d2);
+    }
+
+    d1 += this.getMonth(first).toString().padStart(2, '0');
+    d2 += this.getMonth(second).toString().padStart(2, '0');
+
+    if (['M', 'month', 'months'].includes(unit)) {
+      return Number(d1) - Number(d2);
+    }
+
+    d1 += this.getDate(first).toString().padStart(2, '0');
+    d2 += this.getDate(second).toString().padStart(2, '0');
+
+    if (['d', 'day', 'days'].includes(unit)) {
+      return Number(d1) - Number(d2);
+    }
+
+    d1 += this.getHours(first).toString().padStart(2, '0');
+    d2 += this.getHours(second).toString().padStart(2, '0');
+
+    if (['h', 'hour', 'hours'].indexOf(unit) >= 0) {
+      return Number(d1) - Number(d2);
+    }
+
+    d1 += this.getMinutes(first).toString().padStart(2, '0');
+    d2 += this.getMinutes(second).toString().padStart(2, '0');
+
+    return Number(d1) - Number(d2);
   }
 
   /**
@@ -288,12 +322,12 @@ export abstract class DateAdapter<D> {
    * @returns Whether the two dates are equal.
    *     Null dates are considered equal to other null dates.
    */
-  sameDate(first: D | null, second: D | null): boolean {
+  sameDate(first: D | null, second: D | null, unit: DateUnit = 'minute'): boolean {
     if (first && second) {
       let firstValid = this.isValid(first);
       let secondValid = this.isValid(second);
       if (firstValid && secondValid) {
-        return !this.compareDate(first, second);
+        return !this.compareDate(first, second, unit);
       }
       return firstValid == secondValid;
     }
@@ -308,11 +342,11 @@ export abstract class DateAdapter<D> {
    * @returns `min` if `date` is less than `min`, `max` if date is greater than `max`,
    *     otherwise `date`.
    */
-  clampDate(date: D, min?: D | null, max?: D | null): D {
-    if (min && this.compareDate(date, min) < 0) {
+  clampDate(date: D, min?: D | null, max?: D | null, unit: DateUnit = 'minute'): D {
+    if (min && this.compareDate(date, min, unit) < 0) {
       return min;
     }
-    if (max && this.compareDate(date, max) > 0) {
+    if (max && this.compareDate(date, max, unit) > 0) {
       return max;
     }
     return date;

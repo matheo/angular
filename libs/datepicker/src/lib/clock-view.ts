@@ -204,7 +204,6 @@ export class MatClockView<D> implements AfterViewInit, AfterContentInit {
   }
 
   _selectValue(event: MouseEvent, value: number) {
-    event.stopPropagation();
     this.setTime(event, value);
   }
 
@@ -276,7 +275,7 @@ export class MatClockView<D> implements AfterViewInit, AfterContentInit {
         );
         this._hours.push({
           value: i,
-          displayValue: i === 0 ? '12' : hourNames[i],
+          displayValue: i === 0 ? '00' : hourNames[i],
           enabled: !this.dateFilter || this.dateFilter(date, 'hour'),
           top: CLOCK_RADIUS - Math.cos(radian) * radius - CLOCK_TICK_RADIUS,
           left: CLOCK_RADIUS + Math.sin(radian) * radius - CLOCK_TICK_RADIUS,

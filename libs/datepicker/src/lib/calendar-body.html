@@ -2,14 +2,14 @@
   If there's not enough space in the first row, create a separate label row. We mark this row as
   aria-hidden because we don't want it to be read out as one of the weeks in the month.
 -->
-<tr *ngIf="_firstRowOffset < labelMinRequiredCells" aria-hidden="true">
+<!--tr *ngIf="_firstRowOffset < labelMinRequiredCells" aria-hidden="true">
   <td class="mat-calendar-body-label"
       [attr.colspan]="numCols"
       [style.paddingTop]="_cellPadding"
       [style.paddingBottom]="_cellPadding">
     {{label}}
   </td>
-</tr>
+</tr-->
 
 <!-- Create the first row separately so we can include a special spacer cell. -->
 <tr *ngFor="let row of rows; let rowIndex = index" role="row">

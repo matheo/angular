@@ -4,6 +4,7 @@
     <div class="mat-custom-date" *ngIf="calendar.type === 'year'">
       <button mat-button type="button" class="mat-custom-date-year mat-custom-control"
       (click)="calendar.currentView = 'multi-year'"
+      [@controlActive]="calendar.currentView == 'multi-year' ? 'active' : ''"
       [attr.aria-label]="_intl.switchToMultiYearViewLabel">
         <span>{{ _yearButtonText }}</span>
       </button>
@@ -12,12 +13,14 @@
     <div class="mat-custom-date" *ngIf="calendar.hasOutput('month')">
       <button mat-button type="button" class="mat-custom-date-month mat-custom-control"
       (click)="calendar.currentView = 'year'"
+      [@controlActive]="calendar.currentView == 'year' ? 'active' : ''"
       [attr.aria-label]="_intl.switchToMonthViewLabel">
         <span>{{ _monthButtonText }}</span>
       </button>
 
       <button mat-button type="button" class="mat-custom-date-year mat-custom-control"
       (click)="calendar.currentView = 'multi-year'"
+      [@controlActive]="calendar.currentView == 'multi-year' ? 'active' : ''"
       [attr.aria-label]="_intl.switchToMultiYearViewLabel">
         <span>{{ _yearButtonText }}</span>
       </button>
@@ -25,15 +28,15 @@
 
     <div class="mat-custom-date" *ngIf="calendar.hasOutput('date')">
       <button mat-button type="button" class="mat-custom-date-year mat-custom-control"
-      [class.mat-calendar-control-active]="calendar.currentView == 'multi-year'"
       (click)="calendar.currentView = 'multi-year'"
+      [@controlActive]="calendar.currentView == 'multi-year' ? 'active' : ''"
       [attr.aria-label]="_intl.switchToMultiYearViewLabel">
         <span>{{ _yearButtonText }}</span>
       </button>
 
       <button mat-button type="button" class="mat-custom-date-monthday mat-custom-control"
-      [class.mat-custom-control-active]="calendar.currentView == 'month' || calendar.currentView == 'year'"
       (click)="calendar.currentView = 'year'"
+      [@controlActive]="calendar.currentView == 'month' || calendar.currentView == 'year' ? 'active' : ''"
       [attr.aria-label]="_intl.switchToMonthViewLabel">
         <span class="mat-custom-date-year-dayname">{{ _dayButtonText }}&nbsp;</span>
         <span class="mat-custom-date-year-monthday">{{ _monthdayButtonText }}</span>
@@ -43,8 +46,8 @@
     <div class="mat-custom-time" *ngIf="calendar.hasOutput('time')">
       <div class="mat-custom-time-hour">
         <button mat-button type="button" class="mat-custom-time-hour mat-custom-control"
-        [class.mat-calendar-control-active]="calendar.currentView == 'hour'"
         (click)="calendar.currentView = 'hour'"
+        [@controlActive]="calendar.currentView == 'hour' ? 'active' : ''"
         [attr.aria-label]="_intl.switchToHourViewLabel">
           <span>{{ _hourButtonText }}</span>
         </button>
@@ -52,7 +55,7 @@
         <span>:</span>
 
         <button mat-button type="button" class="mat-custom-time-minute mat-custom-control"
-        [class.mat-calendar-control-active]="calendar.currentView == 'minute'"
+        [@controlActive]="calendar.currentView == 'minute' ? 'active' : ''"
         (click)="calendar.currentView = 'minute'"
         [attr.aria-label]="_intl.switchToMinuteViewLabel">
           <span>{{ _minuteButtonText }}</span>
@@ -61,13 +64,15 @@
       </div>
       <div class="mat-custom-time-ampm" *ngIf="calendar.twelveHour">
         <button mat-button type="button" class="mat-calendar-control"
-        [class.mat-calendar-control-active]="_isAM"
+        [@controlActive]="_isAM ? 'active' : ''"
+        [class.mat-custom-control-active]="_isAM"
         [attr.aria-label]="_intl.setToAMLabel"
         (click)="toggleAmPm(true)">
           AM
         </button>
         <button mat-button type="button" class="mat-calendar-control"
-        [class.mat-calendar-control-active]="!_isAM"
+        [@controlActive]="!_isAM ? 'active' : ''"
+        [class.mat-custom-control-active]="!_isAM"
         [attr.aria-label]="_intl.setToPMLabel"
         (click)="toggleAmPm(false)">
           PM
@@ -76,8 +81,7 @@
     </div>
 
   </div>
-  <div class="mat-custom-prev-next"
-  *ngIf="calendar.currentView !== 'hour' && calendar.currentView !== 'minute'">
+  <div class="mat-custom-prev-next" *ngIf="hasPrevNextBlock()">
 
     <button mat-icon-button type="button"
             class="mat-calendar-previous-button"

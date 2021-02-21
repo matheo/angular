@@ -35,6 +35,7 @@ import {
 } from '../core/datetime';
 import {MatCalendarUserEvent, MatCalendarCellClassFunction} from './calendar-body';
 import {MatCalendarType, MatCalendarView} from './calendar.types';
+import {matDatepickerAnimations} from './datepicker-animations';
 import {createMissingDateImplError} from './datepicker-errors';
 import {MatDatepickerIntl} from './datepicker-intl';
 import {MatClockView} from './clock-view';
@@ -57,6 +58,7 @@ let uniqueId = 0;
   templateUrl: 'mat-header.html',
   styleUrls: ['./mat-header.scss'],
   exportAs: 'matCalendarHeader',
+  animations: [matDatepickerAnimations.controlActive],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -111,6 +113,10 @@ export class MatCalendarHeader<D> {
     this._minuteButtonText = ('00' + minutes).slice(-2);
 
     this.changeDetectorRef.markForCheck();
+  }
+
+  hasPrevNextBlock(): boolean {
+    return this.calendar.currentView !== 'hour' && this.calendar.currentView !== 'minute';
   }
 
   toggleAmPm(am): void {

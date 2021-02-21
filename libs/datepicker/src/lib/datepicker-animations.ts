@@ -7,6 +7,7 @@
  */
 import {
   animate,
+  keyframes,
   state,
   style,
   transition,
@@ -21,6 +22,7 @@ import {
 export const matDatepickerAnimations: {
   readonly transformPanel: AnimationTriggerMetadata;
   readonly fadeInCalendar: AnimationTriggerMetadata;
+  readonly controlActive: AnimationTriggerMetadata;
 } = {
   /** Transforms the height of the datepicker's calendar. */
   transformPanel: trigger('transformPanel', [
@@ -43,5 +45,19 @@ export const matDatepickerAnimations: {
     // TODO(crisbeto): this animation should be removed since it isn't quite on spec, but we
     // need to keep it until #12440 gets in, otherwise the exit animation will look glitchy.
     transition('void => *', animate('120ms 100ms cubic-bezier(0.55, 0, 0.55, 0.2)'))
-  ])
+  ]),
+
+  /* Active control */
+  controlActive: trigger('controlActive', [
+    transition('* => active', [
+      animate(
+        '0.4s linear',
+        keyframes([
+          style({ transform: 'scale(0.9)' }),
+          style({ transform: 'scale(1.1)' }),
+          style({ transform: 'scale(1)' })
+        ])
+      )
+    ])
+  ]),
 };

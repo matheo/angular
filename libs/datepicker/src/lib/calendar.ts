@@ -493,18 +493,6 @@ export class MatCalendar<D> implements AfterContentInit, AfterViewChecked, OnDes
     view._init();
   }
 
-  /** Handles date selection in the clock view. */
-  _timeChanged(date: D): void {
-    this.setDate(date);
-    this.selectedChange.emit(date);
-  }
-
-  _timeSelected(event: MatCalendarUserEvent<D | null>): void {
-    this.setDate(event.value);
-    this.selectedChange.emit(event.value);
-    this._userSelection.emit(event);
-  }
-
   /** Handles date selection. */
   _dateSelected(event: MatCalendarUserEvent<D | null>): void {
     const date = event.value;
@@ -521,8 +509,20 @@ export class MatCalendar<D> implements AfterContentInit, AfterViewChecked, OnDes
     this._userSelection.emit({ value, event: null });
   }
 
-  /** Handles user clicks on the time labels. */
-  _showClockView(event: MatCalendarUserEvent<D | null>): void {
+  /** Handles date selection in the clock view. */
+  _hourSelectedInClockView(date: D): void {
+    this.setDate(date);
+    this.selectedChange.emit(date);
+  }
+
+  _timeSelectedInClockView(event: MatCalendarUserEvent<D | null>): void {
+    this.setDate(event.value);
+    this.selectedChange.emit(event.value);
+    this._userSelection.emit(event);
+  }
+
+  /** Handles user day selection. */
+  _daySelected(event: MatCalendarUserEvent<D | null>): void {
     if (!this.hasOutput('time') || this.selected instanceof DateRange) {
       this._dateSelected(event);
     } else {

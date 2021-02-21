@@ -42,7 +42,7 @@
         <mat-label>Choose a time</mat-label>
         <input matInput [matDatepicker]="ptt" formControlName="time">
         <mat-datepicker-toggle matSuffix [for]="ptt"></mat-datepicker-toggle>
-        <mat-datepicker #ptt type="time" [twelveHour]="false">
+        <mat-datepicker #ptt type="time" [twelveHour]="true">
           <mat-datepicker-actions>
             <button mat-button matDatepickerCancel>Cancel</button>
             <button mat-raised-button color="primary" matDatepickerApply>Apply</button>

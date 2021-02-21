@@ -5,13 +5,15 @@
   <mat-clock-view
       *ngSwitchDefault
       [(activeDate)]="activeDate"
+      [selected]="selected"
       [(currentView)]="currentView"
       [selected]="selected"
       [dateFilter]="dateFilter"
       [clockStep]="clockStep"
       [twelveHour]="twelveHour"
-      (selectedChange)="_timeChanged($event)"
-      (_userSelection)="_timeSelected($event)">
+      (selectedChange)="setDate($event)"
+      (hourSelected)="_hourSelectedInClockView($event)"
+      (_userSelection)="_timeSelectedInClockView($event)">
   </mat-clock-view>
 
   <mat-month-view
@@ -24,7 +26,7 @@
       [dateClass]="dateClass"
       [comparisonStart]="comparisonStart"
       [comparisonEnd]="comparisonEnd"
-      (_userSelection)="_showClockView($event)">
+      (_userSelection)="_daySelected($event)">
   </mat-month-view>
 
   <mat-year-view

@@ -210,11 +210,11 @@ export class MatClockView<D> implements AfterViewInit, AfterContentInit {
 
   // Handles mousedown events on the clock body.
   _handleMousedown(event: any) {
-    this.setTime(event);
     document.addEventListener('mousemove', this.mouseMoveListener);
     document.addEventListener('touchmove', this.mouseMoveListener);
     document.addEventListener('mouseup', this.mouseUpListener);
     document.addEventListener('touchend', this.mouseUpListener);
+    this.setTime(event);
   }
 
   _handleMousemove(event: any) {
@@ -227,6 +227,12 @@ export class MatClockView<D> implements AfterViewInit, AfterContentInit {
     document.removeEventListener('touchmove', this.mouseMoveListener);
     document.removeEventListener('mouseup', this.mouseUpListener);
     document.removeEventListener('touchend', this.mouseUpListener);
+
+    if (this.inHourView) {
+      this.currentViewChange.emit('minute');
+    } else {
+      this._userSelection.emit({ value: this.activeDate, event });
+    }
   }
 
   // Initializes this clock view.
@@ -347,16 +353,10 @@ export class MatClockView<D> implements AfterViewInit, AfterContentInit {
         value = 0;
       }
       value = this.twelveHour
-        ? this._anteMeridian
-          ? value
-          : value + 12
+        ? (this._anteMeridian ? value : value + 12)
         : outer
-        ? value === 0
-          ? 12
-          : value
-        : value === 0
-        ? 0
-        : value + 12;
+          ? (value === 0 ? 12 : value)
+          : (value === 0 ? 0 : value + 12);
       this._dateAdapter.setHours(date, value);
     } else {
       if (this.clockStep) {
@@ -376,13 +376,6 @@ export class MatClockView<D> implements AfterViewInit, AfterContentInit {
 
     this.activeDate = date;
     this.selectedChange.emit(this.activeDate);
-
-    if (this.inHourView) {
-      // continue with minute view
-      this.currentViewChange.emit('minute');
-    } else {
-      this._userSelection.emit({ value: date, event });
-    }
   }
 
   _focusActiveCell() {}

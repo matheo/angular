@@ -93,6 +93,7 @@
     <button mat-button type="button" class="mat-custom-period mat-custom-control"
     disableRipple="true"
     (click)="currentPeriodClicked()"
+    [disabled]="calendar.type === 'year' || calendar.type === 'month'"
     [attr.aria-label]="periodButtonLabel">
       <strong>{{ periodButtonText }}</strong>
     </button>

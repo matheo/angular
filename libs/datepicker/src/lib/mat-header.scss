@@ -47,7 +47,7 @@ mat-custom-header {
       &-hour {
         display: flex;
         flex-direction: row;
-        place-content: center flex-start;
+        place-content: center flex-end;
         align-items: center;
 
         font-size: 42px;
@@ -59,7 +59,7 @@ mat-custom-header {
 
         font-size: 16px;
         line-height: 18px;
-        margin-left: 5px;
+        min-width: 30px;
 
         .mat-calendar-control-active {
           font-weight: 500;
@@ -90,8 +90,8 @@ mat-custom-header {
         align-items: center;
 
         &-year {
-          font-size: 56px;
-          line-height: 56px;
+          font-size: 42px;
+          line-height: 36px;
         }
       }
     }
@@ -106,12 +106,33 @@ mat-custom-header {
 
         &-month,
         &-year {
-          font-size: 56px;
-          line-height: 56px;
+          font-size: 42px;
+          line-height: 36px;
 
           &:not(:last-child) {
             margin-right: 0.2em;
           }
+        }
+      }
+    }
+  }
+
+  &.type-date {
+    .mat-custom-controls {
+      .mat-custom-date {
+        flex-direction: row-reverse;
+        place-content: center;
+        align-items: center;
+
+        &-monthday::after {
+          content: ', ';
+          display: inline-block;
+        }
+
+        &-year {
+          font-size: 42px;
+          line-height: 36px;
+          margin-left: 0.2em;
         }
       }
     }
@@ -130,15 +151,22 @@ mat-custom-header {
   &.type-time {
     .mat-custom-controls {
       .mat-custom-time {
+        place-content: center;
+        align-items: center;
+
         &-hour {
           font-size: 56px;
           line-height: 56px;
         }
+        &-hour,
+        &-minute {
+          min-width: 62px;
+        }
         &-ampm {
           font-size: 22px;
           line-height: 24px;
-          margin-bottom: 3px;
-          margin-left: 7px;
+          margin-top: 4px;
+          min-width: 42px;
         }
       }
     }

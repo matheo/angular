@@ -8,10 +8,10 @@ It is made up of several components and directives that work together.
 Further documentation can be found at the official docs:
 https://material.angular.io/components/datepicker/overview
 
-```
+```html
 <mat-form-field>
   <mat-label>Choose a date</mat-label>
-  <input matInput [matDatepicker]="picker" formControlName="datetime">
+  <input matInput [matDatepicker]="picker" formControlName="datetime" />
   <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
   <mat-datepicker #picker type="datetime"></mat-datepicker>
 </mat-form-field>
@@ -38,13 +38,13 @@ and the `input[matDatepicker]` has the _output_:
 As usual run `yarn add @matheo/datepicker` or `npm install @matheo/datepicker`.  
 Now add the modules to your Angular Module:
 
-```
+```typescript
 import { MatDatepickerModule, MatNativeDateModule } from '@matheo/datepicker';
 
 @NgModule({
   imports: [
-    MatDatepickerModule,
     MatNativeDateModule,
+    MatDatepickerModule,
     ...
   ],
   ...
@@ -65,19 +65,19 @@ so please check [this file](https://github.com/matheo/angular/blob/master/libs/d
 
 ### DateTime picker (year, month, date and clock views)
 
-```
+```html
 <mat-datepicker type="datetime" clockStep="5" #datetimePicker></mat-datepicker>
 ```
 
 ### DateTime picker (starting on the clock view)
 
-```
+```html
 <mat-datepicker type="datetime" startView="clock" #clockPicker></mat-datepicker>
 ```
 
 ### Time picker (clock views, with 5 minutes jump)
 
-```
+```html
 <mat-datepicker type="time" clockStep="5" #timePicker></mat-datepicker>
 ```
 

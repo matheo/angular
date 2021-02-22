@@ -301,6 +301,7 @@ export class MatCalendar<D> implements AfterContentInit, AfterViewChecked, OnDes
   @Input() color: ThemePalette;
 
   /** The type of value handled by the calendar. */
+  @HostBinding('class')
   @Input() type: MatCalendarType = 'date';
 
   /** Whether the calendar should be started in. */

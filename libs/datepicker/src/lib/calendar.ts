@@ -121,8 +121,8 @@ export class MatCalendarHeader<D> {
     return !['hour', 'minute'].includes(this.calendar.currentView);
   }
 
-  isControlActive(views: MatCalendarView[]): string {
-    return views.includes(this.calendar.currentView) ? 'active' : '';
+  isControlActive(views: MatCalendarView[]): boolean {
+    return views.includes(this.calendar.currentView);
   }
 
   switchToView(view: MatCalendarView): void {

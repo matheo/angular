@@ -3,6 +3,14 @@ mat-custom-header {
     box-sizing: border-box;
   }
 
+  .mat-custom-control,
+  .mat-custom-separator {
+    opacity: 0.75;
+  }
+  .mat-custom-control-active {
+    opacity: 1;
+  }
+
   .mat-custom-controls {
     display: flex;
     flex-direction: row;

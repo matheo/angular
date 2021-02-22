@@ -129,7 +129,8 @@
         <mat-label>Choose a date</mat-label>
         <input matInput [matDatepickerFilter]="excludeFilter" [matDatepicker]="pfilter" formControlName="filter">
         <mat-datepicker-toggle matSuffix [for]="pfilter"></mat-datepicker-toggle>
-        <mat-datepicker #pfilter type="datetime"></mat-datepicker>
+        <mat-datepicker #pfilter type="datetime" [twelveHour]="false"></mat-datepicker>
+        <mat-hint>Only office hours are enabled</mat-hint>
       </mat-form-field>
     </fieldset>
 

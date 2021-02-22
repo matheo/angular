@@ -52,6 +52,7 @@ import {
   MatDateRangeSelectionStrategy,
   MAT_DATE_RANGE_SELECTION_STRATEGY,
 } from './date-range-selection-strategy';
+import {DateFilterFn} from './datepicker-input-base';
 
 
 const DAYS_PER_WEEK = 7;
@@ -120,7 +121,7 @@ export class MatMonthView<D> implements AfterContentInit, OnChanges, OnDestroy {
   private _maxDate: D | null;
 
   /** Function used to filter which dates are selectable. */
-  @Input() dateFilter: (date: D) => boolean;
+  @Input() dateFilter: DateFilterFn<D>;
 
   /** Function that can be used to add custom CSS classes to dates. */
   @Input() dateClass: MatCalendarCellClassFunction<D>;
@@ -291,7 +292,7 @@ export class MatMonthView<D> implements AfterContentInit, OnChanges, OnDestroy {
         break;
       case ENTER:
       case SPACE:
-        if (!this.dateFilter || this.dateFilter(this._activeDate)) {
+        if (!this.dateFilter || this.dateFilter(this._activeDate, 'day')) {
           this._dateSelected({value: this._dateAdapter.getDate(this._activeDate), event});
           // Prevent unexpected default actions such as form submission.
           event.preventDefault();
@@ -405,7 +406,7 @@ export class MatMonthView<D> implements AfterContentInit, OnChanges, OnDestroy {
     return !!date &&
         (!this.minDate || this._dateAdapter.compareDate(date, this.minDate) >= 0) &&
         (!this.maxDate || this._dateAdapter.compareDate(date, this.maxDate) <= 0) &&
-        (!this.dateFilter || this.dateFilter(date));
+        (!this.dateFilter || this.dateFilter(date, 'day'));
   }
 
   /**

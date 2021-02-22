@@ -39,6 +39,7 @@ import {MatCalendarType, MatCalendarView} from './calendar.types';
 import {matDatepickerAnimations} from './datepicker-animations';
 import {createMissingDateImplError} from './datepicker-errors';
 import {MatDatepickerIntl} from './datepicker-intl';
+import {DateFilterFn} from './datepicker-input-base';
 import {MatClockView} from './clock-view';
 import {MatMonthView} from './month-view';
 import {
@@ -311,7 +312,7 @@ export class MatCalendar<D> implements AfterContentInit, AfterViewChecked, OnDes
   private _maxDate: D | null;
 
   /** Function used to filter which dates are selectable. */
-  @Input() dateFilter: (date: D) => boolean;
+  @Input() dateFilter: DateFilterFn<D>;
 
   /** Function that can be used to add custom CSS classes to dates. */
   @Input() dateClass: MatCalendarCellClassFunction<D>;

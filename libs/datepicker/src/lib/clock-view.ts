@@ -19,6 +19,7 @@ import {
 } from '../core/datetime';
 import {MatCalendarUserEvent} from './calendar-body';
 import {createMissingDateImplError} from './datepicker-errors';
+import {DateFilterFn} from './datepicker-input-base';
 
 export const CLOCK_RADIUS = 50;
 export const CLOCK_INNER_RADIUS = 27.5;
@@ -108,7 +109,7 @@ export class MatClockView<D> implements AfterViewInit, AfterContentInit {
   private _maxDate: D | null;
 
   // A function used to filter which dates are selectable.
-  @Input() dateFilter: (date: D, unit?: string) => boolean;
+  @Input() dateFilter: DateFilterFn<D>;
 
   @Input() clockStep: number = 1;
 
@@ -218,6 +219,10 @@ export class MatClockView<D> implements AfterViewInit, AfterContentInit {
     document.removeEventListener('touchmove', this.mouseMoveListener);
     document.removeEventListener('mouseup', this.mouseUpListener);
     document.removeEventListener('touchend', this.mouseUpListener);
+
+    if (this.dateFilter && !this.dateFilter(this.activeDate, this.currentView)) {
+      return;
+    }
 
     if (this.inHourView) {
       this.currentViewChange.emit('minute');

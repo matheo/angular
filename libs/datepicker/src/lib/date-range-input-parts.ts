@@ -41,7 +41,7 @@ import {
   MAT_DATE_FORMATS,
   MatDateFormats,
 } from '../core/datetime';
-import {MatDatepickerInputBase, DateFilterFn} from './datepicker-input-base';
+import {DateFilterFn, MatDatepickerInputBase} from './datepicker-input-base';
 import {DateRange, DateSelectionModelChange} from './date-selection-model';
 
 /** Parent component that should be wrapped around `MatStartDate` and `MatEndDate`. */

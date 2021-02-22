@@ -62,7 +62,7 @@ export class MatDatepickerInputEvent<D, S = unknown> {
 }
 
 /** Function that can be used to filter out dates from a calendar. */
-export type DateFilterFn<D> = (date: D | null) => boolean;
+export type DateFilterFn<D> = (date: D | null, unit?: DateUnit) => boolean;
 
 /** Base class for datepicker inputs. */
 @Directive()

@@ -43,6 +43,7 @@ import {createMissingDateImplError} from './datepicker-errors';
 import {Subscription} from 'rxjs';
 import {startWith} from 'rxjs/operators';
 import {DateRange} from './date-selection-model';
+import {DateFilterFn} from './datepicker-input-base';
 
 export const yearsPerPage = 24;
 
@@ -112,7 +113,7 @@ export class MatMultiYearView<D> implements AfterContentInit, OnDestroy {
   private _maxDate: D | null;
 
   /** A function used to filter which dates are selectable. */
-  @Input() dateFilter: (date: D) => boolean;
+  @Input() dateFilter: DateFilterFn<D>;
 
   /** Function that can be used to add custom CSS classes to date cells. */
   @Input() dateClass: MatCalendarCellClassFunction<D>;
@@ -297,7 +298,7 @@ export class MatMultiYearView<D> implements AfterContentInit, OnDestroy {
     // If any date in the year is enabled count the year as enabled.
     for (let date = firstOfYear; this._dateAdapter.getYear(date) == year;
       date = this._dateAdapter.addCalendarDays(date, 1)) {
-      if (this.dateFilter(date)) {
+      if (this.dateFilter(date, 'year')) {
         return true;
       }
     }

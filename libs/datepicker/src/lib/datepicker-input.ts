@@ -30,7 +30,7 @@ import {
   MAT_DATE_FORMATS,
   MatDateFormats,
 } from '../core/datetime';
-import {MatDatepickerInputBase, DateFilterFn} from './datepicker-input-base';
+import {DateFilterFn, MatDatepickerInputBase} from './datepicker-input-base';
 import {MatDatepickerControl, MatDatepickerPanel} from './datepicker-base';
 import {DateSelectionModelChange} from './date-selection-model';
 

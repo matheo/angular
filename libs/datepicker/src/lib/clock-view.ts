@@ -368,7 +368,8 @@ export class MatClockView<D> implements AfterViewInit, AfterContentInit {
       return;
     }
 
-    this.activeDate = date;
+    // we don't want to re-render the clock
+    this._activeDate = date;
     this.selectedChange.emit(this.activeDate);
   }
 

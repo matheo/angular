@@ -18,7 +18,7 @@ import {
   DateAdapter,
   MatDateFormats,
 } from '../core/datetime';
-import {MatCalendarUserEvent} from './calendar-body';
+import {MatCalendarCellClassFunction, MatCalendarUserEvent} from './calendar-body';
 import {createMissingDateImplError} from './datepicker-errors';
 import {DateFilterFn} from './datepicker-input-base';
 
@@ -111,6 +111,9 @@ export class MatClockView<D> implements AfterViewInit, AfterContentInit {
 
   // A function used to filter which dates are selectable.
   @Input() dateFilter: DateFilterFn<D>;
+
+  /** Function that can be used to add custom CSS classes to dates. */
+  @Input() dateClass: MatCalendarCellClassFunction<D>;
 
   @Input() clockStep: number = 1;
 
@@ -264,6 +267,7 @@ export class MatClockView<D> implements AfterViewInit, AfterContentInit {
           value: this._anteMeridian ? i : i + 12,
           displayValue: i === 0 ? hourNames[12] : hourNames[i],
           enabled: !this.dateFilter || this.dateFilter(date, 'hour'),
+          cssClasses: !this.dateClass || this.dateClass(date, 'hour'),
           top: CLOCK_RADIUS - Math.cos(radian) * radius - CLOCK_TICK_RADIUS,
           left: CLOCK_RADIUS + Math.sin(radian) * radius - CLOCK_TICK_RADIUS,
         });
@@ -284,6 +288,7 @@ export class MatClockView<D> implements AfterViewInit, AfterContentInit {
           value: hour,
           displayValue: hourNames[hour],
           enabled: !this.dateFilter || this.dateFilter(date, 'hour'),
+          cssClasses: !this.dateClass || this.dateClass(date, 'hour'),
           top: CLOCK_RADIUS - Math.cos(radian) * radius - CLOCK_TICK_RADIUS,
           left: CLOCK_RADIUS + Math.sin(radian) * radius - CLOCK_TICK_RADIUS,
           fontSize: i > 0 && i < 13 ? '' : '80%',
@@ -304,6 +309,7 @@ export class MatClockView<D> implements AfterViewInit, AfterContentInit {
         value: i,
         displayValue: i === 0 ? '00' : minuteNames[i],
         enabled: !this.dateFilter || this.dateFilter(date, 'minute'),
+        cssClasses: !this.dateClass || this.dateClass(date, 'minute'),
         top:
           CLOCK_RADIUS -
           Math.cos(radian) * CLOCK_OUTER_RADIUS -

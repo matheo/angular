@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { DateUnit } from '@matheo/datepicker';
+import { DateUnit, MatCalendarCellClassFunction } from '@matheo/datepicker';
 
 @Component({
   selector: 'web-datepicker',
@@ -12,6 +12,7 @@ export class DatepickerComponent implements OnInit {
   form!: FormGroup;
 
   startDate = new Date(1990, 0, 1);
+
   excludeFilter = (d: Date | null, unit?: DateUnit): boolean => {
     const hour = (d || new Date()).getHours();
     if (unit === 'hour') {
@@ -28,6 +29,29 @@ export class DatepickerComponent implements OnInit {
     const day = (d || new Date()).getDay();
     // prevent Saturday and Sunday from being selected.
     return day !== 0 && day !== 6;
+  };
+
+  dateClass: MatCalendarCellClassFunction<Date> = (date, view) => {
+    // Only highligh dates inside the month view.
+    if (view === 'month') {
+      const day = date.getDate();
+
+      // Highlight the 1st and 20th day of each month.
+      return day === 1 || day === 20 ? 'custom-date-class' : '';
+    }
+    if (view === 'hour') {
+      const hour = date.getHours();
+      console.log(view, hour);
+      return hour >= 18 || hour < 8 ? 'custom-date-class' : '';
+    }
+
+    if (view === 'minute') {
+      const minutes = date.getMinutes();
+      console.log(view, minutes);
+      return minutes >= 0 && minutes < 30 ? 'custom-date-class' : '';
+    }
+
+    return '';
   };
 
   constructor(private fb: FormBuilder) {}

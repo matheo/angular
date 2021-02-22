@@ -107,15 +107,16 @@
       <h3>Touch UI</h3>
 
       <mat-form-field appearance="fill">
-        <mat-label>Input touchUi</mat-label>
+        <mat-label>Bigger popup</mat-label>
         <input matInput [matDatepicker]="pui" formControlName="touchUI">
         <mat-datepicker-toggle matSuffix [for]="pui"></mat-datepicker-toggle>
-        <mat-datepicker #pui type="datetime" touchUi>
+        <mat-datepicker #pui type="datetime" touchUi [dateClass]="dateClass">
           <mat-datepicker-actions>
             <button mat-button matDatepickerCancel>Cancel</button>
             <button mat-raised-button color="primary" matDatepickerApply>Apply</button>
           </mat-datepicker-actions>
         </mat-datepicker>
+        <mat-hint>With a custom dateClass function</mat-hint>
       </mat-form-field>
     </fieldset>
 
@@ -154,6 +155,7 @@
         </mat-date-range-input>
         <mat-datepicker-toggle matSuffix [for]="range"></mat-datepicker-toggle>
         <mat-date-range-picker #range></mat-date-range-picker>
+        <mat-hint>mat-date-range-input is not modified</mat-hint>
       </mat-form-field>
     </fieldset>
 

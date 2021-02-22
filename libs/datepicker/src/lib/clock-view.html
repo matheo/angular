@@ -5,6 +5,7 @@
   <div class="mat-clock-hours" [class.active]="inHourView">
     <div *ngFor="let item of _hours"
       class="mat-clock-cell"
+      [ngClass]="item.cssClasses"
       [class.mat-clock-cell-selected]="_selectedHour == item.value"
       [class.mat-clock-cell-disabled]="!item.enabled"
       [style.top.%]="item.top"
@@ -17,6 +18,7 @@
   <div class="mat-clock-minutes" [class.active]="!inHourView">
     <div *ngFor="let item of _minutes"
       class="mat-clock-cell"
+      [ngClass]="item.cssClasses"
       [class.mat-clock-cell-selected]="_selectedMinute == item.value"
       [class.mat-clock-cell-disabled]="!item.enabled"
       [style.top.%]="item.top"

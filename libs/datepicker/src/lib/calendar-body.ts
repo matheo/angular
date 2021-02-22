@@ -20,13 +20,14 @@ import {
   OnDestroy,
 } from '@angular/core';
 import {take} from 'rxjs/operators';
+import {MatCalendarView} from './calendar.types';
 
 /** Extra CSS classes that can be associated with a calendar cell. */
 export type MatCalendarCellCssClasses = string | string[] | Set<string> | {[key: string]: any};
 
 /** Function that can generate the extra classes that should be added to a calendar cell. */
 export type MatCalendarCellClassFunction<D> =
-    (date: D, view: 'month' | 'year' | 'multi-year') => MatCalendarCellCssClasses;
+  (date: D, view: MatCalendarView) => MatCalendarCellCssClasses;
 
 /**
  * An internal class that represents the data corresponding to a single calendar cell.

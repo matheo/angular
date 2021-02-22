@@ -499,7 +499,7 @@ export class MatCalendar<D> implements AfterContentInit, AfterViewChecked, OnDes
   }
 
   getDate(): D {
-    return this.selected instanceof DateRange
+    return !this.selected || this.selected instanceof DateRange
       ? this.activeDate
       : this.selected;
   }

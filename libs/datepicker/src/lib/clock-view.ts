@@ -225,6 +225,8 @@ export class MatClockView<D> implements AfterViewInit, AfterContentInit {
     }
 
     if (this.inHourView) {
+      // we refresh the valid minutes
+      this._init();
       this.currentViewChange.emit('minute');
     } else {
       this._userSelection.emit({ value: this.activeDate, event });

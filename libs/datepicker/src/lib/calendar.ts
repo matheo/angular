@@ -557,6 +557,7 @@ export class MatCalendar<D> implements AfterContentInit, AfterViewChecked, OnDes
   }
 
   _dateEmit(value: D) {
+    this.setDate(value);
     this._userSelection.emit({ value, event: null });
   }
 

@@ -342,7 +342,7 @@ export class MatYearView<D> implements AfterContentInit, OnDestroy {
 
   /** Determines whether the user has the RTL layout direction. */
   private _isRtl() {
-    return this._dir && this._dir.value === 'rtl';
+    return this._dir?.value === 'rtl';
   }
 
   /** Sets the currently-selected month based on a model value. */

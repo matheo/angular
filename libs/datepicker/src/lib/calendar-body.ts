@@ -160,7 +160,7 @@ export class MatCalendarBody implements OnChanges, OnDestroy {
     const {rows, numCols} = this;
 
     if (changes['rows'] || columnChanges) {
-      this._firstRowOffset = rows && rows.length && rows[0].length ? numCols - rows[0].length : 0;
+      this._firstRowOffset = rows?.length && rows[0].length ? numCols - rows[0].length : 0;
     }
 
     if (changes['cellAspectRatio'] || columnChanges || !this._cellPadding) {

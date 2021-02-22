@@ -80,7 +80,7 @@ export class MatDatepickerActions implements AfterViewInit, OnDestroy {
     this._datepicker.removeActions(this._portal);
 
     // Needs to be null checked since we initialize it in `ngAfterViewInit`.
-    if (this._portal && this._portal.isAttached) {
+    if (this._portal?.isAttached) {
       this._portal?.detach();
     }
   }

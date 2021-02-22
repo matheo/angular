@@ -428,16 +428,16 @@ export abstract class MatDatepickerBase<C extends MatDatepickerControl<D>, S,
 
   /** The minimum selectable date. */
   _getMinDate(): D | null {
-    return this.datepickerInput && this.datepickerInput.min;
+    return this.datepickerInput?.min;
   }
 
   /** The maximum selectable date. */
   _getMaxDate(): D | null {
-    return this.datepickerInput && this.datepickerInput.max;
+    return this.datepickerInput?.max;
   }
 
   _getDateFilter(): DateFilterFn<D> {
-    return this.datepickerInput && this.datepickerInput.dateFilter;
+    return this.datepickerInput?.dateFilter;
   }
 
   /** A reference to the overlay when the calendar is opened as a popup. */

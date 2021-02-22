@@ -118,7 +118,7 @@ export class MatCalendarHeader<D> {
   }
 
   hasPrevNextBlock(): boolean {
-    return this.calendar.currentView !== 'hour' && this.calendar.currentView !== 'minute';
+    return !['hour', 'minute'].includes(this.calendar.currentView);
   }
 
   toggleAmPm(am): void {
@@ -154,8 +154,9 @@ export class MatCalendarHeader<D> {
   }
 
   get periodButtonLabel(): string {
-    return this.calendar.currentView == 'month' ?
-        this._intl.switchToMultiYearViewLabel : this._intl.switchToMonthViewLabel;
+    return this.calendar.currentView == 'month'
+      ? this._intl.switchToMultiYearViewLabel
+      : this._intl.switchToMonthViewLabel;
   }
 
   /** The label for the previous button. */
@@ -174,6 +175,10 @@ export class MatCalendarHeader<D> {
       'year': this._intl.nextYearLabel,
       'multi-year': this._intl.nextMultiYearLabel
     }[this.calendar.currentView];
+  }
+
+  currentPeriodDisabled(): boolean {
+    return ['year', 'month'].includes(this.calendar.type);
   }
 
   /** Handles user clicks on the period label. */

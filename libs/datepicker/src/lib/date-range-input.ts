@@ -132,15 +132,15 @@ export class MatDateRangeInput<D> implements MatFormFieldControl<DateRange<D>>,
   set dateFilter(value: DateFilterFn<D>) {
     const start = this._startInput;
     const end = this._endInput;
-    const wasMatchingStart = start && start._matchesFilter(start.value);
-    const wasMatchingEnd = end && end._matchesFilter(start.value);
+    const wasMatchingStart = start?._matchesFilter(start.value);
+    const wasMatchingEnd = end?._matchesFilter(start.value);
     this._dateFilter = value;
 
-    if (start && start._matchesFilter(start.value) !== wasMatchingStart) {
+    if (start?._matchesFilter(start.value) !== wasMatchingStart) {
       start._validatorOnChange();
     }
 
-    if (end && end._matchesFilter(end.value) !== wasMatchingEnd) {
+    if (end?._matchesFilter(end.value) !== wasMatchingEnd) {
       end._validatorOnChange();
     }
   }
@@ -175,9 +175,8 @@ export class MatDateRangeInput<D> implements MatFormFieldControl<DateRange<D>>,
   /** Whether the input is disabled. */
   @Input()
   get disabled(): boolean {
-    return (this._startInput && this._endInput) ?
-      (this._startInput.disabled && this._endInput.disabled) :
-      this._groupDisabled;
+    return (this._startInput?.disabled && this._endInput?.disabled)
+      || this._groupDisabled;
   }
   set disabled(value: boolean) {
     const newValue = coerceBooleanProperty(value);
@@ -191,11 +190,7 @@ export class MatDateRangeInput<D> implements MatFormFieldControl<DateRange<D>>,
 
   /** Whether the input is in an error state. */
   get errorState(): boolean {
-    if (this._startInput && this._endInput) {
-      return this._startInput.errorState || this._endInput.errorState;
-    }
-
-    return false;
+    return this._startInput?.errorState || this._endInput?.errorState || false;
   }
 
   /** Whether the datepicker input is empty. */
@@ -348,8 +343,7 @@ export class MatDateRangeInput<D> implements MatFormFieldControl<DateRange<D>>,
 
   /** Gets the value for the `aria-labelledby` attribute of the inputs. */
   _getAriaLabelledby() {
-    const formField = this._formField;
-    return formField && formField._hasFloatingLabel() ? formField._labelId : null;
+    return this._formField?._hasFloatingLabel() ? this._formField._labelId : null;
   }
 
   /** Re-runs the validators on the start/end inputs. */

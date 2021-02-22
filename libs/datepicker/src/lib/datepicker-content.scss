@@ -54,9 +54,15 @@ $mat-datepicker-touch-max-height: 788px;
 
   justify-content: stretch;
   // Ensures that `mat-datepicker-actions` is pushed to the bottom of the popup.
-  .mat-calendar,
-  .mat-calendar-content {
-    flex: 1;
+  .mat-calendar {
+    flex: 20 20 auto;
+
+    .mat-calendar-content {
+      flex: 1;
+    }
+  }
+  .mat-calendar-actions {
+    flex: 1 0 auto;
   }
 }
 

@@ -6,6 +6,7 @@ import {
   Component,
   ElementRef,
   EventEmitter,
+  HostListener,
   Inject,
   Input,
   Optional,
@@ -126,10 +127,18 @@ export class MatClockView<D> implements AfterViewInit, AfterContentInit {
   /** Emits when any date is selected. */
   @Output() readonly _userSelection = new EventEmitter<MatCalendarUserEvent<D | null>>();
 
+  @HostListener('window:resize')
+  updateSize() {
+    const { offsetWidth, offsetHeight } = this._element.nativeElement;
+    this._size = (offsetWidth < offsetHeight ? offsetWidth : offsetHeight) * 0.9;
+    this._changeDetectorRef.detectChanges();
+  }
+
   // Hours and Minutes representing the clock view.
   _hours: any[] = [];
   _minutes: any[] = [];
 
+  _draggingMouse: boolean;
   _selectedHour: number | null;
   _selectedMinute: number | null;
   _anteMeridian: boolean;
@@ -159,7 +168,8 @@ export class MatClockView<D> implements AfterViewInit, AfterContentInit {
     return {
       transform: `rotate(${deg}deg)`,
       height: `${radius}%`,
-      'margin-top': `${50 - radius}%`
+      'margin-top': `${50 - radius}%`,
+      transition: this._draggingMouse ? 'none' : 'all 300ms ease',
     };
   }
 
@@ -187,21 +197,16 @@ export class MatClockView<D> implements AfterViewInit, AfterContentInit {
   }
 
   ngAfterViewInit() {
-    const { offsetWidth, offsetHeight } = this._element.nativeElement;
-    this._size = (offsetWidth < offsetHeight ? offsetWidth : offsetHeight) * 0.96;
-    this._changeDetectorRef.detectChanges();
+    this.updateSize();
   }
 
   ngAfterContentInit() {
     this._init();
   }
 
-  _selectValue(event: MouseEvent, value: number) {
-    this.setTime(event, value);
-  }
-
   // Handles mousedown events on the clock body.
   _handleMousedown(event: any) {
+    this._draggingMouse = true;
     document.addEventListener('mousemove', this.mouseMoveListener);
     document.addEventListener('touchmove', this.mouseMoveListener);
     document.addEventListener('mouseup', this.mouseUpListener);
@@ -215,6 +220,7 @@ export class MatClockView<D> implements AfterViewInit, AfterContentInit {
   }
 
   _handleMouseup() {
+    this._draggingMouse = false;
     document.removeEventListener('mousemove', this.mouseMoveListener);
     document.removeEventListener('touchmove', this.mouseMoveListener);
     document.removeEventListener('mouseup', this.mouseUpListener);
@@ -226,8 +232,9 @@ export class MatClockView<D> implements AfterViewInit, AfterContentInit {
 
     if (this.inHourView) {
       // we refresh the valid minutes
-      this._init();
       this.currentViewChange.emit('minute');
+      this.selectedChange.emit(this.activeDate);
+      this._init();
     } else {
       this._userSelection.emit({ value: this.activeDate, event });
     }
@@ -312,7 +319,7 @@ export class MatClockView<D> implements AfterViewInit, AfterContentInit {
   }
 
   // Set Time
-  private setTime(event: any, input?: number) {
+  private setTime(event: any) {
     const trigger = this._element.nativeElement;
     const triggerRect = trigger.getBoundingClientRect();
     const width = trigger.offsetWidth;
@@ -327,23 +334,14 @@ export class MatClockView<D> implements AfterViewInit, AfterContentInit {
       Math.PI /
       (this.inHourView ? 6 : this.clockStep ? 30 / this.clockStep : 30);
     const z = Math.sqrt(x * x + y * y);
-    const outer =
-      this.inHourView &&
-      z >
-        (width * (CLOCK_OUTER_RADIUS / 100) +
-          width * (CLOCK_INNER_RADIUS / 100)) /
-          2;
+    const avg = (width * (CLOCK_OUTER_RADIUS / 100) + width * (CLOCK_INNER_RADIUS / 100)) / 2;
+    const outer = this.inHourView && z > avg - 16 /* button radius */;
 
-    let value: number;
-    if (input) {
-      value = input;
-    } else {
-      let radian = Math.atan2(-x, y);
-      if (radian < 0) {
-        radian = Math.PI * 2 + radian;
-      }
-      value = Math.round(radian / unit);
+    let radian = Math.atan2(-x, y);
+    if (radian < 0) {
+      radian = Math.PI * 2 + radian;
     }
+    let value = Math.round(radian / unit);
 
     const date = this._dateAdapter.clone(this.activeDate);
 

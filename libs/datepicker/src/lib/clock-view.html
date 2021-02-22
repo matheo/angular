@@ -9,8 +9,7 @@
       [class.mat-clock-cell-disabled]="!item.enabled"
       [style.top.%]="item.top"
       [style.left.%]="item.left"
-      [style.fontSize]="item.fontSize"
-      (mousedown)="_selectValue($event, item.value)">
+      [style.fontSize]="item.fontSize">
       {{ item.displayValue }}
     </div>
   </div>
@@ -21,8 +20,7 @@
       [class.mat-clock-cell-selected]="_selectedMinute == item.value"
       [class.mat-clock-cell-disabled]="!item.enabled"
       [style.top.%]="item.top"
-      [style.left.%]="item.left"
-      (mousedown)="_selectValue($event, item.value)">
+      [style.left.%]="item.left">
       {{ item.displayValue }}
     </div>
   </div>

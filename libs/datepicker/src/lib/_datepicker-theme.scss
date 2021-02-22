@@ -183,7 +183,6 @@ $mat-calendar-weekday-table-font-size: 11px !default;
   }
 
   $clock-min-size: 224px !default;
-  $clock-margin: 8px !default;
   $clock-font-size: 14px !default;
   $clock-cell-size: 14.1666% !default;
 
@@ -195,8 +194,6 @@ $mat-calendar-weekday-table-font-size: 11px !default;
     height: 100%;
     min-height: 236px;
     min-width: $clock-min-size;
-    margin: $clock-margin;
-    padding: $clock-margin 0;
     overflow: hidden;
     font-size: $clock-font-size;
     box-sizing: border-box;

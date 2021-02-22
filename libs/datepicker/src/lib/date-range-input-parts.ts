@@ -33,12 +33,12 @@ import {
   CanUpdateErrorStateCtor,
   mixinErrorState,
   ErrorStateMatcher,
+  MAT_DATE_FORMATS,
 } from '@angular/material/core';
 import {BooleanInput} from '@angular/cdk/coercion';
 import {BACKSPACE} from '@angular/cdk/keycodes';
 import {
   DateAdapter,
-  MAT_DATE_FORMATS,
   MatDateFormats,
 } from '../core/datetime';
 import {DateFilterFn, MatDatepickerInputBase} from './datepicker-input-base';

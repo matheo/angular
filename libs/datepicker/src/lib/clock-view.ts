@@ -13,9 +13,9 @@ import {
   Output,
   ViewEncapsulation,
 } from '@angular/core';
+import {MAT_DATE_FORMATS} from '@angular/material/core';
 import {
   DateAdapter,
-  MAT_DATE_FORMATS,
   MatDateFormats,
 } from '../core/datetime';
 import {MatCalendarUserEvent} from './calendar-body';

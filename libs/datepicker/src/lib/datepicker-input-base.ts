@@ -28,11 +28,11 @@ import {
   Validator,
   ValidatorFn,
 } from '@angular/forms';
+import {MAT_DATE_FORMATS} from '@angular/material/core';
 import {Subscription, Subject} from 'rxjs';
 import {
   DateAdapter,
   DateUnit,
-  MAT_DATE_FORMATS,
   MatDateFormats,
 } from '../core/datetime';
 import {MatCalendarType} from './calendar.types';

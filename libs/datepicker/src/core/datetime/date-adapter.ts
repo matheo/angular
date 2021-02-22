@@ -6,19 +6,7 @@
  * found in the LICENSE file at https://angular.io/license
  */
 
-import {inject, InjectionToken, LOCALE_ID} from '@angular/core';
 import {Observable, Subject} from 'rxjs';
-
-/** InjectionToken for datepicker that can be used to override default locale code. */
-export const MAT_DATE_LOCALE = new InjectionToken<string>('MAT_DATE_LOCALE', {
-  providedIn: 'root',
-  factory: MAT_DATE_LOCALE_FACTORY,
-});
-
-/** @docs-private */
-export function MAT_DATE_LOCALE_FACTORY(): string {
-  return inject(LOCALE_ID);
-}
 
 export type DateUnit =
   | 'y' | 'year' | 'years'

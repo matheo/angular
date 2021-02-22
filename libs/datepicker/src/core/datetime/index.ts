@@ -8,9 +8,8 @@
 
 import {PlatformModule} from '@angular/cdk/platform';
 import {NgModule} from '@angular/core';
-import {DateAdapter as MaterialDateAdapter} from '@angular/material/core';
+import {DateAdapter as MaterialDateAdapter, MAT_DATE_FORMATS} from '@angular/material/core';
 import {DateAdapter} from './date-adapter';
-import {MAT_DATE_FORMATS} from './date-formats';
 import {NativeDateAdapter} from './native-date-adapter';
 import {MAT_NATIVE_DATE_FORMATS} from './native-date-formats';
 

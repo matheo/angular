@@ -21,13 +21,12 @@ import {
   ValidatorFn,
   Validators,
 } from '@angular/forms';
-import {ThemePalette} from '@angular/material/core';
+import {MAT_DATE_FORMATS, ThemePalette} from '@angular/material/core';
 import {MatFormField, MAT_FORM_FIELD} from '@angular/material/form-field';
 import {MAT_INPUT_VALUE_ACCESSOR} from '@angular/material/input';
 import {Subscription} from 'rxjs';
 import {
   DateAdapter,
-  MAT_DATE_FORMATS,
   MatDateFormats,
 } from '../core/datetime';
 import {DateFilterFn, MatDatepickerInputBase} from './datepicker-input-base';

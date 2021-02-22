@@ -6,9 +6,6 @@
  * found in the LICENSE file at https://angular.io/license
  */
 
-import {InjectionToken} from '@angular/core';
-
-
 export type MatDateFormats = {
   parse: {
     dateInput: any,
@@ -32,6 +29,3 @@ export type MatDateFormats = {
     timeLabel: any,
   }
 };
-
-
-export const MAT_DATE_FORMATS = new InjectionToken<MatDateFormats>('mat-date-formats');

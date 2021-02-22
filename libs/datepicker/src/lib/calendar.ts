@@ -26,12 +26,11 @@ import {
   ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
-import {ThemePalette} from '@angular/material/core';
+import {MAT_DATE_FORMATS, ThemePalette} from '@angular/material/core';
 import {Subject, Subscription} from 'rxjs';
 import {
   DateAdapter,
   DateUnit,
-  MAT_DATE_FORMATS,
   MatDateFormats,
 } from '../core/datetime';
 import {MatCalendarUserEvent, MatCalendarCellClassFunction} from './calendar-body';

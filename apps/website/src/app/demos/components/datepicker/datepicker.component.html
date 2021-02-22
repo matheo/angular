@@ -1,9 +1,19 @@
 <web-section>
   <form [formGroup]="form" fxLayout="row wrap">
-    <web-section-actions>
+    <web-section-actions fxLayout="column" fxLayoutGap="5px">
       <a mat-icon-button matTooltip="See source code" target="_blank"
       href="https://github.com/matheo/angular/blob/master/apps/website/src/app/demos/components/datepicker/datepicker.component.html">
         <mat-icon>code</mat-icon>
+      </a>
+
+      <a mat-icon-button matTooltip="NPM Package" target="_blank"
+      href="https://www.npmjs.com/package/@matheo/datepicker">
+        <ion-icon name="logo-npm"></ion-icon>
+      </a>
+
+      <a mat-icon-button matTooltip="Material Issue" target="_blank"
+      href="https://github.com/angular/components/issues/5648">
+        <ion-icon name="logo-github"></ion-icon>
       </a>
     </web-section-actions>
 
@@ -113,10 +123,11 @@
       <h3>Start parameters</h3>
 
       <mat-form-field appearance="fill">
-        <mat-label>Starting in multi-year view</mat-label>
+        <mat-label>Starting in 1990</mat-label>
         <input matInput [matDatepicker]="pp" formControlName="start">
         <mat-datepicker-toggle matSuffix [for]="pp"></mat-datepicker-toggle>
         <mat-datepicker #pp type="datetime" startView="multi-year" [startAt]="startDate"></mat-datepicker>
+        <mat-hint>Starting in 1990 in the multi-year view</mat-hint>
       </mat-form-field>
     </fieldset>
 
@@ -129,6 +140,20 @@
         <mat-datepicker-toggle matSuffix [for]="pfilter"></mat-datepicker-toggle>
         <mat-datepicker #pfilter type="datetime" [twelveHour]="false"></mat-datepicker>
         <mat-hint>Only office hours are enabled</mat-hint>
+      </mat-form-field>
+    </fieldset>
+
+    <fieldset fxFlex.xs="100" fxFlex.sm="50" fxFlex.md="33" fxFlex="33">
+      <h3>Date range</h3>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Enter a date range</mat-label>
+        <mat-date-range-input [rangePicker]="range">
+          <input matStartDate placeholder="Start date">
+          <input matEndDate placeholder="End date">
+        </mat-date-range-input>
+        <mat-datepicker-toggle matSuffix [for]="range"></mat-datepicker-toggle>
+        <mat-date-range-picker #range></mat-date-range-picker>
       </mat-form-field>
     </fieldset>
 

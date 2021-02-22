@@ -3,4 +3,8 @@
   position: absolute;
   top: 0;
   right: 15px;
+
+  ::ng-deep ion-icon {
+    font-size: 24px;
+  }
 }

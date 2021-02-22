@@ -40,17 +40,17 @@ export class MatDatepickerIntl {
   /** A label for the next year button (used by screen readers). */
   nextYearLabel: string = 'Next year';
 
-  /** A label for the 'AM' button (used by screen readers). */
-  setToAMLabel = 'Set date to AM';
-
-  /** A label for the 'PM' button (used by screen readers). */
-  setToPMLabel = 'Set date to PM';
-
   /** A label for the previous multi-year button (used by screen readers). */
   prevMultiYearLabel: string = 'Previous 20 years';
 
   /** A label for the next multi-year button (used by screen readers). */
   nextMultiYearLabel: string = 'Next 20 years';
+
+  /** A label for the 'AM' button (used by screen readers). */
+  setToAMLabel = 'Set date to AM';
+
+  /** A label for the 'PM' button (used by screen readers). */
+  setToPMLabel = 'Set date to PM';
 
   /** A label for the 'switch to minute view' button (used by screen readers). */
   switchToMinuteViewLabel = 'Change to minute view';

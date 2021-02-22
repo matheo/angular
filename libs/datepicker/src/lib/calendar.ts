@@ -121,6 +121,14 @@ export class MatCalendarHeader<D> {
     return !['hour', 'minute'].includes(this.calendar.currentView);
   }
 
+  isControlActive(views: MatCalendarView[]): string {
+    return views.includes(this.calendar.currentView) ? 'active' : '';
+  }
+
+  switchToView(view: MatCalendarView): void {
+    this.calendar.currentView = view;
+  }
+
   toggleAmPm(am): void {
     if (this._isAM !== am) {
       this.calendar.setDate(this._dateAdapter.addCalendarHours(
@@ -153,6 +161,12 @@ export class MatCalendarHeader<D> {
     return this._intl.formatYearRange(minYearName, maxYearName);
   }
 
+  get monthdayButtonLabel(): string {
+    return this.calendar.currentView == 'month'
+      ? this._intl.switchToYearViewLabel
+      : this._intl.switchToMonthViewLabel;
+  }
+
   get periodButtonLabel(): string {
     return this.calendar.currentView == 'month'
       ? this._intl.switchToMultiYearViewLabel
@@ -175,6 +189,10 @@ export class MatCalendarHeader<D> {
       'year': this._intl.nextYearLabel,
       'multi-year': this._intl.nextMultiYearLabel
     }[this.calendar.currentView];
+  }
+
+  monthdayClicked(): void {
+    this.calendar.currentView = this.calendar.currentView == 'month' ? 'year' : 'month';
   }
 
   currentPeriodDisabled(): boolean {

@@ -62,23 +62,6 @@
     </fieldset>
 
     <fieldset fxFlex.xs="100" fxFlex.sm="50" fxFlex.md="33" fxFlex="33">
-      <h3>Year picker</h3>
-
-      <mat-form-field appearance="fill">
-        <mat-label>Choose a year</mat-label>
-        <input matInput [matDatepicker]="pyy" formControlName="year">
-        <mat-datepicker-toggle matSuffix [for]="pyy"></mat-datepicker-toggle>
-        <mat-datepicker #pyy type="year">
-          <mat-datepicker-actions>
-            <button mat-button matDatepickerCancel>Cancel</button>
-            <button mat-raised-button color="primary" matDatepickerApply>Apply</button>
-          </mat-datepicker-actions>
-        </mat-datepicker>
-        <mat-hint>{{ form.value.year | date:'y' }}</mat-hint>
-      </mat-form-field>
-    </fieldset>
-
-    <fieldset fxFlex.xs="100" fxFlex.sm="50" fxFlex.md="33" fxFlex="33">
       <h3>Month picker</h3>
 
       <mat-form-field appearance="fill">
@@ -92,6 +75,23 @@
           </mat-datepicker-actions>
         </mat-datepicker>
         <mat-hint>{{ form.value.month | date:'MMM  y' }}</mat-hint>
+      </mat-form-field>
+    </fieldset>
+
+    <fieldset fxFlex.xs="100" fxFlex.sm="50" fxFlex.md="33" fxFlex="33">
+      <h3>Year picker</h3>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Choose a year</mat-label>
+        <input matInput [matDatepicker]="pyy" formControlName="year">
+        <mat-datepicker-toggle matSuffix [for]="pyy"></mat-datepicker-toggle>
+        <mat-datepicker #pyy type="year">
+          <mat-datepicker-actions>
+            <button mat-button matDatepickerCancel>Cancel</button>
+            <button mat-raised-button color="primary" matDatepickerApply>Apply</button>
+          </mat-datepicker-actions>
+        </mat-datepicker>
+        <mat-hint>{{ form.value.year | date:'y' }}</mat-hint>
       </mat-form-field>
     </fieldset>
 

@@ -3,24 +3,24 @@
 
     <div class="mat-custom-date" *ngIf="calendar.type === 'year'">
       <button mat-button type="button" class="mat-custom-date-year mat-custom-control"
-      (click)="calendar.currentView = 'multi-year'"
-      [@controlActive]="calendar.currentView == 'multi-year' ? 'active' : ''"
+      (click)="switchToView('multi-year')"
+      [@controlActive]="isControlActive(['multi-year'])"
       [attr.aria-label]="_intl.switchToMultiYearViewLabel">
         <span>{{ _yearButtonText }}</span>
       </button>
     </div>
 
-    <div class="mat-custom-date" *ngIf="calendar.hasOutput('month')">
+    <div class="mat-custom-date" *ngIf="calendar.type === 'month'">
       <button mat-button type="button" class="mat-custom-date-month mat-custom-control"
-      (click)="calendar.currentView = 'year'"
-      [@controlActive]="calendar.currentView == 'year' ? 'active' : ''"
-      [attr.aria-label]="_intl.switchToMonthViewLabel">
+      (click)="switchToView('year')"
+      [@controlActive]="isControlActive(['year'])"
+      [attr.aria-label]="_intl.switchToYearViewLabel">
         <span>{{ _monthButtonText }}</span>
       </button>
 
       <button mat-button type="button" class="mat-custom-date-year mat-custom-control"
-      (click)="calendar.currentView = 'multi-year'"
-      [@controlActive]="calendar.currentView == 'multi-year' ? 'active' : ''"
+      (click)="switchToView('multi-year')"
+      [@controlActive]="isControlActive(['multi-year'])"
       [attr.aria-label]="_intl.switchToMultiYearViewLabel">
         <span>{{ _yearButtonText }}</span>
       </button>
@@ -28,16 +28,16 @@
 
     <div class="mat-custom-date" *ngIf="calendar.hasOutput('date')">
       <button mat-button type="button" class="mat-custom-date-year mat-custom-control"
-      (click)="calendar.currentView = 'multi-year'"
-      [@controlActive]="calendar.currentView == 'multi-year' ? 'active' : ''"
+      (click)="switchToView('multi-year')"
+      [@controlActive]="isControlActive(['multi-year'])"
       [attr.aria-label]="_intl.switchToMultiYearViewLabel">
         <span>{{ _yearButtonText }}</span>
       </button>
 
       <button mat-button type="button" class="mat-custom-date-monthday mat-custom-control"
-      (click)="calendar.currentView = 'year'"
-      [@controlActive]="calendar.currentView == 'month' || calendar.currentView == 'year' ? 'active' : ''"
-      [attr.aria-label]="_intl.switchToMonthViewLabel">
+      (click)="monthdayClicked()"
+      [@controlActive]="isControlActive(['month', 'year'])"
+      [attr.aria-label]="monthdayButtonLabel">
         <span class="mat-custom-date-year-dayname">{{ _dayButtonText }}&nbsp;</span>
         <span class="mat-custom-date-year-monthday">{{ _monthdayButtonText }}</span>
       </button>
@@ -46,8 +46,8 @@
     <div class="mat-custom-time" *ngIf="calendar.hasOutput('time')">
       <div class="mat-custom-time-hour">
         <button mat-button type="button" class="mat-custom-time-hour mat-custom-control"
-        (click)="calendar.currentView = 'hour'"
-        [@controlActive]="calendar.currentView == 'hour' ? 'active' : ''"
+        (click)="switchToView('hour')"
+        [@controlActive]="isControlActive(['hour'])"
         [attr.aria-label]="_intl.switchToHourViewLabel">
           <span>{{ _hourButtonText }}</span>
         </button>
@@ -55,8 +55,8 @@
         <span>:</span>
 
         <button mat-button type="button" class="mat-custom-time-minute mat-custom-control"
-        [@controlActive]="calendar.currentView == 'minute' ? 'active' : ''"
-        (click)="calendar.currentView = 'minute'"
+        [@controlActive]="isControlActive(['minute'])"
+        (click)="switchToView('minute')"
         [attr.aria-label]="_intl.switchToMinuteViewLabel">
           <span>{{ _minuteButtonText }}</span>
         </button>
@@ -93,7 +93,7 @@
     <button mat-button type="button" class="mat-custom-period mat-custom-control"
     disableRipple="true"
     (click)="currentPeriodClicked()"
-    [disabled]="calendar.type === 'year' || calendar.type === 'month'"
+    [disabled]="currentPeriodDisabled()"
     [attr.aria-label]="periodButtonLabel">
       <strong>{{ periodButtonText }}</strong>
     </button>

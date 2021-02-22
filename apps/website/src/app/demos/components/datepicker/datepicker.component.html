@@ -1,15 +1,13 @@
 <web-section>
   <form [formGroup]="form" fxLayout="row wrap">
+    <web-section-actions>
+      <a mat-icon-button matTooltip="See source code" target="_blank"
+      href="https://github.com/matheo/angular/blob/master/apps/website/src/app/demos/components/datepicker/datepicker.component.html">
+        <mat-icon>code</mat-icon>
+      </a>
+    </web-section-actions>
 
     <fieldset fxFlex.xs="100" fxFlex.sm="50" fxFlex.md="33" fxFlex="33">
-      <web-section-actions>
-        <a title="See source code"
-        mat-icon-button
-        target="_blank"
-        href="https://github.com/matheo/angular/blob/master/apps/website/src/app/demos/components/datepicker/datepicker.component.html">
-          <mat-icon>code</mat-icon>
-        </a>
-      </web-section-actions>
 
       <h3>Date picker</h3>
 
@@ -96,10 +94,10 @@
     </fieldset>
 
     <fieldset fxFlex.xs="100" fxFlex.sm="50" fxFlex.md="33" fxFlex="33">
-      <h3>TouchUI</h3>
+      <h3>Touch UI</h3>
 
       <mat-form-field appearance="fill">
-        <mat-label>Choose a date</mat-label>
+        <mat-label>Input touchUi</mat-label>
         <input matInput [matDatepicker]="pui" formControlName="touchUI">
         <mat-datepicker-toggle matSuffix [for]="pui"></mat-datepicker-toggle>
         <mat-datepicker #pui type="datetime" touchUi>
@@ -115,7 +113,7 @@
       <h3>Start parameters</h3>
 
       <mat-form-field appearance="fill">
-        <mat-label>Choose a date</mat-label>
+        <mat-label>Starting in multi-year view</mat-label>
         <input matInput [matDatepicker]="pp" formControlName="start">
         <mat-datepicker-toggle matSuffix [for]="pp"></mat-datepicker-toggle>
         <mat-datepicker #pp type="datetime" startView="multi-year" [startAt]="startDate"></mat-datepicker>
@@ -126,7 +124,7 @@
       <h3>Filter validation</h3>
 
       <mat-form-field class="example-full-width" appearance="fill">
-        <mat-label>Choose a date</mat-label>
+        <mat-label>Choose a working date</mat-label>
         <input matInput [matDatepickerFilter]="excludeFilter" [matDatepicker]="pfilter" formControlName="filter">
         <mat-datepicker-toggle matSuffix [for]="pfilter"></mat-datepicker-toggle>
         <mat-datepicker #pfilter type="datetime" [twelveHour]="false"></mat-datepicker>

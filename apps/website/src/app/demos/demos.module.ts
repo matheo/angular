@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { RouterModule, Routes } from '@angular/router';
 import { MatDatepickerModule } from '@matheo/datepicker';
 import { ThemeComponent } from '../shared/layout/theme/theme.component';
@@ -32,6 +33,7 @@ const routes: Routes = [
     FlexLayoutModule,
     RouterModule.forChild(routes),
     MatDatepickerModule,
+    MatTooltipModule,
     SharedModule,
   ],
   declarations: [IndexComponent, DatepickerComponent],

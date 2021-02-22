@@ -39,9 +39,9 @@ export class DatepickerComponent implements OnInit {
       time: new Date(),
       month: new Date(),
       year: new Date(),
-      touchUI: new Date(),
-      start: new Date(),
-      filter: new Date(),
+      touchUI: null,
+      start: null,
+      filter: null,
     });
   }
 }

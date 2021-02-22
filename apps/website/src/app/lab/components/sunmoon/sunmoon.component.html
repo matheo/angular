@@ -3,7 +3,7 @@
 
     <div class="col-12">
       <web-section-actions>
-        <a title="Copiar Enlace"
+        <a matTooltip="Copiar Enlace"
           #link mat-icon-button
           [routerLink]="'.'"
           [queryParams]="{
@@ -14,7 +14,7 @@
           [class.hidden]="!form.value.birthdate">
           <mat-icon>share</mat-icon>
         </a>
-        <!--button mat-icon-button title="Copy Table">
+        <!--button mat-icon-button matTooltip="Copy Table">
           <mat-icon>copy_all</mat-icon>
         </button-->
       </web-section-actions>

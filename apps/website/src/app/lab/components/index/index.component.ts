@@ -12,6 +12,7 @@ export class IndexComponent {
     {
       title: 'Sun-Moon Cycle',
       link: './sunmoon',
+      image: '/assets/items/sunmoon.png',
       description: 'Calculator for the sun-moon lifecycles.',
     },
   ];

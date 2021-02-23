@@ -10,8 +10,17 @@ import { SectionItem } from '../../../shared/layout/item/item.interface';
 export class IndexComponent {
   items: SectionItem[] = [
     {
+      title: 'DataSource',
+      link: './datasource',
+      image: '/assets/items/datasource.png',
+      description:
+        'Reactive Datasource for Angular' +
+        'fetching data from Firestore with filters and pagination.',
+    },
+    {
       title: 'DatePicker',
       link: './datepicker',
+      image: '/assets/items/datepicker.png',
       description: 'DateTime module for Angular Material.',
     },
   ];

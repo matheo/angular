@@ -1,6 +1,6 @@
 {
   "name": "@matheo/datepicker",
-  "version": "11.0.0-beta.5",
+  "version": "11.0.0-beta.6",
   "description": "Angular material date+time picker",
   "keywords": [
     "angular",
@@ -10,6 +10,7 @@
   ],
   "license": "MIT",
   "homepage": "http://matheo.co/demos/datepicker/",
+  "funding": "https://www.paypal.me/mateotp",
   "repository": {
     "type": "git",
     "url": "git@github.com:matheo/angular.git",

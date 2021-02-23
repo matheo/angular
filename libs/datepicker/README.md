@@ -1,16 +1,20 @@
 # @matheo/datepicker
 
-Fork of the official Material Datepicker for Angular with timepicker support.
+Fork of the official Material Datepicker for Angular with time picking support.
 
 The datepicker allows users to enter a date either through text input, or by choosing a date from the calendar.
 
-Further documentation can be found at the official docs:
-<https://material.angular.io/components/datepicker/overview>
-
 ## Installation
 
-As usual, just execute `yarn add @matheo/datepicker` or `npm install @matheo/datepicker`.  
-Then add the modules to your Angular module:
+As usual, just execute
+
+```bash
+npm install @matheo/datepicker
+# or
+yarn add @matheo/datepicker
+```
+
+Then add the modules to your Angular module, or replace the ones imported from `@angular/material/datepicker` with these:
 
 ```typescript
 import { MatDatepickerModule, MatNativeDateModule } from '@matheo/datepicker';
@@ -50,21 +54,21 @@ Some relevant _input_ parameters of the `mat-datepicker`:
 - `twelveHour`: whether to use 12 or 24 hrs format. default: true
 - `color`: `primary | accent | warn`
 - `touchUi`: calendar UI mode. default: false
+- `dateClass`: function that can be used to add custom CSS classes to dates
 
 and `matInput[matDatepicker]` can receive:
 
-- `matDatepickerFilter`: date filter to exclude with a particular algorithm.
+- `matDatepickerFilter`: function of `(D, DateUnit?) => boolean` to exclude with a particular algorithm.
 
 For a complete API reference please check the official docs: <https://material.angular.io/components/datepicker/api>
 
-## Date Formats Customization
-
-This fork uses an extended set of DateFormats,  
-so please check [this file](https://github.com/matheo/angular/blob/master/libs/datepicker/src/core/datetime/native-date-formats.ts) if you're building your own.
-
 ## Internationalization
 
-You will need to override the default implementation of [MatDatepickerIntl](https://github.com/matheo/angular/blob/master/libs/datepicker/src/lib/datepicker-intl.ts) and provide its strings.
+The message strings used in the datepicker's UI can be overriden providing a subclass of [MatDatepickerIntl](https://github.com/matheo/angular/blob/master/libs/datepicker/src/lib/datepicker-intl.ts) with the translated values in your application root module.
+
+### Date Formats Customization
+
+The display and parse formats used by the datepicker can be overriden providing a custom configuration of [MatDateFormats](https://github.com/matheo/angular/blob/master/libs/datepicker/src/core/datetime/native-date-formats.ts) via the `MAT_DATE_FORMATS` token from `@angular/material/core`, and using the `NativeDateModule` instead the `Mat`-prefixed version which does not include the default formats.
 
 More information in the official docs: <https://material.angular.io/components/datepicker/overview#internationalization>.
 
@@ -82,10 +86,10 @@ More information in the official docs: <https://material.angular.io/components/d
 <mat-datepicker type="datetime" #datetimePicker></mat-datepicker>
 ```
 
-### DateTime picker (starting on the clock view)
+### With accent color (starting on the year view)
 
 ```html
-<mat-datepicker color="accent" type="datetime" startView="clock" #clockPicker></mat-datepicker>
+<mat-datepicker color="accent" type="datetime" startView="year" #clockPicker></mat-datepicker>
 ```
 
 ### Time picker (clock view with 24 hours format)
@@ -107,5 +111,8 @@ More information in the official docs: <https://material.angular.io/components/d
 ```
 
 See the [source code](https://github.com/matheo/angular/blob/master/apps/website/src/app/demos/components/datepicker/datepicker.component.html) of the [demo page](http://matheo.co/demos/datepicker) for more insights.
+
+Further documentation can be found at the official docs:
+<https://material.angular.io/components/datepicker/overview>
 
 Enjoy!

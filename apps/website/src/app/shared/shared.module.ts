@@ -9,6 +9,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatTableModule } from '@angular/material/table';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { RouterModule } from '@angular/router';
 import { ItemComponent } from './layout/item/item.component';
 import { MenuComponent } from './layout/menu/menu.component';
@@ -45,6 +46,7 @@ import { ThemeComponent } from './layout/theme/theme.component';
     MatIconModule,
     MatInputModule,
     MatTableModule,
+    MatTooltipModule,
   ],
 })
 export class SharedModule {}

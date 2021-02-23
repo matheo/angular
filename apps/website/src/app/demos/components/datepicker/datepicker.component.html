@@ -42,10 +42,10 @@
         <mat-label>Choose a datetime</mat-label>
         <input matInput [matDatepicker]="pdt" formControlName="datetime">
         <mat-datepicker-toggle matSuffix [for]="pdt"></mat-datepicker-toggle>
-        <mat-datepicker color="accent" #pdt type="datetime">
+        <mat-datepicker #pdt type="datetime">
           <mat-datepicker-actions>
             <button mat-button matDatepickerCancel>Cancel</button>
-            <button mat-raised-button color="accent" matDatepickerApply>Apply</button>
+            <button mat-raised-button matDatepickerApply>Apply</button>
           </mat-datepicker-actions>
         </mat-datepicker>
         <mat-hint>{{ form.value.datetime | date:'short' }}</mat-hint>
@@ -104,16 +104,16 @@
     </fieldset>
 
     <fieldset fxFlex.xs="100" fxFlex.sm="50" fxFlex.md="33" fxFlex="33">
-      <h3>Touch UI</h3>
+      <h3>Colored Touch UI</h3>
 
       <mat-form-field appearance="fill">
         <mat-label>Bigger popup</mat-label>
         <input matInput [matDatepicker]="pui" formControlName="touchUI">
         <mat-datepicker-toggle matSuffix [for]="pui"></mat-datepicker-toggle>
-        <mat-datepicker #pui type="datetime" touchUi [dateClass]="dateClass">
+        <mat-datepicker #pui type="datetime" color="accent" touchUi [dateClass]="dateClass">
           <mat-datepicker-actions>
             <button mat-button matDatepickerCancel>Cancel</button>
-            <button mat-raised-button color="primary" matDatepickerApply>Apply</button>
+            <button mat-raised-button color="accent" matDatepickerApply>Apply</button>
           </mat-datepicker-actions>
         </mat-datepicker>
         <mat-hint>With a custom dateClass function</mat-hint>

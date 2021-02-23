@@ -28,11 +28,12 @@
           <mat-label>Nacimiento</mat-label>
           <input matInput [matDatepicker]="picker" formControlName="birthdate">
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-          <mat-datepicker #picker type="datetime"></mat-datepicker>
-          <mat-datepicker-actions>
-            <button mat-button matDatepickerCancel>Cancel</button>
-            <button mat-raised-button matDatepickerApply>Apply</button>
-          </mat-datepicker-actions>
+          <mat-datepicker #picker type="datetime">
+            <mat-datepicker-actions>
+              <button mat-button matDatepickerCancel>Cancel</button>
+              <button mat-raised-button color="primary" matDatepickerApply>Apply</button>
+            </mat-datepicker-actions>
+          </mat-datepicker>
         </mat-form-field>
 
         <mat-form-field appearance="fill">

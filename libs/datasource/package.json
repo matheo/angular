@@ -1,6 +1,6 @@
 {
   "name": "@matheo/datasource",
-  "version": "10.2.0",
+  "version": "11.2.0",
   "description": "Reactive Datasource for Angular",
   "author": {
     "name": "Mateo Tibaquira",
@@ -14,16 +14,20 @@
     "rxjs"
   ],
   "license": "MIT",
-  "repository": "git://git@github.com/matheo/angular.git",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:matheo/angular.git",
+    "directory": "libs/datasource"
+  },
+  "peerDependencies": {
+    "@angular/common": ">=11.0.0",
+    "@angular/core": ">=11.0.0",
+    "@angular/cdk": ">=11.0.0",
+    "@angular/material": ">=11.0.0",
+    "rxjs": "*"
+  },
   "dependencies": {
     "lodash": "*",
     "tslib": "^2.0.0"
-  },
-  "peerDependencies": {
-    "@angular/common": ">=10.0.0",
-    "@angular/core": ">=10.0.0",
-    "@angular/cdk": ">=10.0.0",
-    "@angular/material": ">=10.0.0",
-    "rxjs": "*"
   }
 }

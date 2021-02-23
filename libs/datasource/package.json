@@ -1,6 +1,6 @@
 {
   "name": "@matheo/datasource",
-  "version": "11.2.0",
+  "version": "11.2.1",
   "description": "Reactive Datasource for Angular",
   "author": {
     "name": "Mateo Tibaquira",
@@ -14,6 +14,8 @@
     "rxjs"
   ],
   "license": "MIT",
+  "homepage": "http://matheo.co/demos/datasource/",
+  "funding": "https://www.paypal.me/mateotp",
   "repository": {
     "type": "git",
     "url": "git@github.com:matheo/angular.git",

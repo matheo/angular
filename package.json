@@ -1,7 +1,8 @@
 {
-  "name": "angular",
-  "version": "0.0.0",
+  "name": "@matheo/angular",
+  "version": "11.2.2",
   "license": "MIT",
+  "private": true,
   "scripts": {
     "ng": "nx",
     "start": "ng serve",
@@ -9,10 +10,11 @@
     "test": "ng test",
     "lint": "nx workspace-lint && ng lint",
     "e2e": "ng e2e",
-    "npm": "npm",
     "npm:publish": "npm publish --access=public",
     "datasource:publish": "run-s 'build datasource --prod' 'npm:publish dist/libs/datasource' 'npm:publish --registry=https://npm.pkg.github.com dist/libs/datasource'",
     "datasource:docs": "compodoc -p libs/datasource/tsconfig.lib.json -s -o -w",
+    "datepicker:publish": "run-s 'build datepicker --prod' 'npm:publish dist/libs/datepicker' 'npm:publish --registry=https://npm.pkg.github.com dist/libs/datepicker'",
+    "datepicker:docs": "compodoc -p libs/datepicker/tsconfig.lib.json -s -o -w",
     "affected:apps": "nx affected:apps",
     "affected:libs": "nx affected:libs",
     "affected:build": "nx affected:build",
@@ -25,14 +27,12 @@
     "format:write": "nx format:write",
     "format:check": "nx format:check",
     "update": "nx migrate latest",
-    "update:check": "ng update",
     "dep-graph": "nx dep-graph",
     "help": "nx help",
     "nx": "nx",
     "postinstall": "ngcc --properties es2015 browser module main --first-only --create-ivy-entry-points && node ./decorate-angular-cli.js",
     "workspace-generator": "nx workspace-generator"
   },
-  "private": true,
   "dependencies": {
     "@angular/animations": "11.2.2",
     "@angular/cdk": "11.2.1",

@@ -19,7 +19,7 @@ const routes: Routes = [
         component: IndexComponent,
       },
       {
-        path: 'datasources',
+        path: 'datasource',
         loadChildren: () =>
           import('./submodules/datasource/datasource.module').then(
             (m) => m.DatasourceModule

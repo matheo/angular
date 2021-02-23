@@ -1,0 +1,44 @@
+<mat-datasource [dataSource]="source">
+  <mat-table [dataSource]="source" matSort start="desc" #sort="matSort">
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Name</mat-header-cell>
+      <mat-cell *matCellDef="let row" fxLayout="row" fxLayoutAlign="start center">
+        <span>
+          {{ row.name }}
+        </span>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="tier">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Tier</mat-header-cell>
+      <mat-cell *matCellDef="let row" fxLayout="row" fxLayoutAlign="start center">
+        <span>
+          <strong>${{ row.tier }}</strong> a month
+        </span>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="following">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Following</mat-header-cell>
+      <mat-cell *matCellDef="let row" fxLayout="row" fxLayoutAlign="start center">
+        <span>
+          {{ row.following ? 'Yes' : 'No' }}
+        </span>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="visibility">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Visibility</mat-header-cell>
+      <mat-cell *matCellDef="let row" fxLayout="row" fxLayoutAlign="start center">
+        <span>
+          {{ row.visibility }}
+        </span>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="columns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: columns"></mat-row>
+  </mat-table>
+
+  <ng-content></ng-content>
+</mat-datasource>

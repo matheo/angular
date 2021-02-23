@@ -3,6 +3,25 @@ $margin: 42px;
 :host {
   display: block;
   padding-bottom: $margin;
+
+  ::ng-deep {
+    h3 {
+      color: #292929;
+      font-size: 19px;
+      font-weight: 500;
+      line-height: 42px;
+      margin: 0 0 13px 0;
+      text-transform: uppercase;
+    }
+
+    .badges {
+      margin-bottom: 15px;
+
+      > * {
+        margin-right: 10px;
+      }
+    }
+  }
 }
 
 header {
@@ -26,13 +45,4 @@ h2 {
     color: #555;
     margin-left: 0.3em;
   }
-}
-
-::ng-deep h3 {
-  color: #292929;
-  font-size: 19px;
-  font-weight: 500;
-  line-height: 42px;
-  margin: 0 0 13px 0;
-  text-transform: uppercase;
 }

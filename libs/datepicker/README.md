@@ -51,7 +51,6 @@ This module supports the Angular Material prebuilt themes that can be included i
 "styles": [
   "node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
   "node_modules/@matheo/datepicker/prebuilt-themes/indigo-pink.css",
-  ...
 ],
 ```
 
@@ -63,9 +62,9 @@ Or you can use your customized Material Theme via mixins:
 // @import '~@angular/material/theming';
 @import '~@matheo/datepicker/theming'; // overrides mat-datepicker-theme
 
-@include mat-core();
+@include mat-core()
 ...
-@include angular-material-theme($theme);
+@include angular-material-theme($theme)
 ```
 
 ## API

@@ -25,6 +25,10 @@
     "@angular/material": ">11.0.0",
     "rxjs": "*"
   },
+  "devDependencies": {
+    "node-sass": "^5.0.0",
+    "scss-bundle": "^3.1.2"
+  },
   "dependencies": {
     "tslib": "^2.0.0"
   }

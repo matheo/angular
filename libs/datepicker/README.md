@@ -43,6 +43,31 @@ so it's recommended to import the former in your root Module.
 </mat-form-field>
 ```
 
+## Theming
+
+This module supports the Angular Material prebuilt themes that can be included in `angular.json`:
+
+```json
+"styles": [
+  "node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+  "node_modules/@matheo/datepicker/prebuilt-themes/indigo-pink.css",
+  ...
+],
+```
+
+available themes are `deeppurple-amber`, `indigo-pink`, `pink-bluegrey` and `purple-green`.
+
+Or you can use your customized Material Theme via mixins:
+
+```sass
+// @import '~@angular/material/theming';
+@import '~@matheo/datepicker/theming'; // overrides mat-datepicker-theme
+
+@include mat-core();
+...
+@include angular-material-theme($theme);
+```
+
 ## API
 
 Some relevant _input_ parameters of the `mat-datepicker`:
@@ -89,7 +114,12 @@ More information in the official docs: <https://material.angular.io/components/d
 ### With accent color (starting on the year view)
 
 ```html
-<mat-datepicker color="accent" type="datetime" startView="year" #clockPicker></mat-datepicker>
+<mat-datepicker
+  color="accent"
+  type="datetime"
+  startView="year"
+  #clockPicker
+></mat-datepicker>
 ```
 
 ### Time picker (clock view with 24 hours format)

@@ -53,12 +53,12 @@
     "@ngrx/store": "11.0.1",
     "astronomy-engine": "^2.0.0",
     "bootstrap": "~4.6.0",
-    "date-fns": "^2.17.0",
-    "firebase": "^8.2.9",
+    "date-fns": "^2.19.0",
+    "firebase": "^8.2.10",
     "rxjs": "6.6.3",
     "tslib": "^2.0.0",
     "typed.js": "~2.0.11",
-    "zone.js": "~0.10.2"
+    "zone.js": "~0.11.4"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "0.1102.3",

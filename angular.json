@@ -20,8 +20,12 @@
             "polyfills": "apps/website/src/polyfills.ts",
             "tsConfig": "apps/website/tsconfig.app.json",
             "assets": [
-              "apps/website/src/favicon.ico",
-              "apps/website/src/assets"
+              "apps/website/src/assets",
+              {
+                "glob": "**/*",
+                "input": "apps/website/src/favicons/",
+                "output": ""
+              }
             ],
             "styles": [
               "apps/website/src/styles.scss"

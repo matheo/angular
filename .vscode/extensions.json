@@ -6,7 +6,5 @@
     "ms-vscode.vscode-typescript-tslint-plugin",
     "firsttris.vscode-jest-runner"
   ],
-  "unwantedRecommendations": [
-    "hookyqr.beautify"
-  ]
+  "unwantedRecommendations": ["hookyqr.beautify"]
 }

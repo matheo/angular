@@ -8,32 +8,18 @@
     "tsconfig.base.json": "*"
   },
   "projects": {
-    "website": {
-      "tags": ["app"]
-    },
-    "website-e2e": {
-      "tags": [],
-      "implicitDependencies": ["website"]
-    },
-    "datasource": {
-      "tags": ["shared"]
-    },
-    "datepicker": {
-      "tags": ["shared"]
-    },
-    "schematics": {
-      "tags": []
-    }
+    "website": { "tags": ["app"] },
+    "website-e2e": { "tags": [], "implicitDependencies": ["website"] },
+    "datasource": { "tags": ["shared"] },
+    "datepicker": { "tags": ["shared"] },
+    "schematics": { "tags": ["shared"] },
+    "forms": { "tags": ["shared"] }
   },
   "tasksRunnerOptions": {
     "default": {
       "runner": "@nrwl/workspace/tasks-runners/default",
-      "options": {
-        "cacheableOperations": ["build", "lint", "test", "e2e"]
-      }
+      "options": { "cacheableOperations": ["build", "lint", "test", "e2e"] }
     }
   },
-  "affected": {
-    "defaultBase": "master"
-  }
+  "affected": { "defaultBase": "master" }
 }

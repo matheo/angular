@@ -27,18 +27,12 @@
                 "output": ""
               }
             ],
-            "styles": [
-              "apps/website/src/styles.scss"
-            ],
+            "styles": ["apps/website/src/styles.scss"],
             "stylePreprocessorOptions": {
-              "includePaths": [
-                "apps/website/src/styles"
-              ]
+              "includePaths": ["apps/website/src/styles"]
             },
             "scripts": [],
-            "allowedCommonJsDependencies": [
-              "lodash"
-            ]
+            "allowedCommonJsDependencies": ["lodash"]
           },
           "configurations": {
             "production": {
@@ -69,9 +63,7 @@
               ]
             }
           },
-          "outputs": [
-            "dist/apps/website"
-          ]
+          "outputs": ["dist/apps/website"]
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
@@ -97,10 +89,7 @@
               "apps/website/tsconfig.app.json",
               "apps/website/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**",
-              "!apps/website/**"
-            ]
+            "exclude": ["**/node_modules/**", "!apps/website/**"]
           }
         },
         "test": {
@@ -109,9 +98,7 @@
             "jestConfig": "apps/website/jest.config.js",
             "passWithNoTests": true
           },
-          "outputs": [
-            "coverage/apps/website/"
-          ]
+          "outputs": ["coverage/apps/website/"]
         }
       }
     },
@@ -137,10 +124,7 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": "apps/website-e2e/tsconfig.e2e.json",
-            "exclude": [
-              "**/node_modules/**",
-              "!apps/website-e2e/**/*"
-            ]
+            "exclude": ["**/node_modules/**", "!apps/website-e2e/**/*"]
           }
         }
       }
@@ -171,10 +155,7 @@
               "libs/datasource/tsconfig.lib.json",
               "libs/datasource/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**",
-              "!libs/datasource/**/*"
-            ]
+            "exclude": ["**/node_modules/**", "!libs/datasource/**/*"]
           }
         },
         "test": {
@@ -183,9 +164,7 @@
             "jestConfig": "libs/datasource/jest.config.js",
             "passWithNoTests": true
           },
-          "outputs": [
-            "coverage/libs/datasource"
-          ]
+          "outputs": ["coverage/libs/datasource"]
         }
       }
     },
@@ -224,10 +203,7 @@
               "libs/datepicker/tsconfig.lib.json",
               "libs/datepicker/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**",
-              "!libs/datepicker/**/*"
-            ]
+            "exclude": ["**/node_modules/**", "!libs/datepicker/**/*"]
           }
         },
         "test": {
@@ -236,9 +212,45 @@
             "jestConfig": "libs/datepicker/jest.config.js",
             "passWithNoTests": true
           },
-          "outputs": [
-            "coverage/libs/datepicker"
-          ]
+          "outputs": ["coverage/libs/datepicker"]
+        }
+      }
+    },
+    "forms": {
+      "projectType": "library",
+      "root": "libs/forms",
+      "sourceRoot": "libs/forms/src",
+      "prefix": "dyn",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:package",
+          "options": {
+            "tsConfig": "libs/forms/tsconfig.lib.json",
+            "project": "libs/forms/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/forms/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/forms/tsconfig.lib.json",
+              "libs/forms/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/forms/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/forms"],
+          "options": {
+            "jestConfig": "libs/forms/jest.config.js",
+            "passWithNoTests": true
+          }
         }
       }
     },
@@ -263,10 +275,7 @@
               "libs/schematics/tsconfig.lib.json",
               "libs/schematics/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**",
-              "!libs/schematics/**/*"
-            ]
+            "exclude": ["**/node_modules/**", "!libs/schematics/**/*"]
           }
         },
         "test": {
@@ -275,9 +284,7 @@
             "jestConfig": "libs/schematics/jest.config.js",
             "passWithNoTests": true
           },
-          "outputs": [
-            "coverage/libs/schematics"
-          ]
+          "outputs": ["coverage/libs/schematics"]
         }
       }
     }
@@ -289,13 +296,18 @@
     "defaultCollection": "@nrwl/angular"
   },
   "schematics": {
-    "@nrwl/schematics:application": {
-      "style": "scss"
+    "@nrwl/angular:application": {
+      "style": "scss",
+      "linter": "tslint",
+      "unitTestRunner": "jest"
     },
-    "@nrwl/schematics:library": {
-      "style": "scss"
+    "@nrwl/angular:library": {
+      "style": "scss",
+      "linter": "tslint",
+      "unitTestRunner": "jest",
+      "strict": true
     },
-    "@nrwl/schematics:component": {
+    "@nrwl/angular:component": {
       "style": "scss"
     }
   }

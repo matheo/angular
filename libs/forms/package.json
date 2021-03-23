@@ -1,0 +1,12 @@
+{
+  "name": "@matheo/dyn-forms",
+  "version": "11.2.6",
+  "peerDependencies": {
+    "@angular/common": ">=11.0.0",
+    "@angular/core": ">=11.0.0",
+    "@angular/forms": ">=11.0.0"
+  },
+  "dependencies": {
+    "tslib": "^2.0.0"
+  }
+}

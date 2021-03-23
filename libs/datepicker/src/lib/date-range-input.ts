@@ -288,7 +288,7 @@ export class MatDateRangeInput<D> implements MatFormFieldControl<DateRange<D>>,
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (dateInputsHaveChanged(changes, this._dateAdapter)) {
+    if (dateInputsHaveChanged(changes, this._dateAdapter, 'day')) {
       this.stateChanges.next(undefined);
     }
   }

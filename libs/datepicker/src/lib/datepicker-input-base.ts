@@ -248,7 +248,7 @@ export abstract class MatDatepickerInputBase<S, D = ExtractDateTypeFromSelection
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (dateInputsHaveChanged(changes, this._dateAdapter)) {
+    if (dateInputsHaveChanged(changes, this._dateAdapter, this.getUnit())) {
       this.stateChanges.next(undefined);
     }
   }
@@ -406,14 +406,15 @@ export abstract class MatDatepickerInputBase<S, D = ExtractDateTypeFromSelection
  */
 export function dateInputsHaveChanged(
   changes: SimpleChanges,
-  adapter: DateAdapter<unknown>): boolean {
+  adapter: DateAdapter<unknown>,
+  unit: DateUnit = 'minute'): boolean {
   const keys = Object.keys(changes);
 
   for (let key of keys) {
     const {previousValue, currentValue} = changes[key];
 
     if (adapter.isDateInstance(previousValue) && adapter.isDateInstance(currentValue)) {
-      if (!adapter.sameDate(previousValue, currentValue, this.getUnit())) {
+      if (!adapter.sameDate(previousValue, currentValue, unit)) {
         return true;
       }
     } else {

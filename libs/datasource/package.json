@@ -1,6 +1,6 @@
 {
   "name": "@matheo/datasource",
-  "version": "11.2.5",
+  "version": "11.2.6",
   "description": "Reactive Datasource for Angular",
   "author": {
     "name": "Mateo Tibaquira",

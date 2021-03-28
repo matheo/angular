@@ -307,8 +307,9 @@
       "unitTestRunner": "jest",
       "strict": true
     },
-    "@nrwl/angular:component": {
-      "style": "scss"
+    "@schematics/angular:component": {
+      "style": "scss",
+      "changeDetection": "OnPush"
     }
   }
 }

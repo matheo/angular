@@ -9,5 +9,6 @@ export * from './src/controls.token';
 
 export * from './src/dyn-control.class';
 // export * from './src/dyn-form-array.class';
+export * from './src/dyn-form-container.class';
 export * from './src/dyn-form-control.class';
 export * from './src/dyn-form-group.class';

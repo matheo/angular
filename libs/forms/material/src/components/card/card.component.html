@@ -1,0 +1,14 @@
+<mat-card>
+  <mat-card-header>
+    <!--img mat-card-avatar [src]="" /-->
+    <mat-card-title>Title</mat-card-title>
+    <mat-card-subtitle>Subtitle</mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content>
+    <dyn-factory
+      *ngFor="let control of config.controls"
+      [config]="control"
+    ></dyn-factory>
+  </mat-card-content>
+</mat-card>

@@ -10,7 +10,7 @@ import { ControlResolverService } from './services/control-resolver.service';
 @NgModule({
   imports: [CommonModule],
   declarations: [FactoryComponent, FormComponent],
-  exports: [FormComponent],
+  exports: [FactoryComponent, FormComponent],
   providers: [ControlResolverService],
 })
 export class DynFormsModule {

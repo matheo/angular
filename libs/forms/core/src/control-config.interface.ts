@@ -10,7 +10,7 @@ export interface DynControlConfig {
   controls?: DynControlConfig[];
   // config
   dynControl: DynControlType;
-  // dynParams: DynControlParams;
+  // dynParams: Observable<DynControlParams>;
   // contexts: { display: { dynControl, dynParams }, table: ... }
   // layout
   // filterOptions

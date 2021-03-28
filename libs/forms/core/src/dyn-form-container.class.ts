@@ -5,21 +5,15 @@ import { DynInstanceType } from './control.type';
 import { DynControl } from './dyn-control.class';
 
 @Directive()
-export abstract class DynFormGroup<
+export abstract class DynFormContainer<
     TConfig extends DynControlConfig = DynControlConfig
   >
   extends DynControl<TConfig, FormGroup>
   implements OnInit {
-  static dynInstance = DynInstanceType.Control;
+  static dynInstance = DynInstanceType.Container;
 
   ngOnInit(): void {
-    if (this.config.name) {
-      // TODO any default config for FormGroup?
-      this.control = new FormGroup({});
-      this.parent.control.addControl(this.config.name, this.control);
-    } else {
-      // fallback to the parent control
-      this.control = this.parent.control;
-    }
+    // just bridges the parent FormGroup
+    this.control = this.parent.control;
   }
 }

@@ -19,7 +19,7 @@ import {
   styleUrls: ['./input.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class InputComponent extends DynFormControl implements OnInit {
+export class DynInputComponent extends DynFormControl implements OnInit {
   static dynControl = 'TEXT';
 
   @Input() config!: DynControlConfig;

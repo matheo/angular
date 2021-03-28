@@ -11,8 +11,13 @@ export class SimpleComponent implements OnInit {
   config: DynFormConfig = {
     controls: [
       {
-        name: 'field',
-        dynControl: 'TEXT',
+        dynControl: 'CARD',
+        controls: [
+          {
+            name: 'field',
+            dynControl: 'TEXT',
+          },
+        ],
       },
     ],
   };

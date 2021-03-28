@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { RouterModule, Routes } from '@angular/router';
 import { DynFormsModule } from '@matheo/dyn-forms';
 import { DynFormsMaterialModule } from '@matheo/dyn-forms/material';
@@ -22,5 +23,14 @@ const routes: Routes = [
     SharedModule,
   ],
   declarations: [SimpleComponent],
+  providers: [
+    {
+      provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
+      useValue: {
+        appearance: 'outline',
+        floatLabel: 'always',
+      },
+    },
+  ],
 })
 export class DemoFormsModule {}

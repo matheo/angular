@@ -1,11 +1,8 @@
 import { DynControlType } from './control.type';
 
-export interface DynFormConfig {
-  controls: DynBaseConfig[];
-}
-
 export interface DynBaseConfig {
   // hierarchy
+  name?: string; // optional entity
   controls?: DynControlConfig[];
   // config
   dynControl: DynControlType;
@@ -14,9 +11,11 @@ export interface DynBaseConfig {
 
 export interface DynControlConfig extends DynBaseConfig {
   // hierarchy
-  name: string; // entity
+  name: string; // mandatory entity
   // config
   // contexts: { display: { dynControl, dynParams }, table: ... }
   // filterOptions
   readonly [property: string]: unknown;
 }
+
+export type DynFormControls = Array<DynBaseConfig | DynControlConfig>;

@@ -13,7 +13,13 @@ export abstract class DynFormContainer<
   static dynInstance = DynInstanceType.Container;
 
   ngOnInit(): void {
-    // just bridges the parent FormGroup
-    this.control = this.parent.control;
+    if (this.config.name) {
+      // TODO any default config for FormGroup?
+      this.control = new FormGroup({});
+      this.parent.control.addControl(this.config.name, this.control);
+    } else {
+      // just bridges the parent FormGroup
+      this.control = this.parent.control;
+    }
   }
 }

@@ -6,6 +6,7 @@ import {
   Injector,
   Inject,
   SkipSelf,
+  forwardRef,
 } from '@angular/core';
 import { DynControl, DynControlConfig } from '@matheo/dyn-forms/core';
 import { DynFormContainer } from '@matheo/dyn-forms/core';
@@ -15,6 +16,12 @@ import { DynFormContainer } from '@matheo/dyn-forms/core';
   templateUrl: './card.component.html',
   styleUrls: ['./card.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [
+    {
+      provide: DynControl,
+      useExisting: forwardRef(() => DynCardComponent),
+    },
+  ],
 })
 export class DynCardComponent extends DynFormContainer implements OnInit {
   static dynControl = 'CARD';

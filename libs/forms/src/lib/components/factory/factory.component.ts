@@ -41,8 +41,9 @@ export class FactoryComponent implements OnInit {
     const ref = this.container.createComponent<any>(
       factory,
       undefined,
-      this.injector,
-      this.ngContent()
+      this.injector
+      // hierarchy: each group must call the factory to resolve the right parent
+      // this.ngContent()
     );
     ref.instance.config = this.config;
     ref.hostView.detectChanges();

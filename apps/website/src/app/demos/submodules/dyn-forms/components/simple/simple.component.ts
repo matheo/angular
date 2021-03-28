@@ -1,28 +1,47 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { DynFormConfig } from '@matheo/dyn-forms/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnInit,
+  ViewEncapsulation,
+} from '@angular/core';
+import { FormBuilder } from '@angular/forms';
+import { DynFormControls } from '@matheo/dyn-forms/core';
 
 @Component({
   selector: 'web-simple',
   templateUrl: './simple.component.html',
   styleUrls: ['./simple.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None,
 })
 export class SimpleComponent implements OnInit {
-  config: DynFormConfig = {
-    controls: [
-      {
-        dynControl: 'CARD',
-        controls: [
-          {
-            name: 'field',
-            dynControl: 'TEXT',
-          },
-        ],
-      },
-    ],
-  };
+  controls: DynFormControls = [
+    {
+      dynControl: 'CARD',
+      name: 'profile',
+      controls: [
+        {
+          name: 'name',
+          dynControl: 'TEXT',
+        },
+      ],
+    },
+    {
+      dynControl: 'CARD',
+      name: 'items',
+      controls: [
+        {
+          name: 'name',
+          dynControl: 'TEXT',
+        },
+      ],
+    },
+  ];
+  form = this.builder.group({});
 
-  constructor() {}
+  constructor(private builder: FormBuilder) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.form.valueChanges.subscribe(console.log);
+  }
 }

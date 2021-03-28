@@ -2,16 +2,17 @@ import { Observable } from 'rxjs';
 import { DynControlParams } from './control-params.interface';
 import { DynControlType } from './control.type';
 
-export interface DynBaseConfig {
+export interface DynBaseConfig<P extends DynControlParams = DynControlParams> {
   // hierarchy
   name?: string; // optional entity
   controls?: DynControlConfig[];
   // config
   dynControl: DynControlType;
-  dynParams?: DynControlParams | Observable<DynControlParams>;
+  dynParams?: P | Observable<P>;
 }
 
-export interface DynControlConfig extends DynBaseConfig {
+export interface DynControlConfig<P extends DynControlParams = DynControlParams>
+  extends DynBaseConfig<P> {
   // hierarchy
   name: string; // mandatory entity
   // config

@@ -1,14 +1,16 @@
 import { Directive, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { DynControlConfig } from './control-config.interface';
+import { DynControlParams } from './control-params.interface';
 import { DynInstanceType } from './control.type';
 import { DynControl } from './dyn-control.class';
 
 @Directive()
 export abstract class DynFormGroup<
-    TConfig extends DynControlConfig = DynControlConfig
+    TParams extends DynControlParams = DynControlParams,
+    TConfig extends DynControlConfig<TParams> = DynControlConfig<TParams>
   >
-  extends DynControl<TConfig, FormGroup>
+  extends DynControl<TParams, TConfig, FormGroup>
   implements OnInit {
   static dynInstance = DynInstanceType.Control;
 
@@ -18,7 +20,7 @@ export abstract class DynFormGroup<
       this.control = new FormGroup({});
       this.parent.control.addControl(this.config.name, this.control);
     } else {
-      // fallback to the parent control
+      // fallback to the parent control (useful for )
       this.control = this.parent.control;
     }
 

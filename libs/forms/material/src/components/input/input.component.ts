@@ -3,15 +3,9 @@ import {
   Component,
   Inject,
   Injector,
-  Input,
   OnInit,
 } from '@angular/core';
-import {
-  DynControl,
-  DynControlConfig,
-  DynControlParams,
-  DynFormControl,
-} from '@matheo/dyn-forms/core';
+import { DynControl, DynFormControl } from '@matheo/dyn-forms/core';
 
 @Component({
   selector: 'dyn-material-input',
@@ -21,9 +15,6 @@ import {
 })
 export class DynInputComponent extends DynFormControl implements OnInit {
   static dynControl = 'TEXT';
-
-  @Input() config!: DynControlConfig;
-  @Input() params!: DynControlParams;
 
   constructor(
     injector: Injector,

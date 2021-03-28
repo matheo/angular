@@ -1,14 +1,16 @@
 import { Directive, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { DynControlConfig } from './control-config.interface';
+import { DynControlParams } from './control-params.interface';
 import { DynInstanceType } from './control.type';
 import { DynControl } from './dyn-control.class';
 
 @Directive()
 export abstract class DynFormControl<
-    TConfig extends DynControlConfig = DynControlConfig
+    TParams extends DynControlParams = DynControlParams,
+    TConfig extends DynControlConfig<TParams> = DynControlConfig<TParams>
   >
-  extends DynControl<TConfig, FormControl>
+  extends DynControl<TParams, TConfig, FormControl>
   implements OnInit {
   static dynInstance = DynInstanceType.Control;
 

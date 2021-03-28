@@ -4,7 +4,6 @@ import {
   forwardRef,
   Inject,
   Injector,
-  Input,
   OnInit,
   SkipSelf,
 } from '@angular/core';
@@ -24,11 +23,10 @@ import { DynCardParams } from './card.component.params';
     },
   ],
 })
-export class DynCardComponent extends DynFormContainer implements OnInit {
+export class DynCardComponent
+  extends DynFormContainer<DynCardParams, DynControlConfig>
+  implements OnInit {
   static dynControl = 'CARD';
-
-  @Input() config!: DynControlConfig;
-  @Input() params!: DynCardParams;
 
   constructor(
     injector: Injector,

@@ -14,19 +14,20 @@ import { DynControlType, DynInstanceType } from './control.type';
 
 @Directive()
 export abstract class DynControl<
-  TConfig extends DynBaseConfig = DynBaseConfig,
-  TControl extends AbstractControl = FormGroup // friendly default
+  TParams extends DynControlParams = DynControlParams,
+  TConfig extends DynBaseConfig<TParams> = DynBaseConfig<TParams>,
+  TControl extends AbstractControl = FormGroup // friendly and most-common default
 > implements OnInit, OnDestroy {
   // central place to define the provided Instance
   static dynInstance: DynInstanceType;
   // central place to define the provided Type
   static dynControl: DynControlType;
 
-  abstract parent: DynControl<DynBaseConfig, FormGroup>;
+  abstract parent: DynControl;
 
   config!: TConfig;
+  params!: TParams;
   control!: TControl;
-  params!: DynControlParams;
 
   protected _ref: ChangeDetectorRef;
   protected _unsubscribe = new Subject<void>();

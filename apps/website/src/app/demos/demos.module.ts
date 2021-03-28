@@ -26,6 +26,13 @@ const routes: Routes = [
           ),
       },
       {
+        path: 'dyn-forms',
+        loadChildren: () =>
+          import('./submodules/dyn-forms/dyn-forms.module').then(
+            (m) => m.DemoFormsModule
+          ),
+      },
+      {
         path: 'datepicker',
         component: DatepickerComponent,
       },

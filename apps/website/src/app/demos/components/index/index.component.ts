@@ -14,7 +14,7 @@ export class IndexComponent {
       link: './datasource',
       image: '/assets/items/datasource.png',
       description:
-        'Reactive Datasource for Angular' +
+        'Reactive Datasource for Angular ' +
         'fetching data from Firestore with filters and pagination.',
     },
     {
@@ -22,6 +22,12 @@ export class IndexComponent {
       link: './datepicker',
       image: '/assets/items/datepicker.png',
       description: 'DateTime module for Angular Material.',
+    },
+    {
+      title: 'Dynamic Forms',
+      link: './dyn-forms',
+      image: '/assets/items/dyn-forms.png',
+      description: 'Dynamic Forms for Angular.',
     },
   ];
 }

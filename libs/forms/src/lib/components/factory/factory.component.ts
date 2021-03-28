@@ -3,23 +3,15 @@ import {
   ChangeDetectionStrategy,
   Component,
   ComponentFactoryResolver,
-  Inject,
   Injector,
   Input,
   OnInit,
-  Optional,
-  SkipSelf,
   TemplateRef,
   ViewChild,
   ViewContainerRef,
 } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
-import {
-  DynControl,
-  DynControlConfig,
-  DYN_CONTROLS_TOKEN,
-  InjectedControl,
-} from '@matheo/dyn-forms/core';
+import { DynControlConfig } from '@matheo/dyn-forms/core';
+import { ControlResolverService } from '../../services/control-resolver.service';
 
 @Component({
   selector: 'dyn-factory',
@@ -40,24 +32,11 @@ export class FactoryComponent implements OnInit {
     private injector: Injector,
     private appRef: ApplicationRef,
     private resolver: ComponentFactoryResolver,
-    @Inject(DYN_CONTROLS_TOKEN) private controls: InjectedControl[],
-    @Inject(DynControl)
-    @Optional()
-    @SkipSelf()
-    public readonly parent: DynControl<DynControlConfig, FormGroup>
+    private controls: ControlResolverService
   ) {}
 
   ngOnInit(): void {
-    const control = this.controls.find(
-      ({ dynControl }) => this.config.dynControl === dynControl
-    );
-
-    if (!control) {
-      throw new Error(
-        `Error 01: Control '${this.config.dynControl}' not provided!`
-      );
-    }
-
+    const control = this.controls.resolve(this.config.dynControl);
     const factory = this.resolver.resolveComponentFactory(control.component);
     const ref = this.container.createComponent<any>(
       factory,

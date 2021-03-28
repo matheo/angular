@@ -1,0 +1,7 @@
+<ng-template #content>
+  <ng-container *ngFor="let child of config.children">
+    <dyn-factory [config]="child"></dyn-factory>
+  </ng-container>
+</ng-template>
+
+<ng-container #container></ng-container>

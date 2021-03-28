@@ -17,6 +17,7 @@
     "paths": {
       "@matheo/datasource": ["libs/datasource/src/index.ts"],
       "@matheo/datepicker": ["libs/datepicker/src/index.ts"],
+      "@matheo/dyn-forms/*": ["libs/forms/*"],
       "@matheo/dyn-forms": ["libs/forms/src/index.ts"],
       "@matheo/schematics": ["libs/schematics/src/index.ts"]
     },

@@ -1,8 +1,10 @@
 {
   "extends": "../../tslint.json",
   "rules": {
+    "component-selector": [true, "element", "dyn", "kebab-case"],
     "directive-selector": [true, "attribute", "dyn", "camelCase"],
-    "component-selector": [true, "element", "dyn", "kebab-case"]
+    "directive-class-suffix": false,
+    "no-input-rename": false
   },
   "linterOptions": {
     "exclude": ["!**/*"]

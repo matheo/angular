@@ -3,7 +3,7 @@ import { ModuleWithProviders, NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { DynFormsModule } from '@matheo/dyn-forms/src';
+import { DynFormsModule } from '@matheo/dyn-forms';
 import { InputComponent } from './components/input/input.component';
 
 @NgModule({

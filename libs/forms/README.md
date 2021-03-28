@@ -22,7 +22,7 @@ Components provided via `forFeature` (via `DYN_CONTROLS_TOKEN`).
 - Strategy of common methods to be supported by the controls
   - (?) awareness of the available strategies
   - Essential methods only, with optional parameters
-- Decouple FormControl and DynControl
+- Composition of FormControls inside DynControls
 
 ## Forms Config
 

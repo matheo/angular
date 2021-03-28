@@ -1,16 +1,17 @@
-import { Injector } from '@angular/core';
-import { AbstractControl } from '@angular/forms';
+import { Directive, Injector } from '@angular/core';
+import { AbstractControl, FormGroup } from '@angular/forms';
 import { DynControlConfig } from './control-config.interface';
 import { DynControlType } from './control.type';
 
+@Directive()
 export abstract class DynControl<
   TConfig extends DynControlConfig = DynControlConfig,
-  TControl extends AbstractControl = AbstractControl
+  TControl extends AbstractControl = FormGroup // friendly default
 > {
-  // central definition of the provided Type
+  // central place to define the provided Type
   static dynControl: DynControlType;
 
-  abstract parent: DynControl;
+  abstract parent: DynControl<DynControlConfig, FormGroup>;
 
   config!: TConfig;
   control!: TControl;

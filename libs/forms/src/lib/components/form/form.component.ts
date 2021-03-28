@@ -7,7 +7,11 @@ import {
   OnInit,
 } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { DynControl, DynControlConfig } from '@matheo/dyn-forms/core';
+import {
+  DynControl,
+  DynControlConfig,
+  DynFormGroup,
+} from '@matheo/dyn-forms/core';
 
 @Component({
   selector: 'dyn-form',
@@ -21,15 +25,15 @@ import { DynControl, DynControlConfig } from '@matheo/dyn-forms/core';
     },
   ],
 })
-export class FormComponent extends DynControl implements OnInit {
+export class FormComponent extends DynFormGroup implements OnInit {
   parent!: DynControl;
 
+  // root FormGroup
+  @Input('form') control = this.builder.group({});
   @Input() config!: DynControlConfig;
 
   constructor(injector: Injector, private builder: FormBuilder) {
     super(injector);
-    // root FormGroup
-    this.control = this.builder.group({});
   }
 
   ngOnInit(): void {}

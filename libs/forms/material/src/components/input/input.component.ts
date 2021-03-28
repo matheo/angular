@@ -7,8 +7,11 @@ import {
   OnInit,
   SkipSelf,
 } from '@angular/core';
-import { FormGroup } from '@angular/forms';
-import { DynControl, DynControlConfig } from '@matheo/dyn-forms/core';
+import {
+  DynControl,
+  DynControlConfig,
+  DynFormControl,
+} from '@matheo/dyn-forms/core';
 
 @Component({
   selector: 'dyn-material-input',
@@ -16,19 +19,19 @@ import { DynControl, DynControlConfig } from '@matheo/dyn-forms/core';
   styleUrls: ['./input.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class InputComponent extends DynControl implements OnInit {
+export class InputComponent extends DynFormControl implements OnInit {
   static dynControl = 'TEXT';
 
   @Input() config!: DynControlConfig;
 
   constructor(
     injector: Injector,
-    @Inject(DynControl)
-    @SkipSelf()
-    public readonly parent: DynControl<DynControlConfig, FormGroup>
+    @Inject(DynControl) @SkipSelf() public readonly parent: DynControl
   ) {
     super(injector);
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    super.ngOnInit();
+  }
 }

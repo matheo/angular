@@ -48,9 +48,6 @@ export class FactoryComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // FIXME proper place to add the control
-    this.parent.control.addControl(this.config.name, new FormControl());
-
     const control = this.controls.find(
       ({ dynControl }) => this.config.dynControl === dynControl
     );

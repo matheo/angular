@@ -1,18 +1,22 @@
 import { DynControlType } from './control.type';
 
 export interface DynFormConfig {
-  controls: DynControlConfig[];
+  controls: DynBaseConfig[];
 }
 
-export interface DynControlConfig {
+export interface DynBaseConfig {
   // hierarchy
-  name?: string; // entity
   controls?: DynControlConfig[];
   // config
   dynControl: DynControlType;
-  // dynParams: Observable<DynControlParams>;
+  // dynParams?: Observable<DynControlParams>;
+}
+
+export interface DynControlConfig extends DynBaseConfig {
+  // hierarchy
+  name: string; // entity
+  // config
   // contexts: { display: { dynControl, dynParams }, table: ... }
-  // layout
   // filterOptions
   readonly [property: string]: unknown;
 }

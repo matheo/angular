@@ -21,5 +21,7 @@ export abstract class DynFormGroup<
       // fallback to the parent control
       this.control = this.parent.control;
     }
+
+    super.ngOnInit();
   }
 }

@@ -1,3 +1,5 @@
+import { Observable } from 'rxjs';
+import { DynControlParams } from './control-params.interface';
 import { DynControlType } from './control.type';
 
 export interface DynBaseConfig {
@@ -6,7 +8,7 @@ export interface DynBaseConfig {
   controls?: DynControlConfig[];
   // config
   dynControl: DynControlType;
-  // dynParams?: Observable<DynControlParams>;
+  dynParams?: DynControlParams | Observable<DynControlParams>;
 }
 
 export interface DynControlConfig extends DynBaseConfig {

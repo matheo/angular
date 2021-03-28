@@ -5,11 +5,11 @@ import {
   Injector,
   Input,
   OnInit,
-  SkipSelf,
 } from '@angular/core';
 import {
   DynControl,
   DynControlConfig,
+  DynControlParams,
   DynFormControl,
 } from '@matheo/dyn-forms/core';
 
@@ -23,10 +23,11 @@ export class DynInputComponent extends DynFormControl implements OnInit {
   static dynControl = 'TEXT';
 
   @Input() config!: DynControlConfig;
+  @Input() params!: DynControlParams;
 
   constructor(
     injector: Injector,
-    @Inject(DynControl) @SkipSelf() public readonly parent: DynControl
+    @Inject(DynControl) public readonly parent: DynControl
   ) {
     super(injector);
   }

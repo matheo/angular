@@ -26,7 +26,8 @@ import {
   ],
 })
 export class FormComponent extends DynFormGroup<any> implements OnInit {
-  parent!: DynControl; // not used
+  // not used in the root
+  parent!: DynControl;
 
   // root FormGroup
   @Input('form') control = this.builder.group({});

@@ -21,5 +21,7 @@ export abstract class DynFormContainer<
       // just bridges the parent FormGroup
       this.control = this.parent.control;
     }
+
+    super.ngOnInit();
   }
 }

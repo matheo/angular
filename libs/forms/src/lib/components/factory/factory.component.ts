@@ -10,7 +10,7 @@ import {
   ViewChild,
   ViewContainerRef,
 } from '@angular/core';
-import { DynControlConfig } from '@matheo/dyn-forms/core';
+import { DynBaseConfig } from '@matheo/dyn-forms/core';
 import { ControlResolverService } from '../../services/control-resolver.service';
 
 @Component({
@@ -20,7 +20,7 @@ import { ControlResolverService } from '../../services/control-resolver.service'
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FactoryComponent implements OnInit {
-  @Input() config!: DynControlConfig;
+  @Input() config!: DynBaseConfig;
 
   @ViewChild(TemplateRef, { static: true })
   content!: TemplateRef<any>;
@@ -38,6 +38,7 @@ export class FactoryComponent implements OnInit {
   ngOnInit(): void {
     const control = this.controls.resolve(this.config.dynControl);
     const factory = this.resolver.resolveComponentFactory(control.component);
+
     const ref = this.container.createComponent<any>(
       factory,
       undefined,
@@ -46,10 +47,11 @@ export class FactoryComponent implements OnInit {
       // this.ngContent()
     );
     ref.instance.config = this.config;
+
     ref.hostView.detectChanges();
   }
 
-  private ngContent(): any[][] {
+  protected ngContent(): any[][] {
     const viewRef = this.content.createEmbeddedView(null);
     this.appRef.attachView(viewRef);
     return [viewRef.rootNodes];

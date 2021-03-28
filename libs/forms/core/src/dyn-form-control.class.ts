@@ -22,5 +22,7 @@ export abstract class DynFormControl<
         `Error 02: No name provided for ${this.config.dynControl}`
       );
     }
+
+    super.ngOnInit();
   }
 }

@@ -28,7 +28,6 @@ export class InputComponent extends DynControl implements OnInit {
     public readonly parent: DynControl<DynControlConfig, FormGroup>
   ) {
     super(injector);
-    console.log({ parent });
   }
 
   ngOnInit(): void {}

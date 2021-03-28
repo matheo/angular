@@ -3,7 +3,7 @@ import { ModuleWithProviders, NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { DYN_CONTROLS_TOKEN } from '@matheo/dyn-forms/core';
+import { DynFormsModule } from '@matheo/dyn-forms/src';
 import { InputComponent } from './components/input/input.component';
 
 @NgModule({
@@ -18,15 +18,13 @@ import { InputComponent } from './components/input/input.component';
 })
 export class DynFormsMaterialModule {
   static forFeature(): ModuleWithProviders<DynFormsMaterialModule> {
-    return {
-      ngModule: DynFormsMaterialModule,
-      providers: [
+    return DynFormsModule.forFeature({
+      controls: [
         {
-          provide: DYN_CONTROLS_TOKEN,
-          useValue: InputComponent,
-          multi: true,
+          dynControl: InputComponent.dynControl,
+          component: InputComponent,
         },
       ],
-    };
+    });
   }
 }

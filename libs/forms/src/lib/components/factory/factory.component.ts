@@ -18,6 +18,7 @@ import {
   DynControl,
   DynControlConfig,
   DYN_CONTROLS_TOKEN,
+  InjectedControl,
 } from '@matheo/dyn-forms/core';
 
 @Component({
@@ -39,7 +40,7 @@ export class FactoryComponent implements OnInit {
     private injector: Injector,
     private appRef: ApplicationRef,
     private resolver: ComponentFactoryResolver,
-    @Inject(DYN_CONTROLS_TOKEN) private controls: any[],
+    @Inject(DYN_CONTROLS_TOKEN) private controls: InjectedControl[],
     @Inject(DynControl)
     @Optional()
     @SkipSelf()
@@ -50,16 +51,17 @@ export class FactoryComponent implements OnInit {
     // FIXME proper place to add the control
     this.parent.control.addControl(this.config.name, new FormControl());
 
-    console.log('DYN_CONTROLS_TOKEN', { controls: this.controls });
     const control = this.controls.find(
       ({ dynControl }) => this.config.dynControl === dynControl
     );
 
     if (!control) {
-      throw new Error(`Control '${this.config.dynControl}' not provided`);
+      throw new Error(
+        `Error 01: Control '${this.config.dynControl}' not provided!`
+      );
     }
 
-    const factory = this.resolver.resolveComponentFactory(control);
+    const factory = this.resolver.resolveComponentFactory(control.component);
     const ref = this.container.createComponent<any>(
       factory,
       undefined,

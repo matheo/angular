@@ -4,6 +4,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { DynFormsModule } from '@matheo/dyn-forms';
+import { DynInstanceType } from '@matheo/dyn-forms/core';
 import { InputComponent } from './components/input/input.component';
 
 @NgModule({
@@ -21,6 +22,7 @@ export class DynFormsMaterialModule {
     return DynFormsModule.forFeature({
       controls: [
         {
+          dynInstance: DynInstanceType.Control,
           dynControl: InputComponent.dynControl,
           component: InputComponent,
         },

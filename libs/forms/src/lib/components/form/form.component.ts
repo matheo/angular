@@ -9,7 +9,7 @@ import {
 import { FormBuilder } from '@angular/forms';
 import {
   DynControl,
-  DynControlConfig,
+  DynFormConfig,
   DynFormGroup,
 } from '@matheo/dyn-forms/core';
 
@@ -25,12 +25,12 @@ import {
     },
   ],
 })
-export class FormComponent extends DynFormGroup implements OnInit {
+export class FormComponent extends DynFormGroup<any> implements OnInit {
   parent!: DynControl;
 
   // root FormGroup
   @Input('form') control = this.builder.group({});
-  @Input() config!: DynControlConfig;
+  @Input() config!: DynFormConfig;
 
   constructor(injector: Injector, private builder: FormBuilder) {
     super(injector);

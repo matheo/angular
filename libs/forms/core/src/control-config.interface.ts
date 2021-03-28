@@ -1,9 +1,13 @@
 import { DynControlType } from './control.type';
 
+export interface DynFormConfig {
+  controls: DynControlConfig[];
+}
+
 export interface DynControlConfig {
   // hierarchy
-  name: string; // entity
-  children?: DynControlConfig[];
+  name?: string; // entity
+  controls?: DynControlConfig[];
   // config
   dynControl: DynControlType;
   // dynParams: DynControlParams;

@@ -22,14 +22,15 @@ export function controlsFactory(controls?: ControlProvider[]): Provider[] {
           // TODO resolve provider.component
         }
         return {
+          dynInstance: provider.dynInstance,
           dynControl: provider.dynControl,
           component: provider.component ?? ({} as any),
         };
       }
     )
-    .map((component) => ({
+    .map((control) => ({
       provide: DYN_CONTROLS_TOKEN,
-      useValue: component,
+      useValue: control,
       multi: true,
     }));
 }

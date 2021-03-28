@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { DynControlConfig } from '@matheo/dyn-forms/core';
+import { DynFormConfig } from '@matheo/dyn-forms/core';
 
 @Component({
   selector: 'web-simple',
@@ -8,9 +8,13 @@ import { DynControlConfig } from '@matheo/dyn-forms/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SimpleComponent implements OnInit {
-  config: DynControlConfig = {
-    name: 'field',
-    dynControl: 'TEXT',
+  config: DynFormConfig = {
+    controls: [
+      {
+        name: 'field',
+        dynControl: 'TEXT',
+      },
+    ],
   };
 
   constructor() {}

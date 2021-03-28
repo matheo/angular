@@ -1,0 +1,7 @@
+<ng-container [formGroup]="parent.control">
+  <mat-form-field>
+    <mat-label>Label</mat-label>
+    <input matInput [formControlName]="config.name" />
+    <mat-hint>{{ config.dynControl }}</mat-hint>
+  </mat-form-field>
+</ng-container>

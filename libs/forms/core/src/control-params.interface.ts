@@ -1,3 +1,2 @@
-export interface DynControlParams {
-  [param: string]: unknown;
-}
+// tslint:disable-next-line: no-empty-interface
+export interface DynControlParams {}

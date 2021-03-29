@@ -26,7 +26,7 @@ import { DynCardParams } from './card.component.params';
 export class DynCardComponent
   extends DynFormContainer<DynCardParams, DynControlConfig>
   implements OnInit {
-  static dynControl = 'CARD';
+  static dynControl: 'CARD' = 'CARD';
 
   static createConfig(
     partial: Partial<DynControlConfig<DynCardParams>>

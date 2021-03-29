@@ -16,11 +16,11 @@ export type PartialConfig<T extends DynControlParams> = Partial<
 
 // type overloads
 export function createConfig(
-  type: 'CARD',
+  type: typeof DynCardComponent.dynControl,
   partial: PartialConfig<DynCardParams>
 ): DynControlConfig;
 export function createConfig(
-  type: 'TEXT',
+  type: typeof DynInputComponent.dynControl,
   partial: PartialConfig<DynInputParams>
 ): DynControlConfig;
 

@@ -5,7 +5,12 @@ import {
   Injector,
   OnInit,
 } from '@angular/core';
-import { DynControl, DynFormControl } from '@matheo/dyn-forms/core';
+import {
+  DynControl,
+  DynControlConfig,
+  DynFormControl,
+} from '@matheo/dyn-forms/core';
+import { DynInputParams } from './input.component.params';
 
 @Component({
   selector: 'dyn-material-input',
@@ -13,8 +18,17 @@ import { DynControl, DynFormControl } from '@matheo/dyn-forms/core';
   styleUrls: ['./input.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DynInputComponent extends DynFormControl implements OnInit {
+export class DynInputComponent
+  extends DynFormControl<DynInputParams>
+  implements OnInit {
   static dynControl = 'TEXT';
+
+  static createConfig(partial: Partial<DynControlConfig>): DynControlConfig {
+    return {
+      ...partial,
+      dynControl: DynInputComponent.dynControl,
+    } as DynControlConfig;
+  }
 
   constructor(
     injector: Injector,

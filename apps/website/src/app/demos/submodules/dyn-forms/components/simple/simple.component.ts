@@ -6,6 +6,7 @@ import {
 } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { DynFormControls } from '@matheo/dyn-forms/core';
+import { createConfig } from '@matheo/dyn-forms/material';
 import { BehaviorSubject } from 'rxjs';
 
 @Component({
@@ -22,31 +23,46 @@ export class SimpleComponent implements OnInit {
   });
 
   controls: DynFormControls = [
-    {
-      dynControl: 'CARD',
-      dynParams: this.profileCard,
+    createConfig('CARD', {
       name: 'profile',
+      dynParams: this.profileCard,
       controls: [
-        {
-          name: 'name',
-          dynControl: 'TEXT',
-        },
+        createConfig('TEXT', {
+          name: 'firstName',
+          dynParams: {
+            label: 'First Name',
+          },
+        }),
+        createConfig('TEXT', {
+          name: 'lastName',
+          dynParams: {
+            label: 'Last Name',
+          },
+        }),
       ],
-    },
-    {
-      dynControl: 'CARD',
+    }),
+    createConfig('CARD', {
+      name: 'items',
       dynParams: {
         title: 'Dynamic Items',
         subtitle: 'Dynamic implementation of a Form Array ',
       },
-      name: 'items',
       controls: [
-        {
-          name: 'name',
-          dynControl: 'TEXT',
-        },
+        createConfig('TEXT', {
+          name: 'fullName',
+          dynParams: {
+            label: 'Full Name',
+          },
+        }),
+        createConfig('TEXT', {
+          name: 'id',
+          dynParams: {
+            type: 'number',
+            label: 'ID Number',
+          },
+        }),
       ],
-    },
+    }),
   ];
   form = this.builder.group({});
 

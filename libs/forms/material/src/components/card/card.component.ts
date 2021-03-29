@@ -28,6 +28,15 @@ export class DynCardComponent
   implements OnInit {
   static dynControl = 'CARD';
 
+  static createConfig(
+    partial: Partial<DynControlConfig<DynCardParams>>
+  ): DynControlConfig<DynCardParams> {
+    return {
+      ...partial,
+      dynControl: DynCardComponent.dynControl,
+    } as DynControlConfig;
+  }
+
   constructor(
     injector: Injector,
     @Inject(DynControl) @SkipSelf() public readonly parent: DynControl

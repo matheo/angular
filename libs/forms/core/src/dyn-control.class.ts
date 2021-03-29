@@ -23,6 +23,8 @@ export abstract class DynControl<
   // central place to define the provided Type
   static dynControl: DynControlType;
 
+  // abstract static createConfig(partial?: Partial<TConfig>): TConfig;
+
   abstract parent: DynControl;
 
   config!: TConfig;
@@ -56,6 +58,4 @@ export abstract class DynControl<
     this._unsubscribe.next();
     this._unsubscribe.complete();
   }
-
-  // abstract getConfig(partial: TConfig): TConfig
 }

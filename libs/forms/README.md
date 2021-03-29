@@ -14,6 +14,7 @@ Components provided via `forFeature` (via `DYN_CONTROLS_TOKEN`).
 - Support display mode (config displayHandler, displayParams - strategy class)
 - Default and customized validators per groups and components
 - Custom behaviors for groups, like isVisible$
+- How to style them consistently? (calling mod non-encapsulated styles?)
 
 ### Patterns
 

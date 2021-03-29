@@ -16,8 +16,7 @@ export abstract class DynFormControl<
 
   ngOnInit(): void {
     if (this.config.name) {
-      // TODO any default config for FormControl?
-      this.control = new FormControl();
+      this.control = new FormControl(null, this.config.dynOptions);
       this.parent.control.addControl(this.config.name, this.control);
     } else {
       throw new Error(

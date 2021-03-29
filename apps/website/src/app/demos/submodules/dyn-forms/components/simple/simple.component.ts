@@ -4,7 +4,7 @@ import {
   OnInit,
   ViewEncapsulation,
 } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { DynFormControls } from '@matheo/dyn-forms/core';
 import { createConfig } from '@matheo/dyn-forms/material';
 import { BehaviorSubject } from 'rxjs';
@@ -31,6 +31,9 @@ export class SimpleComponent implements OnInit {
           name: 'firstName',
           dynParams: {
             label: 'First Name',
+          },
+          dynOptions: {
+            validators: [Validators.required],
           },
         }),
         createConfig('TEXT', {
@@ -59,6 +62,9 @@ export class SimpleComponent implements OnInit {
           dynParams: {
             type: 'number',
             label: 'ID Number',
+          },
+          dynOptions: {
+            validators: [Validators.required],
           },
         }),
       ],

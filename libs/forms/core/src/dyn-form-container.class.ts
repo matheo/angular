@@ -16,8 +16,7 @@ export abstract class DynFormContainer<
 
   ngOnInit(): void {
     if (this.config.name) {
-      // TODO any default config for FormGroup?
-      this.control = new FormGroup({});
+      this.control = new FormGroup({}, this.config.dynOptions);
       this.parent.control.addControl(this.config.name, this.control);
     } else {
       // just bridges the parent FormGroup

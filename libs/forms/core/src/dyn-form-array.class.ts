@@ -16,8 +16,7 @@ export abstract class DynFormArray<
 
   ngOnInit(): void {
     if (this.config.name) {
-      // TODO any default config for FormArray?
-      this.control = new FormArray();
+      this.control = new FormArray([], this.config.dynOptions);
       this.parent.control.addControl(this.config.name, this.control);
     } else {
       throw new Error(

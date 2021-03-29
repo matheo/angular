@@ -1,0 +1,30 @@
+<mat-card>
+  <mat-card-header>
+    <!--img mat-card-avatar [src]="" /-->
+    <mat-card-title *ngIf="params.title">
+      {{ params.title }}
+    </mat-card-title>
+    <mat-card-subtitle *ngIf="params.subtitle">
+      {{ params.subtitle }}
+    </mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content>
+    <div class="array-item" *ngFor="let item of items; index as i">
+      <dyn-group
+        [group]="item"
+        [config]="{ dynControl: '', controls: config.controls }"
+      ></dyn-group>
+
+      <button mat-flat-button [color]="params.color">
+        {{ params.removeButton }}
+      </button>
+    </div>
+  </mat-card-content>
+
+  <mat-card-actions [align]="'end'">
+    <button mat-flat-button [color]="params.color" (click)="addItem()">
+      {{ params.addButton }}
+    </button>
+  </mat-card-actions>
+</mat-card>

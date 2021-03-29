@@ -1,0 +1,16 @@
+// fix left-margin of .mat-card-header-text when there's no card-avatar
+mat-card-header ::ng-deep > :first-child {
+  margin-left: 0;
+}
+
+.array-item {
+  display: flex;
+  flex-direction: row;
+  place-content: center space-between;
+  align-items: center;
+
+  dyn-group {
+    display: flex;
+    flex: 1;
+  }
+}

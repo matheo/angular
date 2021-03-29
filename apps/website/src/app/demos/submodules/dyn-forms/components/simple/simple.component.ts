@@ -46,10 +46,10 @@ export class SimpleComponent implements OnInit, AfterViewInit {
         }),
       ],
     }),
-    createConfig('CARD', {
+    createConfig('ARRAY', {
       name: 'items',
       dynParams: {
-        title: 'Dynamic Items',
+        title: 'Persons',
         subtitle: 'Dynamic implementation of a Form Array ',
       },
       controls: [

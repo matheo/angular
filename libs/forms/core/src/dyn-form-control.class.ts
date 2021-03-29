@@ -16,8 +16,12 @@ export abstract class DynFormControl<
 
   ngOnInit(): void {
     if (this.config.name) {
-      this.control = new FormControl(null, this.config.dynOptions);
-      this.parent.control.addControl(this.config.name, this.control);
+      this.control =
+        (this.parent.control.get(this.config.name) as FormControl) ??
+        new FormControl(null, this.config.dynOptions);
+      if (this.parent.control.addControl) {
+        this.parent.control.addControl(this.config.name, this.control);
+      }
     } else {
       throw new Error(
         `Error 02: No name provided for ${this.config.dynControl}`

@@ -1,13 +1,13 @@
 import { Type } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
-import { DynControlConfig } from './control-config.interface';
+import { DynBaseConfig } from './control-config.interface';
 import { DynControlParams } from './control-params.interface';
 import { DynControlType, DynInstanceType } from './control.type';
 import { DynControl } from './dyn-control.class';
 
 export type AbstractDynControl = DynControl<
   DynControlParams,
-  DynControlConfig,
+  DynBaseConfig,
   AbstractControl
 >;
 

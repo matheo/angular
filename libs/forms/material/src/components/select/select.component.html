@@ -1,0 +1,17 @@
+<ng-container [formGroup]="parent.control">
+  <mat-form-field>
+    <mat-label>{{ params?.label }}</mat-label>
+    <mat-select
+      [formControlName]="config.name"
+      [placeholder]="params.placeholder || ''"
+      [multiple]="params.multiple"
+      [compareWith]="params.compareWith"
+      [sortComparator]="params.sortComparator"
+      [panelClass]="params.panelClass || ''"
+    >
+      <mat-option *ngFor="let option of params.options" [value]="option.value">
+        {{ option.text }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</ng-container>

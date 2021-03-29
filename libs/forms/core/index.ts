@@ -3,6 +3,7 @@ export * from './src/control-params.interface';
 export * from './src/control-provider.interface';
 export * from './src/control-strategy.interface';
 export * from './src/control.type';
+export * from './src/option.interface';
 
 export * from './src/controls.factory';
 export * from './src/controls.token';

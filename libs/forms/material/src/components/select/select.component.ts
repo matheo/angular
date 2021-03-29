@@ -5,6 +5,7 @@ import {
   Injector,
   OnInit,
 } from '@angular/core';
+import { MatOption } from '@angular/material/core';
 import {
   DynControl,
   DynControlConfig,
@@ -23,7 +24,9 @@ export class DynSelectComponent
   implements OnInit {
   static dynControl: 'SELECT' = 'SELECT';
 
-  static createConfig(partial: Partial<DynControlConfig>): DynControlConfig {
+  static createConfig(
+    partial: Partial<DynControlConfig<DynSelectParams>>
+  ): DynControlConfig {
     return {
       ...partial,
       dynControl: DynSelectComponent.dynControl,
@@ -39,5 +42,26 @@ export class DynSelectComponent
 
   ngOnInit(): void {
     super.ngOnInit();
+  }
+
+  checkParams(params: Partial<DynSelectParams>): DynSelectParams {
+    function compareWith(o1: any, o2: any): boolean {
+      // tslint:disable-next-line: triple-equals
+      return o1 == o2;
+    }
+
+    function sortComparator(a: MatOption, b: MatOption): number {
+      return a.value.localeCompare(b.value);
+    }
+
+    return {
+      ...params,
+      placeholder: params.placeholder || '',
+      multiple: Boolean(params.multiple),
+      options: params.options || [],
+      compareWith: params.compareWith || compareWith,
+      sortComparator: params.sortComparator || sortComparator,
+      panelClass: params.panelClass || '',
+    };
   }
 }

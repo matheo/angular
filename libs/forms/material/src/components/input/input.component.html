@@ -1,12 +1,12 @@
 <ng-container [formGroup]="parent.control">
   <mat-form-field>
-    <mat-label>{{ params?.label }}</mat-label>
+    <mat-label>{{ params.label }}</mat-label>
     <input
       matInput
-      [type]="params?.type || 'text'"
+      [type]="params.type"
       [formControlName]="config.name"
-      [placeholder]="params?.placeholder || ''"
+      [placeholder]="params.placeholder"
     />
-    <mat-hint *ngIf="params?.hint">{{ params?.hint }}</mat-hint>
+    <mat-hint *ngIf="params.hint">{{ params.hint }}</mat-hint>
   </mat-form-field>
 </ng-container>

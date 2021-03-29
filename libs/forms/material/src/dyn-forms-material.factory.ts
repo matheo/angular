@@ -15,7 +15,7 @@ import { DynSelectComponent } from './components/select/select.component';
 import { DynSelectParams } from './components/select/select.component.params';
 
 export type PartialConfig<T extends DynControlParams> = Partial<
-  DynControlConfig<T>
+  DynControlConfig<Partial<T>>
 >;
 
 // type overloads
@@ -39,7 +39,7 @@ export function createConfig(
 // factory
 export function createConfig(
   type: DynControlType,
-  partial: PartialConfig<DynControlParams>
+  partial: Partial<DynControlConfig<any>>
 ): DynControlConfig {
   switch (type) {
     // containers

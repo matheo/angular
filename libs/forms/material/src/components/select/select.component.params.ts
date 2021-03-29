@@ -3,10 +3,10 @@ import { DynControlParams, DynOption } from '@matheo/dyn-forms/core';
 
 export interface DynSelectParams extends DynControlParams {
   label?: string;
-  placeholder?: string;
+  placeholder: string;
   multiple?: boolean;
   options: DynOption[];
   compareWith: (o1: any, o2: any) => boolean;
   sortComparator: (a: MatOption, b: MatOption, options: MatOption[]) => number;
-  panelClass?: string | string[] | Set<string> | { [key: string]: any };
+  panelClass: string | string[] | Set<string> | { [key: string]: any };
 }

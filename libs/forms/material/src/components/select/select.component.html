@@ -3,11 +3,11 @@
     <mat-label>{{ params?.label }}</mat-label>
     <mat-select
       [formControlName]="config.name"
-      [placeholder]="params.placeholder || ''"
+      [placeholder]="params.placeholder"
       [multiple]="params.multiple"
       [compareWith]="params.compareWith"
       [sortComparator]="params.sortComparator"
-      [panelClass]="params.panelClass || ''"
+      [panelClass]="params.panelClass"
     >
       <mat-option *ngFor="let option of params.options" [value]="option.value">
         {{ option.text }}

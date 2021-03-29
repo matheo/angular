@@ -47,4 +47,8 @@ export class DynCardComponent
   ngOnInit(): void {
     super.ngOnInit();
   }
+
+  checkParams(params: Partial<DynCardParams>): DynCardParams {
+    return params;
+  }
 }

@@ -23,7 +23,9 @@ export class DynInputComponent
   implements OnInit {
   static dynControl: 'INPUT' = 'INPUT';
 
-  static createConfig(partial: Partial<DynControlConfig>): DynControlConfig {
+  static createConfig(
+    partial: Partial<DynControlConfig<DynInputParams>>
+  ): DynControlConfig {
     return {
       ...partial,
       dynControl: DynInputComponent.dynControl,
@@ -39,5 +41,14 @@ export class DynInputComponent
 
   ngOnInit(): void {
     super.ngOnInit();
+  }
+
+  checkParams(params: Partial<DynInputParams>): DynInputParams {
+    return {
+      ...params,
+      type: params.type || 'text',
+      label: params.label || '',
+      placeholder: params.placeholder || '',
+    };
   }
 }

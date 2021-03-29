@@ -23,7 +23,9 @@ export class DynRadioComponent
   implements OnInit {
   static dynControl: 'RADIO' = 'RADIO';
 
-  static createConfig(partial: Partial<DynControlConfig>): DynControlConfig {
+  static createConfig(
+    partial: Partial<DynControlConfig<DynRadioParams>>
+  ): DynControlConfig {
     return {
       ...partial,
       dynControl: DynRadioComponent.dynControl,
@@ -39,5 +41,12 @@ export class DynRadioComponent
 
   ngOnInit(): void {
     super.ngOnInit();
+  }
+
+  checkParams(params: Partial<DynRadioParams>): DynRadioParams {
+    return {
+      ...params,
+      options: params.options || [],
+    };
   }
 }

@@ -4,14 +4,9 @@ import {
   forwardRef,
   Injector,
   Input,
-  OnInit,
 } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import {
-  DynControl,
-  DynFormControls,
-  DynFormGroup,
-} from '@matheo/dyn-forms/core';
+import { DynControl, DynFormControls } from '@matheo/dyn-forms/core';
 
 @Component({
   selector: 'dyn-form',
@@ -25,17 +20,21 @@ import {
     },
   ],
 })
-export class FormComponent extends DynFormGroup<any> implements OnInit {
-  // not used in the root
-  parent!: DynControl;
-
+export class FormComponent extends DynControl<any> {
   // root FormGroup
   @Input('form') control = this.builder.group({});
   @Input() controls: DynFormControls = [];
+
+  // not used in the root
+  parent!: DynControl;
+  config = {} as any;
 
   constructor(injector: Injector, private builder: FormBuilder) {
     super(injector);
   }
 
-  ngOnInit(): void {}
+  // not used but required to be API compliant
+  checkParams(params: any): any {
+    return params;
+  }
 }

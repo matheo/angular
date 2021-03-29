@@ -59,11 +59,15 @@ export class SimpleComponent implements OnInit, AfterViewInit {
             label: 'Full Name',
           },
         }),
-        createConfig('INPUT', {
-          name: 'id',
+        createConfig('SELECT', {
+          name: 'idType',
           dynParams: {
-            type: 'number',
-            label: 'ID Number',
+            label: 'ID Type',
+            options: [
+              { text: '- Choose one -', value: null },
+              { text: 'ID', value: 'ID' },
+              { text: 'Passport', value: 'PASSPORT' },
+            ],
           },
           dynOptions: {
             validators: [Validators.required],

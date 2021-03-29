@@ -21,7 +21,7 @@ import { DynInputParams } from './input.component.params';
 export class DynInputComponent
   extends DynFormControl<DynInputParams>
   implements OnInit {
-  static dynControl: 'TEXT' = 'TEXT';
+  static dynControl: 'INPUT' = 'INPUT';
 
   static createConfig(partial: Partial<DynControlConfig>): DynControlConfig {
     return {

@@ -29,7 +29,7 @@ export class SimpleComponent implements OnInit, AfterViewInit {
       name: 'profile',
       dynParams: this.profileCard,
       controls: [
-        createConfig('TEXT', {
+        createConfig('INPUT', {
           name: 'firstName',
           dynParams: {
             label: 'First Name',
@@ -38,7 +38,7 @@ export class SimpleComponent implements OnInit, AfterViewInit {
             validators: [Validators.required],
           },
         }),
-        createConfig('TEXT', {
+        createConfig('INPUT', {
           name: 'lastName',
           dynParams: {
             label: 'Last Name',
@@ -53,13 +53,13 @@ export class SimpleComponent implements OnInit, AfterViewInit {
         subtitle: 'Dynamic implementation of a Form Array ',
       },
       controls: [
-        createConfig('TEXT', {
+        createConfig('INPUT', {
           name: 'fullName',
           dynParams: {
             label: 'Full Name',
           },
         }),
-        createConfig('TEXT', {
+        createConfig('INPUT', {
           name: 'id',
           dynParams: {
             type: 'number',

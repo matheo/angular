@@ -11,13 +11,15 @@ export class ControlResolverService {
     @Inject(DYN_CONTROLS_TOKEN) private controls: InjectedControl[]
   ) {}
 
-  resolve(type: DynControlType): InjectedControl {
-    const control = this.controls.find(({ dynControl }) => type === dynControl);
+  resolve(dynControl: DynControlType): InjectedControl {
+    const resolved = this.controls.find(
+      ({ control }) => dynControl === control
+    );
 
-    if (!control) {
-      throw new Error(`Error 01: Control '${type}' not provided!`);
+    if (!resolved) {
+      throw new Error(`Error 01: Control '${dynControl}' not provided!`);
     }
 
-    return control;
+    return resolved;
   }
 }

@@ -12,13 +12,14 @@ export type AbstractDynControl = DynControl<
 >;
 
 export interface LazyControl {
-  dynControl: DynControlType;
+  control: DynControlType;
   useFactory: Function;
+  // resolved in the controls.factory
   component?: Type<AbstractDynControl>;
 }
 
 export interface InjectedControl {
-  dynControl: DynControlType;
+  control: DynControlType;
   component: Type<AbstractDynControl>;
 }
 

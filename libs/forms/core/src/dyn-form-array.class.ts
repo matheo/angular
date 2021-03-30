@@ -1,4 +1,4 @@
-import { Directive, Injector, OnInit } from '@angular/core';
+import { Directive, OnInit } from '@angular/core';
 import { FormArray } from '@angular/forms';
 import { DynControlConfig } from './control-config.interface';
 import { DynControlParams } from './control-params.interface';
@@ -14,13 +14,10 @@ export abstract class DynFormArray<
   implements OnInit {
   static dynInstance = DynInstanceType.Array;
 
-  constructor(injector: Injector) {
-    super(injector);
-  }
-
+  // auto-register in the form hierarchy
   ngOnInit(): void {
     if (!this.config.name) {
-      throw new Error(`Error 02: No name provided for ${this.config.control}`);
+      throw new Error(`02: No name provided for ${this.config.control}`);
     }
 
     super.ngOnInit();

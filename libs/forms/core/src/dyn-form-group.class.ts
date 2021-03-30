@@ -14,6 +14,7 @@ export abstract class DynFormGroup<
   implements OnInit {
   static dynInstance = DynInstanceType.Group;
 
+  // auto-register in the form hierarchy
   ngOnInit(): void {
     super.ngOnInit();
 

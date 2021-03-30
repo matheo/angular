@@ -14,6 +14,7 @@ export abstract class DynFormContainer<
   implements OnInit {
   static dynInstance = DynInstanceType.Container;
 
+  // auto-register in the form hierarchy
   ngOnInit(): void {
     super.ngOnInit();
 

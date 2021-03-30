@@ -18,21 +18,25 @@ import { simpleForm } from './simple.form';
   encapsulation: ViewEncapsulation.None,
 })
 export class SimpleComponent implements OnInit, AfterViewInit {
+  // reactive parameters of the billing CARD
   profileCard = new BehaviorSubject({
     title: 'Billing Address',
     subtitle: 'Please fill the required fields',
   });
 
+  // dyn-form inputs
   controls = simpleForm(this.profileCard);
   form = this.builder.group({});
 
   constructor(private builder: FormBuilder) {}
 
   ngOnInit(): void {
+    // logs each change in the console just to demo
     this.form.valueChanges.subscribe(console.log);
   }
 
   ngAfterViewInit(): void {
+    // simple example of how we can trigger changes into the params
     const group = this.form.get('billing') as FormGroup;
     group.statusChanges.pipe(startWith(group.status)).subscribe((status) => {
       this.profileCard.next({

@@ -19,18 +19,18 @@ export abstract class DynControl<
   TConfig extends DynBaseConfig<TParams> = DynBaseConfig<TParams>,
   TControl extends AbstractControl = FormGroup // friendly and most-common default
 > implements OnInit, OnDestroy {
-  // central place to define the provided Instance
-  static dynInstance: DynInstanceType;
   // central place to define the provided Type
   static dynControl: DynControlType;
+  // central place to define the provided Instance
+  static dynInstance: DynInstanceType;
 
   // abstract static createConfig(partial?: DynPartialControlConfig<TParams>): TConfig;
 
   abstract parent: DynControl;
 
-  config!: TConfig;
-  params!: TParams;
-  control!: TControl;
+  config!: TConfig; // passed down in the hierarchy
+  control!: TControl; // built from the config by the abstract classes
+  params!: TParams; // values available for the concrete Component instance
 
   protected _form: DynFormService;
   protected _ref: ChangeDetectorRef;

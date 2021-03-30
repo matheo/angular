@@ -1,4 +1,4 @@
-# @matheo/dyn-forms
+# @myndpm/dyn-forms
 
 Library to build dynamic forms via a config object.
 
@@ -7,14 +7,14 @@ Library to build dynamic forms via a config object.
 Components provided via `forFeature` (via `DYN_CONTROLS_TOKEN`).
 
 - Provide config for appearance (theme, full-width, inline)
-- Dynamic markers for context (panel, filter, table-cell, mobile)
+- Extensible handlers for context (panel, filter, table-cell, mobile?)
 - How to add form options? (clear, label, defaultValue, fieldName, placeholder, tooltip, cssClass)
 - How to add the filter options? (config, control, cleanseForUrl, apiFieldName)
-- How to have reactive behavior? (readonly, immutable, visible)
+- How to have reactive behavior? (readonly, immutable, visible, business-logic)
+  - Custom behaviors for groups, like isVisible$
 - Support display mode (config displayHandler, displayParams - strategy class)
 - Default and customized validators per groups and components
-- Custom behaviors for groups, like isVisible$
-- How to style them consistently? (calling mod non-encapsulated styles?)
+- How to them consistently? (calling mod non-encapsulated styles?)
 
 ### Patterns
 
@@ -23,7 +23,11 @@ Components provided via `forFeature` (via `DYN_CONTROLS_TOKEN`).
 - Strategy of common methods to be supported by the controls
   - (?) awareness of the available strategies
   - Essential methods only, with optional parameters
-- Composition of FormControls inside DynControls
+
+#### OOP
+
+- Inheritance of DynControls
+- Composition of FormControls
 
 ## Forms Config
 

@@ -14,9 +14,10 @@ export abstract class DynFormControl<
   implements OnInit {
   static dynInstance = DynInstanceType.Control;
 
+  // auto-register in the form hierarchy
   ngOnInit(): void {
     if (!this.config.name) {
-      throw new Error(`Error 02: No name provided for ${this.config.control}`);
+      throw new Error(`02: No name provided for ${this.config.control}`);
     }
 
     super.ngOnInit();

@@ -1,5 +1,5 @@
 {
-  "name": "@matheo/dyn-forms",
+  "name": "@myndpm/dyn-forms",
   "version": "11.2.6",
   "peerDependencies": {
     "@angular/common": ">=11.0.0",

@@ -14,7 +14,7 @@ export type AbstractDynControl = DynControl<
 export interface LazyControl {
   control: DynControlType;
   useFactory: Function;
-  // resolved in the controls.factory
+  // resolved in control-resolver.service
   component?: Type<AbstractDynControl>;
 }
 

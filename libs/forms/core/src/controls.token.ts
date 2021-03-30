@@ -1,6 +1,6 @@
 import { InjectionToken } from '@angular/core';
-import { DynControl } from './dyn-control.class';
+import { ControlProvider } from './control-provider.interface';
 
-export const DYN_CONTROLS_TOKEN = new InjectionToken<DynControl[]>(
+export const DYN_CONTROLS_TOKEN = new InjectionToken<ControlProvider[]>(
   '@matheo/dyn-forms/dyn-controls'
 );

@@ -5,7 +5,7 @@ export * from './src/control-strategy.interface';
 export * from './src/control.type';
 export * from './src/option.interface';
 
-export * from './src/controls.factory';
+export * from './src/controls.mapper';
 export * from './src/controls.token';
 
 export * from './src/dyn-control.class';

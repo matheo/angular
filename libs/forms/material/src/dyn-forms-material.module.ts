@@ -43,32 +43,26 @@ export class DynFormsMaterialModule {
     return DynFormsModule.forFeature({
       controls: [
         {
-          dynInstance: DynArrayComponent.dynInstance,
           dynControl: DynArrayComponent.dynControl,
           component: DynArrayComponent,
         },
         {
-          dynInstance: DynCardComponent.dynInstance,
           dynControl: DynCardComponent.dynControl,
           component: DynCardComponent,
         },
         {
-          dynInstance: DynGroupComponent.dynInstance,
           dynControl: DynGroupComponent.dynControl,
           component: DynGroupComponent,
         },
         {
-          dynInstance: DynInputComponent.dynInstance,
           dynControl: DynInputComponent.dynControl,
           component: DynInputComponent,
         },
         {
-          dynInstance: DynRadioComponent.dynInstance,
           dynControl: DynRadioComponent.dynControl,
           component: DynRadioComponent,
         },
         {
-          dynInstance: DynSelectComponent.dynInstance,
           dynControl: DynSelectComponent.dynControl,
           component: DynSelectComponent,
         },

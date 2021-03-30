@@ -22,7 +22,6 @@ export function controlsFactory(controls?: ControlProvider[]): Provider[] {
           // TODO resolve provider.component
         }
         return {
-          dynInstance: provider.dynInstance,
           dynControl: provider.dynControl,
           component: provider.component ?? ({} as any),
         };

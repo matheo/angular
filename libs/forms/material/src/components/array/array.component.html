@@ -20,7 +20,11 @@
         }"
       ></dyn-group>
 
-      <button mat-raised-button [color]="params.removeColor">
+      <button
+        mat-raised-button
+        [color]="params.removeColor"
+        (click)="removeItem(i)"
+      >
         {{ params.removeButton }}
       </button>
     </div>

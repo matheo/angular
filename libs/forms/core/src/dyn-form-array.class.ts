@@ -37,4 +37,8 @@ export abstract class DynFormArray<
       this._form.build(DynInstanceType.Group, this.config, true)
     );
   }
+
+  removeItem(index: number): void {
+    this.control.removeAt(index);
+  }
 }

@@ -99,10 +99,7 @@ export class DynFormService {
         return (control as unknown) as T;
 
       case DynInstanceType.Array:
-        return (new FormArray(
-          [this.build(DynInstanceType.Group, config, true)],
-          config.options
-        ) as unknown) as T;
+        return (new FormArray([], config.options) as unknown) as T;
 
       case DynInstanceType.Control:
         return (new FormControl(null, config.options) as unknown) as T;

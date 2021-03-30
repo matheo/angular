@@ -1,4 +1,5 @@
 import {
+  AfterViewInit,
   ChangeDetectionStrategy,
   Component,
   forwardRef,
@@ -31,7 +32,7 @@ import { DynArrayParams } from './array.component.params';
 })
 export class DynArrayComponent
   extends DynFormArray<DynArrayParams, DynControlConfig>
-  implements OnInit {
+  implements OnInit, AfterViewInit {
   static dynControl: 'ARRAY' = 'ARRAY';
 
   dynInstanceType = DynInstanceType;
@@ -59,6 +60,13 @@ export class DynArrayComponent
 
   ngOnInit(): void {
     super.ngOnInit();
+  }
+
+  ngAfterViewInit(): void {
+    if (this.params.initItem && !this.control.length) {
+      this.addItem();
+      this._ref.markForCheck();
+    }
   }
 
   checkParams(params: Partial<DynArrayParams>): DynArrayParams {

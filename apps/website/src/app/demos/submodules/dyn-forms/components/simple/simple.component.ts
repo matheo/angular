@@ -84,6 +84,7 @@ export class SimpleComponent implements OnInit, AfterViewInit {
       params: {
         title: 'Products',
         subtitle: 'Items to checkout',
+        initItem: true,
       },
       controls: [
         createConfig('INPUT', {

@@ -92,7 +92,48 @@ The message strings used in the datepicker's UI can be overriden providing a sub
 
 ### Date Formats Customization
 
-The display and parse formats used by the datepicker can be overriden providing a custom configuration of [MatDateFormats](https://github.com/matheo/angular/blob/master/libs/datepicker/src/core/datetime/native-date-formats.ts) via the `MAT_DATE_FORMATS` token from `@angular/material/core`, and using the `NativeDateModule` instead the `Mat`-prefixed version which does not include the default formats.
+The display and parse formats used by the datepicker can be overriden providing a custom configuration of [MatDateFormats](https://github.com/matheo/angular/blob/master/libs/datepicker/src/core/datetime/native-date-formats.ts) via the `MAT_DATE_FORMATS` token from `@angular/material/core`, and using the `NativeDateModule` instead the `Mat`-prefixed version which does not include the default formats like:
+
+```typescript
+@NgModule({
+  imports: [... MatDatepickerModule, NativeDateModule],
+  providers: [
+    {
+      provide: MAT_DATE_FORMATS,
+      useValue: {
+        parse: {
+          dateInput: null,
+          datetimeInput: null,
+          timeInput: null,
+          monthInput: null,
+          yearInput: null,
+        },
+        display: {
+          dateInput: {year: 'numeric', month: 'numeric', day: 'numeric'},
+          datetimeInput: {
+            year: 'numeric',
+            month: 'numeric',
+            day: 'numeric',
+            hour: 'numeric',
+            minute: 'numeric',
+            hour12: true
+          },
+          timeInput: {hour: 'numeric', minute: 'numeric'},
+          monthInput: {month: 'short', year: 'numeric'},
+          yearInput: {year: 'numeric'},
+          dateA11yLabel: {year: 'numeric', month: 'long', day: 'numeric'},
+          monthLabel: {month: 'short'},
+          monthDayLabel: {month: 'short', day: 'numeric'},
+          monthDayA11yLabel: {month: 'long', day: 'numeric'},
+          monthYearLabel: {year: 'numeric', month: 'short'},
+          monthYearA11yLabel: {year: 'numeric', month: 'long'},
+          timeLabel: {hours: 'numeric', minutes: 'numeric'},
+        }
+      }
+    }
+  ],
+})
+```
 
 More information in the official docs: <https://material.angular.io/components/datepicker/overview#internationalization>.
 

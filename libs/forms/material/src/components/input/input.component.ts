@@ -45,7 +45,7 @@ export class DynInputComponent
     super.ngOnInit();
   }
 
-  checkParams(params: Partial<DynInputParams>): DynInputParams {
+  completeParams(params: Partial<DynInputParams>): DynInputParams {
     return {
       ...params,
       type: params.type || 'text',

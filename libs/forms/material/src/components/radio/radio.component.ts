@@ -45,7 +45,7 @@ export class DynRadioComponent
     super.ngOnInit();
   }
 
-  checkParams(params: Partial<DynRadioParams>): DynRadioParams {
+  completeParams(params: Partial<DynRadioParams>): DynRadioParams {
     return {
       ...params,
       options: params.options || [],

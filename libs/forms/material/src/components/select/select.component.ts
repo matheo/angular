@@ -46,7 +46,7 @@ export class DynSelectComponent
     super.ngOnInit();
   }
 
-  checkParams(params: Partial<DynSelectParams>): DynSelectParams {
+  completeParams(params: Partial<DynSelectParams>): DynSelectParams {
     function compareWith(o1: any, o2: any): boolean {
       // tslint:disable-next-line: triple-equals
       return o1 == o2;

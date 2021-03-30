@@ -45,12 +45,12 @@ export abstract class DynControl<
     // assign incoming parameters
     if (this.config.params) {
       if (!isObservable(this.config.params)) {
-        this.params = this.checkParams(this.config.params || {});
+        this.params = this.completeParams(this.config.params || {});
       } else {
         // emulates the async pipe
         this.config.params.pipe(takeUntil(this._unsubscribe)).subscribe({
           next: (params) => {
-            this.params = this.checkParams(params);
+            this.params = this.completeParams(params);
             this._ref.markForCheck();
           },
         });
@@ -63,5 +63,5 @@ export abstract class DynControl<
     this._unsubscribe.complete();
   }
 
-  abstract checkParams(params: Partial<TParams>): TParams;
+  abstract completeParams(params: Partial<TParams>): TParams;
 }

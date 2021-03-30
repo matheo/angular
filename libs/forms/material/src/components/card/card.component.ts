@@ -53,7 +53,7 @@ export class DynCardComponent
     super.ngOnInit();
   }
 
-  checkParams(params: Partial<DynCardParams>): DynCardParams {
+  completeParams(params: Partial<DynCardParams>): DynCardParams {
     return params;
   }
 }

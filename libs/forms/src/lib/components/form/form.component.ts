@@ -34,7 +34,7 @@ export class FormComponent extends DynControl<any> {
   }
 
   // not used but required to be API compliant
-  checkParams(params: any): any {
+  completeParams(params: any): any {
     return params;
   }
 }

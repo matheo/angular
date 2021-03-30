@@ -69,7 +69,7 @@ export class DynArrayComponent
     }
   }
 
-  checkParams(params: Partial<DynArrayParams>): DynArrayParams {
+  completeParams(params: Partial<DynArrayParams>): DynArrayParams {
     return {
       ...params,
       addButton: params.addButton || 'Add Item',

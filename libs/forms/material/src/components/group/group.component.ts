@@ -55,7 +55,7 @@ export class DynGroupComponent extends DynFormContainer implements OnInit {
     super.ngOnInit();
   }
 
-  checkParams(params: Partial<DynControlParams>): DynControlParams {
+  completeParams(params: Partial<DynControlParams>): DynControlParams {
     return params;
   }
 }

@@ -20,9 +20,9 @@ export abstract class DynControl<
   TControl extends AbstractControl = FormGroup // friendly and most-common default
 > implements OnInit, OnDestroy {
   // central place to define the provided Type
-  static dynControl: DynControlType;
+  static dynControl: DynControlType = '';
   // central place to define the provided Instance
-  static dynInstance: DynInstanceType;
+  static dynInstance: DynInstanceType = DynInstanceType.Group;
 
   // abstract static createConfig(partial?: DynPartialControlConfig<TParams>): TConfig;
 

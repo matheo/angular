@@ -5,6 +5,6 @@
     "noUnusedLocals": true
   },
   "angularCompilerOptions": {
-    "enableIvy": true
+    "enableIvy": false
   }
 }

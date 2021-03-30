@@ -1,6 +1,6 @@
 {
   "name": "@myndpm/dyn-forms",
-  "version": "11.2.6",
+  "version": "11.2.6-beta.0",
   "peerDependencies": {
     "@angular/common": ">=11.0.0",
     "@angular/core": ">=11.0.0",

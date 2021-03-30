@@ -20,58 +20,81 @@ import { startWith } from 'rxjs/operators';
 })
 export class SimpleComponent implements OnInit, AfterViewInit {
   profileCard = new BehaviorSubject({
-    title: 'Profile',
-    subtitle: 'Please fill your Personal Information',
+    title: 'Billing Address',
+    subtitle: 'Please fill the required fields',
   });
 
   controls: DynFormControls = [
     createConfig('CARD', {
-      name: 'profile',
+      name: 'billing',
       params: this.profileCard,
       controls: [
         createConfig('INPUT', {
           name: 'firstName',
-          params: {
-            label: 'First Name',
-          },
-          options: {
-            validators: [Validators.required],
-          },
+          params: { label: 'First Name *' },
+          options: { validators: [Validators.required] },
         }),
         createConfig('INPUT', {
           name: 'lastName',
+          params: { label: 'Last Name *' },
+          options: { validators: [Validators.required] },
+        }),
+        createConfig('INPUT', {
+          name: 'address1',
+          params: { label: 'Address Line 1 *' },
+          options: { validators: [Validators.required] },
+        }),
+        createConfig('INPUT', {
+          name: 'address2',
+          params: { label: 'Address Line 2' },
+        }),
+        createConfig('SELECT', {
+          name: 'country',
           params: {
-            label: 'Last Name',
+            label: 'Country',
+            options: [
+              { text: '- Choose one -', value: null },
+              { text: 'Colombia', value: 'CO' },
+              { text: 'United States', value: 'US' },
+              { text: 'China', value: 'CN' },
+              { text: 'Russia', value: 'RU' },
+              { text: 'Other', value: 'XX' },
+            ],
           },
+          options: { validators: [Validators.required] },
+        }),
+        createConfig('INPUT', {
+          name: 'zipCode',
+          params: { label: 'Postal Code *', type: 'number' },
+          options: { validators: [Validators.required, Validators.min(0)] },
         }),
       ],
     }),
-    createConfig('ARRAY', {
-      name: 'items',
+    createConfig('RADIO', {
+      name: 'account',
       params: {
-        title: 'Persons',
-        subtitle: 'Dynamic implementation of a Form Array ',
+        options: [
+          { text: 'Create Account', value: 'CREATE' },
+          { text: 'Checkout as a Guest', value: 'GUEST' },
+        ],
+      },
+    }),
+    createConfig('ARRAY', {
+      name: 'products',
+      params: {
+        title: 'Products',
+        subtitle: 'Items to checkout',
       },
       controls: [
         createConfig('INPUT', {
-          name: 'fullName',
-          params: {
-            label: 'Full Name',
-          },
+          name: 'product',
+          params: { label: 'Product Name *' },
+          options: { validators: [Validators.required] },
         }),
-        createConfig('SELECT', {
-          name: 'idType',
-          params: {
-            label: 'ID Type',
-            options: [
-              { text: '- Choose one -', value: null },
-              { text: 'ID', value: 'ID' },
-              { text: 'Passport', value: 'PASSPORT' },
-            ],
-          },
-          options: {
-            validators: [Validators.required],
-          },
+        createConfig('INPUT', {
+          name: 'quantity',
+          params: { label: 'Quantity *', type: 'number' },
+          options: { validators: [Validators.required, Validators.min(1)] },
         }),
       ],
     }),
@@ -85,14 +108,14 @@ export class SimpleComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    const group = this.form.get('profile') as FormGroup;
+    const group = this.form.get('billing') as FormGroup;
     group.statusChanges.pipe(startWith(group.status)).subscribe((status) => {
       this.profileCard.next({
-        title: 'Profile',
+        title: 'Billing Address',
         subtitle:
           status === 'INVALID'
             ? 'Please fill your Personal Information'
-            : 'Thanks for fill out your Personal Information',
+            : 'Billing information complete',
       });
     });
   }

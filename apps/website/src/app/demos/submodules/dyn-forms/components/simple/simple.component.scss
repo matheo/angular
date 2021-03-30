@@ -5,3 +5,21 @@ mat-card {
 dyn-factory {
   margin-right: 1em;
 }
+
+.dyn-field-address1,
+.dyn-field-address2 {
+  display: block;
+
+  dyn-material-input {
+    display: block;
+
+    .mat-form-field {
+      width: 100%;
+    }
+  }
+}
+
+mat-radio-group {
+  display: inline-block;
+  margin: 0.5em 0;
+}

@@ -3,6 +3,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   ComponentFactoryResolver,
+  HostBinding,
   Injector,
   Input,
   OnInit,
@@ -27,6 +28,11 @@ export class FactoryComponent implements OnInit {
 
   @ViewChild('container', { static: true, read: ViewContainerRef })
   container!: ViewContainerRef;
+
+  @HostBinding('class')
+  get cssClass(): string {
+    return this.config?.name ? `dyn-field-${this.config?.name}` : '';
+  }
 
   constructor(
     private injector: Injector,

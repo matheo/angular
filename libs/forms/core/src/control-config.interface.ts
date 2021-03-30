@@ -19,10 +19,11 @@ export interface DynControlConfig<P extends DynControlParams = DynControlParams>
   extends DynBaseConfig<P> {
   // hierarchy
   name: string; // mandatory fieldName
-  // config
-  // contexts: { display: { dynControl, dynParams }, table: ... }
+  // customizations
+  // layout?: { cssClass, colSpan }
+  // errorHandler: (errors: ValidationErrors) => string
+  // contextHandlers: { display: { dynControl, dynParams }, table: ... }
   // filterOptions
-  // readonly [property: string]: unknown;
 }
 
 export type DynPartialControlConfig<

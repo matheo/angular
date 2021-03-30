@@ -9,6 +9,7 @@ import {
   DynControl,
   DynControlConfig,
   DynFormControl,
+  DynPartialControlConfig,
 } from '@matheo/dyn-forms/core';
 import { DynInputParams } from './input.component.params';
 
@@ -24,10 +25,10 @@ export class DynInputComponent
   static dynControl: 'INPUT' = 'INPUT';
 
   static createConfig(
-    partial: Partial<DynControlConfig<DynInputParams>>
+    partial: DynPartialControlConfig<DynInputParams>
   ): DynControlConfig {
     return {
-      ...(partial as DynControlConfig),
+      ...partial,
       control: DynInputComponent.dynControl,
       instance: DynInputComponent.dynInstance,
     };

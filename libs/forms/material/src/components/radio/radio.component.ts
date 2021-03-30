@@ -9,6 +9,7 @@ import {
   DynControl,
   DynControlConfig,
   DynFormControl,
+  DynPartialControlConfig,
 } from '@matheo/dyn-forms/core';
 import { DynRadioParams } from './radio.component.params';
 
@@ -24,10 +25,10 @@ export class DynRadioComponent
   static dynControl: 'RADIO' = 'RADIO';
 
   static createConfig(
-    partial: Partial<DynControlConfig<DynRadioParams>>
+    partial: DynPartialControlConfig<DynRadioParams>
   ): DynControlConfig {
     return {
-      ...(partial as DynControlConfig),
+      ...partial,
       control: DynRadioComponent.dynControl,
       instance: DynRadioComponent.dynInstance,
     };

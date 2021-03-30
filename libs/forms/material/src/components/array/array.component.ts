@@ -13,6 +13,7 @@ import {
   DynControlConfig,
   DynFormArray,
   DynInstanceType,
+  DynPartialControlConfig,
 } from '@matheo/dyn-forms/core';
 import { DynArrayParams } from './array.component.params';
 
@@ -36,10 +37,10 @@ export class DynArrayComponent
   dynInstanceType = DynInstanceType;
 
   static createConfig(
-    partial: Partial<DynControlConfig<DynArrayParams>>
+    partial: DynPartialControlConfig<DynArrayParams>
   ): DynControlConfig<DynArrayParams> {
     return {
-      ...(partial as DynControlConfig),
+      ...partial,
       control: DynArrayComponent.dynControl,
       instance: DynArrayComponent.dynInstance,
     };

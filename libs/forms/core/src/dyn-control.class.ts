@@ -24,7 +24,7 @@ export abstract class DynControl<
   // central place to define the provided Type
   static dynControl: DynControlType;
 
-  // abstract static createConfig(partial?: Partial<TConfig>): TConfig;
+  // abstract static createConfig(partial?: DynPartialControlConfig<TParams>): TConfig;
 
   abstract parent: DynControl;
 

@@ -10,6 +10,7 @@ import {
   DynControl,
   DynControlConfig,
   DynFormControl,
+  DynPartialControlConfig,
 } from '@matheo/dyn-forms/core';
 import { DynSelectParams } from './select.component.params';
 
@@ -25,10 +26,10 @@ export class DynSelectComponent
   static dynControl: 'SELECT' = 'SELECT';
 
   static createConfig(
-    partial: Partial<DynControlConfig<DynSelectParams>>
+    partial: DynPartialControlConfig<DynSelectParams>
   ): DynControlConfig {
     return {
-      ...(partial as DynControlConfig),
+      ...partial,
       control: DynSelectComponent.dynControl,
       instance: DynSelectComponent.dynInstance,
     };

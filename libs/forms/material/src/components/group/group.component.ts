@@ -15,6 +15,7 @@ import {
   DynControlConfig,
   DynControlParams,
   DynFormContainer,
+  DynPartialControlConfig,
 } from '@matheo/dyn-forms/core';
 
 @Component({
@@ -35,9 +36,9 @@ export class DynGroupComponent extends DynFormContainer implements OnInit {
   @Input('group') control!: FormGroup;
   @Input() config: DynBaseConfig = {} as DynBaseConfig;
 
-  static createConfig(partial: Partial<DynControlConfig>): DynControlConfig {
+  static createConfig(partial: DynPartialControlConfig): DynControlConfig {
     return {
-      ...(partial as DynControlConfig),
+      ...partial,
       control: DynGroupComponent.dynControl,
       instance: DynGroupComponent.dynInstance,
     };

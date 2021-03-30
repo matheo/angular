@@ -2,6 +2,7 @@ import {
   DynControlConfig,
   DynControlParams,
   DynControlType,
+  DynPartialControlConfig,
 } from '@matheo/dyn-forms/core';
 import {
   DynCardComponent,
@@ -17,40 +18,36 @@ import { DynRadioParams } from './components/radio/radio.component.params';
 import { DynSelectComponent } from './components/select/select.component';
 import { DynSelectParams } from './components/select/select.component.params';
 
-export type PartialConfig<T extends DynControlParams> = Partial<
-  DynControlConfig<Partial<T>>
->;
-
 // type overloads
 export function createConfig(
   type: typeof DynArrayComponent.dynControl,
-  partial: PartialConfig<DynArrayParams>
+  partial: DynPartialControlConfig<Partial<DynArrayParams>>
 ): DynControlConfig;
 export function createConfig(
   type: typeof DynCardComponent.dynControl,
-  partial: PartialConfig<DynCardParams>
+  partial: DynPartialControlConfig<Partial<DynCardParams>>
 ): DynControlConfig;
 export function createConfig(
   type: typeof DynGroupComponent.dynControl,
-  partial: PartialConfig<DynControlParams>
+  partial: DynPartialControlConfig<Partial<DynControlParams>>
 ): DynControlConfig;
 export function createConfig(
   type: typeof DynInputComponent.dynControl,
-  partial: PartialConfig<DynInputParams>
+  partial: DynPartialControlConfig<Partial<DynInputParams>>
 ): DynControlConfig;
 export function createConfig(
   type: typeof DynRadioComponent.dynControl,
-  partial: PartialConfig<DynRadioParams>
+  partial: DynPartialControlConfig<Partial<DynRadioParams>>
 ): DynControlConfig;
 export function createConfig(
   type: typeof DynSelectComponent.dynControl,
-  partial: PartialConfig<DynSelectParams>
+  partial: DynPartialControlConfig<Partial<DynSelectParams>>
 ): DynControlConfig;
 
 // factory
 export function createConfig(
   type: DynControlType,
-  partial: Partial<DynControlConfig<any>>
+  partial: DynPartialControlConfig<any>
 ): DynControlConfig {
   switch (type) {
     // containers

@@ -7,7 +7,11 @@ import {
   OnInit,
   SkipSelf,
 } from '@angular/core';
-import { DynControl, DynControlConfig } from '@matheo/dyn-forms/core';
+import {
+  DynControl,
+  DynControlConfig,
+  DynPartialControlConfig,
+} from '@matheo/dyn-forms/core';
 import { DynFormContainer } from '@matheo/dyn-forms/core';
 import { DynCardParams } from './card.component.params';
 
@@ -29,10 +33,10 @@ export class DynCardComponent
   static dynControl: 'CARD' = 'CARD';
 
   static createConfig(
-    partial: Partial<DynControlConfig<DynCardParams>>
+    partial: DynPartialControlConfig<DynCardParams>
   ): DynControlConfig<DynCardParams> {
     return {
-      ...(partial as DynControlConfig),
+      ...partial,
       control: DynCardComponent.dynControl,
       instance: DynCardComponent.dynInstance,
     };

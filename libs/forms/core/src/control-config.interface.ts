@@ -8,7 +8,7 @@ export interface DynBaseConfig<P extends DynControlParams = DynControlParams> {
   control: DynControlType;
   instance: DynInstanceType;
   // hierarchy
-  name?: string; // optional entity
+  name?: string; // optional fieldName
   controls?: DynControlConfig[];
   // customizations
   params?: P | Observable<P>;
@@ -18,11 +18,15 @@ export interface DynBaseConfig<P extends DynControlParams = DynControlParams> {
 export interface DynControlConfig<P extends DynControlParams = DynControlParams>
   extends DynBaseConfig<P> {
   // hierarchy
-  name: string; // mandatory entity
+  name: string; // mandatory fieldName
   // config
   // contexts: { display: { dynControl, dynParams }, table: ... }
   // filterOptions
   // readonly [property: string]: unknown;
 }
+
+export type DynPartialControlConfig<
+  P extends DynControlParams = DynControlParams
+> = Omit<DynControlConfig<P>, 'control' | 'instance'>;
 
 export type DynFormControls = Array<DynBaseConfig | DynControlConfig>;

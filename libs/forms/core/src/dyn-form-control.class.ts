@@ -16,9 +16,7 @@ export abstract class DynFormControl<
 
   ngOnInit(): void {
     if (!this.config.name) {
-      throw new Error(
-        `Error 02: No name provided for ${this.config.dynControl}`
-      );
+      throw new Error(`Error 02: No name provided for ${this.config.control}`);
     }
 
     super.ngOnInit();

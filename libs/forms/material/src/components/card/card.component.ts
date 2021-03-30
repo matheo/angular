@@ -32,10 +32,10 @@ export class DynCardComponent
     partial: Partial<DynControlConfig<DynCardParams>>
   ): DynControlConfig<DynCardParams> {
     return {
-      ...partial,
-      dynInstance: DynCardComponent.dynInstance,
-      dynControl: DynCardComponent.dynControl,
-    } as DynControlConfig;
+      ...(partial as DynControlConfig),
+      control: DynCardComponent.dynControl,
+      instance: DynCardComponent.dynInstance,
+    };
   }
 
   constructor(

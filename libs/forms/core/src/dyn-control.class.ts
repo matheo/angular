@@ -43,12 +43,12 @@ export abstract class DynControl<
 
   ngOnInit(): void {
     // assign incoming parameters
-    if (this.config.dynParams) {
-      if (!isObservable(this.config.dynParams)) {
-        this.params = this.checkParams(this.config.dynParams || {});
+    if (this.config.params) {
+      if (!isObservable(this.config.params)) {
+        this.params = this.checkParams(this.config.params || {});
       } else {
         // emulates the async pipe
-        this.config.dynParams.pipe(takeUntil(this._unsubscribe)).subscribe({
+        this.config.params.pipe(takeUntil(this._unsubscribe)).subscribe({
           next: (params) => {
             this.params = this.checkParams(params);
             this._ref.markForCheck();

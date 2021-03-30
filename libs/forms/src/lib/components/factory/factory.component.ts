@@ -36,7 +36,7 @@ export class FactoryComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const control = this.controls.resolve(this.config.dynControl);
+    const control = this.controls.resolve(this.config.control);
     const factory = this.resolver.resolveComponentFactory(control.component);
 
     const ref = this.container.createComponent<any>(

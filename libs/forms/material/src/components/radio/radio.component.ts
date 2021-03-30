@@ -27,10 +27,10 @@ export class DynRadioComponent
     partial: Partial<DynControlConfig<DynRadioParams>>
   ): DynControlConfig {
     return {
-      ...partial,
-      dynInstance: DynRadioComponent.dynInstance,
-      dynControl: DynRadioComponent.dynControl,
-    } as DynControlConfig;
+      ...(partial as DynControlConfig),
+      control: DynRadioComponent.dynControl,
+      instance: DynRadioComponent.dynInstance,
+    };
   }
 
   constructor(

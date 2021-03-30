@@ -39,10 +39,10 @@ export class DynArrayComponent
     partial: Partial<DynControlConfig<DynArrayParams>>
   ): DynControlConfig<DynArrayParams> {
     return {
-      ...partial,
-      dynInstance: DynArrayComponent.dynInstance,
-      dynControl: DynArrayComponent.dynControl,
-    } as DynControlConfig;
+      ...(partial as DynControlConfig),
+      control: DynArrayComponent.dynControl,
+      instance: DynArrayComponent.dynInstance,
+    };
   }
 
   constructor(

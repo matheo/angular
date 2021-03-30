@@ -28,10 +28,10 @@ export class DynSelectComponent
     partial: Partial<DynControlConfig<DynSelectParams>>
   ): DynControlConfig {
     return {
-      ...partial,
-      dynInstance: DynSelectComponent.dynInstance,
-      dynControl: DynSelectComponent.dynControl,
-    } as DynControlConfig;
+      ...(partial as DynControlConfig),
+      control: DynSelectComponent.dynControl,
+      instance: DynSelectComponent.dynInstance,
+    };
   }
 
   constructor(

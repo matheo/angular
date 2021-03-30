@@ -27,20 +27,20 @@ export class SimpleComponent implements OnInit, AfterViewInit {
   controls: DynFormControls = [
     createConfig('CARD', {
       name: 'profile',
-      dynParams: this.profileCard,
+      params: this.profileCard,
       controls: [
         createConfig('INPUT', {
           name: 'firstName',
-          dynParams: {
+          params: {
             label: 'First Name',
           },
-          dynOptions: {
+          options: {
             validators: [Validators.required],
           },
         }),
         createConfig('INPUT', {
           name: 'lastName',
-          dynParams: {
+          params: {
             label: 'Last Name',
           },
         }),
@@ -48,20 +48,20 @@ export class SimpleComponent implements OnInit, AfterViewInit {
     }),
     createConfig('ARRAY', {
       name: 'items',
-      dynParams: {
+      params: {
         title: 'Persons',
         subtitle: 'Dynamic implementation of a Form Array ',
       },
       controls: [
         createConfig('INPUT', {
           name: 'fullName',
-          dynParams: {
+          params: {
             label: 'Full Name',
           },
         }),
         createConfig('SELECT', {
           name: 'idType',
-          dynParams: {
+          params: {
             label: 'ID Type',
             options: [
               { text: '- Choose one -', value: null },
@@ -69,7 +69,7 @@ export class SimpleComponent implements OnInit, AfterViewInit {
               { text: 'Passport', value: 'PASSPORT' },
             ],
           },
-          dynOptions: {
+          options: {
             validators: [Validators.required],
           },
         }),

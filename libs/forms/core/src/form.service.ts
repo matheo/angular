@@ -15,34 +15,34 @@ import { DynControl } from './dyn-control.class';
 export class DynFormService {
   constructor() {}
 
-  register<FormGroup>(
-    type: DynInstanceType.Container | DynInstanceType.Group,
+  register(
+    instance: DynInstanceType.Container | DynInstanceType.Group,
     config: DynBaseConfig,
     parent: DynControl,
     recursively?: boolean
   ): FormGroup;
-  register<FormArray>(
-    type: DynInstanceType.Array,
+  register(
+    instance: DynInstanceType.Array,
     config: DynBaseConfig,
     parent: DynControl,
     recursively?: boolean
   ): FormArray;
-  register<FormControl>(
-    type: DynInstanceType.Control,
+  register(
+    instance: DynInstanceType.Control,
     config: DynBaseConfig,
     parent: DynControl,
     recursively?: boolean
   ): FormControl;
   register<T extends AbstractControl>(
-    type: DynInstanceType,
+    instance: DynInstanceType,
     config: DynBaseConfig,
     parent: DynControl,
     recursively = false
   ): T {
     // fail-safe validation
-    if (type !== config.dynInstance) {
+    if (instance !== config.instance) {
       throw new Error(
-        `Error 03: Cannot register ${type} for a config with ${config.dynInstance}`
+        `Error 03: Cannot register ${instance} for a config with ${config.instance}`
       );
     }
 
@@ -52,9 +52,9 @@ export class DynFormService {
       return control as T;
     }
 
-    control = this.build(type as any, config, recursively);
+    control = this.build(instance as any, config, recursively);
     if (!control) {
-      throw new Error(`Error 04: Could not build a control for ${type}`);
+      throw new Error(`Error 04: Could not build a control for ${instance}`);
     }
 
     if (config.name) {
@@ -64,35 +64,35 @@ export class DynFormService {
     return control as T;
   }
 
-  build<FormGroup>(
-    type: DynInstanceType.Container | DynInstanceType.Group,
+  build(
+    instance: DynInstanceType.Container | DynInstanceType.Group,
     config: DynBaseConfig,
     recursively: boolean
   ): FormGroup;
-  build<FormArray>(
-    type: DynInstanceType.Array,
+  build(
+    instance: DynInstanceType.Array,
     config: DynBaseConfig,
     recursively: boolean
   ): FormArray;
-  build<FormControl>(
-    type: DynInstanceType.Control,
+  build(
+    instance: DynInstanceType.Control,
     config: DynBaseConfig,
     recursively: boolean
   ): FormControl;
   build<T extends AbstractControl>(
-    type: DynInstanceType,
+    instance: DynInstanceType,
     config: DynBaseConfig,
     recursively = false
   ): T {
-    switch (type) {
+    switch (instance) {
       case DynInstanceType.Container:
       case DynInstanceType.Group:
-        const control = new FormGroup({}, config.dynOptions);
+        const control = new FormGroup({}, config.options);
         if (recursively) {
           config.controls?.forEach((item) => {
             control.addControl(
               item.name,
-              this.build(item.dynInstance as any, item, recursively)
+              this.build(item.instance as any, item, recursively)
             );
           });
         }
@@ -101,11 +101,11 @@ export class DynFormService {
       case DynInstanceType.Array:
         return (new FormArray(
           [this.build(DynInstanceType.Group, config, true)],
-          config.dynOptions
+          config.options
         ) as unknown) as T;
 
       case DynInstanceType.Control:
-        return (new FormControl(null, config.dynOptions) as unknown) as T;
+        return (new FormControl(null, config.options) as unknown) as T;
     }
   }
 

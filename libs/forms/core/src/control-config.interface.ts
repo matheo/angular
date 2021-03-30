@@ -4,14 +4,15 @@ import { DynControlParams } from './control-params.interface';
 import { DynControlType, DynInstanceType } from './control.type';
 
 export interface DynBaseConfig<P extends DynControlParams = DynControlParams> {
+  // config
+  control: DynControlType;
+  instance: DynInstanceType;
   // hierarchy
   name?: string; // optional entity
   controls?: DynControlConfig[];
-  // config
-  dynInstance: DynInstanceType;
-  dynControl: DynControlType;
-  dynParams?: P | Observable<P>;
-  dynOptions?: AbstractControlOptions;
+  // customizations
+  params?: P | Observable<P>;
+  options?: AbstractControlOptions;
 }
 
 export interface DynControlConfig<P extends DynControlParams = DynControlParams>
@@ -21,7 +22,7 @@ export interface DynControlConfig<P extends DynControlParams = DynControlParams>
   // config
   // contexts: { display: { dynControl, dynParams }, table: ... }
   // filterOptions
-  readonly [property: string]: unknown;
+  // readonly [property: string]: unknown;
 }
 
 export type DynFormControls = Array<DynBaseConfig | DynControlConfig>;

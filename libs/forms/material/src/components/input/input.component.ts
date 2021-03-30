@@ -27,10 +27,10 @@ export class DynInputComponent
     partial: Partial<DynControlConfig<DynInputParams>>
   ): DynControlConfig {
     return {
-      ...partial,
-      dynInstance: DynInputComponent.dynInstance,
-      dynControl: DynInputComponent.dynControl,
-    } as DynControlConfig;
+      ...(partial as DynControlConfig),
+      control: DynInputComponent.dynControl,
+      instance: DynInputComponent.dynInstance,
+    };
   }
 
   constructor(

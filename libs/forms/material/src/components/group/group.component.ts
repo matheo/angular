@@ -38,6 +38,7 @@ export class DynGroupComponent extends DynFormContainer implements OnInit {
   static createConfig(partial: Partial<DynControlConfig>): DynControlConfig {
     return {
       ...partial,
+      dynInstance: DynGroupComponent.dynInstance,
       dynControl: DynGroupComponent.dynControl,
     } as DynControlConfig;
   }

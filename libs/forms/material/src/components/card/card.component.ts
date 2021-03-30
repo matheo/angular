@@ -33,6 +33,7 @@ export class DynCardComponent
   ): DynControlConfig<DynCardParams> {
     return {
       ...partial,
+      dynInstance: DynCardComponent.dynInstance,
       dynControl: DynCardComponent.dynControl,
     } as DynControlConfig;
   }

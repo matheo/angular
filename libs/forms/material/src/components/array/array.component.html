@@ -13,17 +13,21 @@
     <div class="array-item" *ngFor="let item of items; index as i">
       <dyn-group
         [group]="item"
-        [config]="{ dynControl: '', controls: config.controls }"
+        [config]="{
+          dynControl: '',
+          dynInstance: dynInstanceType.Group,
+          controls: config.controls
+        }"
       ></dyn-group>
 
-      <button mat-flat-button [color]="params.color">
+      <button mat-raised-button [color]="params.removeColor">
         {{ params.removeButton }}
       </button>
     </div>
   </mat-card-content>
 
   <mat-card-actions [align]="'end'">
-    <button mat-flat-button [color]="params.color" (click)="addItem()">
+    <button mat-raised-button [color]="params.addColor" (click)="addItem()">
       {{ params.addButton }}
     </button>
   </mat-card-actions>

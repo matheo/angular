@@ -12,6 +12,7 @@ import {
   DynControl,
   DynControlConfig,
   DynFormArray,
+  DynInstanceType,
 } from '@matheo/dyn-forms/core';
 import { DynArrayParams } from './array.component.params';
 
@@ -32,11 +33,14 @@ export class DynArrayComponent
   implements OnInit {
   static dynControl: 'ARRAY' = 'ARRAY';
 
+  dynInstanceType = DynInstanceType;
+
   static createConfig(
     partial: Partial<DynControlConfig<DynArrayParams>>
   ): DynControlConfig<DynArrayParams> {
     return {
       ...partial,
+      dynInstance: DynArrayComponent.dynInstance,
       dynControl: DynArrayComponent.dynControl,
     } as DynControlConfig;
   }
@@ -59,9 +63,10 @@ export class DynArrayComponent
   checkParams(params: Partial<DynArrayParams>): DynArrayParams {
     return {
       ...params,
-      color: params.color || 'accent',
       addButton: params.addButton || 'Add Item',
+      addColor: params.addColor || 'primary',
       removeButton: params.removeButton || 'Remove',
+      removeColor: params.removeColor || '',
     };
   }
 }

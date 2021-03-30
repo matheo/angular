@@ -12,19 +12,20 @@ export abstract class DynFormGroup<
   >
   extends DynControl<TParams, TConfig, FormGroup>
   implements OnInit {
-  static dynInstance = DynInstanceType.Control;
+  static dynInstance = DynInstanceType.Group;
 
   ngOnInit(): void {
+    super.ngOnInit();
+
     if (this.config.name) {
-      this.control = new FormGroup({}, this.config.dynOptions);
-      if (this.parent.control.addControl) {
-        this.parent.control.addControl(this.config.name, this.control);
-      }
+      this.control = this._form.register(
+        DynInstanceType.Group,
+        this.config,
+        this.parent
+      );
     } else if (!this.control) {
-      // fallback to the parent control (useful for )
+      // fallback to the parent control (useful for UI subgroups)
       this.control = this.parent.control;
     }
-
-    super.ngOnInit();
   }
 }

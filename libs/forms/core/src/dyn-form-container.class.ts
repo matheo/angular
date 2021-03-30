@@ -15,16 +15,17 @@ export abstract class DynFormContainer<
   static dynInstance = DynInstanceType.Container;
 
   ngOnInit(): void {
+    super.ngOnInit();
+
     if (this.config.name) {
-      this.control = new FormGroup({}, this.config.dynOptions);
-      if (this.parent.control.addControl) {
-        this.parent.control.addControl(this.config.name, this.control);
-      }
+      this.control = this._form.register(
+        DynInstanceType.Container,
+        this.config,
+        this.parent
+      );
     } else if (!this.control) {
-      // just bridges the parent FormGroup
+      // fallback to the parent control
       this.control = this.parent.control;
     }
-
-    super.ngOnInit();
   }
 }

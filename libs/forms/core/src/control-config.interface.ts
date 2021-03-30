@@ -1,13 +1,14 @@
 import { AbstractControlOptions } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { DynControlParams } from './control-params.interface';
-import { DynControlType } from './control.type';
+import { DynControlType, DynInstanceType } from './control.type';
 
 export interface DynBaseConfig<P extends DynControlParams = DynControlParams> {
   // hierarchy
   name?: string; // optional entity
   controls?: DynControlConfig[];
   // config
+  dynInstance: DynInstanceType;
   dynControl: DynControlType;
   dynParams?: P | Observable<P>;
   dynOptions?: AbstractControlOptions;

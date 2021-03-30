@@ -11,6 +11,7 @@ import { takeUntil } from 'rxjs/operators';
 import { DynBaseConfig } from './control-config.interface';
 import { DynControlParams } from './control-params.interface';
 import { DynControlType, DynInstanceType } from './control.type';
+import { DynFormService } from './form.service';
 
 @Directive()
 export abstract class DynControl<
@@ -31,14 +32,17 @@ export abstract class DynControl<
   params!: TParams;
   control!: TControl;
 
+  protected _form: DynFormService;
   protected _ref: ChangeDetectorRef;
   protected _unsubscribe = new Subject<void>();
 
   constructor(injector: Injector) {
+    this._form = injector.get(DynFormService);
     this._ref = injector.get(ChangeDetectorRef);
   }
 
   ngOnInit(): void {
+    // assign incoming parameters
     if (this.config.dynParams) {
       if (!isObservable(this.config.dynParams)) {
         this.params = this.checkParams(this.config.dynParams || {});

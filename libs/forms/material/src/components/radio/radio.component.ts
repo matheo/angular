@@ -28,6 +28,7 @@ export class DynRadioComponent
   ): DynControlConfig {
     return {
       ...partial,
+      dynInstance: DynRadioComponent.dynInstance,
       dynControl: DynRadioComponent.dynControl,
     } as DynControlConfig;
   }

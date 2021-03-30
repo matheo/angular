@@ -28,6 +28,7 @@ export class DynInputComponent
   ): DynControlConfig {
     return {
       ...partial,
+      dynInstance: DynInputComponent.dynInstance,
       dynControl: DynInputComponent.dynControl,
     } as DynControlConfig;
   }

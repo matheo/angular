@@ -5,11 +5,10 @@ import {
   OnInit,
   ViewEncapsulation,
 } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { DynFormControls } from '@matheo/dyn-forms/core';
-import { createConfig } from '@matheo/dyn-forms/material';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { BehaviorSubject } from 'rxjs';
 import { startWith } from 'rxjs/operators';
+import { simpleForm } from './simple.form';
 
 @Component({
   selector: 'web-simple',
@@ -24,82 +23,7 @@ export class SimpleComponent implements OnInit, AfterViewInit {
     subtitle: 'Please fill the required fields',
   });
 
-  controls: DynFormControls = [
-    createConfig('CARD', {
-      name: 'billing',
-      params: this.profileCard,
-      controls: [
-        createConfig('INPUT', {
-          name: 'firstName',
-          params: { label: 'First Name *' },
-          options: { validators: [Validators.required] },
-        }),
-        createConfig('INPUT', {
-          name: 'lastName',
-          params: { label: 'Last Name *' },
-          options: { validators: [Validators.required] },
-        }),
-        createConfig('INPUT', {
-          name: 'address1',
-          params: { label: 'Address Line 1 *' },
-          options: { validators: [Validators.required] },
-        }),
-        createConfig('INPUT', {
-          name: 'address2',
-          params: { label: 'Address Line 2' },
-        }),
-        createConfig('SELECT', {
-          name: 'country',
-          params: {
-            label: 'Country',
-            options: [
-              { text: '- Choose one -', value: null },
-              { text: 'Colombia', value: 'CO' },
-              { text: 'United States', value: 'US' },
-              { text: 'China', value: 'CN' },
-              { text: 'Russia', value: 'RU' },
-              { text: 'Other', value: 'XX' },
-            ],
-          },
-          options: { validators: [Validators.required] },
-        }),
-        createConfig('INPUT', {
-          name: 'zipCode',
-          params: { label: 'Postal Code *', type: 'number' },
-          options: { validators: [Validators.required, Validators.min(0)] },
-        }),
-      ],
-    }),
-    createConfig('RADIO', {
-      name: 'account',
-      params: {
-        options: [
-          { text: 'Create Account', value: 'CREATE' },
-          { text: 'Checkout as a Guest', value: 'GUEST' },
-        ],
-      },
-    }),
-    createConfig('ARRAY', {
-      name: 'products',
-      params: {
-        title: 'Products',
-        subtitle: 'Items to checkout',
-        initItem: true,
-      },
-      controls: [
-        createConfig('INPUT', {
-          name: 'product',
-          params: { label: 'Product Name *' },
-          options: { validators: [Validators.required] },
-        }),
-        createConfig('INPUT', {
-          name: 'quantity',
-          params: { label: 'Quantity *', type: 'number' },
-          options: { validators: [Validators.required, Validators.min(1)] },
-        }),
-      ],
-    }),
-  ];
+  controls = simpleForm(this.profileCard);
   form = this.builder.group({});
 
   constructor(private builder: FormBuilder) {}

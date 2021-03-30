@@ -6,7 +6,7 @@ import {
   Input,
 } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { DynControl, DynFormControls } from '@matheo/dyn-forms/core';
+import { DynControl, DynFormControls } from '@myndpm/dyn-forms/core';
 
 @Component({
   selector: 'dyn-form',

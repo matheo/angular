@@ -1,4 +1,4 @@
-import { DynControlParams, DynOption } from '@matheo/dyn-forms/core';
+import { DynControlParams, DynOption } from '@myndpm/dyn-forms/core';
 
 export interface DynRadioParams extends DynControlParams {
   options: DynOption[];

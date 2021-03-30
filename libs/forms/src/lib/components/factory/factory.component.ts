@@ -11,7 +11,7 @@ import {
   ViewChild,
   ViewContainerRef,
 } from '@angular/core';
-import { DynBaseConfig } from '@matheo/dyn-forms/core';
+import { DynBaseConfig } from '@myndpm/dyn-forms/core';
 import { ControlResolverService } from '../../services/control-resolver.service';
 
 @Component({

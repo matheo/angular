@@ -11,7 +11,7 @@ import {
   DynControlConfig,
   DynFormControl,
   DynPartialControlConfig,
-} from '@matheo/dyn-forms/core';
+} from '@myndpm/dyn-forms/core';
 import { DynSelectParams } from './select.component.params';
 
 @Component({

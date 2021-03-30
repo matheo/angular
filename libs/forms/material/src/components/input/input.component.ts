@@ -10,7 +10,7 @@ import {
   DynControlConfig,
   DynFormControl,
   DynPartialControlConfig,
-} from '@matheo/dyn-forms/core';
+} from '@myndpm/dyn-forms/core';
 import { DynInputParams } from './input.component.params';
 
 @Component({

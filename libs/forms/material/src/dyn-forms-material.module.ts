@@ -8,7 +8,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
-import { DynFormsModule } from '@matheo/dyn-forms';
+import { DynFormsModule } from '@myndpm/dyn-forms';
 import { DynArrayComponent } from './components/array/array.component';
 import { DynCardComponent } from './components/card/card.component';
 import { DynGroupComponent } from './components/group/group.component';

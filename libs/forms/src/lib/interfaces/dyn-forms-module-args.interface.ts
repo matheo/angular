@@ -1,4 +1,4 @@
-import { ControlProvider } from '@matheo/dyn-forms/core';
+import { ControlProvider } from '@myndpm/dyn-forms/core';
 
 export interface DynFormsModuleArgs {
   controls: ControlProvider[];

@@ -1,5 +1,5 @@
 import { MatOption } from '@angular/material/core';
-import { DynControlParams, DynOption } from '@matheo/dyn-forms/core';
+import { DynControlParams, DynOption } from '@myndpm/dyn-forms/core';
 
 export interface DynSelectParams extends DynControlParams {
   label?: string;

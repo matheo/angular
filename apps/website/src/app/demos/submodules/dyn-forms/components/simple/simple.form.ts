@@ -1,6 +1,6 @@
 import { Validators } from '@angular/forms';
-import { DynControlParams, DynFormControls } from '@matheo/dyn-forms/core';
-import { createConfig } from '@matheo/dyn-forms/material';
+import { DynControlParams, DynFormControls } from '@myndpm/dyn-forms/core';
+import { createConfig } from '@myndpm/dyn-forms/material';
 import { Observable } from 'rxjs';
 
 export function simpleForm(

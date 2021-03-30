@@ -11,8 +11,8 @@ import {
   DynControl,
   DynControlConfig,
   DynPartialControlConfig,
-} from '@matheo/dyn-forms/core';
-import { DynFormContainer } from '@matheo/dyn-forms/core';
+} from '@myndpm/dyn-forms/core';
+import { DynFormContainer } from '@myndpm/dyn-forms/core';
 import { DynCardParams } from './card.component.params';
 
 @Component({

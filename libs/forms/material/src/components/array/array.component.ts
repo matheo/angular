@@ -15,7 +15,7 @@ import {
   DynFormArray,
   DynInstanceType,
   DynPartialControlConfig,
-} from '@matheo/dyn-forms/core';
+} from '@myndpm/dyn-forms/core';
 import { DynArrayParams } from './array.component.params';
 
 @Component({

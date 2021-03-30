@@ -5,7 +5,7 @@ import {
   DYN_CONTROLS_TOKEN,
   InjectedControl,
   isLazyControl,
-} from '@matheo/dyn-forms/core';
+} from '@myndpm/dyn-forms/core';
 
 @Injectable()
 export class ControlResolverService {

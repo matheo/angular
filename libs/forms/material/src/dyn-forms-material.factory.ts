@@ -3,7 +3,7 @@ import {
   DynControlParams,
   DynControlType,
   DynPartialControlConfig,
-} from '@matheo/dyn-forms/core';
+} from '@myndpm/dyn-forms/core';
 import {
   DynCardComponent,
   DynCardParams,

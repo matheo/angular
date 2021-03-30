@@ -10,7 +10,7 @@ import {
   DynControlConfig,
   DynFormControl,
   DynPartialControlConfig,
-} from '@matheo/dyn-forms/core';
+} from '@myndpm/dyn-forms/core';
 import { DynRadioParams } from './radio.component.params';
 
 @Component({

@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { ModuleWithProviders, NgModule } from '@angular/core';
-import { controlsFactory } from '@matheo/dyn-forms/core';
+import { controlsFactory } from '@myndpm/dyn-forms/core';
 import { FactoryComponent } from './components/factory/factory.component';
 import { FormComponent } from './components/form/form.component';
 import { _CONTROLS_ARGS_TOKEN } from './constants/controls.token';

@@ -16,7 +16,7 @@ import {
   DynControlParams,
   DynFormContainer,
   DynPartialControlConfig,
-} from '@matheo/dyn-forms/core';
+} from '@myndpm/dyn-forms/core';
 
 @Component({
   selector: 'dyn-group',

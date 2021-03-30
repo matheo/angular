@@ -1,4 +1,4 @@
-import { DynControlParams } from '@matheo/dyn-forms/core';
+import { DynControlParams } from '@myndpm/dyn-forms/core';
 
 export interface DynInputParams extends DynControlParams {
   type: string;

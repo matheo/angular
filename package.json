@@ -13,7 +13,7 @@
     "npm:publish": "npm publish --access=public",
     "npm:datasource": "run-s 'build -- datasource --prod' 'npm:publish dist/libs/datasource' 'npm:publish --registry=https://npm.pkg.github.com dist/libs/datasource'",
     "npm:datepicker": "run-s 'build -- datepicker --prod' 'nx postbuild datepicker' 'npm:publish dist/libs/datepicker' 'npm:publish --registry=https://npm.pkg.github.com dist/libs/datepicker'",
-    "npm:dyn-forms": "run-s 'build -- forms --prod' 'npm:publish dist/libs/forms' 'npm:publish --registry=https://npm.pkg.github.com dist/libs/forms'",
+    "npm:dyn-forms": "run-s 'build -- forms --prod' 'npm:publish dist/libs/forms'",
     "docs:datasource": "compodoc -p libs/datasource/tsconfig.lib.json -s -o -w",
     "docs:datepicker": "compodoc -p libs/datepicker/tsconfig.lib.json -s -o -w",
     "affected:apps": "nx affected:apps",

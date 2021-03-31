@@ -21,6 +21,10 @@ Reactive Datasource for Angular.
 
 A fork of the official datepicker module with time picking support.
 
-## @matheo/schematics
+## @myndpm/dyn-forms
 
-Custom tooling with my coding styles.
+[![npm badge](https://badge.fury.io/js/%myndpm%dyn-forms.svg)](https://www.npmjs.com/package/@myndpm/dyn-forms)
+[![npm downloads](https://img.shields.io/npm/dm/@myndpm/dyn-forms.svg?style=flat)](https://npmcharts.com/compare/@myndpm/dyn-forms?minimal=true)
+[![npm bundle size](https://img.shields.io/bundlephobia/minzip/@myndpm/dyn-forms)](https://bundlephobia.com/result?p=@myndpm/dyn-forms)
+
+Abstract layer to easily generate Dynamic Forms on Angular.

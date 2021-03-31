@@ -23,7 +23,7 @@ A fork of the official datepicker module with time picking support.
 
 ## @myndpm/dyn-forms
 
-[![npm badge](https://badge.fury.io/js/%myndpm%dyn-forms.svg)](https://www.npmjs.com/package/@myndpm/dyn-forms)
+[![npm badge](https://badge.fury.io/js/%40myndpm%2Fdyn-forms.svg)](https://www.npmjs.com/package/@myndpm/dyn-forms)
 [![npm downloads](https://img.shields.io/npm/dm/@myndpm/dyn-forms.svg?style=flat)](https://npmcharts.com/compare/@myndpm/dyn-forms?minimal=true)
 [![npm bundle size](https://img.shields.io/bundlephobia/minzip/@myndpm/dyn-forms)](https://bundlephobia.com/result?p=@myndpm/dyn-forms)
 

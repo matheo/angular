@@ -140,7 +140,7 @@ From there, the component is autonomous to do anything to accomplish its purpose
 
 ## Extending
 
-You can check the [example source code of @myndpm/dyn-forms/material](https://github.com/matheo/angular/tree/master/libs/forms/material/src) and learn from its internals.
+You can check the example [source code of @myndpm/dyn-forms/material](https://github.com/matheo/angular/tree/master/libs/forms/material/src) and learn from its internals.
 Basically your custom controls need to extend the respective `abstract class`
 (`DynFormControl`, `DynFormArray`, `DynFormGroup` or `DynFormContainer`).
 

@@ -2,10 +2,9 @@ import {
   ChangeDetectionStrategy,
   Component,
   forwardRef,
-  Injector,
   Input,
 } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { DynControl, DynFormControls } from '@myndpm/dyn-forms/core';
 
 @Component({
@@ -20,18 +19,14 @@ import { DynControl, DynFormControls } from '@myndpm/dyn-forms/core';
     },
   ],
 })
-export class FormComponent extends DynControl<any> {
+export class FormComponent extends DynControl {
   // root FormGroup
-  @Input('form') control = this.builder.group({});
+  @Input('form') control = new FormGroup({});
   @Input() controls: DynFormControls = [];
 
   // not used in the root
   parent!: DynControl;
   config = {} as any;
-
-  constructor(injector: Injector, private builder: FormBuilder) {
-    super(injector);
-  }
 
   // not used but required to be API compliant
   completeParams(params: any): any {

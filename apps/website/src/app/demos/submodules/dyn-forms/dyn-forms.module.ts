@@ -2,7 +2,6 @@ import { CommonModule } from '@angular/common';
 import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { RouterModule, Routes } from '@angular/router';
-import { DynFormsModule } from '@myndpm/dyn-forms';
 import { DynFormsMaterialModule } from '@myndpm/dyn-forms/material';
 import { SharedModule } from '../../../shared/shared.module';
 import { SimpleComponent } from './components/simple/simple.component';
@@ -18,7 +17,6 @@ const routes: Routes = [
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
-    DynFormsModule,
     DynFormsMaterialModule.forFeature(),
     SharedModule,
   ],

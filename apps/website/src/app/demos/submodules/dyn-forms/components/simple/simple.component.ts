@@ -5,7 +5,7 @@ import {
   OnInit,
   ViewEncapsulation,
 } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { BehaviorSubject } from 'rxjs';
 import { startWith } from 'rxjs/operators';
 import { simpleForm } from './simple.form';
@@ -26,9 +26,7 @@ export class SimpleComponent implements OnInit, AfterViewInit {
 
   // dyn-form inputs
   controls = simpleForm(this.profileCard);
-  form = this.builder.group({});
-
-  constructor(private builder: FormBuilder) {}
+  form = new FormGroup({});
 
   ngOnInit(): void {
     // logs each change in the console just to demo

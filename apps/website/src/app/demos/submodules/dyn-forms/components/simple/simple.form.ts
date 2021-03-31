@@ -47,7 +47,7 @@ export function simpleForm(
         }),
         createConfig('INPUT', {
           name: 'zipCode',
-          params: { label: 'Postal Code *', type: 'number' },
+          params: { label: 'Postal Code *' },
           options: { validators: [Validators.required, Validators.min(0)] },
         }),
       ],

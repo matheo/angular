@@ -30,6 +30,9 @@ import {
     },
   ],
 })
+/**
+ * This component just wraps the incoming controls in a FormGroup.
+ */
 export class DynGroupComponent extends DynFormContainer implements OnInit {
   static dynControl: 'GROUP' = 'GROUP';
 

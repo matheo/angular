@@ -1,6 +1,6 @@
 <ng-container [formGroup]="parent.control">
   <mat-form-field>
-    <mat-label>{{ params?.label }}</mat-label>
+    <mat-label *ngIf="params.label">{{ params.label }}</mat-label>
     <mat-select
       [formControlName]="config.name"
       [placeholder]="params.placeholder"

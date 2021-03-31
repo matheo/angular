@@ -49,7 +49,6 @@ export class DynInputComponent
     return {
       ...params,
       type: params.type || 'text',
-      label: params.label || '',
       placeholder: params.placeholder || '',
     };
   }

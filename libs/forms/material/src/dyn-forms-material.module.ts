@@ -11,7 +11,6 @@ import { MatSelectModule } from '@angular/material/select';
 import { DynFormsModule } from '@myndpm/dyn-forms';
 import { DynArrayComponent } from './components/array/array.component';
 import { DynCardComponent } from './components/card/card.component';
-import { DynGroupComponent } from './components/group/group.component';
 import { DynInputComponent } from './components/input/input.component';
 import { DynRadioComponent } from './components/radio/radio.component';
 import { DynSelectComponent } from './components/select/select.component';
@@ -32,7 +31,6 @@ import { DynSelectComponent } from './components/select/select.component';
   declarations: [
     DynArrayComponent,
     DynCardComponent,
-    DynGroupComponent,
     DynInputComponent,
     DynRadioComponent,
     DynSelectComponent,
@@ -49,10 +47,6 @@ export class DynFormsMaterialModule {
         {
           control: DynCardComponent.dynControl,
           component: DynCardComponent,
-        },
-        {
-          control: DynGroupComponent.dynControl,
-          component: DynGroupComponent,
         },
         {
           control: DynInputComponent.dynControl,

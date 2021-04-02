@@ -1,15 +1,15 @@
 import { CommonModule } from '@angular/common';
 import { ModuleWithProviders, NgModule } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
 import { controlsFactory } from '@myndpm/dyn-forms/core';
-import { FactoryComponent } from './components/factory/factory.component';
-import { FormComponent } from './components/form/form.component';
+import { FactoryComponent, FormComponent, GroupComponent } from './components';
 import { DynFormsModuleArgs } from './dyn-forms.module.interface';
-import { ControlResolverService } from './services/control-resolver.service';
+import { ControlResolverService } from './services';
 
 @NgModule({
-  imports: [CommonModule],
-  declarations: [FactoryComponent, FormComponent],
-  exports: [FactoryComponent, FormComponent],
+  imports: [CommonModule, ReactiveFormsModule],
+  declarations: [FactoryComponent, FormComponent, GroupComponent],
+  exports: [FactoryComponent, FormComponent, GroupComponent],
   providers: [ControlResolverService],
 })
 export class DynFormsModule {

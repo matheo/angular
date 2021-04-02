@@ -11,14 +11,7 @@
 
   <mat-card-content>
     <div class="array-item" *ngFor="let item of items; index as i">
-      <dyn-group
-        [group]="item"
-        [config]="{
-          control: '',
-          instance: dynInstanceType.Group,
-          controls: config.controls
-        }"
-      ></dyn-group>
+      <dyn-group [group]="item" [controls]="config.controls"></dyn-group>
 
       <button
         mat-raised-button

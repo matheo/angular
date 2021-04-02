@@ -1,0 +1,6 @@
+<ng-container [formGroup]="group">
+  <dyn-factory
+    *ngFor="let control of controls"
+    [config]="control"
+  ></dyn-factory>
+</ng-container>

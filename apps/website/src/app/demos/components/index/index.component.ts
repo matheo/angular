@@ -24,10 +24,16 @@ export class IndexComponent {
       description: 'DateTime module for Angular Material.',
     },
     {
-      title: 'Dynamic Forms',
-      link: './dyn-forms',
+      title: 'Simple Dynamic Form',
+      link: './dyn-forms/simple-form',
       image: '/assets/items/dyn-forms.png',
-      description: 'Dynamic Forms for Angular.',
+      description: 'Simple Dynamic Forms Demo.',
+    },
+    {
+      title: 'Stepper Dynamic Form',
+      link: './dyn-forms/stepper-form',
+      image: '/assets/items/dyn-forms.png',
+      description: 'Routed Stepper Form Demo.',
     },
   ];
 }

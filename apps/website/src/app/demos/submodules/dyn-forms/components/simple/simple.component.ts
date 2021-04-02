@@ -11,7 +11,7 @@ import { startWith } from 'rxjs/operators';
 import { simpleForm } from './simple.form';
 
 @Component({
-  selector: 'web-simple',
+  selector: 'web-form-simple',
   templateUrl: './simple.component.html',
   styleUrls: ['./simple.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

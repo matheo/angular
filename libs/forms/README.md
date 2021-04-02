@@ -7,7 +7,7 @@ and create the Form Controls hierarchy from it. Each control configuration suppo
 options of the Angular's Form Framework, and aims to facilitate the required setup of Angular Forms,
 being able to focus the development in the bussines logic.
 
-The general overview is shown at this [Prezi-ntation](https://prezi.com/view/4Ok1bgCWvf0g26FMVwfx/)
+The general overview is shown at this [Prezi](https://prezi.com/view/4Ok1bgCWvf0g26FMVwfx/)ntation.
 
 ## Installation
 
@@ -48,8 +48,8 @@ import { DynFormsModule } from '@myndpm/dyn-forms';
     }),
 ```
 
-where [SelectComponent](https://github.com/matheo/angular/blob/master/libs/forms/material/src/components/select/select.component.ts)
-and [InputComponent](https://github.com/matheo/angular/blob/master/libs/forms/material/src/components/input/input.component.ts)
+where [SelectComponent](https://github.com/Mynd-Management/open-source/blob/master/libs/forms/material/src/components/select/select.component.ts)
+and [InputComponent](https://github.com/Mynd-Management/open-source/blob/master/libs/forms/material/src/components/input/input.component.ts)
 are already implemented in `DynFormsMaterialModule`.
 
 Then with the provided controls you could use them in a Config like this:
@@ -88,11 +88,11 @@ export class MyFormComponent {
 and pass it them to the `dyn-form` component in its template:
 
 ```html
-<dyn-form [controls]="controls" [form]="form"></dyn-form>
+<dyn-form [form]="form" [controls]="controls"></dyn-form>
 ```
 
-and that's it!
-now you can customize its styles and build some custom controls.
+and that's it!  
+now you can customize the styles and build some custom controls.
 
 ## Helpers
 
@@ -149,6 +149,7 @@ and compose the `AbstractFormControl` in the `control` property.
 
 You just need to implement the `completeParams` method, which is useful to ensure that any
 configured parameters will have any required field(s) and the component won't break.
+Also, if you implement OnInit, be sure to call the base class too with `super.ngOnInit()`.
 
 As mentioned in the _Installation_ section, you can provide your controls with the useful
 `DynFormsModule.forFeature({ controls })` that saves any boilerplate.
@@ -156,8 +157,10 @@ As mentioned in the _Installation_ section, you can provide your controls with t
 ## Share your Feedback
 
 Please share your experience and ideas!  
-impressions, sugestions, improvements, use cases, are welcome at [GitHub Discussions](https://github.com/matheo/angular/discussions).  
-as usual, please report any [Issue](https://github.com/matheo/angular/issues/new?labels=bug&template=bug-report.md)
-or request a [Feature](https://github.com/matheo/angular/issues/new?labels=enhancement&template=feature-request.md).
+impressions, sugestions, improvements, use cases, are welcome at [GitHub Discussions](https://github.com/Mynd-Management/open-source/discussions).  
+as usual, please report any [Issue](https://github.com/Mynd-Management/open-source/issues/new?labels=bug&template=bug-report.md)
+or request a [Feature](https://github.com/Mynd-Management/open-source/issues/new?labels=enhancement&template=feature-request.md).
 
 Enjoy!
+
+&#8722; Mynd.co

@@ -9,6 +9,11 @@ import { SimpleComponent } from './components/simple/simple.component';
 const routes: Routes = [
   {
     path: '',
+    pathMatch: 'full',
+    redirectTo: 'simple-form',
+  },
+  {
+    path: 'simple-form',
     component: SimpleComponent,
   },
 ];

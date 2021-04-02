@@ -2,7 +2,7 @@ import { Directive, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { DynControlConfig } from './control-config.interface';
 import { DynControlParams } from './control-params.interface';
-import { DynInstanceType } from './control.type';
+import { DynInstanceType } from './control.types';
 import { DynControl } from './dyn-control.class';
 
 @Directive()

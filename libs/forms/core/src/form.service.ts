@@ -1,13 +1,12 @@
 import { Injectable } from '@angular/core';
 import {
   AbstractControl,
-  ControlContainer,
   FormArray,
   FormControl,
   FormGroup,
 } from '@angular/forms';
 import { DynBaseConfig } from './control-config.interface';
-import { DynInstanceType } from './control.type';
+import { DynControlParent, DynInstanceType } from './control.types';
 
 @Injectable({
   providedIn: 'root',
@@ -18,25 +17,25 @@ export class DynFormService {
   register(
     instance: DynInstanceType.Container | DynInstanceType.Group,
     config: DynBaseConfig,
-    parent: ControlContainer,
+    parent: DynControlParent,
     recursively?: boolean
   ): FormGroup;
   register(
     instance: DynInstanceType.Array,
     config: DynBaseConfig,
-    parent: ControlContainer,
+    parent: DynControlParent,
     recursively?: boolean
   ): FormArray;
   register(
     instance: DynInstanceType.Control,
     config: DynBaseConfig,
-    parent: ControlContainer,
+    parent: DynControlParent,
     recursively?: boolean
   ): FormControl;
   register<T extends AbstractControl>(
     instance: DynInstanceType,
     config: DynBaseConfig,
-    parent: ControlContainer,
+    parent: DynControlParent,
     recursively = false
   ): T {
     // fail-safe validation
@@ -109,7 +108,7 @@ export class DynFormService {
     }
   }
 
-  append(parent: ControlContainer, name: string, control: AbstractControl) {
+  append(parent: DynControlParent, name: string, control: AbstractControl) {
     // only FormGroup can be extended
     if (parent.control instanceof FormGroup) {
       parent.control.addControl(name, control);

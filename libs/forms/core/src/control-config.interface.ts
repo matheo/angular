@@ -1,7 +1,7 @@
 import { AbstractControlOptions } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { DynControlParams } from './control-params.interface';
-import { DynControlType, DynInstanceType } from './control.type';
+import { DynControlType, DynInstanceType } from './control.types';
 
 export interface DynBaseConfig<P extends DynControlParams = DynControlParams> {
   // config

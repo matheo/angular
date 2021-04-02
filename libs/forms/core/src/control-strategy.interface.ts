@@ -1,4 +1,4 @@
-import { DynControlType } from './control.type';
+import { DynControlType } from './control.types';
 
 // T (value), P (params) :: to be typed by the component.genConfig()
 export interface DynControlStrategy {

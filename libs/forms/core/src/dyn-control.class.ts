@@ -10,7 +10,11 @@ import { isObservable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { DynBaseConfig } from './control-config.interface';
 import { DynControlParams } from './control-params.interface';
-import { DynControlType, DynInstanceType } from './control.type';
+import {
+  DynControlParent,
+  DynControlType,
+  DynInstanceType,
+} from './control.types';
 import { DynFormService } from './form.service';
 
 @Directive()
@@ -26,7 +30,7 @@ export abstract class DynControl<
 
   // abstract static createConfig(partial?: DynPartialControlConfig<TParams>): TConfig;
 
-  parent: ControlContainer;
+  parent: DynControlParent;
 
   config!: TConfig; // passed down in the hierarchy
   control!: TControl; // built from the config by the abstract classes
@@ -38,7 +42,7 @@ export abstract class DynControl<
 
   constructor(injector: Injector) {
     try {
-      this.parent = injector.get(ControlContainer);
+      this.parent = injector.get(ControlContainer) as DynControlParent;
     } catch (e) {
       throw new Error(`00: No parent ControlContainer found.`); // TODO debug trace
     }

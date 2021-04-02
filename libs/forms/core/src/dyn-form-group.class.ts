@@ -2,7 +2,7 @@ import { Directive, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { DynControlConfig } from './control-config.interface';
 import { DynControlParams } from './control-params.interface';
-import { DynInstanceType } from './control.type';
+import { DynInstanceType } from './control.types';
 import { DynControl } from './dyn-control.class';
 
 @Directive()
@@ -26,7 +26,7 @@ export abstract class DynFormGroup<
       );
     } else if (!this.control) {
       // fallback to the parent control (useful for UI subgroups)
-      this.control = this.parent.control as FormGroup;
+      this.control = this.parent.control;
     }
   }
 }

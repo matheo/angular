@@ -1,11 +1,6 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  forwardRef,
-  Input,
-} from '@angular/core';
-import { FormGroup } from '@angular/forms';
-import { DynControl, DynFormControls } from '@myndpm/dyn-forms/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ControlContainer, FormGroup } from '@angular/forms';
+import { DynFormControls } from '@myndpm/dyn-forms/core';
 
 @Component({
   selector: 'dyn-form',
@@ -14,22 +9,12 @@ import { DynControl, DynFormControls } from '@myndpm/dyn-forms/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
     {
-      provide: DynControl,
-      useExisting: forwardRef(() => FormComponent),
+      provide: ControlContainer,
+      useValue: {},
     },
   ],
 })
-export class FormComponent extends DynControl {
-  // root FormGroup
-  @Input('form') control = new FormGroup({});
+export class FormComponent {
+  @Input() form = new FormGroup({});
   @Input() controls: DynFormControls = [];
-
-  // not used in the root
-  parent!: DynControl;
-  config = {} as any;
-
-  // not used but required to be API compliant
-  completeParams(params: any): any {
-    return params;
-  }
 }

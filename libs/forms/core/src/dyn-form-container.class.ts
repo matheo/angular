@@ -26,7 +26,7 @@ export abstract class DynFormContainer<
       );
     } else if (!this.control) {
       // fallback to the parent control
-      this.control = this.parent.control;
+      this.control = this.parent.control as FormGroup;
     }
   }
 }

@@ -1,13 +1,6 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  Inject,
-  Injector,
-  OnInit,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { MatOption } from '@angular/material/core';
 import {
-  DynControl,
   DynControlConfig,
   DynFormControl,
   DynPartialControlConfig,
@@ -15,7 +8,7 @@ import {
 import { DynSelectParams } from './select.component.params';
 
 @Component({
-  selector: 'dyn-select',
+  selector: 'dyn-mat-select',
   templateUrl: './select.component.html',
   styleUrls: ['./select.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -33,13 +26,6 @@ export class DynSelectComponent
       control: DynSelectComponent.dynControl,
       instance: DynSelectComponent.dynInstance,
     };
-  }
-
-  constructor(
-    injector: Injector,
-    @Inject(DynControl) public readonly parent: DynControl
-  ) {
-    super(injector);
   }
 
   ngOnInit(): void {

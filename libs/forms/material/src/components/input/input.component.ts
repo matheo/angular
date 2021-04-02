@@ -1,12 +1,5 @@
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import {
-  ChangeDetectionStrategy,
-  Component,
-  Inject,
-  Injector,
-  OnInit,
-} from '@angular/core';
-import {
-  DynControl,
   DynControlConfig,
   DynFormControl,
   DynPartialControlConfig,
@@ -14,7 +7,7 @@ import {
 import { DynInputParams } from './input.component.params';
 
 @Component({
-  selector: 'dyn-material-input',
+  selector: 'dyn-mat-input',
   templateUrl: './input.component.html',
   styleUrls: ['./input.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -32,13 +25,6 @@ export class DynInputComponent
       control: DynInputComponent.dynControl,
       instance: DynInputComponent.dynInstance,
     };
-  }
-
-  constructor(
-    injector: Injector,
-    @Inject(DynControl) public readonly parent: DynControl
-  ) {
-    super(injector);
   }
 
   ngOnInit(): void {

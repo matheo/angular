@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import {
   AbstractControl,
+  ControlContainer,
   FormArray,
   FormControl,
   FormGroup,
 } from '@angular/forms';
 import { DynBaseConfig } from './control-config.interface';
 import { DynInstanceType } from './control.type';
-import { DynControl } from './dyn-control.class';
 
 @Injectable({
   providedIn: 'root',
@@ -18,31 +18,34 @@ export class DynFormService {
   register(
     instance: DynInstanceType.Container | DynInstanceType.Group,
     config: DynBaseConfig,
-    parent: DynControl,
+    parent: ControlContainer,
     recursively?: boolean
   ): FormGroup;
   register(
     instance: DynInstanceType.Array,
     config: DynBaseConfig,
-    parent: DynControl,
+    parent: ControlContainer,
     recursively?: boolean
   ): FormArray;
   register(
     instance: DynInstanceType.Control,
     config: DynBaseConfig,
-    parent: DynControl,
+    parent: ControlContainer,
     recursively?: boolean
   ): FormControl;
   register<T extends AbstractControl>(
     instance: DynInstanceType,
     config: DynBaseConfig,
-    parent: DynControl,
+    parent: ControlContainer,
     recursively = false
   ): T {
     // fail-safe validation
+    if (!parent.control) {
+      throw new Error(`03: the ControlContainer doesn't have a control`);
+    }
     if (instance !== config.instance) {
       throw new Error(
-        `03: Inconsistent [${config.control}] control instance "${instance}" for a config with "${config.instance}"`
+        `04: Inconsistent [${config.control}] control instance "${instance}" for a config with "${config.instance}"`
       );
     }
 
@@ -54,7 +57,7 @@ export class DynFormService {
 
     control = this.build(instance as any, config, recursively);
     if (!control) {
-      throw new Error(`04: Could not build a control for ${instance}`);
+      throw new Error(`05: Could not build a control for ${instance}`);
     }
 
     if (config.name) {
@@ -106,12 +109,10 @@ export class DynFormService {
     }
   }
 
-  append(parent: DynControl, name: string, control: AbstractControl) {
+  append(parent: ControlContainer, name: string, control: AbstractControl) {
     // only FormGroup can be extended
-    if (parent.control.addControl) {
+    if (parent.control instanceof FormGroup) {
       parent.control.addControl(name, control);
-    } else {
-      console.warn(`Didn't add '${name}' to ${parent.config.name}`);
     }
   }
 }

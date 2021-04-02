@@ -2,15 +2,10 @@ import {
   AfterViewInit,
   ChangeDetectionStrategy,
   Component,
-  forwardRef,
-  Inject,
-  Injector,
   OnInit,
-  SkipSelf,
 } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import {
-  DynControl,
   DynControlConfig,
   DynFormArray,
   DynInstanceType,
@@ -19,16 +14,10 @@ import {
 import { DynArrayParams } from './array.component.params';
 
 @Component({
-  selector: 'dyn-array',
+  selector: 'dyn-mat-array',
   templateUrl: './array.component.html',
   styleUrls: ['./array.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [
-    {
-      provide: DynControl,
-      useExisting: forwardRef(() => DynArrayComponent),
-    },
-  ],
 })
 export class DynArrayComponent
   extends DynFormArray<DynArrayParams, DynControlConfig>
@@ -45,13 +34,6 @@ export class DynArrayComponent
       control: DynArrayComponent.dynControl,
       instance: DynArrayComponent.dynInstance,
     };
-  }
-
-  constructor(
-    injector: Injector,
-    @Inject(DynControl) @SkipSelf() public readonly parent: DynControl
-  ) {
-    super(injector);
   }
 
   get items(): FormGroup[] {

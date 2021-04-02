@@ -26,7 +26,7 @@ export abstract class DynFormGroup<
       );
     } else if (!this.control) {
       // fallback to the parent control (useful for UI subgroups)
-      this.control = this.parent.control;
+      this.control = this.parent.control as FormGroup;
     }
   }
 }

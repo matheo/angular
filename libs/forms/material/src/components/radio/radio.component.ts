@@ -1,12 +1,5 @@
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import {
-  ChangeDetectionStrategy,
-  Component,
-  Inject,
-  Injector,
-  OnInit,
-} from '@angular/core';
-import {
-  DynControl,
   DynControlConfig,
   DynFormControl,
   DynPartialControlConfig,
@@ -14,7 +7,7 @@ import {
 import { DynRadioParams } from './radio.component.params';
 
 @Component({
-  selector: 'dyn-radio',
+  selector: 'dyn-mat-radio',
   templateUrl: './radio.component.html',
   styleUrls: ['./radio.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -32,13 +25,6 @@ export class DynRadioComponent
       control: DynRadioComponent.dynControl,
       instance: DynRadioComponent.dynInstance,
     };
-  }
-
-  constructor(
-    injector: Injector,
-    @Inject(DynControl) public readonly parent: DynControl
-  ) {
-    super(injector);
   }
 
   ngOnInit(): void {

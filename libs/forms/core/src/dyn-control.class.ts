@@ -5,7 +5,7 @@ import {
   OnDestroy,
   OnInit,
 } from '@angular/core';
-import { AbstractControl, FormGroup } from '@angular/forms';
+import { AbstractControl, ControlContainer, FormGroup } from '@angular/forms';
 import { isObservable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { DynBaseConfig } from './control-config.interface';
@@ -26,7 +26,7 @@ export abstract class DynControl<
 
   // abstract static createConfig(partial?: DynPartialControlConfig<TParams>): TConfig;
 
-  abstract parent: DynControl;
+  parent: ControlContainer;
 
   config!: TConfig; // passed down in the hierarchy
   control!: TControl; // built from the config by the abstract classes
@@ -37,6 +37,11 @@ export abstract class DynControl<
   protected _unsubscribe = new Subject<void>();
 
   constructor(injector: Injector) {
+    try {
+      this.parent = injector.get(ControlContainer);
+    } catch (e) {
+      throw new Error(`00: No parent ControlContainer found.`); // TODO debug trace
+    }
     this._form = injector.get(DynFormService);
     this._ref = injector.get(ChangeDetectorRef);
   }

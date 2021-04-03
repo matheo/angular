@@ -1,11 +1,10 @@
 # @myndpm/dyn-forms
 
-Abstract layer to easily generate Dynamic Forms on Angular.
+Abstract layer to easily generate Dynamic Forms for Angular.
 
-From a Configuration Object, this library is able to load Dynamic Controls
-and create the Form Controls hierarchy from it. Each control configuration supports the default
-options of the Angular's Form Framework, and aims to facilitate the required setup of Angular Forms,
-being able to focus the development in the bussines logic.
+With this library we are able to dynamically create the Form Controls hierarchy from a Configuration Object, this is comprised of nested configuration objects which corresponds one-to-one with the form fields.
+
+Each nested field configuration supports the default options from Angular's form framework, while avoiding boilerplate.
 
 The general overview is shown at this [Prezi](https://prezi.com/view/4Ok1bgCWvf0g26FMVwfx/)ntation.
 
@@ -97,7 +96,7 @@ now you can customize the styles and build some custom controls.
 ## Helpers
 
 The `DynFormsMaterialModule` provides a typed _Factory Method_ to easily create
-the config objects corresponding to its DynControls; the controls config can look like:
+the config objects corresponding to its DynControls; for example:
 
 ```typescript
 import { createConfig } from '@myndpm/dyn-forms/material';
@@ -124,43 +123,45 @@ export class MyFormComponent {
 }
 ```
 
-This factory will warn you if the provided Config doesn't correspond to the ControlType,
-like if you try to set an `action` param for the `CARD` which is not supported.
+This factory will warn you if the provided config object doesn't correspond to the ControlType,
+for example if you try to set an `action` parameter for the `CARD` which is not supported.
 
 ## DynControl
 
-A Dynamic Control has a `DynControlType` which acts as an ID to be invoked in the config.
-It's stored in the `static dynControl` property as a convention to locate it easily.
+A Dynamic Control is an Angular component that has a `static dynControl` field which acts as an unique ID.
+We can reference any component from the configuration object with this ID.
 
-Once instantiated, the library fills the corresponding `config`, sets the `control` to the
-corresponding instance (`FormControl`, `FormGroup` or `FormArray`) and pass any `params` values
-specified in the config, as a plain value or as an Observable.
+While creating a new form the library recursively instantiates these Dynamic Controls components, and populates their core fields:
 
-From there, the component is autonomous to do anything to accomplish its purpose.
+1. Its corresponding `config`,
+2. the `control` instance (`FormControl`, `FormGroup` or `FormArray`),
+3. any `params` values specified in the config.
+
+From there, we have the required tools for the component to provide any control functionality.
 
 ## Extending
 
-You can check the example [source code of @myndpm/dyn-forms/material](https://github.com/matheo/angular/tree/master/libs/forms/material/src) and learn from its internals.
+You can check out the example [source code of @myndpm/dyn-forms/material](https://github.com/matheo/angular/tree/master/libs/forms/material/src).
 Basically your custom controls need to extend the respective `abstract class`
 (`DynFormControl`, `DynFormArray`, `DynFormGroup` or `DynFormContainer`).
 
-Those abstract classes builds the Form Control hierarchy as specified in the Config Object,
+Those abstract classes build the Form Control hierarchy as specified in the nexted Config Object,
 and compose the `AbstractFormControl` in the `control` property.
 
 You just need to implement the `completeParams` method, which is useful to ensure that any
-configured parameters will have any required field(s) and the component won't break.
-Also, if you implement OnInit, be sure to call the base class too with `super.ngOnInit()`.
+configured parameters will have any required fields and the component won't break.
+Also, if you implement OnInit be sure to call the base class too, with `super.ngOnInit()`.
 
 As mentioned in the _Installation_ section, you can provide your controls with the useful
-`DynFormsModule.forFeature({ controls })` that saves any boilerplate.
+`DynFormsModule.forFeature({ controls })` to avoid boilerplate.
 
 ## Share your Feedback
 
 Please share your experience and ideas!  
-impressions, sugestions, improvements, use cases, are welcome at [GitHub Discussions](https://github.com/Mynd-Management/open-source/discussions).  
-as usual, please report any [Issue](https://github.com/Mynd-Management/open-source/issues/new?labels=bug&template=bug-report.md)
+Impressions, sugestions, improvements, use cases are welcome at [GitHub Discussions](https://github.com/Mynd-Management/open-source/discussions).  
+As usual, please report any [Issue](https://github.com/Mynd-Management/open-source/issues/new?labels=bug&template=bug-report.md)
 or request a [Feature](https://github.com/Mynd-Management/open-source/issues/new?labels=enhancement&template=feature-request.md).
 
 Enjoy!
 
-&#8722; Mynd.co
+&#8722; Mynd.co Frontend Engineering

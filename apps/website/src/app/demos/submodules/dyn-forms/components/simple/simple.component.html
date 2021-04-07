@@ -43,6 +43,8 @@
   <fieldset>
     <h3>Simple Dynamic Form</h3>
 
-    <dyn-form [controls]="controls" [form]="form"></dyn-form>
+    <form [formGroup]="form">
+      <dyn-form [config]="config" [form]="form"></dyn-form>
+    </form>
   </fieldset>
 </web-section>

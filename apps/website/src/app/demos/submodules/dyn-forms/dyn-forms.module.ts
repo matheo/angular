@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { RouterModule, Routes } from '@angular/router';
 import { DynFormsMaterialModule } from '@myndpm/dyn-forms/material';
@@ -48,6 +49,7 @@ const routes: Routes = [
 @NgModule({
   imports: [
     CommonModule,
+    ReactiveFormsModule,
     RouterModule.forChild(routes),
     DynFormsMaterialModule.forFeature(),
     SharedModule,
@@ -64,9 +66,9 @@ const routes: Routes = [
     {
       provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
       useValue: {
-        appearance: 'standard',
+        appearance: 'outline',
         hideRequiredMarker: true,
-        floatLabel: 'never',
+        floatLabel: 'auto',
       },
     },
   ],

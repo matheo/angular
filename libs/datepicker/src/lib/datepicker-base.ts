@@ -313,6 +313,11 @@ export abstract class MatDatepickerBase<C extends MatDatepickerControl<D>, S,
   /** The view that the calendar should start in. */
   @Input() startView: MatCalendarView = 'month';
 
+  /** multi-year inputs */
+  @Input() yearsPerPage = 24;
+
+  @Input() yearsPerRow = 4;
+
   /** Clock interval */
   @Input() clockStep = 1;
 

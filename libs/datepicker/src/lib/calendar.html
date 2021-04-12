@@ -44,6 +44,8 @@
 
   <mat-multi-year-view
       *ngSwitchCase="'multi-year'"
+      [yearsPerPage]="yearsPerPage"
+      [yearsPerRow]="yearsPerRow"
       [(activeDate)]="activeDate"
       [selected]="selected"
       [dateFilter]="dateFilter"

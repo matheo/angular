@@ -45,7 +45,6 @@ import {
   getActiveOffset,
   isSameMultiYearView,
   MatMultiYearView,
-  yearsPerPage
 } from './multi-year-view';
 import {MatYearView} from './year-view';
 import {MAT_SINGLE_DATE_SELECTION_MODEL_PROVIDER, DateRange} from './date-selection-model';
@@ -151,8 +150,8 @@ export class MatCalendarHeader<D> {
     // just yearsPerPage - 1 away.
     const activeYear = this._dateAdapter.getYear(this.calendar.activeDate);
     const minYearOfPage = activeYear - getActiveOffset(
-      this._dateAdapter, this.calendar.activeDate, this.calendar.minDate, this.calendar.maxDate);
-    const maxYearOfPage = minYearOfPage + yearsPerPage - 1;
+      this._dateAdapter, this.calendar.activeDate, this.calendar.minDate, this.calendar.maxDate, this.calendar.yearsPerPage);
+    const maxYearOfPage = minYearOfPage + this.calendar.yearsPerPage - 1;
     const minYearName =
       this._dateAdapter.getYearName(this._dateAdapter.createDate(minYearOfPage, 0, 1));
     const maxYearName =
@@ -209,7 +208,7 @@ export class MatCalendarHeader<D> {
       ? this._dateAdapter.addCalendarMonths(this.calendar.activeDate, -1)
       : this._dateAdapter.addCalendarYears(
           this.calendar.activeDate,
-          this.calendar.currentView == 'year' ? -1 : -yearsPerPage
+          this.calendar.currentView == 'year' ? -1 : -this.calendar.yearsPerPage
         );
 
     this.calendar.setDate(date);
@@ -221,7 +220,7 @@ export class MatCalendarHeader<D> {
       ? this._dateAdapter.addCalendarMonths(this.calendar.activeDate, 1)
       : this._dateAdapter.addCalendarYears(
           this.calendar.activeDate,
-          this.calendar.currentView == 'year' ? 1 : yearsPerPage
+          this.calendar.currentView == 'year' ? 1 : this.calendar.yearsPerPage
         );
 
     this.calendar.setDate(date);
@@ -253,7 +252,7 @@ export class MatCalendarHeader<D> {
     }
     // Otherwise we are in 'multi-year' view.
     return isSameMultiYearView(
-      this._dateAdapter, date1, date2, this.calendar.minDate, this.calendar.maxDate);
+      this._dateAdapter, date1, date2, this.calendar.minDate, this.calendar.maxDate, this.calendar.yearsPerPage);
   }
 }
 
@@ -305,6 +304,11 @@ export class MatCalendar<D> implements AfterContentInit, AfterViewChecked, OnDes
 
   /** Whether the calendar should be started in. */
   @Input() startView: MatCalendarView = 'month';
+
+  /** multi-year inputs */
+  @Input() yearsPerPage = 24;
+
+  @Input() yearsPerRow = 4;
 
   /** The currently selected date. */
   @Input()

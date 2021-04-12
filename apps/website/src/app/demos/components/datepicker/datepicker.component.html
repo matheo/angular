@@ -105,13 +105,13 @@
         <mat-label>Choose a year</mat-label>
         <input matInput [matDatepicker]="pyy" formControlName="year">
         <mat-datepicker-toggle matSuffix [for]="pyy"></mat-datepicker-toggle>
-        <mat-datepicker #pyy type="year">
+        <mat-datepicker #pyy type="year" [yearsPerPage]="12" [yearsPerRow]="2">
           <mat-datepicker-actions>
             <button mat-button matDatepickerCancel>Cancel</button>
             <button mat-raised-button color="primary" matDatepickerApply>Apply</button>
           </mat-datepicker-actions>
         </mat-datepicker>
-        <mat-hint>{{ form.value.year | date:'y' }}</mat-hint>
+        <mat-hint>using [yearsPerPage] and [yearsPerRow]</mat-hint>
       </mat-form-field>
     </fieldset>
 

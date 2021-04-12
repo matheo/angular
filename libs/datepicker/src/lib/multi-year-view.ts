@@ -45,10 +45,6 @@ import {startWith} from 'rxjs/operators';
 import {DateRange} from './date-selection-model';
 import {DateFilterFn} from './datepicker-input-base';
 
-export const yearsPerPage = 24;
-
-export const yearsPerRow = 4;
-
 /**
  * An internal component used to display a year selector in the datepicker.
  * @docs-private
@@ -63,6 +59,11 @@ export const yearsPerRow = 4;
 export class MatMultiYearView<D> implements AfterContentInit, OnDestroy {
   private _rerenderSubscription = Subscription.EMPTY;
 
+  /** consts moved as inputs */
+  @Input() yearsPerPage = 24;
+
+  @Input() yearsPerRow = 4;
+
   /** The date to display in this multi-year view (everything other than the year is ignored). */
   @Input()
   get activeDate(): D { return this._activeDate; }
@@ -75,7 +76,7 @@ export class MatMultiYearView<D> implements AfterContentInit, OnDestroy {
     this._activeDate = this._dateAdapter.clampDate(validDate, this.minDate, this.maxDate);
 
     if (!isSameMultiYearView(
-      this._dateAdapter, oldActiveDate, this._activeDate, this.minDate, this.maxDate)) {
+      this._dateAdapter, oldActiveDate, this._activeDate, this.minDate, this.maxDate, this.yearsPerPage)) {
       this._init();
     }
   }
@@ -171,12 +172,12 @@ export class MatMultiYearView<D> implements AfterContentInit, OnDestroy {
     // *actual* first rendered year in the multi-year view.
     const activeYear = this._dateAdapter.getYear(this._activeDate);
     const minYearOfPage = activeYear - getActiveOffset(
-      this._dateAdapter, this.activeDate, this.minDate, this.maxDate);
+      this._dateAdapter, this.activeDate, this.minDate, this.maxDate, this.yearsPerPage);
 
     this._years = [];
-    for (let i = 0, row: number[] = []; i < yearsPerPage; i++) {
+    for (let i = 0, row: number[] = []; i < this.yearsPerPage; i++) {
       row.push(minYearOfPage + i);
-      if (row.length == yearsPerRow) {
+      if (row.length == this.yearsPerRow) {
         this._years.push(row.map(year => this._createCellForYear(year)));
         row = [];
       }
@@ -220,29 +221,29 @@ export class MatMultiYearView<D> implements AfterContentInit, OnDestroy {
         this.activeDate = this._dateAdapter.addCalendarYears(this._activeDate, isRtl ? -1 : 1);
         break;
       case UP_ARROW:
-        this.activeDate = this._dateAdapter.addCalendarYears(this._activeDate, -yearsPerRow);
+        this.activeDate = this._dateAdapter.addCalendarYears(this._activeDate, -this.yearsPerRow);
         break;
       case DOWN_ARROW:
-        this.activeDate = this._dateAdapter.addCalendarYears(this._activeDate, yearsPerRow);
+        this.activeDate = this._dateAdapter.addCalendarYears(this._activeDate, this.yearsPerRow);
         break;
       case HOME:
         this.activeDate = this._dateAdapter.addCalendarYears(this._activeDate,
-          -getActiveOffset(this._dateAdapter, this.activeDate, this.minDate, this.maxDate));
+          -getActiveOffset(this._dateAdapter, this.activeDate, this.minDate, this.maxDate, this.yearsPerPage));
         break;
       case END:
         this.activeDate = this._dateAdapter.addCalendarYears(this._activeDate,
-          yearsPerPage - getActiveOffset(
-            this._dateAdapter, this.activeDate, this.minDate, this.maxDate) - 1);
+          this.yearsPerPage - getActiveOffset(
+            this._dateAdapter, this.activeDate, this.minDate, this.maxDate, this.yearsPerPage) - 1);
         break;
       case PAGE_UP:
         this.activeDate =
             this._dateAdapter.addCalendarYears(
-                this._activeDate, event.altKey ? -yearsPerPage * 10 : -yearsPerPage);
+                this._activeDate, event.altKey ? -this.yearsPerPage * 10 : -this.yearsPerPage);
         break;
       case PAGE_DOWN:
         this.activeDate =
             this._dateAdapter.addCalendarYears(
-                this._activeDate, event.altKey ? yearsPerPage * 10 : yearsPerPage);
+                this._activeDate, event.altKey ? this.yearsPerPage * 10 : this.yearsPerPage);
         break;
       case ENTER:
       case SPACE:
@@ -262,7 +263,7 @@ export class MatMultiYearView<D> implements AfterContentInit, OnDestroy {
   }
 
   _getActiveCell(): number {
-    return getActiveOffset(this._dateAdapter, this.activeDate, this.minDate, this.maxDate);
+    return getActiveOffset(this._dateAdapter, this.activeDate, this.minDate, this.maxDate, this.yearsPerPage);
   }
 
   /** Focuses the active cell after the microtask queue is empty. */
@@ -328,10 +329,10 @@ export class MatMultiYearView<D> implements AfterContentInit, OnDestroy {
 }
 
 export function isSameMultiYearView<D>(
-  dateAdapter: DateAdapter<D>, date1: D, date2: D, minDate: D | null, maxDate: D | null): boolean {
+  dateAdapter: DateAdapter<D>, date1: D, date2: D, minDate: D | null, maxDate: D | null, yearsPerPage: number): boolean {
   const year1 = dateAdapter.getYear(date1);
   const year2 = dateAdapter.getYear(date2);
-  const startingYear = getStartingYear(dateAdapter, minDate, maxDate);
+  const startingYear = getStartingYear(dateAdapter, minDate, maxDate, yearsPerPage);
   return Math.floor((year1 - startingYear) / yearsPerPage) ===
           Math.floor((year2 - startingYear) / yearsPerPage);
 }
@@ -342,9 +343,9 @@ export function isSameMultiYearView<D>(
  * "startingYear" will render when paged into view.
  */
 export function getActiveOffset<D>(
-  dateAdapter: DateAdapter<D>, activeDate: D, minDate: D | null, maxDate: D | null): number {
+  dateAdapter: DateAdapter<D>, activeDate: D, minDate: D | null, maxDate: D | null, yearsPerPage: number): number {
   const activeYear = dateAdapter.getYear(activeDate);
-  return euclideanModulo((activeYear - getStartingYear(dateAdapter, minDate, maxDate)),
+  return euclideanModulo((activeYear - getStartingYear(dateAdapter, minDate, maxDate, yearsPerPage)),
     yearsPerPage);
 }
 
@@ -353,7 +354,7 @@ export function getActiveOffset<D>(
  * or the minimum year would be at the beginning of a page.
  */
 function getStartingYear<D>(
-  dateAdapter: DateAdapter<D>, minDate: D | null, maxDate: D | null): number {
+  dateAdapter: DateAdapter<D>, minDate: D | null, maxDate: D | null, yearsPerPage: number): number {
   let startingYear = 0;
   if (maxDate) {
     const maxYear = dateAdapter.getYear(maxDate);

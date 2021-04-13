@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { SectionAction } from './section-action.interface';
 
 @Component({
   selector: 'web-section-actions',
@@ -6,4 +7,6 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   styleUrls: ['./section-actions.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SectionActionsComponent {}
+export class SectionActionsComponent {
+  @Input() actions: SectionAction[] = [];
+}

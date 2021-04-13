@@ -1,0 +1,7 @@
+<div class="badges"
+fxLayout="row" fxLayout.lt-md="column"
+fxLayoutGap="4px">
+  <a *ngFor="let badge of badges" [href]="badge.link">
+    <img [src]="badge.img" [alt]="badge.alt" />
+  </a>
+</div>

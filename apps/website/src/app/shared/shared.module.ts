@@ -17,6 +17,7 @@ import { RouterModule } from '@angular/router';
 import { ItemComponent } from './layout/item/item.component';
 import { MenuComponent } from './layout/menu/menu.component';
 import { SectionActionsComponent } from './layout/section-actions/section-actions.component';
+import { SectionBadgesComponent } from './layout/section-badges/section-badges.component';
 import { SectionComponent } from './layout/section/section.component';
 import { ThemeComponent } from './layout/theme/theme.component';
 
@@ -28,6 +29,7 @@ import { ThemeComponent } from './layout/theme/theme.component';
     MatIconModule,
     MatListModule,
     MatSidenavModule,
+    MatTooltipModule,
     RouterModule,
   ],
   declarations: [
@@ -35,12 +37,14 @@ import { ThemeComponent } from './layout/theme/theme.component';
     MenuComponent,
     SectionComponent,
     SectionActionsComponent,
+    SectionBadgesComponent,
     ItemComponent,
   ],
   exports: [
     ThemeComponent,
     SectionComponent,
     SectionActionsComponent,
+    SectionBadgesComponent,
     ItemComponent,
     // modules
     ReactiveFormsModule,

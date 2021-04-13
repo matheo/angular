@@ -1,35 +1,8 @@
 <web-section>
-  <div class="badges">
-    <a href="https://github.com/matheo/angular/tree/master/libs/datasource">
-      <img src="https://img.shields.io/badge/%40matheo-datasource-brightgreen" alt="Package"/>
-    </a>
-    <a href="https://www.npmjs.com/package/@matheo/datasource">
-      <img src="https://badge.fury.io/js/%40matheo%2Fdatasource.svg" alt="NPM Badge"/>
-    </a>
-    <a href="https://npmcharts.com/compare/@matheo/datasource?minimal=true">
-      <img src="https://img.shields.io/npm/dm/@matheo/datasource.svg?style=flat" alt="NPM Downloads"/>
-    </a>
-  </div>
-
-  <web-section-actions fxLayout="row-reverse" fxLayoutGap="5px">
-    <a mat-icon-button matTooltip="See source code" target="_blank"
-    href="https://github.com/matheo/angular/blob/master/apps/website/src/app/demos/submodules/datasource/datasource.module.ts">
-      <mat-icon>code</mat-icon>
-    </a>
-
-    <a mat-icon-button matTooltip="NPM Package" target="_blank"
-    href="https://www.npmjs.com/package/@matheo/datasource">
-      <ion-icon name="logo-npm"></ion-icon>
-    </a>
-
-    <a mat-icon-button matTooltip="Medium Article" target="_blank"
-    href="https://medium.com/@matheo/reactive-datasource-for-angular-1d869b0155f6">
-      <ion-icon name="logo-medium"></ion-icon>
-    </a>
-  </web-section-actions>
+  <web-section-badges [badges]="badges"></web-section-badges>
+  <web-section-actions [actions]="actions"></web-section-actions>
 
   <fieldset>
-
     <h3>Sponsors Datasource</h3>
 
     <p>

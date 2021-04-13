@@ -7,6 +7,7 @@ import {
 import { FormGroup } from '@angular/forms';
 import { BehaviorSubject } from 'rxjs';
 import { startWith } from 'rxjs/operators';
+import { actions, badges } from '../../constants/dyn-forms.links';
 import { simpleForm } from './simple.form';
 
 @Component({
@@ -17,6 +18,10 @@ import { simpleForm } from './simple.form';
   encapsulation: ViewEncapsulation.None,
 })
 export class SimpleComponent implements AfterViewInit {
+  // ref links
+  actions = actions;
+  badges = badges;
+
   // reactive parameters of the billing CARD
   profileCard = new BehaviorSubject({
     title: 'Billing Address',

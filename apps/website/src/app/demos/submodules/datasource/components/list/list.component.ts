@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { actions, badges } from '../../constants/datasource.links';
 import { SponsorsDatabase, SponsorsDatasource } from '../../services';
 
 @Component({
@@ -9,5 +10,9 @@ import { SponsorsDatabase, SponsorsDatasource } from '../../services';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ListComponent {
+  // ref links
+  actions = actions;
+  badges = badges;
+
   constructor(public source: SponsorsDatasource) {}
 }

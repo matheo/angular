@@ -1,1 +1,12 @@
-<ng-content></ng-content>
+<div class="section-actions" fxLayout="row-reverse" fxLayoutGap="4px">
+  <a
+    *ngFor="let action of actions"
+    mat-icon-button
+    [matTooltip]="action.tooltip"
+    [href]="action.link"
+    target="_blank"
+  >
+    <mat-icon *ngIf="action.icon">{{ action.icon }}</mat-icon>
+    <ion-icon *ngIf="action.ionicon" [name]="action.ionicon"></ion-icon>
+  </a>
+</div>

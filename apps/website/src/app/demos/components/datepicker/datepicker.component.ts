@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { DateUnit, MatCalendarCellClassFunction } from '@matheo/datepicker';
+import { actions, badges } from '../../constants/datepicker.links';
 
 @Component({
   selector: 'web-datepicker',
@@ -9,6 +10,10 @@ import { DateUnit, MatCalendarCellClassFunction } from '@matheo/datepicker';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DatepickerComponent implements OnInit {
+  // ref links
+  actions = actions;
+  badges = badges;
+
   form!: FormGroup;
 
   startDate = new Date(1990, 0, 1);

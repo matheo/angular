@@ -3,7 +3,7 @@ import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { RouterModule, Routes } from '@angular/router';
-import { DynFormsMaterialModule } from '@myndpm/dyn-forms/material';
+import { DynFormsMaterialModule } from '@myndpm/dyn-forms/ui-material';
 import { SharedModule } from '../../../shared/shared.module';
 import { SimpleComponent } from './components/simple/simple.component';
 import { Step1Component } from './components/stepper/step1/step1.component';
@@ -26,6 +26,11 @@ const routes: Routes = [
     path: 'stepper-form',
     component: StepperComponent,
     children: [
+      {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: 'step-1',
+      },
       {
         path: 'step-1',
         component: Step1Component,

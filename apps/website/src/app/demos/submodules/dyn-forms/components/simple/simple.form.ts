@@ -1,7 +1,7 @@
 import { Validators } from '@angular/forms';
 import { DynFormConfig } from '@myndpm/dyn-forms';
 import { DynControlParams } from '@myndpm/dyn-forms/core';
-import { createConfig } from '@myndpm/dyn-forms/material';
+import { createMatConfig } from '@myndpm/dyn-forms/ui-material';
 import { Observable } from 'rxjs';
 
 export function simpleForm(
@@ -9,30 +9,30 @@ export function simpleForm(
 ): DynFormConfig {
   return {
     controls: [
-      createConfig('CARD', {
+      createMatConfig('CARD', {
         name: 'billing',
         params: obsParams,
         controls: [
-          createConfig('INPUT', {
+          createMatConfig('INPUT', {
             name: 'firstName',
             params: { label: 'First Name *' },
             options: { validators: [Validators.required] },
           }),
-          createConfig('INPUT', {
+          createMatConfig('INPUT', {
             name: 'lastName',
             params: { label: 'Last Name *' },
             options: { validators: [Validators.required] },
           }),
-          createConfig('INPUT', {
+          createMatConfig('INPUT', {
             name: 'address1',
             params: { label: 'Address Line 1 *' },
             options: { validators: [Validators.required] },
           }),
-          createConfig('INPUT', {
+          createMatConfig('INPUT', {
             name: 'address2',
             params: { label: 'Address Line 2' },
           }),
-          createConfig('SELECT', {
+          createMatConfig('SELECT', {
             name: 'country',
             params: {
               label: 'Country',
@@ -47,14 +47,14 @@ export function simpleForm(
             },
             options: { validators: [Validators.required] },
           }),
-          createConfig('INPUT', {
+          createMatConfig('INPUT', {
             name: 'zipCode',
             params: { label: 'Postal Code *' },
             options: { validators: [Validators.required, Validators.min(0)] },
           }),
         ],
       }),
-      createConfig('RADIO', {
+      createMatConfig('RADIO', {
         name: 'account',
         params: {
           options: [
@@ -63,7 +63,7 @@ export function simpleForm(
           ],
         },
       }),
-      createConfig('ARRAY', {
+      createMatConfig('ARRAY', {
         name: 'products',
         params: {
           title: 'Products',
@@ -71,12 +71,12 @@ export function simpleForm(
           initItem: true,
         },
         controls: [
-          createConfig('INPUT', {
+          createMatConfig('INPUT', {
             name: 'product',
             params: { label: 'Product Name *' },
             options: { validators: [Validators.required] },
           }),
-          createConfig('INPUT', {
+          createMatConfig('INPUT', {
             name: 'quantity',
             params: { label: 'Quantity *', type: 'number' },
             options: { validators: [Validators.required, Validators.min(1)] },

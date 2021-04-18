@@ -10,14 +10,13 @@ assignees: ''
 
 A clear and concise description of what the bug is.
 
-## To Reproduce
+## Minimal Reproduction
 
-Steps to reproduce the behavior:
+<!--
+Please create and share minimal reproduction of the issue starting with this template:
 
-1. Go to '...'
-2. Click on '....'
-3. Scroll down to '....'
-4. See error
+Datepicker: https://stackblitz.com/edit/blitz-datepicker?file=src%2Fapp%2Fmaterial-module.ts
+-->
 
 ## Expected behavior
 
@@ -27,12 +26,18 @@ A clear and concise description of what you expected to happen.
 
 If applicable, add screenshots to help explain your problem.
 
-## Desktop (please complete the following information)
+## Your Environment
 
-- OS: [e.g. Linux]
-- Browser [e.g. chrome, safari]
-- Version [e.g. 22]
+**Angular Version:**
 
-## Additional context
+<pre><code>
+<!-- run `ng version` and paste output below -->
+<!-- ✍️-->
 
-Add any other context about the problem here.
+</code></pre>
+
+**Anything else relevant?**
+
+<!-- ✍️Is this a browser specific issue? If so, please specify the browser and version. -->
+
+<!-- ✍️Do any of these matter: operating system, IDE, package manager, HTTP server, ...? If so, please mention it below. -->

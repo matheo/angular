@@ -257,6 +257,10 @@ export abstract class MatDataSource<REQ = any, RAW = any, RES = any>
     this._trigger$.next({ forceReload: new Date().getTime() });
   }
 
+  restart() {
+    this._triggered = 0;
+  }
+
   /**
    * Data processing that can be completely customized.
    */

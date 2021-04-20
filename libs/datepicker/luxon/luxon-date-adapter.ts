@@ -8,7 +8,7 @@
 
 import { Inject, Injectable, Optional, InjectionToken } from '@angular/core';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
-import { DateAdapter } from '@matheo/datepicker/core';
+import { DateAdapter } from '@matheo/datepicker';
 import { DateTime, Info, DateTimeOptions } from 'luxon';
 
 /** Configurable options for {@see LuxonDateAdapter}. */
@@ -46,6 +46,12 @@ export function MAT_LUXON_DATE_ADAPTER_OPTIONS_FACTORY(): MatLuxonDateAdapterOpt
 
 /** The default date names to use if Intl API is not available. */
 const DEFAULT_DATE_NAMES = range(31, (i) => String(i + 1));
+
+/** The default hour names to use if Intl API is not available. */
+const DEFAULT_HOUR_NAMES = range(24, (i) => (i === 0 ? '00' : String(i)));
+
+/** The default minute names to use if Intl API is not available. */
+const DEFAULT_MINUTE_NAMES = range(60, String);
 
 /** Creates an array and fills it with values. */
 function range<T>(length: number, valueFunction: (index: number) => T): T[] {
@@ -91,8 +97,36 @@ export class LuxonDateAdapter extends DateAdapter<DateTime> {
     return date.day;
   }
 
+  getHours(date: DateTime): number {
+    return date.hour;
+  }
+
+  setHours(date: DateTime, hour: number): DateTime {
+    return date.set({ hour });
+  }
+
+  getMinutes(date: DateTime): number {
+    return date.minute;
+  }
+
+  setMinutes(date: DateTime, minute: number): DateTime {
+    return date.set({ minute });
+  }
+
+  getSeconds(date: DateTime): number {
+    return date.second;
+  }
+
+  setSeconds(date: DateTime, second: number, ms?: number): DateTime {
+    return date.set({ second, millisecond: ms });
+  }
+
+  getMilliseconds(date: DateTime): number {
+    return date.millisecond;
+  }
+
   getDayOfWeek(date: DateTime): number {
-    return date.weekday;
+    return date.weekday - 1;
   }
 
   getMonthNames(style: 'long' | 'short' | 'narrow'): string[] {
@@ -117,6 +151,14 @@ export class LuxonDateAdapter extends DateAdapter<DateTime> {
       });
     }
     return DEFAULT_DATE_NAMES;
+  }
+
+  getHourNames(): string[] {
+    return DEFAULT_HOUR_NAMES;
+  }
+
+  getMinuteNames(): string[] {
+    return DEFAULT_MINUTE_NAMES;
   }
 
   getDayOfWeekNames(style: 'long' | 'short' | 'narrow'): string[] {
@@ -147,7 +189,15 @@ export class LuxonDateAdapter extends DateAdapter<DateTime> {
     return DateTime.fromObject(date.toObject({ includeConfig: true }));
   }
 
-  createDate(year: number, month: number, date: number): DateTime {
+  createDate(
+    year: number,
+    month: number,
+    date: number,
+    hours?: number,
+    minutes?: number,
+    seconds?: number,
+    ms?: number
+  ): DateTime {
     if (month < 0 || month > 11) {
       throw Error(
         `Invalid month index "${month}". Month index has to be between 0 and 11.`
@@ -160,8 +210,8 @@ export class LuxonDateAdapter extends DateAdapter<DateTime> {
 
     // Luxon uses 1-indexed months so we need to add one to the month.
     const result = this._useUTC
-      ? DateTime.utc(year, month + 1, date)
-      : DateTime.local(year, month + 1, date);
+      ? DateTime.utc(year, month + 1, date, hours, minutes, seconds, ms)
+      : DateTime.local(year, month + 1, date, hours, minutes, seconds, ms);
 
     if (!this.isValid(result)) {
       throw Error(`Invalid date "${date}". Reason: "${result.invalidReason}".`);
@@ -228,6 +278,18 @@ export class LuxonDateAdapter extends DateAdapter<DateTime> {
 
   addCalendarDays(date: DateTime, days: number): DateTime {
     return date.plus({ days }).setLocale(this.locale);
+  }
+
+  addCalendarHours(date: DateTime, hours: number): DateTime {
+    return date.plus({ hours });
+  }
+
+  addCalendarMinutes(date: DateTime, minutes: number): DateTime {
+    return date.plus({ minutes });
+  }
+
+  addCalendarSeconds(date: DateTime, seconds: number, ms?: number): DateTime {
+    return date.plus({ seconds, milliseconds: ms });
   }
 
   toIso8601(date: DateTime): string {

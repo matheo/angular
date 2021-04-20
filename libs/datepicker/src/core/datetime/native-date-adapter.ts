@@ -116,24 +116,30 @@ export class NativeDateAdapter extends DateAdapter<Date> {
     return date.getHours();
   }
 
-  setHours(date: Date, value: number): void {
-    date.setHours(value);
+  setHours(date: Date, value: number): Date {
+    const clone = this.clone(date);
+    clone.setHours(value);
+    return clone;
   }
 
   getMinutes(date: Date): number {
     return date.getMinutes();
   }
 
-  setMinutes(date: Date, value: number): void {
-    date.setMinutes(value);
+  setMinutes(date: Date, value: number): Date {
+    const clone = this.clone(date);
+    clone.setMinutes(value);
+    return clone;
   }
 
   getSeconds(date: Date): number {
     return date.getSeconds();
   }
 
-  setSeconds(date: Date, value: number, ms?: number): void {
-    date.setSeconds(value, ms);
+  setSeconds(date: Date, value: number, ms?: number): Date {
+    const clone = this.clone(date);
+    clone.setSeconds(value, ms);
+    return clone;
   }
 
   getMilliseconds(date: Date): number {

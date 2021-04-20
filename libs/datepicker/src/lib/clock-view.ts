@@ -349,7 +349,7 @@ export class MatClockView<D> implements AfterViewInit, AfterContentInit {
     }
     let value = Math.round(radian / unit);
 
-    const date = this._dateAdapter.clone(this.activeDate);
+    let date = this._dateAdapter.clone(this.activeDate);
 
     if (this.inHourView) {
       if (value === 12) {
@@ -358,7 +358,7 @@ export class MatClockView<D> implements AfterViewInit, AfterContentInit {
       value = this.twelveHour
         ? (this._anteMeridian ? value : value + 12)
         : (outer ? value : value + 12);
-      this._dateAdapter.setHours(date, value);
+      date = this._dateAdapter.setHours(date, value);
     } else {
       if (this.clockStep) {
         value *= this.clockStep;
@@ -366,7 +366,7 @@ export class MatClockView<D> implements AfterViewInit, AfterContentInit {
       if (value === 60) {
         value = 0;
       }
-      this._dateAdapter.setMinutes(date, value);
+      date = this._dateAdapter.setMinutes(date, value);
     }
 
     // validate if the resulting value is disabled and do not take action

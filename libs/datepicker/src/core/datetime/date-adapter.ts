@@ -40,15 +40,15 @@ export abstract class DateAdapter<D> {
 
   abstract getHours(date: D): number;
 
-  abstract setHours(date: D, value: number): void;
+  abstract setHours(date: D, value: number): D;
 
   abstract getMinutes(date: D): number;
 
-  abstract setMinutes(date: D, value: number): void;
+  abstract setMinutes(date: D, value: number): D;
 
   abstract getSeconds(date: D): number;
 
-  abstract setSeconds(date: D, value: number, ms?: number): void;
+  abstract setSeconds(date: D, value: number, ms?: number): D;
 
   abstract getMilliseconds(date: D): number;
 

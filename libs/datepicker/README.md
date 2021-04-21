@@ -17,7 +17,8 @@ yarn add @matheo/datepicker
 Then add the modules to your Angular module, or replace the ones imported from `@angular/material/datepicker` with these:
 
 ```typescript
-import { MatDatepickerModule, MatNativeDateModule } from '@matheo/datepicker';
+import { MatDatepickerModule } from '@matheo/datepicker';
+import { MatNativeDateModule } from '@matheo/datepicker/core';
 
 @NgModule({
   imports: [
@@ -31,8 +32,10 @@ export class AppModule {}
 ```
 
 **Note** that the `MatDatepickerModule` can be loaded into feature modules,  
-but it requires the providers given by `MatNativeDateModule`,  
+but it requires the providers given by `MatNativeDateModule`,
 so it's recommended to import the former in your root Module.
+There's the `MatLuxonDateModule` at `@matheo/datepicker/luxon`
+if you use luxon in your application.
 
 ```html
 <mat-form-field>
@@ -96,38 +99,16 @@ The display and parse formats used by the datepicker can be overriden providing 
 
 ```typescript
 @NgModule({
-  imports: [... MatDatepickerModule, NativeDateModule],
+  imports: [MatDatepickerModule, NativeDateModule],
   providers: [
     {
       provide: MAT_DATE_FORMATS,
       useValue: {
         parse: {
-          dateInput: null,
-          datetimeInput: null,
-          timeInput: null,
-          monthInput: null,
-          yearInput: null,
+          ...
         },
         display: {
-          dateInput: {year: 'numeric', month: 'numeric', day: 'numeric'},
-          datetimeInput: {
-            year: 'numeric',
-            month: 'numeric',
-            day: 'numeric',
-            hour: 'numeric',
-            minute: 'numeric',
-            hour12: true
-          },
-          timeInput: {hour: 'numeric', minute: 'numeric'},
-          monthInput: {month: 'short', year: 'numeric'},
-          yearInput: {year: 'numeric'},
-          dateA11yLabel: {year: 'numeric', month: 'long', day: 'numeric'},
-          monthLabel: {month: 'short'},
-          monthDayLabel: {month: 'short', day: 'numeric'},
-          monthDayA11yLabel: {month: 'long', day: 'numeric'},
-          monthYearLabel: {year: 'numeric', month: 'short'},
-          monthYearA11yLabel: {year: 'numeric', month: 'long'},
-          timeLabel: {hours: 'numeric', minutes: 'numeric'},
+          ...
         }
       }
     }

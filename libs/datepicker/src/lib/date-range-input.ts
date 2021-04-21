@@ -27,7 +27,7 @@ import {ThemePalette} from '@angular/material/core';
 import {NgControl, ControlContainer} from '@angular/forms';
 import {Subject, merge, Subscription} from 'rxjs';
 import {coerceBooleanProperty, BooleanInput} from '@angular/cdk/coercion';
-import {DateAdapter} from '../core/datetime';
+import {DateAdapter} from '@matheo/datepicker/core';
 import {
   MatStartDate,
   MatEndDate,

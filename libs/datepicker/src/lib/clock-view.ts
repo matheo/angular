@@ -17,7 +17,7 @@ import {MAT_DATE_FORMATS} from '@angular/material/core';
 import {
   DateAdapter,
   MatDateFormats,
-} from '../core/datetime';
+} from '@matheo/datepicker/core';
 import {MatCalendarCellClassFunction, MatCalendarUserEvent} from './calendar-body';
 import {createMissingDateImplError} from './datepicker-errors';
 import {DateFilterFn} from './datepicker-input-base';

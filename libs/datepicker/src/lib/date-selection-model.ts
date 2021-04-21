@@ -8,7 +8,7 @@
 
 import {FactoryProvider, Injectable, Optional, SkipSelf, OnDestroy, Directive} from '@angular/core';
 import {Observable, Subject} from 'rxjs';
-import {DateAdapter} from '../core/datetime';
+import {DateAdapter} from '@matheo/datepicker/core';
 
 /** A class representing a range of dates. */
 export class DateRange<D> {

@@ -38,7 +38,7 @@ import {
 } from '@angular/core';
 import {Directionality} from '@angular/cdk/bidi';
 import {MAT_DATE_FORMATS} from '@angular/material/core';
-import {DateAdapter, MatDateFormats} from '../core/datetime';
+import {DateAdapter, MatDateFormats} from '@matheo/datepicker/core';
 import {
   MatCalendarBody,
   MatCalendarCell,

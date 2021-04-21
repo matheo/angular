@@ -34,7 +34,7 @@ import {
   DateAdapter,
   DateUnit,
   MatDateFormats,
-} from '../core/datetime';
+} from '@matheo/datepicker/core';
 import {MatCalendarType} from './calendar.types';
 import {createMissingDateImplError} from './datepicker-errors';
 import {

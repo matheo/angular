@@ -6,7 +6,7 @@
  * found in the LICENSE file at https://angular.io/license
  */
 
-import { MatDateFormats } from '@matheo/datepicker';
+import { MatDateFormats } from '@matheo/datepicker/core';
 
 export const MAT_LUXON_DATE_FORMATS: MatDateFormats = {
   parse: {

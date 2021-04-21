@@ -32,7 +32,7 @@ import {
   OnDestroy,
 } from '@angular/core';
 import {Directionality} from '@angular/cdk/bidi';
-import {DateAdapter} from '../core/datetime';
+import {DateAdapter} from '@matheo/datepicker/core';
 import {
   MatCalendarBody,
   MatCalendarCell,

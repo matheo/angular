@@ -50,7 +50,7 @@ import {
 import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {merge, Subject, Observable, Subscription} from 'rxjs';
 import {filter, take} from 'rxjs/operators';
-import {DateAdapter} from '../core/datetime';
+import {DateAdapter} from '@matheo/datepicker/core';
 import {MatCalendar} from './calendar';
 import {MatCalendarType, MatCalendarView} from './calendar.types';
 import {matDatepickerAnimations} from './datepicker-animations';

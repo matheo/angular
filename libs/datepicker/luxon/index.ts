@@ -12,7 +12,7 @@ import {
   MAT_DATE_FORMATS,
   MAT_DATE_LOCALE,
 } from '@angular/material/core';
-import { DateAdapter } from '@matheo/datepicker';
+import { DateAdapter } from '@matheo/datepicker/core';
 import {
   MAT_LUXON_DATE_ADAPTER_OPTIONS,
   LuxonDateAdapter,

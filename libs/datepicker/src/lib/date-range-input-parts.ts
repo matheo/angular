@@ -40,7 +40,7 @@ import {BACKSPACE} from '@angular/cdk/keycodes';
 import {
   DateAdapter,
   MatDateFormats,
-} from '../core/datetime';
+} from '@matheo/datepicker/core';
 import {DateFilterFn, MatDatepickerInputBase} from './datepicker-input-base';
 import {DateRange, DateSelectionModelChange} from './date-selection-model';
 

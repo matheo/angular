@@ -28,7 +28,7 @@ import {Subscription} from 'rxjs';
 import {
   DateAdapter,
   MatDateFormats,
-} from '../core/datetime';
+} from '@matheo/datepicker/core';
 import {DateFilterFn, MatDatepickerInputBase} from './datepicker-input-base';
 import {MatDatepickerControl, MatDatepickerPanel} from './datepicker-base';
 import {DateSelectionModelChange} from './date-selection-model';

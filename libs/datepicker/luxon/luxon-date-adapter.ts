@@ -8,7 +8,7 @@
 
 import { Inject, Injectable, Optional, InjectionToken } from '@angular/core';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
-import { DateAdapter } from '@matheo/datepicker';
+import { DateAdapter } from '@matheo/datepicker/core';
 import { DateTime, Info, DateTimeOptions } from 'luxon';
 
 /** Configurable options for {@see LuxonDateAdapter}. */

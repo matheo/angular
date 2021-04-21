@@ -32,7 +32,7 @@ import {
   DateAdapter,
   DateUnit,
   MatDateFormats,
-} from '../core/datetime';
+} from '@matheo/datepicker/core';
 import {MatCalendarUserEvent, MatCalendarCellClassFunction} from './calendar-body';
 import {MatCalendarType, MatCalendarView} from './calendar.types';
 import {matDatepickerAnimations} from './datepicker-animations';

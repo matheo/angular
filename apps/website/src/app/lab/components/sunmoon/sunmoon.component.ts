@@ -8,7 +8,7 @@ import {
 } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { DateAdapter } from '@matheo/datepicker';
+import { DateAdapter } from '@matheo/datepicker/core';
 import { AstroTime, MoonPhase, SearchMoonPhase } from 'astronomy-engine';
 import { differenceInHours } from 'date-fns';
 import { startWith } from 'rxjs/operators';

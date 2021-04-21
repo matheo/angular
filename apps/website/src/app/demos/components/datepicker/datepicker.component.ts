@@ -1,10 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import {
-  DateAdapter,
-  DateUnit,
-  MatCalendarCellClassFunction,
-} from '@matheo/datepicker';
+import { MatCalendarCellClassFunction } from '@matheo/datepicker';
+import { DateAdapter, DateUnit } from '@matheo/datepicker/core';
 import { actions, badges } from '../../constants/datepicker.links';
 
 @Component({
@@ -13,7 +10,7 @@ import { actions, badges } from '../../constants/datepicker.links';
   styleUrls: ['./datepicker.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DatepickerComponent<D> implements OnInit {
+export class DatepickerComponent<D = Date> implements OnInit {
   // ref links
   actions = actions;
   badges = badges;

@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { RouterModule, Routes } from '@angular/router';
 import { MatDatepickerModule } from '@matheo/datepicker';
+import { MatNativeDateModule } from '@matheo/datepicker/core';
 import { ThemeComponent } from '../shared/layout/theme/theme.component';
 import { SharedModule } from '../shared/shared.module';
 import { IndexComponent } from './components/index/index.component';
@@ -34,6 +35,7 @@ const routes: Routes = [
     FlexLayoutModule,
     RouterModule.forChild(routes),
     MatDatepickerModule,
+    MatNativeDateModule,
     SharedModule,
   ],
   declarations: [IndexComponent, SunmoonComponent],

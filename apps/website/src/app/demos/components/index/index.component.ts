@@ -29,11 +29,5 @@ export class IndexComponent {
       image: '/assets/items/dyn-forms.png',
       description: 'Simple Dynamic Forms Demo.',
     },
-    {
-      title: 'Stepper Dynamic Form',
-      link: './dyn-forms/stepper-form',
-      image: '/assets/items/dyn-forms.png',
-      description: 'Routed Stepper Form Demo.',
-    },
   ];
 }

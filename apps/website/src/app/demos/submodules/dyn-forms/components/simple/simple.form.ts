@@ -1,4 +1,3 @@
-import { Validators } from '@angular/forms';
 import { DynFormConfig } from '@myndpm/dyn-forms';
 import { DynControlParams } from '@myndpm/dyn-forms/core';
 import { createMatConfig } from '@myndpm/dyn-forms/ui-material';
@@ -6,34 +5,55 @@ import { Observable } from 'rxjs';
 
 export function simpleForm(
   obsParams: Observable<DynControlParams>
-): DynFormConfig {
+): DynFormConfig<'edit' | 'display'> {
+  // typed mode
   return {
+    modeParams: {
+      edit: { readonly: false },
+      display: { readonly: true },
+    },
     controls: [
       createMatConfig('CARD', {
         name: 'billing',
+        factory: { cssClass: 'row' },
         params: obsParams,
         controls: [
           createMatConfig('INPUT', {
             name: 'firstName',
+            options: { validators: ['required'] },
+            factory: { cssClass: 'col-sm-6 col-md-4' },
             params: { label: 'First Name *' },
-            options: { validators: [Validators.required] },
           }),
           createMatConfig('INPUT', {
             name: 'lastName',
+            options: { validators: ['required'] },
+            factory: { cssClass: 'col-sm-6 col-md-4' },
             params: { label: 'Last Name *' },
-            options: { validators: [Validators.required] },
+          }),
+          createMatConfig('DIVIDER', {
+            params: { invisible: true },
           }),
           createMatConfig('INPUT', {
             name: 'address1',
+            options: { validators: { required: null, minLength: 4 } },
+            factory: { cssClass: 'col-12 col-md-8' },
             params: { label: 'Address Line 1 *' },
-            options: { validators: [Validators.required] },
           }),
           createMatConfig('INPUT', {
             name: 'address2',
+            factory: { cssClass: 'col-12 col-md-8' },
             params: { label: 'Address Line 2' },
+          }),
+          createMatConfig('DIVIDER', {
+            params: { invisible: true },
           }),
           createMatConfig('SELECT', {
             name: 'country',
+            options: {
+              defaults: 'CO',
+              validators: ['required'],
+            },
+            factory: { cssClass: 'col-sm-6 col-md-4' },
             params: {
               label: 'Country',
               options: [
@@ -45,12 +65,33 @@ export function simpleForm(
                 { text: 'Other', value: 'XX' },
               ],
             },
-            options: { validators: [Validators.required] },
+            modes: {
+              display: {
+                control: 'INPUT',
+                paramFns: { getValue: 'getOptionText' },
+              },
+            },
           }),
           createMatConfig('INPUT', {
             name: 'zipCode',
-            params: { label: 'Postal Code *' },
-            options: { validators: [Validators.required, Validators.min(0)] },
+            options: {
+              matchers: [
+                {
+                  matcher: 'DISABLE',
+                  operator: 'AND',
+                  when: [
+                    { path: 'firstName', value: 'Mateo' },
+                    { path: 'country', value: 'CO' },
+                  ],
+                },
+                {
+                  matcher: 'HIDE',
+                  when: [{ path: 'account', value: 'GUEST' }],
+                },
+              ],
+            },
+            factory: { cssClass: 'col-sm-6 col-md-4' },
+            params: { label: 'Postal Code' },
           }),
         ],
       }),
@@ -62,9 +103,16 @@ export function simpleForm(
             { text: 'Checkout as a Guest', value: 'GUEST' },
           ],
         },
+        modes: {
+          display: {
+            control: 'INPUT',
+            paramFns: { getValue: 'getOptionText' },
+          },
+        },
       }),
       createMatConfig('ARRAY', {
         name: 'products',
+        factory: { cssClass: 'row' },
         params: {
           title: 'Products',
           subtitle: 'Items to checkout',
@@ -73,13 +121,15 @@ export function simpleForm(
         controls: [
           createMatConfig('INPUT', {
             name: 'product',
+            options: { validators: ['required'] },
+            factory: { cssClass: 'col-6 col-md-8' },
             params: { label: 'Product Name *' },
-            options: { validators: [Validators.required] },
           }),
           createMatConfig('INPUT', {
             name: 'quantity',
+            options: { validators: ['required', ['min', 1]] },
+            factory: { cssClass: 'col-5 col-md-3' },
             params: { label: 'Quantity *', type: 'number' },
-            options: { validators: [Validators.required, Validators.min(1)] },
           }),
         ],
       }),

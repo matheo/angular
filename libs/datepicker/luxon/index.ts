@@ -7,7 +7,11 @@
  */
 
 import { NgModule } from '@angular/core';
-import { MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
+import {
+  DateAdapter as MaterialDateAdapter,
+  MAT_DATE_FORMATS,
+  MAT_DATE_LOCALE,
+} from '@angular/material/core';
 import { DateAdapter } from '@matheo/datepicker';
 import {
   MAT_LUXON_DATE_ADAPTER_OPTIONS,
@@ -22,6 +26,11 @@ export * from './luxon-date-formats';
   providers: [
     {
       provide: DateAdapter,
+      useClass: LuxonDateAdapter,
+      deps: [MAT_DATE_LOCALE, MAT_LUXON_DATE_ADAPTER_OPTIONS],
+    },
+    {
+      provide: MaterialDateAdapter,
       useClass: LuxonDateAdapter,
       deps: [MAT_DATE_LOCALE, MAT_LUXON_DATE_ADAPTER_OPTIONS],
     },

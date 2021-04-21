@@ -13,7 +13,7 @@ const jsonFile = JSON.parse(readFileSync(packageJson, { encoding: 'utf8' }));
 
 switch (jsonFile.name) {
   case '@matheo/datepicker':
-    delete jsonFile['peerDependencies']['luxon'];
+    delete jsonFile['dependencies']['luxon'];
     writeFileSync(
       `dist/${lib}/package.json`,
       `${JSON.stringify(jsonFile, null, 2)}\n`

@@ -25,6 +25,7 @@ import {
   SimpleChanges,
   ViewChild,
   ViewEncapsulation,
+  isDevMode,
 } from '@angular/core';
 import {MAT_DATE_FORMATS, ThemePalette} from '@angular/material/core';
 import {Subject, Subscription} from 'rxjs';
@@ -433,7 +434,7 @@ export class MatCalendar<D> implements AfterContentInit, AfterViewChecked, OnDes
               @Optional() @Inject(MAT_DATE_FORMATS) private _dateFormats: MatDateFormats,
               private _changeDetectorRef: ChangeDetectorRef) {
 
-    if (typeof ngDevMode === 'undefined' || ngDevMode) {
+    if (isDevMode()) {
       if (!this._dateAdapter) {
         throw createMissingDateImplError('DateAdapter');
       }

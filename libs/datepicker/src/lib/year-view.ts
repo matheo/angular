@@ -31,6 +31,7 @@ import {
   ViewChild,
   ViewEncapsulation,
   OnDestroy,
+  isDevMode,
 } from '@angular/core';
 import {Directionality} from '@angular/cdk/bidi';
 import {MAT_DATE_FORMATS} from '@angular/material/core';
@@ -145,7 +146,7 @@ export class MatYearView<D> implements AfterContentInit, OnDestroy {
               @Optional() public _dateAdapter: DateAdapter<D>,
               @Optional() private _dir?: Directionality) {
 
-    if (typeof ngDevMode === 'undefined' || ngDevMode) {
+    if (isDevMode()) {
       if (!this._dateAdapter) {
         throw createMissingDateImplError('DateAdapter');
       }

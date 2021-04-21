@@ -35,6 +35,7 @@ import {
   OnDestroy,
   SimpleChanges,
   OnChanges,
+  isDevMode,
 } from '@angular/core';
 import {Directionality} from '@angular/cdk/bidi';
 import {MAT_DATE_FORMATS} from '@angular/material/core';
@@ -189,7 +190,7 @@ export class MatMonthView<D> implements AfterContentInit, OnChanges, OnDestroy {
               @Inject(MAT_DATE_RANGE_SELECTION_STRATEGY) @Optional()
                   private _rangeStrategy?: MatDateRangeSelectionStrategy<D>) {
 
-    if (typeof ngDevMode === 'undefined' || ngDevMode) {
+    if (isDevMode()) {
       if (!this._dateAdapter) {
         throw createMissingDateImplError('DateAdapter');
       }

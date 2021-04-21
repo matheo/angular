@@ -30,6 +30,7 @@ import {
   ViewChild,
   ViewEncapsulation,
   OnDestroy,
+  isDevMode,
 } from '@angular/core';
 import {Directionality} from '@angular/cdk/bidi';
 import {DateAdapter} from '@matheo/datepicker/core';
@@ -143,7 +144,7 @@ export class MatMultiYearView<D> implements AfterContentInit, OnDestroy {
   constructor(private _changeDetectorRef: ChangeDetectorRef,
               @Optional() public _dateAdapter: DateAdapter<D>,
               @Optional() private _dir?: Directionality) {
-    if (!this._dateAdapter && (typeof ngDevMode === 'undefined' || ngDevMode)) {
+    if (!this._dateAdapter && isDevMode()) {
       throw createMissingDateImplError('DateAdapter');
     }
 

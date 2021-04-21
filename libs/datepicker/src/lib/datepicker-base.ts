@@ -40,6 +40,7 @@ import {
   OnChanges,
   OnInit,
   SimpleChanges,
+  isDevMode,
 } from '@angular/core';
 import {
   CanColor,
@@ -478,7 +479,7 @@ export abstract class MatDatepickerBase<C extends MatDatepickerControl<D>, S,
               @Optional() private _dir: Directionality,
               @Optional() @Inject(DOCUMENT) private _document: any,
               private _model: MatDateSelectionModel<S, D>) {
-    if (!this._dateAdapter && (typeof ngDevMode === 'undefined' || ngDevMode)) {
+    if (!this._dateAdapter && isDevMode()) {
       throw createMissingDateImplError('DateAdapter');
     }
 
@@ -537,7 +538,7 @@ export abstract class MatDatepickerBase<C extends MatDatepickerControl<D>, S,
    * @returns Selection model that the input should hook itself up to.
    */
   registerInput(input: C): MatDateSelectionModel<S, D> {
-    if (this.datepickerInput && (typeof ngDevMode === 'undefined' || ngDevMode)) {
+    if (this.datepickerInput && (isDevMode())) {
       throw Error('A MatDatepicker can only be associated with a single input.');
     }
     this._inputStateChanges.unsubscribe();
@@ -552,7 +553,7 @@ export abstract class MatDatepickerBase<C extends MatDatepickerControl<D>, S,
    * @param portal Portal to be registered.
    */
   registerActions(portal: TemplatePortal): void {
-    if (this._actionsPortal && (typeof ngDevMode === 'undefined' || ngDevMode)) {
+    if (this._actionsPortal && (isDevMode())) {
       throw Error('A MatDatepicker can only be associated with a single actions row.');
     }
     this._actionsPortal = portal;
@@ -573,7 +574,7 @@ export abstract class MatDatepickerBase<C extends MatDatepickerControl<D>, S,
     if (this._opened || this.disabled) {
       return;
     }
-    if (!this.datepickerInput && (typeof ngDevMode === 'undefined' || ngDevMode)) {
+    if (!this.datepickerInput && (isDevMode())) {
       throw Error('Attempted to open an MatDatepicker with no associated input.');
     }
     if (this._document) {

@@ -21,6 +21,7 @@ import {
   Inject,
   OnChanges,
   SimpleChanges,
+  isDevMode,
 } from '@angular/core';
 import {MatFormFieldControl, MatFormField, MAT_FORM_FIELD} from '@angular/material/form-field';
 import {ThemePalette} from '@angular/material/core';
@@ -235,7 +236,7 @@ export class MatDateRangeInput<D> implements MatFormFieldControl<DateRange<D>>,
     @Optional() private _dateAdapter: DateAdapter<D>,
     @Optional() @Inject(MAT_FORM_FIELD) private _formField?: MatFormField) {
 
-    if (!_dateAdapter && (typeof ngDevMode === 'undefined' || ngDevMode)) {
+    if (!_dateAdapter && (isDevMode())) {
       throw createMissingDateImplError('DateAdapter');
     }
 
@@ -266,7 +267,7 @@ export class MatDateRangeInput<D> implements MatFormFieldControl<DateRange<D>>,
   }
 
   ngAfterContentInit() {
-    if (typeof ngDevMode === 'undefined' || ngDevMode) {
+    if (isDevMode()) {
       if (!this._startInput) {
         throw Error('mat-date-range-input must contain a matStartDate input');
       }

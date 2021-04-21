@@ -20,6 +20,7 @@ import {
   AfterViewInit,
   OnChanges,
   SimpleChanges,
+  isDevMode,
 } from '@angular/core';
 import {
   AbstractControl,
@@ -228,7 +229,7 @@ export abstract class MatDatepickerInputBase<S, D = ExtractDateTypeFromSelection
       @Optional() public _dateAdapter: DateAdapter<D>,
       @Optional() @Inject(MAT_DATE_FORMATS) private _dateFormats: MatDateFormats) {
 
-    if (typeof ngDevMode === 'undefined' || ngDevMode) {
+    if (isDevMode()) {
       if (!this._dateAdapter) {
         throw createMissingDateImplError('DateAdapter');
       }

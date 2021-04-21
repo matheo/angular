@@ -7,7 +7,7 @@
  */
 
 import {Platform} from '@angular/cdk/platform';
-import {Inject, Injectable, Optional} from '@angular/core';
+import {Inject, Injectable, Optional, isDevMode} from '@angular/core';
 import {MAT_DATE_LOCALE} from '@angular/material/core';
 import {DateAdapter} from './date-adapter';
 
@@ -216,7 +216,7 @@ export class NativeDateAdapter extends DateAdapter<Date> {
     seconds?: number,
     ms?: number,
   ): Date {
-    if (typeof ngDevMode === 'undefined' || ngDevMode) {
+    if (isDevMode()) {
       // Check for invalid month and date (except upper bound on date which we have to check after
       // creating the Date).
       if (month < 0 || month > 11) {
@@ -230,7 +230,7 @@ export class NativeDateAdapter extends DateAdapter<Date> {
 
     let result = this._createDateWithOverflow(year, month, date, hours, minutes, seconds, ms);
     // Check that the date wasn't above the upper bound for the month, causing the month to overflow
-    if (result.getMonth() != month && (typeof ngDevMode === 'undefined' || ngDevMode)) {
+    if (result.getMonth() != month && (isDevMode())) {
       throw Error(`Invalid date "${date}" for month with index "${month}".`);
     }
 

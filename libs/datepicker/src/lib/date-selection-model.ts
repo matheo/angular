@@ -6,7 +6,7 @@
  * found in the LICENSE file at https://angular.io/license
  */
 
-import {FactoryProvider, Injectable, Optional, SkipSelf, OnDestroy, Directive} from '@angular/core';
+import {FactoryProvider, Injectable, Optional, SkipSelf, OnDestroy, Directive, isDevMode} from '@angular/core';
 import {Observable, Subject} from 'rxjs';
 import {DateAdapter} from '@matheo/datepicker/core';
 
@@ -95,7 +95,7 @@ export abstract class MatDateSelectionModel<S, D = ExtractDateTypeFromSelection<
    * @breaking-change 12.0.0
    */
   clone(): MatDateSelectionModel<S, D> {
-    if (typeof ngDevMode === 'undefined' || ngDevMode) {
+    if (isDevMode()) {
       throw Error('Not implemented');
     }
 

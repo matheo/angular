@@ -3,7 +3,7 @@ import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { RouterModule, Routes } from '@angular/router';
 import { MatDatepickerModule } from '@matheo/datepicker';
-import { MatLuxonDateModule } from '@matheo/datepicker/luxon';
+import { MatDateFnsModule } from '@matheo/datepicker/date-fns';
 import { ThemeComponent } from '../shared/layout/theme/theme.component';
 import { SharedModule } from '../shared/shared.module';
 import { DatepickerComponent } from './components/datepicker/datepicker.component';
@@ -47,7 +47,7 @@ const routes: Routes = [
     FlexLayoutModule,
     RouterModule.forChild(routes),
     MatDatepickerModule,
-    MatLuxonDateModule,
+    MatDateFnsModule,
     SharedModule,
   ],
   declarations: [IndexComponent, DatepickerComponent],

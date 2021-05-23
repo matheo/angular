@@ -191,11 +191,11 @@ export class DateFnsAdapter extends DateAdapter<Date> {
   }
 
   getHourNames(): string[] {
-    return range(0, 24).map((i) => (i === 0 ? '00' : String(i)));
+    return range(0, 23).map((i) => (i === 0 ? '00' : String(i)));
   }
 
   getMinuteNames(): string[] {
-    return range(0, 31).map((i) => String(i + 1));
+    return range(0, 59).map(String);
   }
 
   getDayOfWeekNames(style: 'long' | 'short' | 'narrow'): string[] {
@@ -252,7 +252,15 @@ export class DateFnsAdapter extends DateAdapter<Date> {
       throw Error(`Invalid date "${date}". Date has to be greater than 0.`);
     }
 
-    const result = this._createDateWithOverflow(year, month, date);
+    const result = this._createDateWithOverflow(
+      year,
+      month,
+      date,
+      hours,
+      minutes,
+      seconds,
+      ms
+    );
     // Check that the date wasn't above the upper bound for the month, causing the month to overflow
     if (result.getMonth() !== month) {
       throw Error(`Invalid date "${date}" for month with index "${month}".`);
@@ -357,10 +365,10 @@ export class DateFnsAdapter extends DateAdapter<Date> {
     year: number,
     month: number,
     date: number,
-    hours?: number,
-    minutes?: number,
-    seconds?: number,
-    ms?: number
+    hours: number = 0,
+    minutes: number = 0,
+    seconds: number = 0,
+    ms: number = 0
   ): Date {
     const result = this._createDateInternal(
       year,

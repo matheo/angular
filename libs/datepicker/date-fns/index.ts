@@ -22,6 +22,7 @@ import { MAT_DATE_FNS_LOCALES } from './date-fns-locales';
 
 export * from './date-fns-adapter';
 export * from './date-fns-formats';
+export * from './date-fns-locales';
 
 @NgModule({
   providers: [

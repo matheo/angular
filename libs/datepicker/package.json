@@ -1,6 +1,6 @@
 {
   "name": "@matheo/datepicker",
-  "version": "11.2.10",
+  "version": "11.2.11",
   "description": "Angular material date+time picker",
   "keywords": [
     "angular",
@@ -23,6 +23,9 @@
     "@angular/core": ">=11.0.0",
     "@angular/forms": ">=11.0.0",
     "@angular/material": ">=11.0.0",
+    "date-fns": "^2.21.1",
+    "date-fns-tz": "^1.1.4",
+    "luxon": "^1.26.0",
     "rxjs": "*"
   },
   "devDependencies": {

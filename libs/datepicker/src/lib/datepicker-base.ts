@@ -248,6 +248,7 @@ export class MatDatepickerContent<S, D = ExtractDateTypeFromSelection<S>>
 
 /** Form control that can be associated with a datepicker. */
 export interface MatDatepickerControl<D> {
+  type: MatCalendarType;
   getStartValue(): D | null;
   getThemePalette(): ThemePalette;
   min: D | null;
@@ -498,6 +499,10 @@ export abstract class MatDatepickerBase<C extends MatDatepickerControl<D>, S,
       }
     }
 
+    if (this.datepickerInput.type !== this.type) {
+      this.datepickerInput.type = this.type;
+    }
+
     this.stateChanges.next(undefined);
   }
 
@@ -543,6 +548,7 @@ export abstract class MatDatepickerBase<C extends MatDatepickerControl<D>, S,
     }
     this._inputStateChanges.unsubscribe();
     this.datepickerInput = input;
+    this.datepickerInput.type = this.type;
     this._inputStateChanges =
         input.stateChanges.subscribe(() => this.stateChanges.next(undefined));
     return this._model;

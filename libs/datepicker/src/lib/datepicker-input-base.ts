@@ -120,8 +120,14 @@ export abstract class MatDatepickerInputBase<S, D = ExtractDateTypeFromSelection
   stateChanges = new Subject<void>();
 
   /** The type of value handled by the calendar. */
-  type: MatCalendarType = 'date';
-
+  set type(type: MatCalendarType) {
+    this._type = type;
+    if (this.value) {
+      this._formatValue(this.value);
+    }
+  }
+  protected _type: MatCalendarType = 'date';
+    
   _onTouched = () => {};
   _validatorOnChange = () => {};
 
@@ -261,14 +267,14 @@ export abstract class MatDatepickerInputBase<S, D = ExtractDateTypeFromSelection
   }
 
   getUnit(): DateUnit {
-    switch (this.type) {
+    switch (this._type) {
       case 'date':
         return 'day';
       case 'datetime':
       case 'time':
         return 'minute';
       default:
-        return this.type;
+        return this._type;
     }
   }
 
@@ -313,7 +319,7 @@ export abstract class MatDatepickerInputBase<S, D = ExtractDateTypeFromSelection
 
   _onInput(value: string) {
     const lastValueWasValid = this._lastValueValid;
-    let date = this._dateAdapter.parse(value, this._dateFormats.parse[`${this.type}Input`]);
+    let date = this._dateAdapter.parse(value, this._dateFormats.parse[`${this._type}Input`]);
     this._lastValueValid = this._isValidValue(date);
     date = this._dateAdapter.getValidDateOrNull(date);
 
@@ -351,7 +357,7 @@ export abstract class MatDatepickerInputBase<S, D = ExtractDateTypeFromSelection
   /** Formats a value and sets it on the input element. */
   protected _formatValue(value: D | null) {
     this._elementRef.nativeElement.value = value
-      ? this._dateAdapter.format(value, this._dateFormats.display[`${this.type}Input`])
+      ? this._dateAdapter.format(value, this._dateFormats.display[`${this._type}Input`])
       : '';
   }
 

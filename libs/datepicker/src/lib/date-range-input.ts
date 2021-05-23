@@ -229,6 +229,8 @@ export class MatDateRangeInput<D> implements MatFormFieldControl<DateRange<D>>,
   /** Emits when the input's state has changed. */
   stateChanges = new Subject<void>();
 
+  type: any; // unused prop in the range
+
   constructor(
     private _changeDetectorRef: ChangeDetectorRef,
     private _elementRef: ElementRef<HTMLElement>,

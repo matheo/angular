@@ -7,13 +7,13 @@ export function stepperForm(): DynControlConfig {
     controls: [
       createMatConfig('INPUT', {
         name: 'firstName',
+        validators: ['required'],
         params: { label: 'First Name *' },
-        options: { validators: ['required'] },
       }),
       createMatConfig('INPUT', {
         name: 'lastName',
+        validators: ['required'],
         params: { label: 'Last Name *' },
-        options: { validators: ['required'] },
       }),
       createMatConfig('INPUT', {
         name: 'friendCode',
@@ -21,28 +21,28 @@ export function stepperForm(): DynControlConfig {
       }),
       createMatConfig('INPUT', {
         name: 'streetNumber',
+        validators: ['required'],
         params: { label: 'Street Number *' },
-        options: { validators: ['required'] },
       }),
       createMatConfig('INPUT', {
         name: 'islandName',
+        validators: ['required'],
         params: { label: 'Island Name *' },
-        options: { validators: ['required'] },
       }),
       createMatConfig('INPUT', {
         name: 'initialDeposit',
+        validators: ['required', ['min', 0]],
         params: { label: 'Initial Deposit *' },
-        options: { validators: ['required', ['min', 0]] },
       }),
       createMatConfig('INPUT', {
         name: 'loanType',
+        validators: ['required'],
         params: { label: 'Loan Type *' },
-        options: { validators: ['required'] },
       }),
       createMatConfig('INPUT', {
         name: 'roofColor',
+        validators: ['required'],
         params: { label: 'Roof Color *' },
-        options: { validators: ['required'] },
       }),
     ],
   });

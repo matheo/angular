@@ -29,12 +29,12 @@ export * from './date-fns-locales';
     {
       provide: DateAdapter,
       useClass: DateFnsAdapter,
-      deps: [MAT_DATE_LOCALE, MAT_DATE_FNS_ADAPTER_OPTIONS],
+      deps: [MAT_DATE_LOCALE, MAT_DATE_FNS_LOCALES, MAT_DATE_FNS_ADAPTER_OPTIONS],
     },
     {
       provide: MaterialDateAdapter,
       useClass: DateFnsAdapter,
-      deps: [MAT_DATE_LOCALE, MAT_DATE_FNS_ADAPTER_OPTIONS],
+      deps: [MAT_DATE_LOCALE, MAT_DATE_FNS_LOCALES, MAT_DATE_FNS_ADAPTER_OPTIONS],
     },
   ],
 })

@@ -1,3 +1,5 @@
+@use '~@angular/material/core/style/vendor-prefixes';
+
 $mat-date-range-input-separator-spacing: 4px;
 $mat-date-range-input-part-max-width: calc(50% - #{$mat-date-range-input-separator-spacing});
 
@@ -27,7 +29,7 @@ $mat-date-range-input-part-max-width: calc(50% - #{$mat-date-range-input-separat
 .mat-date-range-input-separator-hidden {
   // Disable text selection, because the user can click
   // through the main label when the input is disabled.
-  @include user-select(none);
+  @include vendor-prefixes.user-select(none);
 
   // Use opacity to hide the text, because `color: transparent` will be shown in high contrast mode.
   opacity: 0;
@@ -70,7 +72,7 @@ $mat-date-range-input-part-max-width: calc(50% - #{$mat-date-range-input-separat
     @include input-placeholder {
       // Disable text selection, because the user can click
       // through the main label when the input is disabled.
-      @include user-select(none);
+      @include vendor-prefixes.user-select(none);
 
       // Needs to be !important, because the placeholder will end up inheriting the
       // input color in IE, if the consumer overrides it with a higher specificity.
@@ -90,7 +92,7 @@ $mat-date-range-input-part-max-width: calc(50% - #{$mat-date-range-input-separat
 // to stretch and the input with it.
 .mat-date-range-input-mirror {
   // Disable user selection so users don't accidentally copy the text via ctrl + A.
-  @include user-select(none);
+  @include vendor-prefixes.user-select(none);
 
   // Hide the element so it doesn't get read out by screen
   // readers and it doesn't show up behind the input.

@@ -71,7 +71,7 @@
     "@angular/cli": "12.0.2",
     "@angular/compiler-cli": "12.0.2",
     "@angular/language-service": "12.0.2",
-    "@angular/localize": "~11.2.14",
+    "@angular/localize": "12.0.2",
     "@compodoc/compodoc": "^1.1.11",
     "@ngrx/schematics": "12.0.0",
     "@ngrx/store-devtools": "12.0.0",

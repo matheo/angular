@@ -216,44 +216,6 @@
         }
       }
     },
-    "forms": {
-      "projectType": "library",
-      "root": "libs/forms",
-      "sourceRoot": "libs/forms/src",
-      "prefix": "dyn",
-      "architect": {
-        "build": {
-          "builder": "@nrwl/angular:package",
-          "options": {
-            "tsConfig": "libs/forms/tsconfig.lib.json",
-            "project": "libs/forms/ng-package.json"
-          },
-          "configurations": {
-            "production": {
-              "tsConfig": "libs/forms/tsconfig.lib.prod.json"
-            }
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "libs/forms/tsconfig.lib.json",
-              "libs/forms/tsconfig.spec.json"
-            ],
-            "exclude": ["**/node_modules/**", "!libs/forms/**/*"]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/forms"],
-          "options": {
-            "jestConfig": "libs/forms/jest.config.js",
-            "passWithNoTests": true
-          }
-        }
-      }
-    },
     "schematics": {
       "root": "libs/schematics",
       "sourceRoot": "libs/schematics/src",

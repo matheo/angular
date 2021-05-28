@@ -12,8 +12,7 @@
     "website-e2e": { "tags": [], "implicitDependencies": ["website"] },
     "datasource": { "tags": ["shared"] },
     "datepicker": { "tags": ["shared"] },
-    "schematics": { "tags": ["shared"] },
-    "forms": { "tags": ["shared"] }
+    "schematics": { "tags": ["shared"] }
   },
   "tasksRunnerOptions": {
     "default": {

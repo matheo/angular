@@ -1,4 +1,5 @@
-@use '~@angular/material/theming';
+@use '~@angular/material/core/theming/palette';
+@use '~@angular/material/core/theming/theming';
 @use '../datepicker-theme' as theme;
 
 // define a theme.

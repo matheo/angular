@@ -5,7 +5,7 @@
 @use '~@angular/material/core/style/private';
 @use '~@angular/material/core/typography/typography';
 @use '~@angular/material/core/typography/typography-utils';
-@use '~@angular/material/theming';
+@use '~@angular/material/core/theming/theming';
 
 $selected-today-box-shadow-width: 1px;
 $selected-fade-amount: 0.6;

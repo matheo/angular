@@ -29,7 +29,6 @@
     "rxjs": "*"
   },
   "devDependencies": {
-    "node-sass": "^5.0.0",
     "scss-bundle": "^3.1.2"
   },
   "dependencies": {

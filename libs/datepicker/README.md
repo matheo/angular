@@ -61,6 +61,16 @@ available themes are `deeppurple-amber`, `indigo-pink`, `pink-bluegrey` and `pur
 
 Or you can use your customized Material Theme via mixins:
 
+### Angular 12+
+
+```sass
+@use '~@matheo/datepicker/theming' as datepicker;
+...
+@include datepicker.mat-datepicker-theme($theme);
+```
+
+### Angular 11 and erlier
+
 ```sass
 // @import '~@angular/material/theming';
 @import '~@matheo/datepicker/theming'; // overrides mat-datepicker-theme

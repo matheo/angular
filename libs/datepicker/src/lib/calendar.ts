@@ -580,6 +580,7 @@ export class MatCalendar<D> implements AfterContentInit, AfterViewChecked, OnDes
   /** Handles user day selection. */
   _daySelected(event: MatCalendarUserEvent<D | null>): void {
     if (!this.hasOutput('time') || this.selected instanceof DateRange) {
+      this.setDate(event.value);
       this._dateSelected(event);
     } else {
       this.selectedChange.emit(event.value);

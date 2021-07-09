@@ -211,10 +211,10 @@ export class NativeDateAdapter extends DateAdapter<Date> {
     year: number,
     month: number,
     date: number,
-    hours?: number,
-    minutes?: number,
-    seconds?: number,
-    ms?: number,
+    hours: number = 0,
+    minutes: number = 0,
+    seconds: number = 0,
+    ms: number = 0,
   ): Date {
     if (isDevMode()) {
       // Check for invalid month and date (except upper bound on date which we have to check after

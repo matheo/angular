@@ -262,6 +262,9 @@ export class MatClockView<D> implements AfterViewInit, AfterContentInit {
           this._dateAdapter.getMonth(this.activeDate),
           this._dateAdapter.getDate(this.activeDate),
           this._anteMeridian ? i : i + 12,
+          0,
+          0,
+          0
         );
         this._hours.push({
           value: this._anteMeridian ? i : i + 12,
@@ -283,6 +286,9 @@ export class MatClockView<D> implements AfterViewInit, AfterContentInit {
           this._dateAdapter.getMonth(this.activeDate),
           this._dateAdapter.getDate(this.activeDate),
           hour,
+          0,
+          0,
+          0
         );
         this._hours.push({
           value: hour,
@@ -303,7 +309,9 @@ export class MatClockView<D> implements AfterViewInit, AfterContentInit {
         this._dateAdapter.getMonth(this.activeDate),
         this._dateAdapter.getDate(this.activeDate),
         this._dateAdapter.getHours(this.activeDate),
-        i
+        i,
+        0,
+        0
       );
       this._minutes.push({
         value: i,

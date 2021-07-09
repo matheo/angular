@@ -193,10 +193,10 @@ export class LuxonDateAdapter extends DateAdapter<DateTime> {
     year: number,
     month: number,
     date: number,
-    hours?: number,
-    minutes?: number,
-    seconds?: number,
-    ms?: number
+    hours: number = 0,
+    minutes: number = 0,
+    seconds: number = 0,
+    ms: number = 0
   ): DateTime {
     if (month < 0 || month > 11) {
       throw Error(

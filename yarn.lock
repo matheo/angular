@@ -2005,10 +2005,10 @@
     call-me-maybe "^1.0.1"
     glob-to-regexp "^0.3.0"
 
-"@myndpm/dyn-forms@11.2.12-beta.2":
-  version "11.2.12-beta.2"
-  resolved "https://registry.yarnpkg.com/@myndpm/dyn-forms/-/dyn-forms-11.2.12-beta.2.tgz#06f1e84e1ba60347cda12695af6004497daeb648"
-  integrity sha512-6+05A/UCWZpGryA5wEhT7PACW3S0x0M3vKwtmXsHN+Tp3OJezc/+f/yNZ0t2LlVxYSnJ5QK7vs18nf0c6SNFWg==
+"@myndpm/dyn-forms@11.2.13-beta.3":
+  version "11.2.13-beta.3"
+  resolved "https://registry.yarnpkg.com/@myndpm/dyn-forms/-/dyn-forms-11.2.13-beta.3.tgz#b28023d160f82f0bfc06df6c41ca9f86d4185ef2"
+  integrity sha512-204YZSwK5vx7TI503Arf+Xn6W17etW3Lqkp0Io/i48RpqhctC+M/Sdy+8rpGX8O1+IUSfhkaNWlfiPe9r4Su9A==
   dependencies:
     fast-deep-equal "~3.1.3"
     is-callable "~1.2.3"

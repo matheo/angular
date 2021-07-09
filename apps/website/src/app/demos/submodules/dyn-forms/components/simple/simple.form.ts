@@ -55,12 +55,12 @@ export function simpleForm(
             params: {
               label: 'Country',
               options: [
-                { text: '- Choose one -', value: null },
-                { text: 'Colombia', value: 'CO' },
-                { text: 'United States', value: 'US' },
-                { text: 'China', value: 'CN' },
-                { text: 'Russia', value: 'RU' },
-                { text: 'Other', value: 'XX' },
+                { value: '- Choose one -', key: null },
+                { value: 'Colombia', key: 'CO' },
+                { value: 'United States', key: 'US' },
+                { value: 'China', key: 'CN' },
+                { value: 'Russia', key: 'RU' },
+                { value: 'Other', key: 'XX' },
               ],
             },
             modes: {
@@ -95,8 +95,8 @@ export function simpleForm(
         name: 'account',
         params: {
           options: [
-            { text: 'Create Account', value: 'CREATE' },
-            { text: 'Checkout as a Guest', value: 'GUEST' },
+            { value: 'Create Account', key: 'CREATE' },
+            { value: 'Checkout as a Guest', key: 'GUEST' },
           ],
         },
         modes: {

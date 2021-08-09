@@ -126,7 +126,7 @@ export class LuxonDateAdapter extends DateAdapter<DateTime> {
   }
 
   getDayOfWeek(date: DateTime): number {
-    return date.weekday - 1;
+    return date.weekday === 7 ? 0 : date.weekday;
   }
 
   getMonthNames(style: 'long' | 'short' | 'narrow'): string[] {

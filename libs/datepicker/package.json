@@ -23,9 +23,9 @@
     "@angular/core": ">=11.0.0",
     "@angular/forms": ">=11.0.0",
     "@angular/material": ">=11.0.0",
-    "date-fns": "^2.21.1",
-    "date-fns-tz": "^1.1.4",
-    "luxon": "^1.26.0",
+    "date-fns": "^2.23.0",
+    "date-fns-tz": "^1.1.6",
+    "luxon": "^1.28.0",
     "rxjs": "*"
   },
   "devDependencies": {

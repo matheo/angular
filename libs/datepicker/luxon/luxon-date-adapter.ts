@@ -44,9 +44,6 @@ export function MAT_LUXON_DATE_ADAPTER_OPTIONS_FACTORY(): MatLuxonDateAdapterOpt
   };
 }
 
-/** The default date names to use if Intl API is not available. */
-const DEFAULT_DATE_NAMES = range(31, (i) => String(i + 1));
-
 /** The default hour names to use if Intl API is not available. */
 const DEFAULT_HOUR_NAMES = range(24, (i) => (i === 0 ? '00' : String(i)));
 
@@ -134,23 +131,20 @@ export class LuxonDateAdapter extends DateAdapter<DateTime> {
   }
 
   getDateNames(): string[] {
-    if (Info.features().intl) {
-      // At the time of writing, Luxon doesn't offer similar
-      // functionality so we have to fall back to the Intl API.
-      const dtf = new Intl.DateTimeFormat(this.locale, {
-        day: 'numeric',
-        timeZone: 'utc',
-      });
+    // At the time of writing, Luxon doesn't offer similar
+    // functionality so we have to fall back to the Intl API.
+    const dtf = new Intl.DateTimeFormat(this.locale, {
+      day: 'numeric',
+      timeZone: 'utc',
+    });
 
-      return range(31, (i) => {
-        // Format a UTC date in order to avoid DST issues.
-        const date = DateTime.utc(2017, 1, i + 1).toJSDate();
+    return range(31, (i) => {
+      // Format a UTC date in order to avoid DST issues.
+      const date = DateTime.utc(2017, 1, i + 1).toJSDate();
 
-        // Strip the directionality characters from the formatted date.
-        return dtf.format(date).replace(/[\u200e\u200f]/g, '');
-      });
-    }
-    return DEFAULT_DATE_NAMES;
+      // Strip the directionality characters from the formatted date.
+      return dtf.format(date).replace(/[\u200e\u200f]/g, '');
+    });
   }
 
   getHourNames(): string[] {
@@ -263,9 +257,12 @@ export class LuxonDateAdapter extends DateAdapter<DateTime> {
     if (!this.isValid(date)) {
       throw Error('LuxonDateAdapter: Cannot format invalid date.');
     }
-    return date
-      .setLocale(this.locale)
-      .toFormat(displayFormat, { timeZone: this._useUTC ? 'utc' : undefined });
+
+    let result = date.setLocale(this.locale);
+    if (this._useUTC) {
+      result = result.toUTC();
+    }
+    return result.toFormat(displayFormat);
   }
 
   addCalendarYears(date: DateTime, years: number): DateTime {

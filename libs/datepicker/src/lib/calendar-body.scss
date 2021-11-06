@@ -1,3 +1,4 @@
+@use '~@angular/cdk' as cdk;
 @import '~@angular/material/theming';
 
 $mat-calendar-body-label-padding-start: 5% !default;
@@ -156,7 +157,7 @@ $mat-calendar-range-end-body-cell-size: $mat-calendar-body-cell-content-size +
   // Fade out the disabled cells so that they can be distinguished from the enabled ones. Note that
   // ideally we'd use `color: GreyText` here which is what the browser uses for disabled buttons,
   // but we can't because Firefox doesn't recognize it.
-  @include cdk-high-contrast(active, off) {
+  @include cdk.high-contrast(active, off) {
     opacity: 0.5;
   }
 }
@@ -189,7 +190,7 @@ $mat-calendar-range-end-body-cell-size: $mat-calendar-body-cell-content-size +
     position: absolute;
   }
 
-  @include cdk-high-contrast(active, off) {
+  @include cdk.high-contrast(active, off) {
     border: none;
   }
 }
@@ -200,7 +201,7 @@ $mat-calendar-range-end-body-cell-size: $mat-calendar-body-cell-content-size +
   overflow: visible;
 }
 
-@include cdk-high-contrast(active, off) {
+@include cdk.high-contrast(active, off) {
   .mat-datepicker-popup:not(:empty),
   .mat-calendar-body-selected {
     outline: solid 1px;

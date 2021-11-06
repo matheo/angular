@@ -6,9 +6,9 @@
  * found in the LICENSE file at https://angular.io/license
  */
 
-import {Directionality} from '@angular/cdk/bidi';
-import {BooleanInput, coerceBooleanProperty, coerceStringArray} from '@angular/cdk/coercion';
-import {ESCAPE, hasModifierKey, UP_ARROW} from '@angular/cdk/keycodes';
+import { Directionality } from '@angular/cdk/bidi';
+import { BooleanInput, coerceBooleanProperty, coerceStringArray } from '@angular/cdk/coercion';
+import { ESCAPE, hasModifierKey, UP_ARROW } from '@angular/cdk/keycodes';
 import {
   Overlay,
   OverlayConfig,
@@ -16,8 +16,8 @@ import {
   ScrollStrategy,
   FlexibleConnectedPositionStrategy,
 } from '@angular/cdk/overlay';
-import {ComponentPortal, ComponentType, TemplatePortal} from '@angular/cdk/portal';
-import {DOCUMENT} from '@angular/common';
+import { ComponentPortal, ComponentType, TemplatePortal } from '@angular/cdk/portal';
+import { DOCUMENT } from '@angular/common';
 import {
   AfterViewInit,
   ChangeDetectionStrategy,
@@ -44,20 +44,19 @@ import {
 } from '@angular/core';
 import {
   CanColor,
-  CanColorCtor,
   mixinColor,
   ThemePalette,
 } from '@angular/material/core';
-import {MatDialog, MatDialogRef} from '@angular/material/dialog';
-import {merge, Subject, Observable, Subscription} from 'rxjs';
-import {filter, take} from 'rxjs/operators';
-import {DateAdapter} from '@matheo/datepicker/core';
-import {MatCalendar} from './calendar';
-import {MatCalendarType, MatCalendarView} from './calendar.types';
-import {matDatepickerAnimations} from './datepicker-animations';
-import {createMissingDateImplError} from './datepicker-errors';
-import {MatCalendarUserEvent, MatCalendarCellClassFunction} from './calendar-body';
-import {DateFilterFn} from './datepicker-input-base';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { merge, Subject, Observable, Subscription } from 'rxjs';
+import { filter, take } from 'rxjs/operators';
+import { DateAdapter } from '@matheo/datepicker/core';
+import { MatCalendar } from './calendar';
+import { MatCalendarType, MatCalendarView } from './calendar.types';
+import { matDatepickerAnimations } from './datepicker-animations';
+import { createMissingDateImplError } from './datepicker-errors';
+import { MatCalendarUserEvent, MatCalendarCellClassFunction } from './calendar-body';
+import { DateFilterFn } from './datepicker-input-base';
 import {
   ExtractDateTypeFromSelection,
   MatDateSelectionModel,
@@ -67,14 +66,15 @@ import {
   MAT_DATE_RANGE_SELECTION_STRATEGY,
   MatDateRangeSelectionStrategy,
 } from './date-range-selection-strategy';
-import {MatDatepickerIntl} from './datepicker-intl';
+import { MatDatepickerIntl } from './datepicker-intl';
+import { AbstractConstructor, Constructor } from '@angular/material/core/common-behaviors/constructor';
 
 /** Used to generate a unique ID for each datepicker instance. */
 let datepickerUid = 0;
 
 /** Injection token that determines the scroll handling while the calendar is open. */
 export const MAT_DATEPICKER_SCROLL_STRATEGY =
-    new InjectionToken<() => ScrollStrategy>('mat-datepicker-scroll-strategy');
+  new InjectionToken<() => ScrollStrategy>('mat-datepicker-scroll-strategy');
 
 /** @docs-private */
 export function MAT_DATEPICKER_SCROLL_STRATEGY_FACTORY(overlay: Overlay): () => ScrollStrategy {
@@ -87,6 +87,7 @@ export type DatepickerDropdownPositionX = 'start' | 'end';
 /** Possible positions for the datepicker dropdown along the Y axis. */
 export type DatepickerDropdownPositionY = 'above' | 'below';
 
+export type CanColorCtor = Constructor<CanColor> & AbstractConstructor<CanColor>;
 /** @docs-private */
 export const MAT_DATEPICKER_SCROLL_STRATEGY_FACTORY_PROVIDER = {
   provide: MAT_DATEPICKER_SCROLL_STRATEGY,
@@ -100,7 +101,7 @@ class MatDatepickerContentBase {
   constructor(public _elementRef: ElementRef) { }
 }
 const _MatDatepickerContentMixinBase: CanColorCtor & typeof MatDatepickerContentBase =
-    mixinColor(MatDatepickerContentBase);
+  mixinColor(MatDatepickerContentBase);
 
 /**
  * Component used as the content for the datepicker dialog and popup. We use this instead of using
@@ -169,7 +170,7 @@ export class MatDatepickerContent<S, D = ExtractDateTypeFromSelection<S>>
     private _globalModel: MatDateSelectionModel<S, D>,
     private _dateAdapter: DateAdapter<D>,
     @Optional() @Inject(MAT_DATE_RANGE_SELECTION_STRATEGY)
-        private _rangeSelectionStrategy: MatDateRangeSelectionStrategy<D>,
+    private _rangeSelectionStrategy: MatDateRangeSelectionStrategy<D>,
     /**
      * @deprecated `intl` argument to become required.
      * @breaking-change 12.0.0
@@ -215,10 +216,10 @@ export class MatDatepickerContent<S, D = ExtractDateTypeFromSelection<S>>
     // change. This isn't very intuitive, but it's here for backwards-compatibility.
     if (isRange && this._rangeSelectionStrategy) {
       const newSelection = this._rangeSelectionStrategy.selectionFinished(value,
-          selection as unknown as DateRange<D>, event.event);
+        selection as unknown as DateRange<D>, event.event);
       this._model.updateSelection(newSelection as unknown as S, this);
     } else if (value && (isRange || !this._dateAdapter.sameDate(
-        value, selection as unknown as D, this._calendar.getUnit()))) {
+      value, selection as unknown as D, this._calendar.getUnit()))) {
       this._model.add(value);
     }
 
@@ -261,7 +262,7 @@ export interface MatDatepickerControl<D> {
 
 /** A datepicker that can be attached to a {@link MatDatepickerControl}. */
 export interface MatDatepickerPanel<C extends MatDatepickerControl<D>, S,
-    D = ExtractDateTypeFromSelection<S>> {
+  D = ExtractDateTypeFromSelection<S>> {
   /** Stream that emits whenever the date picker is closed. */
   closedStream: EventEmitter<void>;
   /** The type of value handled by the calendar. */
@@ -290,7 +291,7 @@ export interface MatDatepickerPanel<C extends MatDatepickerControl<D>, S,
 @Directive()
 export abstract class MatDatepickerBase<C extends MatDatepickerControl<D>, S,
   D = ExtractDateTypeFromSelection<S>> implements MatDatepickerPanel<C, S, D>, OnDestroy,
-    OnChanges {
+  OnChanges {
   private _scrollStrategy: () => ScrollStrategy;
   private _inputStateChanges = Subscription.EMPTY;
 
@@ -330,7 +331,7 @@ export abstract class MatDatepickerBase<C extends MatDatepickerControl<D>, S,
   @Input()
   get color(): ThemePalette {
     return this._color ||
-        (this.datepickerInput ? this.datepickerInput.getThemePalette() : undefined);
+      (this.datepickerInput ? this.datepickerInput.getThemePalette() : undefined);
   }
   set color(value: ThemePalette) {
     this._color = value;
@@ -352,7 +353,7 @@ export abstract class MatDatepickerBase<C extends MatDatepickerControl<D>, S,
   @Input()
   get disabled(): boolean {
     return this._disabled === undefined && this.datepickerInput ?
-        this.datepickerInput.disabled : !!this._disabled;
+      this.datepickerInput.disabled : !!this._disabled;
   }
   set disabled(value: boolean) {
     const newValue = coerceBooleanProperty(value);
@@ -472,14 +473,14 @@ export abstract class MatDatepickerBase<C extends MatDatepickerControl<D>, S,
   readonly stateChanges = new Subject<void>();
 
   constructor(private _dialog: MatDialog,
-              private _overlay: Overlay,
-              private _ngZone: NgZone,
-              private _viewContainerRef: ViewContainerRef,
-              @Inject(MAT_DATEPICKER_SCROLL_STRATEGY) scrollStrategy: any,
-              @Optional() private _dateAdapter: DateAdapter<D>,
-              @Optional() private _dir: Directionality,
-              @Optional() @Inject(DOCUMENT) private _document: any,
-              private _model: MatDateSelectionModel<S, D>) {
+    private _overlay: Overlay,
+    private _ngZone: NgZone,
+    private _viewContainerRef: ViewContainerRef,
+    @Inject(MAT_DATEPICKER_SCROLL_STRATEGY) scrollStrategy: any,
+    @Optional() private _dateAdapter: DateAdapter<D>,
+    @Optional() private _dir: Directionality,
+    @Optional() @Inject(DOCUMENT) private _document: any,
+    private _model: MatDateSelectionModel<S, D>) {
     if (!this._dateAdapter && isDevMode()) {
       throw createMissingDateImplError('DateAdapter');
     }
@@ -492,7 +493,7 @@ export abstract class MatDatepickerBase<C extends MatDatepickerControl<D>, S,
 
     if (positionChange && !positionChange.firstChange && this._popupRef) {
       this._setConnectedPositions(
-          this._popupRef.getConfig().positionStrategy as FlexibleConnectedPositionStrategy);
+        this._popupRef.getConfig().positionStrategy as FlexibleConnectedPositionStrategy);
 
       if (this.opened) {
         this._popupRef.updatePosition();
@@ -550,7 +551,7 @@ export abstract class MatDatepickerBase<C extends MatDatepickerControl<D>, S,
     this.datepickerInput = input;
     this.datepickerInput.type = this.type;
     this._inputStateChanges =
-        input.stateChanges.subscribe(() => this.stateChanges.next(undefined));
+      input.stateChanges.subscribe(() => this.stateChanges.next(undefined));
     return this._model;
   }
 
@@ -685,7 +686,7 @@ export abstract class MatDatepickerBase<C extends MatDatepickerControl<D>, S,
   /** Open the calendar as a popup. */
   private _openAsPopup(): void {
     const portal = new ComponentPortal<MatDatepickerContent<S, D>>(MatDatepickerContent,
-                                                                   this._viewContainerRef);
+      this._viewContainerRef);
 
     this._destroyPopup();
     this._createPopup();
@@ -732,7 +733,7 @@ export abstract class MatDatepickerBase<C extends MatDatepickerControl<D>, S,
       this._popupRef.keydownEvents().pipe(filter(event => {
         // Closing on alt + up is only valid when there's an input associated with the datepicker.
         return (event.keyCode === ESCAPE && !hasModifierKey(event)) || (this.datepickerInput &&
-            hasModifierKey(event, 'altKey') && event.keyCode === UP_ARROW);
+          hasModifierKey(event, 'altKey') && event.keyCode === UP_ARROW);
       }))
     ).subscribe(event => {
       if (event) {

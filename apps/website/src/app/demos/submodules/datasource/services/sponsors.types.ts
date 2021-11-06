@@ -1,4 +1,5 @@
-import { DocumentChangeAction } from '@angular/fire/firestore';
+import { DocumentChangeAction } from "@angular/fire/firestore";
+
 
 export type SponsorVisibility = 'Public' | 'Private';
 

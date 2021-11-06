@@ -1,11 +1,13 @@
 @import '@angular/material/theming';
 
 $mat-date-range-input-separator-spacing: 4px;
-$mat-date-range-input-part-max-width: calc(50% - #{$mat-date-range-input-separator-spacing});
+$mat-date-range-input-part-max-width: calc(
+  50% - #{$mat-date-range-input-separator-spacing}
+);
 
 @mixin _mat-date-range-input-placeholder-transition($property) {
   transition: #{$property} $swift-ease-out-duration $swift-ease-out-duration / 3
-      $swift-ease-out-timing-function;
+    $swift-ease-out-timing-function;
 }
 
 // Host of the date range input.

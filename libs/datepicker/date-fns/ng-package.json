@@ -2,11 +2,6 @@
   "$schema": "../../../node_modules/ng-packagr/ng-package.schema.json",
   "dest": "../../../dist/libs/datepicker/date-fns",
   "lib": {
-    "entryFile": "./index.ts",
-    "umdModuleIds": {
-      "date-fns": "dateFns",
-      "date-fns/esm/locale": "locales",
-      "date-fns-tz/esm": "date-fns-tz"
-    }
+    "entryFile": "./index.ts"
   }
 }

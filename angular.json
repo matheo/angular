@@ -87,16 +87,6 @@
             "browserTarget": "website:build"
           }
         },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "apps/website/tsconfig.app.json",
-              "apps/website/tsconfig.spec.json"
-            ],
-            "exclude": ["**/node_modules/**", "!apps/website/**"]
-          }
-        },
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
@@ -124,13 +114,6 @@
               "devServerTarget": "website:serve:production"
             }
           }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": "apps/website-e2e/tsconfig.e2e.json",
-            "exclude": ["**/node_modules/**", "!apps/website-e2e/**/*"]
-          }
         }
       }
     },
@@ -151,16 +134,6 @@
             "production": {
               "tsConfig": "libs/datasource/tsconfig.lib.prod.json"
             }
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "libs/datasource/tsconfig.lib.json",
-              "libs/datasource/tsconfig.spec.json"
-            ],
-            "exclude": ["**/node_modules/**", "!libs/datasource/**/*"]
           }
         },
         "test": {
@@ -201,16 +174,6 @@
             ]
           }
         },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "libs/datepicker/tsconfig.lib.json",
-              "libs/datepicker/tsconfig.spec.json"
-            ],
-            "exclude": ["**/node_modules/**", "!libs/datepicker/**/*"]
-          }
-        },
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
@@ -239,16 +202,6 @@
             }
           }
         },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "libs/forms/tsconfig.lib.json",
-              "libs/forms/tsconfig.spec.json"
-            ],
-            "exclude": ["**/node_modules/**", "!libs/forms/**/*"]
-          }
-        },
         "test": {
           "builder": "@nrwl/jest:jest",
           "outputs": ["coverage/libs/forms"],
@@ -271,16 +224,6 @@
             "tsConfig": "libs/schematics/tsconfig.lib.json",
             "project": "libs/schematics/ng-package.json",
             "buildableProjectDepsInPackageJsonType": "dependencies"
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "libs/schematics/tsconfig.lib.json",
-              "libs/schematics/tsconfig.spec.json"
-            ],
-            "exclude": ["**/node_modules/**", "!libs/schematics/**/*"]
           }
         },
         "test": {

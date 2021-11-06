@@ -17,19 +17,19 @@
     "directory": "libs/datepicker"
   },
   "peerDependencies": {
-    "@angular/animations": ">=11.0.0",
-    "@angular/cdk": ">=11.0.0",
-    "@angular/common": ">=11.0.0",
-    "@angular/core": ">=11.0.0",
-    "@angular/forms": ">=11.0.0",
-    "@angular/material": ">=11.0.0",
+    "@angular/animations": ">=13.0.0",
+    "@angular/cdk": ">=13.0.0",
+    "@angular/common": ">=13.0.0",
+    "@angular/core": ">=13.0.0",
+    "@angular/forms": ">=13.0.0",
+    "@angular/material": ">=13.0.0",
     "date-fns": "^2.23.0",
     "date-fns-tz": "^1.1.6",
-    "luxon": "^1.28.0",
+    "luxon": "^2.0.2",
     "rxjs": "*"
   },
   "devDependencies": {
-    "node-sass": "^5.0.0",
+    "node-sass": "^6.0.1",
     "scss-bundle": "^3.1.2"
   },
   "dependencies": {

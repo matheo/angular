@@ -1,9 +1,6 @@
 import { Injectable } from '@angular/core';
-import {
-  AngularFirestore,
-  CollectionReference,
-  Query,
-} from '@angular/fire/firestore';
+
+import { AngularFirestore, Query } from '@angular/fire/compat/firestore';
 import { doc, docExists } from '../operators';
 import { Sponsor, SponsorsListRequest } from './sponsors.types';
 
@@ -12,7 +9,7 @@ export class SponsorsDatabase {
   /**
    * The Database translates the Datasource request to the backend.
    */
-  constructor(private db: AngularFirestore) {}
+  constructor(private db: AngularFirestore) { }
 
   single(id: string) {
     return this.db
@@ -24,7 +21,7 @@ export class SponsorsDatabase {
   list(args: SponsorsListRequest) {
     return this.db
       .collection<Sponsor>('sponsors', (ref) => {
-        let query: CollectionReference | Query = ref;
+        let query = ref as Query<firebase.default.firestore.DocumentData>;
 
         // filtering
         if (args.tier) {

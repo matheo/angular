@@ -1,4 +1,4 @@
-import { Action, DocumentSnapshot } from '@angular/fire/firestore';
+import { Action, DocumentSnapshot } from '@angular/fire/compat/firestore';
 import { map } from 'rxjs/operators';
 
 export function doc<T>() {

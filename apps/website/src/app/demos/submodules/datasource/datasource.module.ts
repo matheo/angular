@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
-import { AngularFireModule } from '@angular/fire';
+import { AngularFireModule } from '@angular/fire/compat';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { RouterModule, Routes } from '@angular/router';
 import { MatDataSourceModule } from '@matheo/datasource';
@@ -31,4 +31,4 @@ const routes: Routes = [
   declarations: [ListComponent, ListFilterComponent, ListTableComponent],
   schemas: [NO_ERRORS_SCHEMA],
 })
-export class DatasourceModule {}
+export class DatasourceModule { }

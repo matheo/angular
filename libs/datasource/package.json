@@ -1,6 +1,6 @@
 {
   "name": "@matheo/datasource",
-  "version": "11.2.7",
+  "version": "13.0.0.beta",
   "description": "Reactive Datasource for Angular",
   "author": {
     "name": "Mateo Tibaquira",
@@ -22,10 +22,10 @@
     "directory": "libs/datasource"
   },
   "peerDependencies": {
-    "@angular/common": ">=11.0.0",
-    "@angular/core": ">=11.0.0",
-    "@angular/cdk": ">=11.0.0",
-    "@angular/material": ">=11.0.0",
+    "@angular/common": ">=13.0.0",
+    "@angular/core": ">=13.0.0",
+    "@angular/cdk": ">=13.0.0",
+    "@angular/material": ">=13.0.0",
     "rxjs": "*"
   },
   "dependencies": {

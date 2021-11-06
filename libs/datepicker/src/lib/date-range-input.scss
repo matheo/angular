@@ -1,4 +1,4 @@
-@import '~@angular/material/theming';
+@import '@angular/material/theming';
 
 $mat-date-range-input-separator-spacing: 4px;
 $mat-date-range-input-part-max-width: calc(50% - #{$mat-date-range-input-separator-spacing});

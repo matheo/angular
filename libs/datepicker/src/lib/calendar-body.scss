@@ -1,5 +1,5 @@
-@use '~@angular/cdk' as cdk;
-@import '~@angular/material/theming';
+@use '@angular/cdk' as cdk;
+@import '@angular/material/theming';
 
 $mat-calendar-body-label-padding-start: 5% !default;
 // We don't want the label to jump around when we switch between month and year views, so we use

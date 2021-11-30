@@ -66,19 +66,26 @@ Or you can use your customized Material Theme via mixins:
 ```sass
 @use '~@matheo/datepicker/theming' as datepicker
 ...
-@include datepicker.mat-datepicker-theme($theme)
+@include datepicker.theme($theme)
 ```
 
-### Angular 11 and erlier
+and add node_modules to your preprocessor options in your`angular.json`:
 
-```sass
-// @import '~@angular/material/theming';
-@import '~@matheo/datepicker/theming'; // overrides mat-datepicker-theme
-
-@include mat-core()
-...
-@include angular-material-theme($theme)
+```json
+"projects": {
+  "[your-project]": {
+    "architect": {
+      "build": {
+        ...
+        "stylePreprocessorOptions": {
+          "includePaths": ["node_modules"]
+        }
+      }
+    }
+  }
 ```
+
+For Angular 11 please use @matheo/datepicker@11.2.17.
 
 ## API
 

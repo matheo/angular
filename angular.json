@@ -66,8 +66,8 @@
           "builder": "@nrwl/workspace:run-commands",
           "options": {
             "commands": [
-              "node ./node_modules/.bin/scss-bundle -p . --ignoreImports '~@angular/.*' -e libs/datepicker/src/lib/_datepicker-theme.scss -o dist/libs/datepicker/_theming.scss",
-              "node ./node_modules/.bin/node-sass --importer tools/node-sass.importer.js --output-style compressed -o dist/libs/datepicker/prebuilt-themes/ libs/datepicker/src/lib/prebuilt-themes/"
+              "scss-bundle -p . --includePaths=node_modules --ignoreImports '@angular/.*' -e libs/datepicker/src/lib/_datepicker-theme.scss -o dist/libs/datepicker/_theming.scss",
+              "sass --update --no-source-map --load-path=node_modules libs/datepicker/src/lib/prebuilt-themes/:dist/libs/datepicker/prebuilt-themes/"
             ]
           }
         },

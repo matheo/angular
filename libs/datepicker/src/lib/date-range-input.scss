@@ -1,6 +1,6 @@
 @use 'sass:math';
-@use '~@angular/material/core/style/vendor-prefixes';
-@use '~@angular/material/core/style/variables';
+@use '@angular/material/core/style/vendor-prefixes';
+@use '@angular/material/core/style/variables';
 
 $mat-date-range-input-separator-spacing: 4px;
 $mat-date-range-input-part-max-width: calc(50% - #{$mat-date-range-input-separator-spacing});

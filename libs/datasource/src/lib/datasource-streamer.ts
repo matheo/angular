@@ -57,7 +57,10 @@ export class DataSourceStreamer<T> {
           )
         : of({} as Partial<T>),
       optional.length
-        ? merge(...optional).pipe(scan(this.reducePartials, {} as Partial<T>))
+        ? merge(...optional).pipe(
+            startWith({}),
+            scan(this.reducePartials, {} as Partial<T>)
+          )
         : of({} as Partial<T>),
     ]).pipe(
       map((args) => args.reduce(this.reducePartials, {} as Partial<T>)),

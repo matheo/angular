@@ -1,14 +1,22 @@
-# Javascript Node CircleCI 2.0 configuration file
-# Check https://circleci.com/docs/2.0/language-javascript/ for more details
+version: 2.1
 
-version: 2
+machine:
+  pre:
+    - mkdir ~/.cache/yarn
+
+dependencies:
+  cache_directories:
+    - ~/.cache/yarn
+  override:
+    - yarn install
+
+defaults: &defaults
+  working_directory: ~/repo
+
 jobs:
   build:
     docker:
-      # specify the version you desire here
-      - image: circleci/node
-
-    working_directory: ~/ng
+      - image: cimg/node:14.17-browsers
 
     steps:
       - checkout
@@ -16,16 +24,17 @@ jobs:
       # Download and cache dependencies
       - restore_cache:
           keys:
-            - v1-dependencies-{{ checksum "yarn.lock" }}
+            - v12-dependencies-{{ checksum "yarn.lock" }}
             # fallback to using the latest cache if no exact match is found
-            - v1-dependencies-
+            - v12-dependencies-
 
-      - run: yarn install
+      - run: yarn install --prefer-offline --frozen-lockfile --non-interactive --cache-folder ~/.cache/yarn
 
       - save_cache:
           paths:
             - node_modules
-          key: v1-dependencies-{{ checksum "yarn.lock" }}
+            - ~/.cache/yarn
+          key: v12-dependencies-{{ checksum "yarn.lock" }}
 
       # Lint
       - run: yarn affected:lint --base=origin/master --parallel

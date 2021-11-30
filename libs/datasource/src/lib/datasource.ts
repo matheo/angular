@@ -22,7 +22,7 @@ import {
   tap,
   throttleTime,
 } from 'rxjs/operators';
-import { DataSourceConfig, defaultConfig } from './config';
+import { DataSourceConfig, defaultConfig } from './datasource-config';
 import { MatDataSourceIntl } from './datasource-intl';
 import { DataSourceLogger } from './datasource-logger';
 import { DataSourceStreamer } from './datasource-streamer';

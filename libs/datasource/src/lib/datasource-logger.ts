@@ -1,4 +1,4 @@
-import { DataSourceConfig } from './config';
+import { DataSourceConfig } from './datasource-config';
 import { MatDataSourceIntl } from './datasource-intl';
 
 /**

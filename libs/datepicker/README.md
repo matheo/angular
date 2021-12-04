@@ -64,8 +64,14 @@ Or you can use your customized Material Theme via mixins:
 ### Angular 12+
 
 ```sass
-@use '~@matheo/datepicker/theming' as datepicker
+@use '@angular/material' as mat;
+@use '~@matheo/datepicker/theming' as datepicker;
+
+mat.$theme-ignore-duplication-warnings: true;
+
+@include mat.core();
 ...
+@include mat.all-component-themes($theme);
 @include datepicker.theme($theme)
 ```
 

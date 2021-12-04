@@ -42,7 +42,7 @@
     "@angular/common": "12.2.13",
     "@angular/compiler": "12.2.13",
     "@angular/core": "12.2.13",
-    "@angular/fire": "^6.1.5",
+    "@angular/fire": "^7.2.0",
     "@angular/flex-layout": "~12.0.0-beta.35",
     "@angular/forms": "12.2.13",
     "@angular/material": "12.2.13",
@@ -59,12 +59,13 @@
     "bootstrap": "~4.6.0",
     "date-fns": "^2.26.0",
     "date-fns-tz": "^1.1.6",
-    "firebase": "^8.6.7",
+    "firebase": "^9.4.0",
     "luxon": "^1.28.0",
     "rxjs": "6.6.7",
     "tslib": "^2.0.0",
     "typed.js": "~2.0.12",
-    "zone.js": "~0.11.4"
+    "zone.js": "~0.11.4",
+    "rxfire": "^6.0.0"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "12.2.13",

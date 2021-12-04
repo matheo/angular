@@ -1,4 +1,4 @@
-import { DocumentChangeAction } from '@angular/fire/firestore';
+import { DocumentChangeAction } from '@angular/fire/compat/firestore';
 
 export function docsMapper<T>(result: DocumentChangeAction<T>[]): T[] {
   return result

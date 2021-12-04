@@ -69,6 +69,8 @@ export class DatepickerComponent<D = Date> implements OnInit {
       touchUI: null,
       start: null,
       filter: null,
+      rangeStart: null,
+      rangeEnd: null,
     });
   }
 }

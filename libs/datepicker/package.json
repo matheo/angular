@@ -1,6 +1,6 @@
 {
   "name": "@matheo/datepicker",
-  "version": "12.10.0-beta.1",
+  "version": "13.0.0-beta.0",
   "description": "Angular material date+time picker",
   "keywords": [
     "angular",

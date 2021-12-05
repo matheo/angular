@@ -65,7 +65,7 @@ Or you can use your customized Material Theme via mixins:
 
 ```sass
 @use '@angular/material' as mat;
-@use '~@matheo/datepicker/theming' as datepicker;
+@use '@matheo/datepicker/theming' as datepicker;
 
 mat.$theme-ignore-duplication-warnings: true;
 
@@ -75,7 +75,7 @@ mat.$theme-ignore-duplication-warnings: true;
 @include datepicker.theme($theme)
 ```
 
-and add node_modules to your preprocessor options in your`angular.json`:
+and add `node_modules` to your preprocessor options in your`angular.json`:
 
 ```json
 "projects": {

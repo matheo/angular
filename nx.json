@@ -17,34 +17,6 @@
     "defaultCollection": "@nrwl/angular"
   },
   "defaultProject": "website",
-  "projects": {
-    "datasource": {
-      "tags": [
-        "shared"
-      ]
-    },
-    "datepicker": {
-      "tags": [
-        "shared"
-      ]
-    },
-    "schematics": {
-      "tags": [
-        "shared"
-      ]
-    },
-    "website": {
-      "tags": [
-        "app"
-      ]
-    },
-    "website-e2e": {
-      "tags": [],
-      "implicitDependencies": [
-        "website"
-      ]
-    }
-  },
   "tasksRunnerOptions": {
     "default": {
       "runner": "@nrwl/workspace/tasks-runners/default",
@@ -54,7 +26,8 @@
           "lint",
           "test",
           "e2e"
-        ]
+        ],
+        "parallel": 1
       }
     }
   },

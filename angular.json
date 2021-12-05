@@ -2,7 +2,6 @@
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
   "newProjectRoot": "",
-  "defaultProject": "website",
   "projects": {
     "datasource": {
       "root": "libs/datasource",
@@ -23,25 +22,20 @@
             }
           }
         },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "libs/datasource/tsconfig.lib.json",
-              "libs/datasource/tsconfig.spec.json"
-            ],
-            "exclude": ["**/node_modules/**", "!libs/datasource/**/*"]
-          }
-        },
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
             "jestConfig": "libs/datasource/jest.config.js",
             "passWithNoTests": true
           },
-          "outputs": ["coverage/libs/datasource"]
+          "outputs": [
+            "coverage/libs/datasource"
+          ]
         }
-      }
+      },
+      "tags": [
+        "shared"
+      ]
     },
     "datepicker": {
       "root": "libs/datepicker",
@@ -71,25 +65,20 @@
             ]
           }
         },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "libs/datepicker/tsconfig.lib.json",
-              "libs/datepicker/tsconfig.spec.json"
-            ],
-            "exclude": ["**/node_modules/**", "!libs/datepicker/**/*"]
-          }
-        },
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
             "jestConfig": "libs/datepicker/jest.config.js",
             "passWithNoTests": true
           },
-          "outputs": ["coverage/libs/datepicker"]
+          "outputs": [
+            "coverage/libs/datepicker"
+          ]
         }
-      }
+      },
+      "tags": [
+        "shared"
+      ]
     },
     "schematics": {
       "root": "libs/schematics",
@@ -105,25 +94,20 @@
             "buildableProjectDepsInPackageJsonType": "dependencies"
           }
         },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "libs/schematics/tsconfig.lib.json",
-              "libs/schematics/tsconfig.spec.json"
-            ],
-            "exclude": ["**/node_modules/**", "!libs/schematics/**/*"]
-          }
-        },
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
             "jestConfig": "libs/schematics/jest.config.js",
             "passWithNoTests": true
           },
-          "outputs": ["coverage/libs/schematics"]
+          "outputs": [
+            "coverage/libs/schematics"
+          ]
         }
-      }
+      },
+      "tags": [
+        "shared"
+      ]
     },
     "website": {
       "root": "apps/website/",
@@ -147,12 +131,18 @@
                 "output": ""
               }
             ],
-            "styles": ["apps/website/src/styles.scss"],
+            "styles": [
+              "apps/website/src/styles.scss"
+            ],
             "stylePreprocessorOptions": {
-              "includePaths": ["apps/website/src/styles"]
+              "includePaths": [
+                "apps/website/src/styles"
+              ]
             },
             "scripts": [],
-            "allowedCommonJsDependencies": ["lodash"],
+            "allowedCommonJsDependencies": [
+              "lodash"
+            ],
             "vendorChunk": true,
             "extractLicenses": false,
             "buildOptimizer": false,
@@ -188,7 +178,9 @@
               ]
             }
           },
-          "outputs": ["dist/apps/website"],
+          "outputs": [
+            "dist/apps/website"
+          ],
           "defaultConfiguration": ""
         },
         "serve": {
@@ -208,25 +200,20 @@
             "browserTarget": "website:build"
           }
         },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "apps/website/tsconfig.app.json",
-              "apps/website/tsconfig.spec.json"
-            ],
-            "exclude": ["**/node_modules/**", "!apps/website/**"]
-          }
-        },
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
             "jestConfig": "apps/website/jest.config.js",
             "passWithNoTests": true
           },
-          "outputs": ["coverage/apps/website/"]
+          "outputs": [
+            "coverage/apps/website/"
+          ]
         }
-      }
+      },
+      "tags": [
+        "app"
+      ]
     },
     "website-e2e": {
       "root": "apps/website-e2e",
@@ -245,15 +232,12 @@
               "devServerTarget": "website:serve:production"
             }
           }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": "apps/website-e2e/tsconfig.e2e.json",
-            "exclude": ["**/node_modules/**", "!apps/website-e2e/**/*"]
-          }
         }
-      }
+      },
+      "tags": [],
+      "implicitDependencies": [
+        "website"
+      ]
     }
   }
 }

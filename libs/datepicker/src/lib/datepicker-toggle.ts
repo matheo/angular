@@ -23,17 +23,15 @@ import {
   ViewChild,
 } from '@angular/core';
 import {MatButton} from '@angular/material/button';
-import {merge, of as observableOf, Subscription} from 'rxjs';
+import {merge, Observable, of as observableOf, Subscription} from 'rxjs';
 import {MatDatepickerIntl} from './datepicker-intl';
 import {MatDatepickerControl, MatDatepickerPanel} from './datepicker-base';
 
-
 /** Can be used to override the icon of a `matDatepickerToggle`. */
 @Directive({
-  selector: '[matDatepickerToggleIcon]'
+  selector: '[matDatepickerToggleIcon]',
 })
 export class MatDatepickerToggleIcon {}
-
 
 @Component({
   selector: 'mat-datepicker-toggle',
@@ -94,10 +92,10 @@ export class MatDatepickerToggle<D> implements AfterContentInit, OnChanges, OnDe
   constructor(
     public _intl: MatDatepickerIntl,
     private _changeDetectorRef: ChangeDetectorRef,
-    @Attribute('tabindex') defaultTabIndex: string) {
-
+    @Attribute('tabindex') defaultTabIndex: string,
+  ) {
     const parsedTabIndex = Number(defaultTabIndex);
-    this.tabIndex = (parsedTabIndex || parsedTabIndex === 0) ? parsedTabIndex : null;
+    this.tabIndex = parsedTabIndex || parsedTabIndex === 0 ? parsedTabIndex : null;
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -122,18 +120,21 @@ export class MatDatepickerToggle<D> implements AfterContentInit, OnChanges, OnDe
   }
 
   private _watchStateChanges() {
-    const datepickerStateChanged = this.datepicker?.stateChanges || observableOf();
-    const inputStateChanged = this.datepicker?.datepickerInput?.stateChanges || observableOf();
-    const datepickerToggled = this.datepicker
-        ? merge(this.datepicker.openedStream, this.datepicker.closedStream)
+    const datepickerStateChanged = this.datepicker ? this.datepicker.stateChanges : observableOf();
+    const inputStateChanged =
+      this.datepicker && this.datepicker.datepickerInput
+        ? this.datepicker.datepickerInput.stateChanges
         : observableOf();
+    const datepickerToggled = this.datepicker
+      ? merge(this.datepicker.openedStream, this.datepicker.closedStream)
+      : observableOf();
 
     this._stateChanges.unsubscribe();
     this._stateChanges = merge(
       this._intl.changes,
-      datepickerStateChanged,
+      datepickerStateChanged as Observable<void>,
       inputStateChanged,
-      datepickerToggled
+      datepickerToggled,
     ).subscribe(() => this._changeDetectorRef.markForCheck());
   }
 

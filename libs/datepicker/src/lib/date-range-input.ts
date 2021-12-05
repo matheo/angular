@@ -6,7 +6,7 @@
  * found in the LICENSE file at https://angular.io/license
  */
 
-import {
+ import {
   Component,
   ChangeDetectionStrategy,
   ViewEncapsulation,
@@ -27,6 +27,7 @@ import {MatFormFieldControl, MatFormField, MAT_FORM_FIELD} from '@angular/materi
 import {ThemePalette} from '@angular/material/core';
 import {NgControl, ControlContainer} from '@angular/forms';
 import {Subject, merge, Subscription} from 'rxjs';
+import {FocusOrigin} from '@angular/cdk/a11y';
 import {coerceBooleanProperty, BooleanInput} from '@angular/cdk/coercion';
 import {DateAdapter} from '@matheo/datepicker/core';
 import {
@@ -65,11 +66,18 @@ let nextUniqueId = 0;
   providers: [
     {provide: MatFormFieldControl, useExisting: MatDateRangeInput},
     {provide: MAT_DATE_RANGE_INPUT_PARENT, useExisting: MatDateRangeInput},
-  ]
+  ],
 })
-export class MatDateRangeInput<D> implements MatFormFieldControl<DateRange<D>>,
-  MatDatepickerControl<D>, MatDateRangeInputParent<D>, MatDateRangePickerInput<D>,
-  AfterContentInit, OnChanges, OnDestroy {
+export class MatDateRangeInput<D>
+  implements
+    MatFormFieldControl<DateRange<D>>,
+    MatDatepickerControl<D>,
+    MatDateRangeInputParent<D>,
+    MatDateRangePickerInput<D>,
+    AfterContentInit,
+    OnChanges,
+    OnDestroy
+{
   private _closedSubscription = Subscription.EMPTY;
 
   /** Current value of the range input. */
@@ -99,12 +107,14 @@ export class MatDateRangeInput<D> implements MatFormFieldControl<DateRange<D>>,
   get placeholder() {
     const start = this._startInput?._getPlaceholder() || '';
     const end = this._endInput?._getPlaceholder() || '';
-    return (start || end) ? `${start} ${this.separator} ${end}` : '';
+    return start || end ? `${start} ${this.separator} ${end}` : '';
   }
 
   /** The range picker that this input is associated with. */
   @Input()
-  get rangePicker() { return this._rangePicker; }
+  get rangePicker() {
+    return this._rangePicker;
+  }
   set rangePicker(rangePicker: MatDatepickerPanel<MatDatepickerControl<D>, DateRange<D>, D>) {
     if (rangePicker) {
       this._model = rangePicker.registerInput(this);
@@ -121,7 +131,9 @@ export class MatDateRangeInput<D> implements MatFormFieldControl<DateRange<D>>,
 
   /** Whether the input is required. */
   @Input()
-  get required(): boolean { return !!this._required; }
+  get required(): boolean {
+    return !!this._required;
+  }
   set required(value: boolean) {
     this._required = coerceBooleanProperty(value);
   }
@@ -129,19 +141,21 @@ export class MatDateRangeInput<D> implements MatFormFieldControl<DateRange<D>>,
 
   /** Function that can be used to filter out dates within the date range picker. */
   @Input()
-  get dateFilter() { return this._dateFilter; }
+  get dateFilter() {
+    return this._dateFilter;
+  }
   set dateFilter(value: DateFilterFn<D>) {
     const start = this._startInput;
     const end = this._endInput;
-    const wasMatchingStart = start?._matchesFilter(start.value);
-    const wasMatchingEnd = end?._matchesFilter(start.value);
+    const wasMatchingStart = start && start._matchesFilter(start.value);
+    const wasMatchingEnd = end && end._matchesFilter(start.value);
     this._dateFilter = value;
 
-    if (start?._matchesFilter(start.value) !== wasMatchingStart) {
+    if (start && start._matchesFilter(start.value) !== wasMatchingStart) {
       start._validatorOnChange();
     }
 
-    if (end?._matchesFilter(end.value) !== wasMatchingEnd) {
+    if (end && end._matchesFilter(end.value) !== wasMatchingEnd) {
       end._validatorOnChange();
     }
   }
@@ -149,7 +163,9 @@ export class MatDateRangeInput<D> implements MatFormFieldControl<DateRange<D>>,
 
   /** The minimum valid date. */
   @Input()
-  get min(): D | null { return this._min; }
+  get min(): D | null {
+    return this._min;
+  }
   set min(value: D | null) {
     const validValue = this._dateAdapter.getValidDateOrNull(this._dateAdapter.deserialize(value));
 
@@ -162,7 +178,9 @@ export class MatDateRangeInput<D> implements MatFormFieldControl<DateRange<D>>,
 
   /** The maximum valid date. */
   @Input()
-  get max(): D | null { return this._max; }
+  get max(): D | null {
+    return this._max;
+  }
   set max(value: D | null) {
     const validValue = this._dateAdapter.getValidDateOrNull(this._dateAdapter.deserialize(value));
 
@@ -176,8 +194,9 @@ export class MatDateRangeInput<D> implements MatFormFieldControl<DateRange<D>>,
   /** Whether the input is disabled. */
   @Input()
   get disabled(): boolean {
-    return (this._startInput?.disabled && this._endInput?.disabled)
-      || this._groupDisabled;
+    return this._startInput && this._endInput
+      ? this._startInput.disabled && this._endInput.disabled
+      : this._groupDisabled;
   }
   set disabled(value: boolean) {
     const newValue = coerceBooleanProperty(value);
@@ -191,7 +210,11 @@ export class MatDateRangeInput<D> implements MatFormFieldControl<DateRange<D>>,
 
   /** Whether the input is in an error state. */
   get errorState(): boolean {
-    return this._startInput?.errorState || this._endInput?.errorState || false;
+    if (this._startInput && this._endInput) {
+      return this._startInput.errorState || this._endInput.errorState;
+    }
+
+    return false;
   }
 
   /** Whether the datepicker input is empty. */
@@ -227,7 +250,7 @@ export class MatDateRangeInput<D> implements MatFormFieldControl<DateRange<D>>,
   ngControl: NgControl | null;
 
   /** Emits when the input's state has changed. */
-  stateChanges = new Subject<void>();
+  readonly stateChanges = new Subject<void>();
 
   type: any; // unused prop in the range
 
@@ -236,10 +259,18 @@ export class MatDateRangeInput<D> implements MatFormFieldControl<DateRange<D>>,
     private _elementRef: ElementRef<HTMLElement>,
     @Optional() @Self() control: ControlContainer,
     @Optional() private _dateAdapter: DateAdapter<D>,
-    @Optional() @Inject(MAT_FORM_FIELD) private _formField?: MatFormField) {
-
-    if (!_dateAdapter && (isDevMode())) {
+    @Optional() @Inject(MAT_FORM_FIELD) private _formField?: MatFormField,
+  ) {
+    if (!_dateAdapter && isDevMode()) {
       throw createMissingDateImplError('DateAdapter');
+    }
+
+    // The datepicker module can be used both with MDC and non-MDC form fields. We have
+    // to conditionally add the MDC input class so that the range picker looks correctly.
+    if (_formField?._elementRef.nativeElement.classList.contains('mat-mdc-form-field')) {
+      const classList = _elementRef.nativeElement.classList;
+      classList.add('mat-mdc-input-element');
+      classList.add('mat-mdc-form-field-input-control');
     }
 
     // TODO(crisbeto): remove `as any` after #18206 lands.
@@ -316,6 +347,11 @@ export class MatDateRangeInput<D> implements MatFormFieldControl<DateRange<D>>,
     return this._formField ? this._formField.getConnectedOverlayOrigin() : this._elementRef;
   }
 
+  /** Gets the ID of an element that should be used a description for the calendar overlay. */
+  getOverlayLabelId(): string | null {
+    return this._formField ? this._formField.getLabelId() : null;
+  }
+
   /** Gets the value that is used to mirror the state input. */
   _getInputMirrorValue() {
     return this._startInput ? this._startInput.getMirrorValue() : '';
@@ -341,12 +377,23 @@ export class MatDateRangeInput<D> implements MatFormFieldControl<DateRange<D>>,
 
   /** Whether the separate text should be hidden. */
   _shouldHideSeparator() {
-    return (!this._formField || this._formField._hideControlPlaceholder()) && this.empty;
+    return (
+      (!this._formField ||
+        (this._formField.getLabelId() && !this._formField._shouldLabelFloat())) &&
+      this.empty
+    );
   }
 
   /** Gets the value for the `aria-labelledby` attribute of the inputs. */
   _getAriaLabelledby() {
-    return this._formField?._hasFloatingLabel() ? this._formField._labelId : null;
+    const formField = this._formField;
+    return formField && formField._hasFloatingLabel() ? formField._labelId : null;
+  }
+
+  /** Updates the focused state of the range input. */
+  _updateFocus(origin: FocusOrigin) {
+    this.focused = origin !== null;
+    this.stateChanges.next();
   }
 
   /** Re-runs the validators on the start/end inputs. */

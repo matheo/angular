@@ -24,7 +24,7 @@
     "@angular/forms": ">=11.0.0",
     "@angular/material": ">=11.0.0",
     "date-fns": "^2.23.0",
-    "date-fns-tz": "^1.1.6",
+    "date-fns-tz": "^1.2.2",
     "luxon": "^2.3.0",
     "rxjs": "*"
   },

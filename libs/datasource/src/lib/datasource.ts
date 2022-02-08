@@ -20,8 +20,9 @@ import {
   take,
   takeUntil,
   tap,
+  throttleTime,
 } from 'rxjs/operators';
-import { DataSourceConfig, defaultConfig } from './config';
+import { DataSourceConfig, defaultConfig } from './datasource-config';
 import { MatDataSourceIntl } from './datasource-intl';
 import { DataSourceLogger } from './datasource-logger';
 import { DataSourceStreamer } from './datasource-streamer';
@@ -445,6 +446,7 @@ export abstract class MatDataSource<REQ = any, RAW = any, RES = any>
   connect() {
     return this._streams.connect().pipe(
       takeUntil(this._disconnect$),
+      throttleTime(10),
       tap(() => this._triggered++),
       skipWhile(() => this._blockStart()),
       map((args) => this._getArgs(args)),

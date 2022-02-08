@@ -1,6 +1,6 @@
 {
   "name": "@matheo/datepicker",
-  "version": "11.3.0",
+  "version": "13.0.0-beta.0",
   "description": "Angular material date+time picker",
   "keywords": [
     "angular",
@@ -29,7 +29,6 @@
     "rxjs": "*"
   },
   "devDependencies": {
-    "node-sass": "^5.0.0",
     "scss-bundle": "^3.1.2"
   },
   "dependencies": {

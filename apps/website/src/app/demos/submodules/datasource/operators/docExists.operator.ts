@@ -1,4 +1,4 @@
-import { Action, DocumentSnapshot } from '@angular/fire/firestore';
+import { Action, DocumentSnapshot } from '@angular/fire/compat/firestore';
 import { of, throwError } from 'rxjs';
 import { concatMap } from 'rxjs/operators';
 

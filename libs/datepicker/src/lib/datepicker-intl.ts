@@ -9,7 +9,6 @@
 import {Injectable} from '@angular/core';
 import {Subject} from 'rxjs';
 
-
 /** Datepicker data that requires internationalization. */
 @Injectable({providedIn: 'root'})
 export class MatDatepickerIntl {
@@ -41,31 +40,31 @@ export class MatDatepickerIntl {
   nextYearLabel: string = 'Next year';
 
   /** A label for the previous multi-year button (used by screen readers). */
-  prevMultiYearLabel: string = 'Previous 20 years';
+  prevMultiYearLabel: string = 'Previous 24 years';
 
   /** A label for the next multi-year button (used by screen readers). */
-  nextMultiYearLabel: string = 'Next 20 years';
+  nextMultiYearLabel: string = 'Next 24 years';
 
   /** A label for the 'AM' button (used by screen readers). */
-  setToAMLabel = 'Set date to AM';
+  setToAMLabel: string = 'Set date to AM';
 
   /** A label for the 'PM' button (used by screen readers). */
-  setToPMLabel = 'Set date to PM';
+  setToPMLabel: string = 'Set date to PM';
 
   /** A label for the 'switch to minute view' button (used by screen readers). */
-  switchToMinuteViewLabel = 'Change to minute view';
+  switchToMinuteViewLabel: string = 'Change to minute view';
 
   /** A label for the 'switch to hour view' button (used by screen readers). */
-  switchToHourViewLabel = 'Change to hour view';
+  switchToHourViewLabel: string = 'Change to hour view';
 
   /** A label for the 'switch to month view' button (used by screen readers). */
-  switchToMonthViewLabel = 'Change to month view';
+  switchToMonthViewLabel: string = 'Choose date';
 
   /** A label for the 'switch to year view' button (used by screen readers). */
-  switchToYearViewLabel = 'Change to year view';
+  switchToYearViewLabel: string = 'Change to year view';
 
   /** A label for the 'switch to years view' button (used by screen readers). */
-  switchToMultiYearViewLabel = 'Change to years view';
+  switchToMultiYearViewLabel: string = 'Change to years view';
 
   /** Formats a range of years. */
   formatYearRange(start: string, end: string): string {

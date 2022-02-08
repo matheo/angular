@@ -20,7 +20,6 @@
     https://www.w3schools.com/howto/howto_css_aspect_ratio.asp).
   -->
   <td *ngIf="rowIndex === 0 && _firstRowOffset"
-      aria-hidden="true"
       class="mat-calendar-body-label"
       [attr.colspan]="_firstRowOffset"
       [style.paddingTop]="_cellPadding"
@@ -50,6 +49,7 @@
       [attr.aria-label]="item.ariaLabel"
       [attr.aria-disabled]="!item.enabled || null"
       [attr.aria-selected]="_isSelected(item.compareValue)"
+      [attr.aria-current]="todayValue === item.compareValue ? 'date' : null"
       (click)="_cellClicked(item, $event)"
       [style.width]="_cellWidth"
       [style.paddingTop]="_cellPadding"

@@ -26,21 +26,25 @@ import {MatCalendarView} from './calendar.types';
 export type MatCalendarCellCssClasses = string | string[] | Set<string> | {[key: string]: any};
 
 /** Function that can generate the extra classes that should be added to a calendar cell. */
-export type MatCalendarCellClassFunction<D> =
-  (date: D, view: MatCalendarView) => MatCalendarCellCssClasses;
+export type MatCalendarCellClassFunction<D> = (
+  date: D,
+  view: MatCalendarView,
+) => MatCalendarCellCssClasses;
 
 /**
  * An internal class that represents the data corresponding to a single calendar cell.
  * @docs-private
  */
 export class MatCalendarCell<D = any> {
-  constructor(public value: number,
-              public displayValue: string,
-              public ariaLabel: string,
-              public enabled: boolean,
-              public cssClasses: MatCalendarCellCssClasses = {},
-              public compareValue = value,
-              public rawValue?: D) {}
+  constructor(
+    public value: number,
+    public displayValue: string,
+    public ariaLabel: string,
+    public enabled: boolean,
+    public cssClasses: MatCalendarCellCssClasses = {},
+    public compareValue = value,
+    public rawValue?: D,
+  ) {}
 }
 
 /** Event emitted when a date inside the calendar is triggered as a result of a user action. */
@@ -59,8 +63,6 @@ export interface MatCalendarUserEvent<D> {
   styleUrls: ['calendar-body.scss'],
   host: {
     'class': 'mat-calendar-body',
-    'role': 'grid',
-    'aria-readonly': 'true'
   },
   exportAs: 'matCalendarBody',
   encapsulation: ViewEncapsulation.None,
@@ -119,11 +121,12 @@ export class MatCalendarBody implements OnChanges, OnDestroy {
   @Input() previewEnd: number | null = null;
 
   /** Emits when a new value is selected. */
-  @Output() readonly selectedValueChange: EventEmitter<MatCalendarUserEvent<number>> =
-      new EventEmitter<MatCalendarUserEvent<number>>();
+  @Output() readonly selectedValueChange = new EventEmitter<MatCalendarUserEvent<number>>();
 
   /** Emits when the preview has changed as a result of a user action. */
-  @Output() previewChange = new EventEmitter<MatCalendarUserEvent<MatCalendarCell | null>>();
+  @Output() readonly previewChange = new EventEmitter<
+    MatCalendarUserEvent<MatCalendarCell | null>
+  >();
 
   /** The number of blank cells to put at the beginning for the first row. */
   _firstRowOffset: number;
@@ -161,11 +164,11 @@ export class MatCalendarBody implements OnChanges, OnDestroy {
     const {rows, numCols} = this;
 
     if (changes['rows'] || columnChanges) {
-      this._firstRowOffset = rows?.length && rows[0].length ? numCols - rows[0].length : 0;
+      this._firstRowOffset = rows && rows.length && rows[0].length ? numCols - rows[0].length : 0;
     }
 
     if (changes['cellAspectRatio'] || columnChanges || !this._cellPadding) {
-      this._cellPadding = `${50 * this.cellAspectRatio / numCols}%`;
+      this._cellPadding = `${(50 * this.cellAspectRatio) / numCols}%`;
     }
 
     if (columnChanges || !this._cellWidth) {
@@ -197,8 +200,9 @@ export class MatCalendarBody implements OnChanges, OnDestroy {
   _focusActiveCell(movePreview = true) {
     this._ngZone.runOutsideAngular(() => {
       this._ngZone.onStable.pipe(take(1)).subscribe(() => {
-        const activeCell: HTMLElement | null =
-            this._elementRef.nativeElement.querySelector('.mat-calendar-body-active');
+        const activeCell: HTMLElement | null = this._elementRef.nativeElement.querySelector(
+          '.mat-calendar-body-active',
+        );
 
         if (activeCell) {
           if (!movePreview) {
@@ -322,7 +326,7 @@ export class MatCalendarBody implements OnChanges, OnDestroy {
         this._ngZone.run(() => this.previewChange.emit({value: cell.enabled ? cell : null, event}));
       }
     }
-  }
+  };
 
   /**
    * Event handler for when the user's pointer leaves an element
@@ -338,7 +342,7 @@ export class MatCalendarBody implements OnChanges, OnDestroy {
         this._ngZone.run(() => this.previewChange.emit({value: null, event}));
       }
     }
-  }
+  };
 
   /** Finds the MatCalendarCell that corresponds to a DOM node. */
   private _getCellFromElement(element: HTMLElement): MatCalendarCell | null {
@@ -361,7 +365,6 @@ export class MatCalendarBody implements OnChanges, OnDestroy {
 
     return null;
   }
-
 }
 
 /** Checks whether a node is a table cell element. */
@@ -380,10 +383,18 @@ function isEnd(value: number, start: number | null, end: number | null): boolean
 }
 
 /** Checks whether a value is inside of a range. */
-function isInRange(value: number,
-                   start: number | null,
-                   end: number | null,
-                   rangeEnabled: boolean): boolean {
-  return rangeEnabled && start !== null && end !== null && start !== end &&
-         value >= start && value <= end;
+function isInRange(
+  value: number,
+  start: number | null,
+  end: number | null,
+  rangeEnabled: boolean,
+): boolean {
+  return (
+    rangeEnabled &&
+    start !== null &&
+    end !== null &&
+    start !== end &&
+    value >= start &&
+    value <= end
+  );
 }

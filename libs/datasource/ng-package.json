@@ -2,10 +2,9 @@
   "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
   "dest": "../../dist/libs/datasource",
   "lib": {
-    "entryFile": "src/index.ts",
-    "umdModuleIds": {
-      "lodash": "_"
-    }
+    "entryFile": "src/index.ts"
   },
-  "allowedNonPeerDependencies": [".*"]
+  "allowedNonPeerDependencies": [
+    ".*"
+  ]
 }

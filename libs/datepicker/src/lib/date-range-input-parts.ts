@@ -30,18 +30,16 @@ import {
 } from '@angular/forms';
 import {
   CanUpdateErrorState,
-  CanUpdateErrorStateCtor,
   mixinErrorState,
-  ErrorStateMatcher,
   MAT_DATE_FORMATS,
+  ErrorStateMatcher,
 } from '@angular/material/core';
-import {BooleanInput} from '@angular/cdk/coercion';
 import {BACKSPACE} from '@angular/cdk/keycodes';
 import {
   DateAdapter,
   MatDateFormats,
 } from '@matheo/datepicker/core';
-import {DateFilterFn, MatDatepickerInputBase} from './datepicker-input-base';
+import {MatDatepickerInputBase, DateFilterFn} from './datepicker-input-base';
 import {DateRange, DateSelectionModelChange} from './date-selection-model';
 
 /** Parent component that should be wrapped around `MatStartDate` and `MatEndDate`. */
@@ -65,25 +63,27 @@ export interface MatDateRangeInputParent<D> {
  * Used to provide the date range input wrapper component
  * to the parts without circular dependencies.
  */
-export const MAT_DATE_RANGE_INPUT_PARENT =
-    new InjectionToken<MatDateRangeInputParent<unknown>>('MAT_DATE_RANGE_INPUT_PARENT');
+export const MAT_DATE_RANGE_INPUT_PARENT = new InjectionToken<MatDateRangeInputParent<unknown>>(
+  'MAT_DATE_RANGE_INPUT_PARENT',
+);
 
 /**
  * Base class for the individual inputs that can be projected inside a `mat-date-range-input`.
  */
 @Directive()
 abstract class MatDateRangeInputPartBase<D>
-  extends MatDatepickerInputBase<DateRange<D>> implements OnInit, DoCheck {
-
+  extends MatDatepickerInputBase<DateRange<D>>
+  implements OnInit, DoCheck
+{
   /** @docs-private */
   ngControl: NgControl;
 
   /** @docs-private */
   abstract updateErrorState(): void;
 
-  protected abstract _validator: ValidatorFn | null;
-  protected abstract _assignValueToModel(value: D | null): void;
-  protected abstract _getValueFromModel(modelValue: DateRange<D>): D | null;
+  protected abstract override _validator: ValidatorFn | null;
+  protected abstract override _assignValueToModel(value: D | null): void;
+  protected abstract override _getValueFromModel(modelValue: DateRange<D>): D | null;
 
   constructor(
     @Inject(MAT_DATE_RANGE_INPUT_PARENT) public _rangeInput: MatDateRangeInputParent<D>,
@@ -93,7 +93,8 @@ abstract class MatDateRangeInputPartBase<D>
     @Optional() public _parentForm: NgForm,
     @Optional() public _parentFormGroup: FormGroupDirective,
     @Optional() dateAdapter: DateAdapter<D>,
-    @Optional() @Inject(MAT_DATE_FORMATS) dateFormats: MatDateFormats) {
+    @Optional() @Inject(MAT_DATE_FORMATS) dateFormats: MatDateFormats,
+  ) {
     super(elementRef, dateAdapter, dateFormats);
   }
 
@@ -104,7 +105,8 @@ abstract class MatDateRangeInputPartBase<D>
     // itself. Usually we can work around it for the CVA, but there's no API to do it for the
     // validator. We work around it here by injecting the `NgControl` in `ngOnInit`, after
     // everything has been resolved.
-    const ngControl = this._injector.get(NgControl, null, InjectFlags.Self);
+    // tslint:disable-next-line:no-bitwise
+    const ngControl = this._injector.get(NgControl, null, InjectFlags.Self | InjectFlags.Optional);
 
     if (ngControl) {
       this.ngControl = ngControl;
@@ -136,7 +138,7 @@ abstract class MatDateRangeInputPartBase<D>
   }
 
   /** Handles `input` events on the input element. */
-  _onInput(value: string) {
+  override _onInput(value: string) {
     super._onInput(value);
     this._rangeInput._handleChildValueChange();
   }
@@ -161,7 +163,7 @@ abstract class MatDateRangeInputPartBase<D>
     return this._rangeInput.dateFilter;
   }
 
-  protected _parentDisabled() {
+  protected override _parentDisabled() {
     return this._rangeInput._groupDisabled;
   }
 
@@ -169,18 +171,18 @@ abstract class MatDateRangeInputPartBase<D>
     return source !== this._rangeInput._startInput && source !== this._rangeInput._endInput;
   }
 
-  protected _assignValueProgrammatically(value: D | null) {
+  protected override _assignValueProgrammatically(value: D | null) {
     super._assignValueProgrammatically(value);
-    const opposite = (this === this._rangeInput._startInput ? this._rangeInput._endInput :
-        this._rangeInput._startInput) as MatDateRangeInputPartBase<D> | undefined;
+    const opposite = (
+      this === this._rangeInput._startInput
+        ? this._rangeInput._endInput
+        : this._rangeInput._startInput
+    ) as MatDateRangeInputPartBase<D> | undefined;
     opposite?._validatorOnChange();
   }
 }
 
-const _MatDateRangeInputBase:
-    CanUpdateErrorStateCtor & typeof MatDateRangeInputPartBase =
-    // Needs to be `as any`, because the base class is abstract.
-    mixinErrorState(MatDateRangeInputPartBase as any);
+const _MatDateRangeInputBase = mixinErrorState(MatDateRangeInputPartBase);
 
 /** Input for entering the start date in a `mat-date-range-input`. */
 @Directive({
@@ -201,24 +203,24 @@ const _MatDateRangeInputBase:
   },
   providers: [
     {provide: NG_VALUE_ACCESSOR, useExisting: MatStartDate, multi: true},
-    {provide: NG_VALIDATORS, useExisting: MatStartDate, multi: true}
+    {provide: NG_VALIDATORS, useExisting: MatStartDate, multi: true},
   ],
   // These need to be specified explicitly, because some tooling doesn't
   // seem to pick them up from the base class. See #20932.
   outputs: ['dateChange', 'dateInput'],
-  inputs: ['errorStateMatcher']
+  inputs: ['errorStateMatcher'],
 })
-export class MatStartDate<D> extends _MatDateRangeInputBase<D> implements
-    CanUpdateErrorState, DoCheck, OnInit {
+export class MatStartDate<D> extends _MatDateRangeInputBase<D> implements CanUpdateErrorState {
   /** Validator that checks that the start date isn't after the end date. */
   private _startValidator: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
     const start = this._dateAdapter.getValidDateOrNull(
-      this._dateAdapter.deserialize(control.value));
+      this._dateAdapter.deserialize(control.value),
+    );
     const end = this._model ? this._model.selection.end : null;
-    return (!start || !end ||
-        this._dateAdapter.compareDate(start, end) <= 0) ?
-        null : {'matStartDateInvalid': {'end': end, 'actual': start}};
-  }
+    return !start || !end || this._dateAdapter.compareDate(start, end) <= 0
+      ? null
+      : {'matStartDateInvalid': {'end': end, 'actual': start}};
+  };
 
   constructor(
     @Inject(MAT_DATE_RANGE_INPUT_PARENT) rangeInput: MatDateRangeInputParent<D>,
@@ -228,39 +230,37 @@ export class MatStartDate<D> extends _MatDateRangeInputBase<D> implements
     @Optional() parentForm: NgForm,
     @Optional() parentFormGroup: FormGroupDirective,
     @Optional() dateAdapter: DateAdapter<D>,
-    @Optional() @Inject(MAT_DATE_FORMATS) dateFormats: MatDateFormats) {
-
-    // TODO(crisbeto): this constructor shouldn't be necessary, but ViewEngine doesn't seem to
-    // handle DI correctly when it is inherited from `MatDateRangeInputPartBase`. We can drop this
-    // constructor once ViewEngine is removed.
-    super(rangeInput, elementRef, defaultErrorStateMatcher, injector, parentForm, parentFormGroup,
-        dateAdapter, dateFormats);
-  }
-
-  ngOnInit() {
-    // Normally this happens automatically, but it seems to break if not added explicitly when all
-    // of the criteria below are met:
-    // 1) The class extends a TS mixin.
-    // 2) The application is running in ViewEngine.
-    // 3) The application is being transpiled through tsickle.
-    // This can be removed once google3 is completely migrated to Ivy.
-    super.ngOnInit();
-  }
-
-  ngDoCheck() {
-    // Normally this happens automatically, but it seems to break if not added explicitly when all
-    // of the criteria below are met:
-    // 1) The class extends a TS mixin.
-    // 2) The application is running in ViewEngine.
-    // 3) The application is being transpiled through tsickle.
-    // This can be removed once google3 is completely migrated to Ivy.
-    super.ngDoCheck();
+    @Optional() @Inject(MAT_DATE_FORMATS) dateFormats: MatDateFormats,
+  ) {
+    super(
+      rangeInput,
+      elementRef,
+      defaultErrorStateMatcher,
+      injector,
+      parentForm,
+      parentFormGroup,
+      dateAdapter,
+      dateFormats,
+    );
   }
 
   protected _validator = Validators.compose([...super._getValidators(), this._startValidator]);
 
   protected _getValueFromModel(modelValue: DateRange<D>) {
     return modelValue.start;
+  }
+
+  protected override _shouldHandleChangeEvent(
+    change: DateSelectionModelChange<DateRange<D>>,
+  ): boolean {
+    if (!super._shouldHandleChangeEvent(change)) {
+      return false;
+    } else {
+      return !change.oldValue?.start
+        ? !!change.selection.start
+        : !change.selection.start ||
+            !!this._dateAdapter.compareDate(change.oldValue.start, change.selection.start);
+    }
   }
 
   protected _assignValueToModel(value: D | null) {
@@ -270,7 +270,7 @@ export class MatStartDate<D> extends _MatDateRangeInputBase<D> implements
     }
   }
 
-  protected _formatValue(value: D | null) {
+  protected override _formatValue(value: D | null) {
     super._formatValue(value);
 
     // Any time the input value is reformatted we need to tell the parent.
@@ -283,10 +283,7 @@ export class MatStartDate<D> extends _MatDateRangeInputBase<D> implements
     const value = element.value;
     return value.length > 0 ? value : element.placeholder;
   }
-
-  static ngAcceptInputType_disabled: BooleanInput;
 }
-
 
 /** Input for entering the end date in a `mat-date-range-input`. */
 @Directive({
@@ -306,23 +303,22 @@ export class MatStartDate<D> extends _MatDateRangeInputBase<D> implements
   },
   providers: [
     {provide: NG_VALUE_ACCESSOR, useExisting: MatEndDate, multi: true},
-    {provide: NG_VALIDATORS, useExisting: MatEndDate, multi: true}
+    {provide: NG_VALIDATORS, useExisting: MatEndDate, multi: true},
   ],
   // These need to be specified explicitly, because some tooling doesn't
   // seem to pick them up from the base class. See #20932.
   outputs: ['dateChange', 'dateInput'],
-  inputs: ['errorStateMatcher']
+  inputs: ['errorStateMatcher'],
 })
-export class MatEndDate<D> extends _MatDateRangeInputBase<D> implements
-    CanUpdateErrorState, DoCheck, OnInit {
+export class MatEndDate<D> extends _MatDateRangeInputBase<D> implements CanUpdateErrorState {
   /** Validator that checks that the end date isn't before the start date. */
   private _endValidator: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
     const end = this._dateAdapter.getValidDateOrNull(this._dateAdapter.deserialize(control.value));
     const start = this._model ? this._model.selection.start : null;
-    return (!end || !start ||
-        this._dateAdapter.compareDate(end, start) >= 0) ?
-        null : {'matEndDateInvalid': {'start': start, 'actual': end}};
-  }
+    return !end || !start || this._dateAdapter.compareDate(end, start) >= 0
+      ? null
+      : {'matEndDateInvalid': {'start': start, 'actual': end}};
+  };
 
   constructor(
     @Inject(MAT_DATE_RANGE_INPUT_PARENT) rangeInput: MatDateRangeInputParent<D>,
@@ -332,39 +328,37 @@ export class MatEndDate<D> extends _MatDateRangeInputBase<D> implements
     @Optional() parentForm: NgForm,
     @Optional() parentFormGroup: FormGroupDirective,
     @Optional() dateAdapter: DateAdapter<D>,
-    @Optional() @Inject(MAT_DATE_FORMATS) dateFormats: MatDateFormats) {
-
-    // TODO(crisbeto): this constructor shouldn't be necessary, but ViewEngine doesn't seem to
-    // handle DI correctly when it is inherited from `MatDateRangeInputPartBase`. We can drop this
-    // constructor once ViewEngine is removed.
-    super(rangeInput, elementRef, defaultErrorStateMatcher, injector, parentForm, parentFormGroup,
-        dateAdapter, dateFormats);
-  }
-
-  ngOnInit() {
-    // Normally this happens automatically, but it seems to break if not added explicitly when all
-    // of the criteria below are met:
-    // 1) The class extends a TS mixin.
-    // 2) The application is running in ViewEngine.
-    // 3) The application is being transpiled through tsickle.
-    // This can be removed once google3 is completely migrated to Ivy.
-    super.ngOnInit();
-  }
-
-  ngDoCheck() {
-    // Normally this happens automatically, but it seems to break if not added explicitly when all
-    // of the criteria below are met:
-    // 1) The class extends a TS mixin.
-    // 2) The application is running in ViewEngine.
-    // 3) The application is being transpiled through tsickle.
-    // This can be removed once google3 is completely migrated to Ivy.
-    super.ngDoCheck();
+    @Optional() @Inject(MAT_DATE_FORMATS) dateFormats: MatDateFormats,
+  ) {
+    super(
+      rangeInput,
+      elementRef,
+      defaultErrorStateMatcher,
+      injector,
+      parentForm,
+      parentFormGroup,
+      dateAdapter,
+      dateFormats,
+    );
   }
 
   protected _validator = Validators.compose([...super._getValidators(), this._endValidator]);
 
   protected _getValueFromModel(modelValue: DateRange<D>) {
     return modelValue.end;
+  }
+
+  protected override _shouldHandleChangeEvent(
+    change: DateSelectionModelChange<DateRange<D>>,
+  ): boolean {
+    if (!super._shouldHandleChangeEvent(change)) {
+      return false;
+    } else {
+      return !change.oldValue?.end
+        ? !!change.selection.end
+        : !change.selection.end ||
+            !!this._dateAdapter.compareDate(change.oldValue.end, change.selection.end);
+    }
   }
 
   protected _assignValueToModel(value: D | null) {
@@ -374,7 +368,7 @@ export class MatEndDate<D> extends _MatDateRangeInputBase<D> implements
     }
   }
 
-  _onKeydown(event: KeyboardEvent) {
+  override _onKeydown(event: KeyboardEvent) {
     // If the user is pressing backspace on an empty end input, move focus back to the start.
     if (event.keyCode === BACKSPACE && !this._elementRef.nativeElement.value) {
       this._rangeInput._startInput.focus();
@@ -382,6 +376,4 @@ export class MatEndDate<D> extends _MatDateRangeInputBase<D> implements
 
     super._onKeydown(event);
   }
-
-  static ngAcceptInputType_disabled: BooleanInput;
 }

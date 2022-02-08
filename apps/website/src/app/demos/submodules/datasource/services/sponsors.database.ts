@@ -3,7 +3,7 @@ import {
   AngularFirestore,
   CollectionReference,
   Query,
-} from '@angular/fire/firestore';
+} from '@angular/fire/compat/firestore';
 import { doc, docExists } from '../operators';
 import { Sponsor, SponsorsListRequest } from './sponsors.types';
 

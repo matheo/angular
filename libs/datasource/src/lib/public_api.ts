@@ -9,5 +9,5 @@ export * from './datasource-reactive';
 export * from './directives';
 export * from './mappers';
 
-export { DataSourceConfig } from './config';
+export { DataSourceConfig } from './datasource-config';
 export { DataSourceItem, DataSourceStream } from './types';

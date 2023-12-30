@@ -32,6 +32,7 @@
 /coverage
 /libpeerconnection.log
 .npmrc
+migrations.json
 npm-debug.log
 yarn-error.log
 testem.log

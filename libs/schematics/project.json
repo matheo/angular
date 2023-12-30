@@ -1,0 +1,26 @@
+{
+  "name": "schematics",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/schematics/src",
+  "projectType": "library",
+  "prefix": "mat",
+  "targets": {
+    "build": {
+      "executor": "@nx/angular:package",
+      "options": {
+        "tsConfig": "libs/schematics/tsconfig.lib.json",
+        "project": "libs/schematics/ng-package.json",
+        "buildableProjectDepsInPackageJsonType": "dependencies",
+        "updateBuildableProjectDepsInPackageJson": true
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "options": {
+        "jestConfig": "libs/schematics/jest.config.js"
+      },
+      "outputs": ["{workspaceRoot}/coverage/libs/schematics"]
+    }
+  },
+  "tags": ["shared"]
+}

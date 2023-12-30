@@ -1,0 +1,31 @@
+{
+  "name": "datasource",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/datasource/src",
+  "projectType": "library",
+  "prefix": "mat",
+  "targets": {
+    "build": {
+      "executor": "@nx/angular:package",
+      "options": {
+        "tsConfig": "libs/datasource/tsconfig.lib.json",
+        "project": "libs/datasource/ng-package.json",
+        "buildableProjectDepsInPackageJsonType": "dependencies",
+        "updateBuildableProjectDepsInPackageJson": true
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "libs/datasource/tsconfig.lib.prod.json"
+        }
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "options": {
+        "jestConfig": "libs/datasource/jest.config.js"
+      },
+      "outputs": ["{workspaceRoot}/coverage/libs/datasource"]
+    }
+  },
+  "tags": ["shared"]
+}

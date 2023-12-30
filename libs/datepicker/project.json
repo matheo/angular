@@ -1,0 +1,40 @@
+{
+  "name": "datepicker",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/datepicker/src",
+  "projectType": "library",
+  "prefix": "mat",
+  "targets": {
+    "build": {
+      "executor": "@nx/angular:package",
+      "options": {
+        "tsConfig": "libs/datepicker/tsconfig.lib.json",
+        "project": "libs/datepicker/ng-package.json",
+        "buildableProjectDepsInPackageJsonType": "dependencies",
+        "updateBuildableProjectDepsInPackageJson": true
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "libs/datepicker/tsconfig.lib.prod.json"
+        }
+      }
+    },
+    "postbuild": {
+      "executor": "@nx/workspace:run-commands",
+      "options": {
+        "commands": [
+          "scss-bundle -p . --includePaths=node_modules --ignoreImports '@angular/.*' -e libs/datepicker/src/lib/_datepicker-theme.scss -o dist/libs/datepicker/_theming.scss",
+          "sass --update --no-source-map --load-path=node_modules libs/datepicker/src/lib/prebuilt-themes/:dist/libs/datepicker/prebuilt-themes/"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "options": {
+        "jestConfig": "libs/datepicker/jest.config.js"
+      },
+      "outputs": ["{workspaceRoot}/coverage/libs/datepicker"]
+    }
+  },
+  "tags": ["shared"]
+}

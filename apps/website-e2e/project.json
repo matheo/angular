@@ -1,0 +1,23 @@
+{
+  "name": "website-e2e",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "prefix": "",
+  "targets": {
+    "e2e": {
+      "executor": "@nx/cypress:cypress",
+      "options": {
+        "cypressConfig": "apps/website-e2e/cypress.json",
+        "tsConfig": "apps/website-e2e/tsconfig.e2e.json",
+        "devServerTarget": "website:serve"
+      },
+      "configurations": {
+        "production": {
+          "devServerTarget": "website:serve:production"
+        }
+      }
+    }
+  },
+  "tags": [],
+  "implicitDependencies": ["website"]
+}

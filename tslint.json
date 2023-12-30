@@ -1,11 +1,9 @@
 {
-  "extends": [
-    "rxjs-tslint-rules"
-  ],
+  "extends": ["rxjs-tslint-rules"],
   "rulesDirectory": [
     "node_modules/codelyzer",
     "node_modules/vrsource-tslint-rules/rules",
-    "node_modules/@nrwl/workspace/src/tslint"
+    "node_modules/@nx/workspace/src/tslint"
   ],
   "rules": {
     "arrow-return-shorthand": true,

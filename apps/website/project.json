@@ -1,0 +1,94 @@
+{
+  "name": "website",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/website/src",
+  "projectType": "application",
+  "prefix": "web",
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:browser",
+      "options": {
+        "outputPath": "dist/apps/website",
+        "index": "apps/website/src/index.html",
+        "main": "apps/website/src/main.ts",
+        "polyfills": "apps/website/src/polyfills.ts",
+        "tsConfig": "apps/website/tsconfig.app.json",
+        "assets": [
+          "apps/website/src/assets",
+          {
+            "glob": "**/*",
+            "input": "apps/website/src/favicons/",
+            "output": ""
+          }
+        ],
+        "styles": ["apps/website/src/styles.scss"],
+        "stylePreprocessorOptions": {
+          "includePaths": ["apps/website/src/styles", "node_modules"]
+        },
+        "scripts": [],
+        "allowedCommonJsDependencies": ["lodash"],
+        "vendorChunk": true,
+        "extractLicenses": false,
+        "buildOptimizer": false,
+        "sourceMap": true,
+        "optimization": false,
+        "namedChunks": true
+      },
+      "configurations": {
+        "production": {
+          "fileReplacements": [
+            {
+              "replace": "apps/website/src/environments/environment.ts",
+              "with": "apps/website/src/environments/environment.prod.ts"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false,
+          "buildOptimizer": true,
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "2mb",
+              "maximumError": "5mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "6kb"
+            }
+          ]
+        }
+      },
+      "outputs": ["{workspaceRoot}/dist/apps/website"],
+      "defaultConfiguration": ""
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "options": {
+        "buildTarget": "website:build"
+      },
+      "configurations": {
+        "production": {
+          "buildTarget": "website:build:production"
+        }
+      }
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "buildTarget": "website:build"
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "options": {
+        "jestConfig": "apps/website/jest.config.js"
+      },
+      "outputs": ["{workspaceRoot}/coverage/apps/website/"]
+    }
+  },
+  "tags": ["app"]
+}

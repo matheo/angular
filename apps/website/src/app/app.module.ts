@@ -22,7 +22,7 @@ const routes: Routes = [
   imports: [
     BrowserAnimationsModule,
     RouterModule.forRoot(routes, {
-      initialNavigation: 'enabled',
+      initialNavigation: 'enabledBlocking',
     }),
     PagesModule,
   ],

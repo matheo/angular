@@ -2,10 +2,11 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "outDir": "../../dist/out-tsc",
-    "target": "es2015",
+    "target": "ES2022",
     "declaration": true,
     "declarationMap": true,
     "inlineSources": true,
+    "useDefineForClassFields": false,
     "types": [],
     "lib": ["dom", "es2018"]
   },

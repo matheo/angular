@@ -3,3 +3,4 @@
 *.js
 *.json
 *.jsonc
+/.nx/cache

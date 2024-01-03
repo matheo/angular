@@ -18,9 +18,10 @@
   "funding": "https://www.paypal.me/mateotp",
   "repository": {
     "type": "git",
-    "url": "git@github.com:matheo/angular.git",
+    "url": "git+https://github.com/matheo/angular.git",
     "directory": "libs/datasource"
   },
+  "scripts": {},
   "peerDependencies": {
     "@angular/common": ">=11.0.0",
     "@angular/core": ">=11.0.0",

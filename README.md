@@ -3,7 +3,7 @@
 [![MIT badge](http://img.shields.io/badge/license-MIT-brightgreen.svg)](https://opensource.org/licenses/MIT)
 ![Circle CI](https://img.shields.io/circleci/build/github/matheo/angular?token=6b2b1dc42fc44f80fdae3e70f1c4f170f35419fd)
 
-This project is a sandbox to play with Angular and Nx, improve my coding standards and release some open source stuff.
+This project is a sandbox to play with Angular and Nx, to improve my coding standards and release some open source stuff.
 
 ## @matheo/datasource
 

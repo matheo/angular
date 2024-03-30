@@ -3,4 +3,7 @@
 *.js
 *.json
 *.jsonc
+/dist
+/coverage
 /.nx/cache
+.angular

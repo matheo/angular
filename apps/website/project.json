@@ -4,6 +4,7 @@
   "sourceRoot": "apps/website/src",
   "projectType": "application",
   "prefix": "web",
+  "tags": ["app"],
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
@@ -89,6 +90,5 @@
       },
       "outputs": ["{workspaceRoot}/coverage/apps/website/"]
     }
-  },
-  "tags": ["app"]
+  }
 }

@@ -4,6 +4,7 @@
   "sourceRoot": "libs/schematics/src",
   "projectType": "library",
   "prefix": "mat",
+  "tags": ["lib"],
   "targets": {
     "build": {
       "executor": "@nx/angular:package",
@@ -21,6 +22,5 @@
       },
       "outputs": ["{workspaceRoot}/coverage/libs/schematics"]
     }
-  },
-  "tags": ["shared"]
+  }
 }

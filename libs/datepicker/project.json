@@ -4,6 +4,7 @@
   "sourceRoot": "libs/datepicker/src",
   "projectType": "library",
   "prefix": "mat",
+  "tags": ["lib"],
   "targets": {
     "build": {
       "executor": "@nx/angular:package",
@@ -35,6 +36,5 @@
       },
       "outputs": ["{workspaceRoot}/coverage/libs/datepicker"]
     }
-  },
-  "tags": ["shared"]
+  }
 }

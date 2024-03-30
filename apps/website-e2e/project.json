@@ -3,6 +3,8 @@
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
   "prefix": "",
+  "tags": ["e2e"],
+  "implicitDependencies": ["website"],
   "targets": {
     "e2e": {
       "executor": "@nx/cypress:cypress",
@@ -17,7 +19,5 @@
         }
       }
     }
-  },
-  "tags": [],
-  "implicitDependencies": ["website"]
+  }
 }

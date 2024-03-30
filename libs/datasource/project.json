@@ -4,6 +4,7 @@
   "sourceRoot": "libs/datasource/src",
   "projectType": "library",
   "prefix": "mat",
+  "tags": ["lib"],
   "targets": {
     "build": {
       "executor": "@nx/angular:package",
@@ -26,6 +27,5 @@
         "jestConfig": "libs/datasource/jest.config.ts"
       }
     }
-  },
-  "tags": ["shared"]
+  }
 }

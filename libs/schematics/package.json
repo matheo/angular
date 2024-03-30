@@ -1,9 +1,9 @@
 {
   "name": "@matheo/schematics",
-  "version": "12.10.0-beta.0",
+  "version": "17.0.0-beta.0",
   "peerDependencies": {
-    "@angular/common": ">=11.0.0",
-    "@angular/core": "^>=11.0.0"
+    "@angular/common": ">=17.0.0",
+    "@angular/core": "^>=17.0.0"
   },
   "dependencies": {
     "tslib": "^2.0.0"

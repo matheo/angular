@@ -1,6 +1,6 @@
 {
   "name": "@matheo/datepicker",
-  "version": "13.0.0-beta.1",
+  "version": "17.0.0-beta.0",
   "description": "Angular material date+time picker",
   "keywords": [
     "angular",
@@ -18,15 +18,15 @@
   },
   "scripts": {},
   "peerDependencies": {
-    "@angular/animations": ">=11.0.0",
-    "@angular/cdk": ">=11.0.0",
-    "@angular/common": ">=11.0.0",
-    "@angular/core": ">=11.0.0",
-    "@angular/forms": ">=11.0.0",
-    "@angular/material": ">=11.0.0",
-    "date-fns": "^2.23.0",
-    "date-fns-tz": "^1.2.2",
-    "luxon": "^2.3.0",
+    "@angular/animations": ">=17.0.0",
+    "@angular/cdk": ">=17.0.0",
+    "@angular/common": ">=17.0.0",
+    "@angular/core": ">=17.0.0",
+    "@angular/forms": ">=17.0.0",
+    "@angular/material": ">=17.0.0",
+    "date-fns": "^3.6.0",
+    "date-fns-tz": "^2.0.1",
+    "luxon": "^3.4.4",
     "rxjs": "*"
   },
   "devDependencies": {

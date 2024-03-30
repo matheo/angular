@@ -1,19 +1,19 @@
 {
   "$schema": "node_modules/nx/schemas/nx-schema.json",
+  "defaultBase": "master",
+  "defaultProject": "website",
+  "nxCloudAccessToken": "YzliYTY2ZmItMzI5Zi00ZmY2LWJjOGQtZTgxZTJiMDg3Y2QwfHJlYWQtd3JpdGU=",
+  "useInferencePlugins": false,
   "cli": {
     "warnings": {
       "versionMismatch": false
     }
   },
-  "defaultProject": "website",
   "tasksRunnerOptions": {
     "default": {
       "runner": "@nx/workspace/tasks-runners/default",
       "options": {}
     }
-  },
-  "affected": {
-    "defaultBase": "master"
   },
   "targetDependencies": {
     "build": [

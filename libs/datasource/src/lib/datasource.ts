@@ -104,7 +104,7 @@ export abstract class MatDataSource<REQ = any, RAW = any, RES = any>
   get outputMsg() {
     return this._outputMsg;
   }
-  protected _outputMsg: string;
+  protected _outputMsg: string = '';
 
   /**
    * Accessors
@@ -155,7 +155,7 @@ export abstract class MatDataSource<REQ = any, RAW = any, RES = any>
    */
   protected defaults: Partial<REQ> = {};
   protected overrides: Partial<REQ> = {};
-  protected arguments: REQ & DataSourceOpts;
+  protected arguments?: REQ & DataSourceOpts;
 
   /**
    * Error control vars.
@@ -227,9 +227,9 @@ export abstract class MatDataSource<REQ = any, RAW = any, RES = any>
   ): string {
     const src: DataSourceStream<REQ | DataSourceOpts> = isObservable(stream)
       ? {
-          name: this._streams.length.toString(),
-          stream,
-        }
+        name: this._streams.length.toString(),
+        stream,
+      }
       : stream;
 
     this._logger.check(this._triggered, addWhenRunning(src.name || src.stream));
@@ -311,9 +311,9 @@ export abstract class MatDataSource<REQ = any, RAW = any, RES = any>
       ...this.overrides,
     } as any;
 
-    delete this.arguments.forceReload;
+    delete this.arguments?.forceReload;
 
-    return this.arguments;
+    return this.args;
   }
 
   private _isEqual(): (prev: REQ, curr: REQ) => boolean {
@@ -342,28 +342,27 @@ export abstract class MatDataSource<REQ = any, RAW = any, RES = any>
     return merge(
       query,
       // timers check
-      timer(this.config.waitMs, this.config.intervalMs).pipe(
+      timer(this.config.waitMs ?? 5000, this.config.intervalMs || 10000).pipe(
         takeUntil(query),
-        take(3) // by default: 5s, 15s, 25s
-      )
-    ).pipe(
-      // delay check
-      tap((val) => {
-        if (typeof val !== 'number') {
-          this._logger.print(queryResponse(), val);
-        } else {
-          this._logger.print(queryTimeout(), val);
+        take(3), // by default: 5s, 15s, 25s
+        tap((sequence) => {
+          this._logger.print(queryTimeout(), sequence);
           try {
-            this._outputMsg = this._logger.getTimeoutError(val);
-          } catch (e) {
-            this._logger.addError('timeout', e.message);
+            this._outputMsg = this._logger.getTimeoutError(sequence);
+          } catch (e: unknown) {
+            if (e instanceof Error) {
+              this._logger.addError('timeout', e.message);
+            }
             this._loading = false;
           }
           this._change$.next({});
-        }
-      }),
-      // discard timer result
-      filter<RAW>((result) => typeof result !== 'number'),
+        }),
+        filter((result: number | RAW): result is RAW => {
+          return typeof result !== 'number';
+        })
+      )
+    ).pipe(
+      tap((result) => this._logger.print(queryResponse(), result)),
       catchError((err) => {
         // isolate query error
         this._logger.handleError('query', err);

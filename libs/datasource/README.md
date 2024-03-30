@@ -8,7 +8,7 @@ This library provides an abstract `ReactiveDataSource` and `MatDataSource` class
 
 You can pass it to a Material Table:
 
-```
+```html
 <mat-datasource [dataSource]="source">
   <mat-table [dataSource]="source">
     ...
@@ -20,12 +20,11 @@ You can pass it to a Material Table:
     ></mat-paginator>
   </footer>
 </mat-datasource>
-
 ```
 
 Or consume it via the `dataSource` pipe:
 
-```
+```html
 <ng-container *ngIf="source | dataSource as items">
   <mat-nav-list>
     <mat-list-item *ngFor="let item of items">
@@ -38,7 +37,7 @@ Or consume it via the `dataSource` pipe:
 ## Demo
 
 An example of how it can work with a Firebase backend it's here:  
-https://stackblitz.com/edit/matdatasource
+<https://stackblitz.com/edit/matdatasource>
 
 And the concepts behind are explained here:  
-https://medium.com/@matheo/reactive-datasource-for-angular-1d869b0155f6
+<https://medium.com/@matheo/reactive-datasource-for-angular-1d869b0155f6>

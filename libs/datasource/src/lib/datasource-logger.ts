@@ -13,7 +13,7 @@ export class DataSourceLogger {
   set config(config: DataSourceConfig) {
     this._config = config;
   }
-  private _config: DataSourceConfig;
+  private _config!: DataSourceConfig;
 
   constructor(private sourceName: string, private _intl?: MatDataSourceIntl) {}
 
@@ -45,12 +45,12 @@ export class DataSourceLogger {
     );
   }
 
-  getTimeoutError(attempt: number) {
+  getTimeoutError(attempt: number): string {
     switch (attempt) {
       case 0:
-        return this._intl?.waitMsg || this._config.waitMsg;
+        return this._intl?.waitMsg || this._config.waitMsg || '';
       case 1:
-        return this._intl?.delayMsg || this._config.delayMsg;
+        return this._intl?.delayMsg || this._config.delayMsg || '';
       default:
         throw new Error(this._intl?.timeoutMsg || this._config.timeoutMsg);
     }

@@ -4,7 +4,7 @@ import { pipe } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 
 /**
- * Premade Mappers
+ * Pre-made Mappers
  */
 
 export function mapPaginator(pageSize: number) {

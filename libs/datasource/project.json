@@ -7,24 +7,24 @@
   "targets": {
     "build": {
       "executor": "@nx/angular:package",
+      "outputs": ["{workspaceRoot}/dist/{projectRoot}"],
       "options": {
         "tsConfig": "libs/datasource/tsconfig.lib.json",
-        "project": "libs/datasource/ng-package.json",
-        "buildableProjectDepsInPackageJsonType": "dependencies",
-        "updateBuildableProjectDepsInPackageJson": true
+        "project": "libs/datasource/ng-package.json"
       },
       "configurations": {
         "production": {
           "tsConfig": "libs/datasource/tsconfig.lib.prod.json"
         }
-      }
+      },
+      "defaultConfiguration": "production"
     },
     "test": {
       "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "libs/datasource/jest.config.js"
-      },
-      "outputs": ["{workspaceRoot}/coverage/libs/datasource"]
+        "jestConfig": "libs/datasource/jest.config.ts"
+      }
     }
   },
   "tags": ["shared"]

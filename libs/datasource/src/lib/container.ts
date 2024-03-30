@@ -3,7 +3,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   Input,
-  ViewEncapsulation
+  ViewEncapsulation,
 } from '@angular/core';
 import { MatDataSource } from './datasource';
 import { missingDataSourceInput } from './messages';
@@ -13,13 +13,13 @@ import { missingDataSourceInput } from './messages';
   templateUrl: './container.html',
   styleUrls: ['./container.scss', './directives.scss', './overlay.scss'],
   host: {
-    class: 'mat-datasource'
+    class: 'mat-datasource',
   },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DataSourceContainer<REQ, RAW, RES> implements AfterContentInit {
-  @Input() dataSource: MatDataSource<REQ, RAW, RES>;
+  @Input({ required: true }) dataSource!: MatDataSource<REQ, RAW, RES>;
 
   @Input() diameter = 40;
   @Input() strokeWidth = 5;

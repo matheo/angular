@@ -4,10 +4,9 @@ import {
   Pipe,
   PipeTransform,
   Type,
-  ɵisObservable,
   ɵstringify as stringify,
 } from '@angular/core';
-import { Observable, SubscriptionLike } from 'rxjs';
+import { Observable, SubscriptionLike, isObservable } from 'rxjs';
 import { ReactiveDataSource } from './datasource-reactive';
 
 export function invalidPipeArgumentError(type: Type<any>, value: Object) {
@@ -100,7 +99,7 @@ export class DataSourcePipe implements OnDestroy, PipeTransform {
   }
 
   private _selectStrategy(obj: ReactiveDataSource<any, any, any>): any {
-    if (ɵisObservable(obj.change$)) {
+    if (isObservable(obj.change$)) {
       return _observableStrategy;
     }
 
@@ -109,7 +108,7 @@ export class DataSourcePipe implements OnDestroy, PipeTransform {
 
   private _dispose(): void {
     this._strategy.dispose(this._subscription!);
-    this._obj.disconnect();
+    this._obj?.disconnect();
     this._latestValue = null;
     this._subscription = null;
     this._obj = null;

@@ -13,12 +13,23 @@
     "importHelpers": true,
     "target": "es2015",
     "module": "esnext",
-    "lib": ["es2018", "dom"],
+    "lib": [
+      "es2020",
+      "dom"
+    ],
     "paths": {
-      "@matheo/datasource": ["libs/datasource/src/index.ts"],
-      "@matheo/datepicker": ["libs/datepicker/src/index.ts"],
-      "@matheo/datepicker/*": ["libs/datepicker/*"],
-      "@matheo/schematics": ["libs/schematics/src/index.ts"]
+      "@matheo/datasource": [
+        "libs/datasource/src/index.ts"
+      ],
+      "@matheo/datepicker": [
+        "libs/datepicker/src/index.ts"
+      ],
+      "@matheo/datepicker/*": [
+        "libs/datepicker/*"
+      ],
+      "@matheo/schematics": [
+        "libs/schematics/src/index.ts"
+      ]
     },
     "plugins": [
       {
@@ -26,5 +37,8 @@
       }
     ]
   },
-  "exclude": ["node_modules", "tmp"]
+  "exclude": [
+    "node_modules",
+    "tmp"
+  ]
 }

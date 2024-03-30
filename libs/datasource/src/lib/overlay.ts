@@ -6,7 +6,7 @@ import {
   HostBinding,
   Input,
   OnDestroy,
-  ViewEncapsulation
+  ViewEncapsulation,
 } from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -17,20 +17,21 @@ import { missingDataSourceInput } from './messages';
   selector: 'mat-datasource-overlay',
   templateUrl: './overlay.html',
   host: {
-    class: 'mat-datasource-overlay'
+    class: 'mat-datasource-overlay',
   },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DataSourceOverlay<REQ, RAW, RES>
-  implements AfterContentInit, OnDestroy {
-  @Input() dataSource: MatDataSource<REQ, RAW, RES>;
+  implements AfterContentInit, OnDestroy
+{
+  @Input({ required: true }) dataSource!: MatDataSource<REQ, RAW, RES>;
 
-  @Input() diameter: number;
-  @Input() strokeWidth: number;
+  @Input() diameter?: number;
+  @Input() strokeWidth?: number;
 
   @HostBinding('style.display')
-  _display: string;
+  _display?: string;
 
   private onDestroy = new Subject<void>();
 

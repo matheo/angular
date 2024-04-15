@@ -58,7 +58,7 @@
     "bootstrap": "~5.3.3",
     "date-fns": "^3.6.0",
     "date-fns-tz": "^2.0.1",
-    "firebase": "10.10.0",
+    "firebase": "10.11.0",
     "luxon": "^3.4.4",
     "rxjs": "7.8.1",
     "tslib": "^2.3.0",
